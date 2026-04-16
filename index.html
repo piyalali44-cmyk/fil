@@ -347,6 +347,50 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ─── BLOG ─── */
+.blog{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+.blog-card{
+  border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
+  text-decoration:none;color:inherit;
+}
+.blog-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);}
+.blog-thumb{
+  width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
+  background:linear-gradient(135deg,var(--s3),var(--s4));
+  position:relative;overflow:hidden;
+}
+.blog-thumb-inner{
+  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
+  font-size:48px;
+  background:var(--grad);opacity:.12;
+  position:absolute;inset:0;
+}
+.blog-thumb-emoji{position:relative;z-index:1;font-size:44px;}
+.blog-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap;}
+.blog-cat{
+  padding:3px 11px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
+}
+.blog-date{font-size:12px;color:var(--t3);}
+.blog-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);line-height:1.35;margin-bottom:10px;letter-spacing:-.2px;}
+.blog-desc{font-size:13px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:16px;}
+.blog-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--br);padding-top:14px;margin-top:auto;}
+.blog-author{display:flex;align-items:center;gap:8px;}
+.blog-av{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.blog-author-name{font-size:12px;font-weight:600;color:var(--t2);}
+.blog-read{font-size:12px;color:var(--a);font-weight:600;display:flex;align-items:center;gap:4px;}
+.blog-more{text-align:center;margin-top:44px;}
+.blog-more-btn{
+  display:inline-flex;align-items:center;gap:8px;padding:13px 32px;
+  border-radius:50px;border:1.5px solid var(--br2);background:var(--s1);
+  color:var(--t2);font-size:14px;font-weight:600;text-decoration:none;
+  transition:all .25s;
+}
+.blog-more-btn:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.06);}
+
 /* ─── RESPONSIVE ─── */
 @media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}}
@@ -415,7 +459,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
           </div>
         </div>
 
-        <div class="nav-item"><a class="nav-link" href="#">Blog</a></div>
+        <div class="nav-item"><a class="nav-link" href="#blog">Blog</a></div>
       </nav>
 
       <div class="header-right">
@@ -451,7 +495,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       <a class="mob-item" href="#"><span class="mob-ico">🔢</span>Calculator</a>
       <a class="mob-item" href="#"><span class="mob-ico">🔐</span>Password Generator</a>
       <div class="mob-div"></div>
-      <a class="mob-item" href="#">📰 Blog</a>
+      <a class="mob-item" href="#blog" onclick="closeMob()">📰 Blog</a>
       <div class="mob-div"></div>
       <div style="padding:14px 20px;">
         <a href="#" style="display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);">Explore All Tools 🚀</a>
@@ -567,6 +611,155 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
   </div>
 </section>
 
+<!-- ══ BLOG ══ -->
+<section class="blog" id="blog">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">📰 Latest Articles</div>
+      <h2 class="sec-title">From the Blog</h2>
+      <p class="sec-sub">Tips, tutorials, and guides on tools, productivity, and getting more done online — for free.</p>
+    </div>
+    <div class="blog-grid">
+
+      <a class="blog-card reveal d1" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">📄</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;">PDF Tools</span>
+            <span class="blog-date">April 10, 2026</span>
+          </div>
+          <div class="blog-title">How to Merge Multiple PDFs Into One File in Seconds</div>
+          <div class="blog-desc">Learn the fastest way to combine PDF files without any software — all you need is a browser and our free Merge PDF tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d2" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🖼️</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#fbbf24;">Image Tools</span>
+            <span class="blog-date">April 7, 2026</span>
+          </div>
+          <div class="blog-title">Best Free Ways to Compress Images Without Losing Quality</div>
+          <div class="blog-desc">High-quality images don't have to be large files. Here's how to shrink your images instantly using our free compressor tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d3" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🤖</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a78bfa;">AI Tools</span>
+            <span class="blog-date">April 3, 2026</span>
+          </div>
+          <div class="blog-title">Top 5 AI Writing Tools You Can Use Right Now — For Free</div>
+          <div class="blog-desc">From rewriting paragraphs to translating languages, discover the AI tools that can supercharge your writing productivity today.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d4" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🔐</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;">Security</span>
+            <span class="blog-date">March 28, 2026</span>
+          </div>
+          <div class="blog-title">Why You Need a Strong Password — and How to Generate One</div>
+          <div class="blog-desc">Weak passwords are the #1 cause of account breaches. Here's how to create unbreakable passwords with our free generator tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d5" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🌍</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25);color:#22d3ee;">Text Tools</span>
+            <span class="blog-date">March 22, 2026</span>
+          </div>
+          <div class="blog-title">Translate Any Text Into 250+ Languages Instantly — No App Needed</div>
+          <div class="blog-desc">Our free online translator supports over 250 languages and dialects. No downloads, no signups — just paste and translate.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d6" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">📊</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#60a5fa;">Productivity</span>
+            <span class="blog-date">March 15, 2026</span>
+          </div>
+          <div class="blog-title">Convert Excel to PDF in One Click — No Microsoft Office Required</div>
+          <div class="blog-desc">Sharing spreadsheets shouldn't be complicated. Convert any Excel file to a clean, readable PDF in seconds with our free tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author">
+              <div class="blog-av">✍️</div>
+              <span class="blog-author-name">ToolsHub Team</span>
+            </div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+    <div class="blog-more reveal">
+      <a class="blog-more-btn" href="#">View All Posts 📰</a>
+    </div>
+  </div>
+</section>
+
 <!-- ══ CTA ══ -->
 <section class="cta">
   <div class="container">
@@ -577,7 +770,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <p class="cta-sub">100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working.</p>
         <div class="cta-btns">
           <a class="cta-btn1" href="#">🛠️ Explore All Tools</a>
-          <a class="cta-btn2" href="#">📰 Read the Blog</a>
+          <a class="cta-btn2" href="#blog">📰 Read the Blog</a>
         </div>
       </div>
     </div>
@@ -629,7 +822,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <div class="ft-col-title">Company</div>
         <div class="ft-links">
           <a class="ft-link" href="#">About Us</a>
-          <a class="ft-link" href="#">Blog</a>
+          <a class="ft-link" href="#blog">Blog</a>
           <a class="ft-link" href="#">Privacy Policy</a>
           <a class="ft-link" href="#">Terms of Service</a>
           <a class="ft-link" href="#">Contact Us</a>

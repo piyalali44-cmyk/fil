@@ -13,17 +13,21 @@ Since Blogger themes cannot run standalone, this Replit serves a **static HTML p
 ```
 ├── blogger-theme-multitools-professional-animations (1).xml  # Original Blogger XML theme
 ├── index.html      # Static HTML preview of the theme
-├── server.py       # Python HTTP server (serves index.html on port 5000)
+├── blog.html       # Static blog listing preview page
+├── attached_assets/ # Public image assets used by the preview
+├── server.py       # Python HTTP server (serves approved public files on port 5000)
 └── replit.md       # This file
 ```
 
 ## Running the App
 
-The app runs via a Python `http.server` on port 5000:
+The app runs via a Python HTTP server on port 5000 by default and respects Replit's `PORT` environment variable:
 
 ```bash
 python server.py
 ```
+
+The server intentionally restricts requests to the preview pages, theme XML files, and `attached_assets/` so internal project files are not exposed through the web preview.
 
 ## Tech Stack
 

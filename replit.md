@@ -34,7 +34,7 @@ The server intentionally restricts requests to the preview pages, theme XML file
 - **Theme**: Blogger XML template with CSS3, HTML5, JavaScript
 - **Preview Server**: Python built-in HTTP server
 - **Fonts**: Google Fonts (Syne, DM Sans)
-- **Design**: Dark/light mode, CSS variables, responsive layout, animations
+- **Design**: Dark/light mode, CSS variables, responsive layout, professional animated backgrounds, animated line/particle effects
 
 ## Deployment
 

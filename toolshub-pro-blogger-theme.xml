@@ -182,10 +182,10 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 /* ━━ FEATURES ━━ */
 .feats{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br)}
 .feat-g{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
-.fc{padding:34px 28px 30px;border-radius:var(--r2);background:var(--s1);border:1px solid var(--br);position:relative;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
-.fc::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
-.fc:hover{transform:translateY(-10px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28)}
-.fc:hover::after{transform:scaleX(1)}
+.feat-card{padding:34px 28px 30px;border-radius:var(--r2);background:var(--s1);border:1px solid var(--br);position:relative;overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s}
+.feat-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.feat-card:hover{transform:translateY(-10px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28)}
+.feat-card:hover::after{transform:scaleX(1)}
 .fi{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25)}
 .ft{font-family:var(--f-display);font-size:17px;font-weight:700;color:var(--tx);margin-bottom:9px;letter-spacing:-.2px}
 .fd{font-size:13.5px;color:var(--t2);line-height:1.78}
@@ -386,6 +386,54 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 @media(max-width:768px){.lp-nav{display:none}.mob-btn{display:flex}.h-srch{display:none}.h-stats{gap:20px}.hs-sep{display:none}.cta-c{padding:56px 22px}.foot-g{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.foot-g{grid-template-columns:1fr}.hs-i{flex-direction:column;border-radius:20px;padding:14px;gap:10px}.hs-btn{width:100%;justify-content:center}.cta-bs{flex-direction:column;align-items:center}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}.rv{opacity:1;transform:none}}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BLOGGER OVERRIDES — Prevents Blogger's
+   default widget/gadget styles from
+   overriding our theme. Keep at bottom.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+body{margin:0!important;padding:0!important}
+.widget,.gadget{margin:0!important;padding:0!important;border:none!important;background:transparent!important}
+.widget-content{margin:0!important;padding:0!important}
+.widget h2,.widget-title,.gadget-title{margin:0!important;padding:0!important;font-family:var(--f-display)!important;font-size:inherit!important;font-weight:inherit!important;color:inherit!important;background:none!important;border:none!important;text-transform:none!important;letter-spacing:normal!important}
+#blog-pager,.blog-pager{display:none}
+.date-header{display:none!important}
+.post-body{font-family:var(--f-body);font-size:15.5px;line-height:1.88;color:var(--t2)}
+.post-body img{max-width:100%;height:auto;border-radius:var(--r1)}
+.post-body ul,.post-body ol{margin:0 0 17px 22px}
+.post-body li{margin-bottom:6px}
+.post-body h1,.post-body h2,.post-body h3,.post-body h4{font-family:var(--f-display);color:var(--tx);margin:28px 0 12px;font-weight:700;letter-spacing:-.3px;line-height:1.2}
+.post-body h2{font-size:24px}.post-body h3{font-size:20px}
+.post-body p{margin-bottom:17px}
+.post-body a{color:var(--a);border-bottom:1px solid rgba(59,130,246,.3);text-decoration:none}
+.post-body a:hover{border-bottom-color:var(--a)}
+.post-body blockquote{margin:22px 0;padding:16px 20px;border-left:4px solid var(--a);background:rgba(59,130,246,.06);border-radius:0 var(--r1) var(--r1) 0;font-style:italic;color:var(--t2)}
+.post-body pre{background:var(--s2);border:1px solid var(--br);border-radius:var(--r1);padding:18px;overflow-x:auto;margin:22px 0}
+.post-body code{background:var(--s3);padding:2px 7px;border-radius:5px;font-size:12.5px;color:var(--a3)}
+.post-body pre code{background:none;padding:0}
+.post-body table{width:100%;border-collapse:collapse;margin:22px 0;font-size:14px}
+.post-body th,.post-body td{padding:11px 15px;border:1px solid var(--br);text-align:left}
+.post-body th{background:var(--s3);font-weight:700;color:var(--tx)}
+/* Blogger comment form */
+#comments{margin-top:40px}
+.comment-thread,.comment-form{font-family:var(--f-body);color:var(--t2);font-size:14px}
+.comment-form textarea{width:100%;padding:10px 14px;border-radius:10px;border:1px solid var(--br2);background:var(--s3);color:var(--tx);font-size:14px;font-family:var(--f-body);outline:none;resize:vertical;min-height:100px}
+.comment-form input[type=text],.comment-form input[type=url]{width:100%;padding:9px 14px;border-radius:10px;border:1px solid var(--br2);background:var(--s3);color:var(--tx);font-size:13px;font-family:var(--f-body);outline:none;margin-bottom:8px}
+.comment-form input[type=submit]{padding:10px 22px;border-radius:50px;background:var(--grad);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f-body);transition:opacity .2s}
+.comment-form input[type=submit]:hover{opacity:.88}
+/* Blogger attribution/nav bar */
+#navbar-iframe{display:none!important;height:0!important}
+/* Blogger label/archive widgets alignment fix */
+.label-list,.label-list-link{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
+.label-list li{display:inline}
+.label-list li a{display:inline-flex;align-items:center;padding:5px 12px;border-radius:50px;font-size:12px;font-weight:600;color:var(--t2);background:var(--s3);border:1px solid var(--br);text-decoration:none;transition:all .2s}
+.label-list li a:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.08)}
+/* loading body flash prevention */
+body.loading *{animation-play-state:paused!important}
+/* Ensure Blogger doesn't add unwanted margin to gadget sections */
+.lp-section-wrap,.ann-bar-wrap,.ad-banner{overflow:visible}
+/* svg icon base style */
+.ico-svg{display:inline-flex;align-items:center;justify-content:center;flex-shrink:0}
   ]]></b:skin>
 </head>
 
@@ -417,7 +465,9 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
   <div class='wrap'>
     <div class='hdr'>
       <a class='logo' expr:href='data:blog.homepageUrl'>
-        <div class='logo-ico'>🔧</div>
+        <div class='logo-ico'>
+          <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='#93c5fd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>
+        </div>
         <span class='logo-txt'><data:blog.title/></span>
       </a>
 
@@ -544,8 +594,14 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
       </nav>
 
       <div class='hdr-r'>
-        <button class='h-srch' onclick='openS()'>🔍 Search</button>
-        <button class='th-btn' id='th-btn' onclick='togTh()' title='Toggle theme'>🌙</button>
+        <button class='h-srch' onclick='openS()'>
+          <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
+          Search
+        </button>
+        <button class='th-btn' id='th-btn' onclick='togTh()' title='Toggle theme'>
+          <svg id='ico-moon' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>
+          <svg id='ico-sun' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='display:none'><circle cx='12' cy='12' r='5'/><line x1='12' y1='1' x2='12' y2='3'/><line x1='12' y1='21' x2='12' y2='23'/><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'/><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'/><line x1='1' y1='12' x2='3' y2='12'/><line x1='21' y1='12' x2='23' y2='12'/><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'/><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'/></svg>
+        </button>
         <a class='h-cta' href='/p/all-tools.html'>All Tools →</a>
         <button class='mob-btn' onclick='openM()'><span/><span/><span/></button>
       </div>
@@ -560,10 +616,14 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
   <div class='mob-inner'>
     <div class='mob-hd'>
       <a class='logo' expr:href='data:blog.homepageUrl'>
-        <div class='logo-ico'>🔧</div>
+        <div class='logo-ico'>
+          <svg width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='#93c5fd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>
+        </div>
         <span class='logo-txt'><data:blog.title/></span>
       </a>
-      <button class='mob-cl' onclick='closeM()'>✕</button>
+      <button class='mob-cl' onclick='closeM()'>
+        <svg width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>
+      </button>
     </div>
     <div class='mob-list'>
       <a class='mob-lnk' expr:href='data:blog.homepageUrl'>🏠 Home</a>
@@ -601,9 +661,13 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 <div class='s-ov' id='s-ov' onclick='if(event.target===this)closeS()'>
   <div class='s-box'>
     <div class='s-row'>
-      <span>🔍</span>
+      <span style='display:flex;align-items:center;color:var(--t3)'>
+        <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
+      </span>
       <input class='s-inp' id='s-inp' onkeydown='if(event.key==="Enter")doS()' placeholder='Search tools or articles...' type='text'/>
-      <button class='s-cls' onclick='closeS()'>✕</button>
+      <button class='s-cls' onclick='closeS()'>
+        <svg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>
+      </button>
     </div>
     <div class='s-hints'>
       <span>Try:</span>
@@ -697,22 +761,22 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
         <p class='sh-s'>No fees, no accounts, no limits. Powerful tools that work instantly in your browser on any device.</p>
       </div>
       <div class='feat-g'>
-        <div class='fc rv d1'>
+        <div class='feat-card rv d1'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border-color:rgba(245,158,11,.25)'>⚡</div>
           <div class='ft'>Instant &amp; Lightning Fast</div>
           <div class='fd'>All tools run in your browser. Zero wait, zero loading. Results in milliseconds, every single time.</div>
         </div>
-        <div class='fc rv d2'>
+        <div class='feat-card rv d2'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border-color:rgba(59,130,246,.25)'>🔒</div>
           <div class='ft'>100% Private &amp; Secure</div>
           <div class='fd'>Your files never leave your device. No uploads, no tracking, no accounts. Your privacy is always guaranteed.</div>
         </div>
-        <div class='fc rv d3'>
+        <div class='feat-card rv d3'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border-color:rgba(16,185,129,.25)'>🌐</div>
           <div class='ft'>Works on Any Device</div>
           <div class='fd'>Fully responsive across desktop, tablet, and mobile. Open any tool on any browser — it just works perfectly.</div>
         </div>
-        <div class='fc rv d4'>
+        <div class='feat-card rv d4'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border-color:rgba(167,139,250,.25)'>✨</div>
           <div class='ft'>Always Growing</div>
           <div class='fd'>New tools added every week across every category. Can't find what you need? Request a tool and we'll build it.</div>
@@ -927,11 +991,11 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
             <b:widget id='BlogSearch1' locked='false' title='Search' type='BlogSearch' version='2'>
               <b:includable id='main'>
                 <div class='sw'>
-                  <div class='sw-hd'>🔍 Search</div>
+                  <div class='sw-hd'>Search</div>
                   <div class='sw-bd'>
                     <div class='sw-search'>
                       <input class='sw-sinp' id='sw-s1' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s1").value)}'/>
-                      <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s1").value)'>🔍</button>
+                      <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s1").value)' style='display:flex;align-items:center;justify-content:center;width:40px'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
                     </div>
                   </div>
                 </div>
@@ -1133,11 +1197,11 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
               <b:widget id='BlogSearch2' locked='false' title='Search' type='BlogSearch' version='2'>
                 <b:includable id='main'>
                   <div class='sw'>
-                    <div class='sw-hd'>🔍 Search</div>
+                    <div class='sw-hd'>Search</div>
                     <div class='sw-bd'>
                       <div class='sw-search'>
                         <input class='sw-sinp' id='sw-s2' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s2").value)}'/>
-                        <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s2").value)'>🔍</button>
+                        <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s2").value)' style='display:flex;align-items:center;justify-content:center;width:40px'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
                       </div>
                     </div>
                   </div>
@@ -1246,7 +1310,9 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
     <div class='foot-g'>
       <div>
         <div class='fl-wrap'>
-          <div class='fl-ico'>🔧</div>
+          <div class='fl-ico'>
+            <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='#93c5fd' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z'/></svg>
+          </div>
           <span class='fl-txt'><data:blog.title/></span>
         </div>
         <p class='f-desc'>Your one-stop hub for 100+ free online tools. Documents, images, text, converters, calculators, and much more — fast, private, always free.</p>
@@ -1326,17 +1392,21 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 <script>
 //<![CDATA[
 /* ── Theme Switcher ── */
+function _syncThIco(isLight){
+  var moon=document.getElementById('ico-moon');
+  var sun=document.getElementById('ico-sun');
+  if(moon)moon.style.display=isLight?'none':'inline-block';
+  if(sun)sun.style.display=isLight?'inline-block':'none';
+}
 (function(){
   var t=localStorage.getItem('th')||'dark';
   if(t==='light')document.body.classList.add('light-mode');
-  var b=document.getElementById('th-btn');
-  if(b)b.textContent=t==='light'?'🌙':'☀️';
+  _syncThIco(t==='light');
 })();
 function togTh(){
   var l=document.body.classList.toggle('light-mode');
   localStorage.setItem('th',l?'light':'dark');
-  var b=document.getElementById('th-btn');
-  if(b)b.textContent=l?'🌙':'☀️';
+  _syncThIco(l);
 }
 
 /* ── Mobile Nav ── */

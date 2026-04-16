@@ -37,18 +37,9 @@ img{max-width:100%;height:auto;}
 /* ─── SCROLL PROGRESS ─── */
 #scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
 
-/* ─── ANNOUNCEMENT BAR ─── */
-.ann-bar{background:linear-gradient(90deg,#1d4ed8,#4f46e5);padding:10px 0;text-align:center;font-size:13px;color:rgba(255,255,255,.92);font-weight:500;position:relative;}
-.ann-bar.hidden{display:none;}
-.ann-bar-inner{display:flex;align-items:center;justify-content:center;gap:0;}
-.ann-bar a{color:#fff;font-weight:700;text-decoration:underline;margin-left:6px;transition:opacity .2s;}
-.ann-bar a:hover{opacity:.8;}
-.ann-close{position:absolute;right:16px;top:50%;transform:translateY(-50%);background:none;border:none;color:rgba(255,255,255,.65);cursor:pointer;font-size:18px;line-height:1;padding:4px;transition:color .2s;}
-.ann-close:hover{color:#fff;}
-
 /* ─── HEADER ─── */
 #lp-header{
-  position:sticky;top:0;z-index:1000;height:var(--nav-h);
+  position:fixed;top:0;left:0;right:0;width:100%;z-index:1000;height:var(--nav-h);
   background:rgba(11,15,26,.93);backdrop-filter:blur(20px) saturate(180%);-webkit-backdrop-filter:blur(20px) saturate(180%);
   border-bottom:1px solid rgba(255,255,255,.06);
   transition:box-shadow .3s,background .3s;
@@ -391,6 +382,7 @@ body.light-mode #footer{background:rgba(255,255,255,.88);}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.ambient-bg,canvas#particles{display:none !important;}.reveal,.reveal-left,.reveal-right{opacity:1;transform:none;}}
   
 html{scroll-padding-top:calc(var(--nav-h) + 12px);}
+body{padding-top:var(--nav-h);}
 #lp-header{z-index:3000;}
 .h-cta{padding:7px 14px;border-radius:12px;font-size:12px;box-shadow:0 3px 12px rgba(59,130,246,.26);}
 .h-cta:hover{transform:translateY(-1px);box-shadow:0 8px 18px rgba(59,130,246,.34);}
@@ -436,14 +428,6 @@ body.light-mode .orb{opacity:.58;}
   <div class="ambient-orb orb-c"></div>
 </div>
 <div id="scroll-progress"></div>
-
-<!-- ══ ANNOUNCEMENT BAR ══ -->
-<div class="ann-bar" id="ann-bar">
-  <div class="ann-bar-inner container">
-    ✨ নতুন টুলস প্রতি সপ্তাহে যোগ হচ্ছে! আজই চেষ্টা করুন আমাদের লেটেস্ট PDF টুলস।<a href="#">এখানে দেখুন →</a>
-  </div>
-  <button class="ann-close" onclick="closeAnnBar()" aria-label="Close">×</button>
-</div>
 
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
@@ -992,12 +976,6 @@ document.addEventListener('keydown',function(e){
   if(e.key==='Escape'){closeSearch();closeMob();}
   if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
 });
-
-/* ── Announcement bar ── */
-function closeAnnBar(){
-  var bar=document.getElementById('ann-bar');
-  if(bar){bar.style.transition='opacity .25s';bar.style.opacity='0';setTimeout(function(){bar.classList.add('hidden');},260);}
-}
 
 /* ── Header scroll ── */
 window.addEventListener('scroll',function(){

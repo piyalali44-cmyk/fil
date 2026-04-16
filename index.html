@@ -303,8 +303,6 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 .ft-bottom-links a{color:var(--t3);text-decoration:none;transition:color .2s;}
 .ft-bottom-links a:hover{color:var(--tx);}
 
-/* ─── SCROLL PROGRESS BAR ─── */
-#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
 
 /* ─── SCROLL REVEAL ─── */
 /* Base state: hidden, exits instantly (no stagger delay on exit) */
@@ -414,11 +412,10 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 @media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.hs-inner{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.hs-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;}#scroll-progress{display:none;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;}}
   </style>
 </head>
 <body id="body">
-<div id="scroll-progress"></div>
 
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
@@ -478,7 +475,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
           </div>
         </div>
 
-        <div class="nav-item"><a class="nav-link" href="/blog">Blog</a></div>
+        <div class="nav-item"><a class="nav-link" href="/search">Blog</a></div>
       </nav>
 
       <div class="header-right">
@@ -514,7 +511,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       <a class="mob-item" href="#"><span class="mob-ico">🔢</span>Calculator</a>
       <a class="mob-item" href="#"><span class="mob-ico">🔐</span>Password Generator</a>
       <div class="mob-div"></div>
-      <a class="mob-item" href="/blog">📰 Blog</a>
+      <a class="mob-item" href="/search">📰 Blog</a>
       <div class="mob-div"></div>
       <div style="padding:14px 20px;">
         <a href="#" style="display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);">Explore All Tools 🚀</a>
@@ -718,7 +715,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <p class="cta-sub">100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working.</p>
         <div class="cta-btns">
           <a class="cta-btn1" href="#">🛠️ Explore All Tools</a>
-          <a class="cta-btn2" href="/blog">📰 Read the Blog</a>
+          <a class="cta-btn2" href="/search">📰 Read the Blog</a>
         </div>
       </div>
     </div>
@@ -770,7 +767,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <div class="ft-col-title">Company</div>
         <div class="ft-links">
           <a class="ft-link" href="#">About Us</a>
-          <a class="ft-link" href="/blog">Blog</a>
+          <a class="ft-link" href="/search">Blog</a>
           <a class="ft-link" href="#">Privacy Policy</a>
           <a class="ft-link" href="#">Terms of Service</a>
           <a class="ft-link" href="#">Contact Us</a>
@@ -861,17 +858,6 @@ window.addEventListener('scroll',function(){
 var yr=document.getElementById('yr');
 if(yr) yr.textContent=new Date().getFullYear();
 
-/* ── Scroll progress bar ── */
-(function(){
-  var bar=document.getElementById('scroll-progress');
-  if(!bar)return;
-  function updateBar(){
-    var sc=window.scrollY, tot=document.body.scrollHeight-window.innerHeight;
-    bar.style.width=(tot>0?(sc/tot*100):0)+'%';
-  }
-  window.addEventListener('scroll',updateBar,{passive:true});
-  updateBar();
-})();
 
 /* ── Bidirectional scroll reveal ── */
 (function(){

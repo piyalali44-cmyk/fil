@@ -59,9 +59,6 @@ img{max-width:100%;height:auto;display:block}
 .wrap{max-width:1200px;margin:0 auto;padding:0 24px}
 .wrap-sm{max-width:880px;margin:0 auto;padding:0 24px}
 
-/* ━━ SCROLL PROGRESS ━━ */
-#sp{position:fixed;top:0;left:0;height:3px;width:0;z-index:9999;background:var(--grad);pointer-events:none;border-radius:0 3px 3px 0;transition:width .1s linear}
-
 /* ━━ ANNOUNCEMENT BAR ━━ */
 .ann-bar-wrap{background:linear-gradient(90deg,#1d4ed8,#4f46e5);padding:10px 0;text-align:center;font-size:13px;color:rgba(255,255,255,.92);font-weight:500}
 .ann-bar-wrap a{color:#fff;font-weight:700;text-decoration:underline;margin-left:6px}
@@ -410,8 +407,6 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 
 <body expr:class='"loading " + data:blog.languageDirection' id='body'>
 
-<div id='sp'/>
-
 <!-- ════════════════════════════════════════════════════
   LAYOUT SECTION 1 — ANNOUNCEMENT BAR
   Blogger Layout → Announcement Bar
@@ -560,7 +555,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
           </div>
         </div>
         <div class='ni'>
-          <a class='nl' expr:href='data:blog.homepageUrl'>Blog</a>
+          <a class='nl' href='/search'>Blog</a>
         </div>
       </nav>
 
@@ -607,7 +602,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
       <div class='mob-sec'>More</div>
       <a class='mob-lnk' href='/p/calculator.html'><span class='mob-ico'>🔢</span>Calculator</a>
       <a class='mob-lnk' href='/p/password-generator.html'><span class='mob-ico'>🔐</span>Password Generator</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl'><span class='mob-ico'>📰</span>Blog</a>
+      <a class='mob-lnk' href='/search'><span class='mob-ico'>📰</span>Blog</a>
       <div class='mob-div'/>
       <div style='padding:12px 18px'>
         <a href='/p/all-tools.html' style='display:flex;align-items:center;justify-content:center;gap:6px;padding:12px 22px;border-radius:50px;background:linear-gradient(135deg,#3b82f6,#6366f1);color:#fff;font-size:14px;font-weight:700;text-decoration:none'>🚀 All Tools</a>
@@ -641,18 +636,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
   Blogger Layout → Pre Main Area
   Add AdSense 728x90 leaderboard or custom HTML here
 ════════════════════════════════════════════════════ -->
-<b:section class='ad-banner' id='pre-main' name='📌 Pre-Main (Top Ad Area)' maxwidgets='2' showaddelement='yes'>
-  <b:widget id='HTML2' locked='false' title='Top Leaderboard Ad (728x90)' type='HTML' version='2'>
-    <b:widget-settings>
-      <b:widget-setting name='content'>&lt;!-- Replace with your AdSense 728x90 code --&gt;&lt;div class=&quot;ad-banner-inner&quot;&gt;&lt;div class=&quot;ad-slot&quot;&gt;AD SPACE — 728×90 Leaderboard&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-    </b:widget-settings>
-    <b:includable id='main'>
-      <div class='ad-banner-inner'>
-        <data:content/>
-      </div>
-    </b:includable>
-  </b:widget>
-</b:section>
+<b:section class='ad-banner' id='pre-main' name='📌 Pre-Main (Top Ad Area — paste AdSense 728x90 here)' maxwidgets='2' showaddelement='yes'/>
 
 <!-- ═══════════════════════════ HOMEPAGE VIEW ════════════════════════════ -->
 <b:if cond='data:view.isHomepage'>
@@ -755,8 +739,19 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 
   <!-- ════════════════════════════════════════════════════
     LAYOUT SECTION 8B — HOMEPAGE TOOLS GRID
-    Clickable tool cards organised by category
-    Edit href values below to point to your tool pages
+    ─────────────────────────────────────────────────────
+    HOW TO ADD A NEW TOOL:
+    1. Copy any <a class='ttool' ...> line inside a tcat-bd block.
+    2. Change the href to your tool's Blogger page URL, e.g. href='/p/your-tool.html'
+    3. Change the emoji inside <span class='ttool-ico'>
+    4. Change the tool name text after </span>
+    5. Save the theme — the new tool appears instantly.
+
+    HOW TO ADD A NEW CATEGORY CARD:
+    1. Copy an entire <div class='tcat rv dN'>...</div> block.
+    2. Change dN to d1/d2/d3/d4 for stagger animation order.
+    3. Update the icon, name, description and tool links.
+    4. Update the "All ... Tools →" link at the bottom.
   ════════════════════════════════════════════════════ -->
   <section class='tools-sec'>
     <div class='wrap'>
@@ -908,7 +903,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
               </b:loop>
             </div>
             <div class='bp-more rv'>
-              <a class='bp-btn' expr:href='data:blog.homepageUrl'>View All Posts 📰</a>
+              <a class='bp-btn' href='/search'>View All Posts 📰</a>
             </div>
           </b:includable>
           <b:includable id='nextprev'/>
@@ -936,7 +931,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
           <p class='cta-s2'>100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
           <div class='cta-bs'>
             <a class='cb1' href='/p/all-tools.html'>🔧 Explore All Tools</a>
-            <a class='cb2' expr:href='data:blog.homepageUrl'>📰 Read the Blog</a>
+            <a class='cb2' href='/search'>📰 Read the Blog</a>
           </div>
         </div>
       </div>
@@ -1416,7 +1411,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
         <div class='fc-tit'>Company</div>
         <div class='f-links'>
           <a class='f-lnk' href='/p/about.html'>About Us</a>
-          <a class='f-lnk' expr:href='data:blog.homepageUrl'>Blog</a>
+          <a class='f-lnk' href='/search'>Blog</a>
           <a class='f-lnk' href='/p/privacy-policy.html'>Privacy Policy</a>
           <a class='f-lnk' href='/p/terms.html'>Terms of Service</a>
           <a class='f-lnk' href='/p/contact.html'>Contact Us</a>
@@ -1535,17 +1530,6 @@ window.addEventListener('scroll',function(){
 var yr=document.getElementById('yr');
 if(yr)yr.textContent=new Date().getFullYear();
 
-/* ── Scroll progress bar ── */
-(function(){
-  var bar=document.getElementById('sp');
-  if(!bar)return;
-  function u(){
-    var sc=window.scrollY,tot=document.body.scrollHeight-window.innerHeight;
-    bar.style.width=(tot>0?(sc/tot*100).toFixed(1):0)+'%';
-  }
-  window.addEventListener('scroll',u,{passive:true});
-  u();
-})();
 
 /* ── Remove loading class immediately ── */
 document.body.classList.remove('loading');

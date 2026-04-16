@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0" name="viewport"/>
+  <title>Blog — ToolsHub Pro</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --bg:#0b0f1a;--bg2:#111827;--s1:#1a2234;--s2:#1e2a3e;--s3:#243147;--s4:#2c3d58;
+  --br:#2e3f5c;--br2:#3a4f6e;--a:#3b82f6;--a2:#6366f1;--a3:#22d3ee;
+  --g:#10b981;--r:#ef4444;--y:#f59e0b;
+  --tx:#e8edf5;--t2:#94a3b8;--t3:#4a6080;--t4:#2d3d55;
+  --grad:linear-gradient(135deg,#3b82f6 0%,#6366f1 50%,#22d3ee 100%);
+  --card-shadow:0 4px 24px rgba(0,0,0,.4);--nav-h:64px;
+  --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+  --radius:12px;--radius-lg:18px;--radius-xl:24px;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+body.light-mode{
+  --bg:#f0f4f8;--bg2:#ffffff;--s1:#ffffff;--s2:#f5f8fc;--s3:#edf2f7;--s4:#e2e8f0;
+  --br:#d1dce9;--br2:#bac8d8;--a:#2563eb;--a2:#4f46e5;--a3:#0891b2;
+  --tx:#0f1f36;--t2:#334e68;--t3:#627d98;--t4:#9fb3c8;
+  --card-shadow:0 4px 20px rgba(0,0,0,.08);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:var(--font-body);background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;}
+a{color:var(--a);text-decoration:none;transition:color .2s;}
+img{max-width:100%;height:auto;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--br2);border-radius:3px;}
+.container{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+/* ─── HEADER ─── */
+#lp-header{
+  position:sticky;top:0;z-index:1000;height:var(--nav-h);
+  background:rgba(11,15,26,.88);backdrop-filter:blur(20px) saturate(180%);
+  border-bottom:1px solid rgba(255,255,255,.06);
+  transition:box-shadow .3s,background .3s;
+}
+body.light-mode #lp-header{background:rgba(255,255,255,.9);border-bottom-color:rgba(0,0,0,.07);}
+#lp-header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.28);}
+.header-inner{display:flex;align-items:center;height:var(--nav-h);gap:0;}
+.lp-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
+.lp-logo-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(59,130,246,.3);}
+.lp-logo-text{font-family:var(--font-display);font-size:19px;font-weight:800;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px;}
+.nav-item{position:relative;}
+.nav-link{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:500;color:var(--t2);text-decoration:none;white-space:nowrap;transition:all .18s;}
+.nav-link svg{transition:transform .2s;width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;}
+.nav-link:hover,.nav-item:hover>.nav-link{color:var(--a);background:var(--s3);}
+.nav-link.active{color:var(--a);background:var(--s3);}
+.nav-item:hover>.nav-link svg{transform:rotate(180deg);}
+.nav-dropdown{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--s1);border:1px solid var(--br2);border-radius:var(--radius-lg);padding:8px;min-width:220px;max-width:680px;box-shadow:0 24px 64px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.2);opacity:0;visibility:hidden;pointer-events:none;transition:all .22s cubic-bezier(.4,0,.2,1);z-index:500;}
+.nav-item:hover .nav-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.nav-dropdown.g2{display:grid;grid-template-columns:1fr 1fr;gap:4px;min-width:420px;}
+.nav-dropdown.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;min-width:580px;}
+.dd-hd{grid-column:1/-1;padding:6px 12px 4px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:6px;}
+.dd-hd::after{content:'';flex:1;height:1px;background:var(--br);}
+.dd-item{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:10px;text-decoration:none;color:var(--t2);transition:all .15s;}
+.dd-item:hover{background:var(--s3);color:var(--tx);}
+.dd-ico{width:36px;height:36px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;}
+.dd-n{font-size:13px;font-weight:600;color:var(--tx);}
+.dd-d{font-size:11px;color:var(--t3);margin-top:1px;}
+.header-right{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto;}
+.theme-btn{width:36px;height:36px;border-radius:10px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s;}
+.theme-btn:hover{border-color:var(--a);color:var(--a);}
+.h-cta{background:var(--grad);color:#fff;padding:9px 20px;border-radius:50px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(59,130,246,.35);transition:all .2s;}
+.h-cta:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(59,130,246,.5);color:#fff;}
+.mob-btn{display:none;width:36px;height:36px;border-radius:10px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;align-items:center;justify-content:center;flex-direction:column;gap:5px;}
+.mob-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;}
+
+/* ─── MOBILE NAV ─── */
+.mob-nav{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.82);backdrop-filter:blur(12px);}
+.mob-nav.open{display:flex;}
+.mob-nav-inner{width:min(340px,90vw);height:100%;background:var(--s1);border-right:1px solid var(--br2);overflow-y:auto;padding:0 0 40px;animation:slideLeft .28s var(--ease);}
+@keyframes slideLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
+.mob-head{display:flex;align-items:center;justify-content:space-between;padding:16px 18px;border-bottom:1px solid var(--br);}
+.mob-close{width:32px;height:32px;border-radius:50%;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;}
+.mob-list{padding:10px 0;}
+.mob-sec{font-size:9px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);padding:12px 20px 5px;}
+.mob-item{display:flex;align-items:center;gap:12px;padding:11px 20px;font-size:14px;color:var(--t2);text-decoration:none;transition:background .15s;}
+.mob-item:hover{background:var(--s3);color:var(--tx);}
+.mob-ico{width:34px;height:34px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.mob-div{height:1px;background:var(--br);margin:8px 0;}
+
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
+
+/* ─── BLOG HERO ─── */
+.blog-hero{
+  padding:72px 0 60px;background:var(--bg2);border-bottom:1px solid var(--br);
+  position:relative;overflow:hidden;
+}
+.blog-hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 20% 40%,rgba(59,130,246,.14) 0,transparent 55%),radial-gradient(ellipse at 80% 60%,rgba(99,102,241,.10) 0,transparent 50%);}
+.blog-hero-inner{position:relative;z-index:1;}
+.blog-breadcrumb{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--t3);margin-bottom:20px;}
+.blog-breadcrumb a{color:var(--t3);text-decoration:none;transition:color .2s;}
+.blog-breadcrumb a:hover{color:var(--a);}
+.blog-breadcrumb span{color:var(--t4);}
+.blog-hero-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 16px;border-radius:50px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);font-size:11px;font-weight:700;color:var(--a3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:16px;}
+.blog-hero-title{font-family:var(--font-display);font-size:clamp(32px,5vw,52px);font-weight:800;letter-spacing:-1.5px;color:var(--tx);line-height:1.1;margin-bottom:14px;}
+.blog-hero-sub{font-size:16px;color:var(--t2);max-width:520px;line-height:1.8;margin-bottom:0;}
+
+/* ─── BLOG MAIN ─── */
+.blog-main{padding:72px 0 96px;background:var(--bg);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+.blog-card{
+  border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
+  overflow:hidden;display:flex;flex-direction:column;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
+  text-decoration:none;color:inherit;
+}
+.blog-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);}
+.blog-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--s3),var(--s4));position:relative;overflow:hidden;}
+.blog-thumb-inner{width:100%;height:100%;background:var(--grad);opacity:.12;position:absolute;inset:0;}
+.blog-thumb-emoji{position:relative;z-index:1;font-size:44px;}
+.blog-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap;}
+.blog-cat{padding:3px 11px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;}
+.blog-date{font-size:12px;color:var(--t3);}
+.blog-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);line-height:1.35;margin-bottom:10px;letter-spacing:-.2px;}
+.blog-desc{font-size:13px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:16px;}
+.blog-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--br);padding-top:14px;margin-top:auto;}
+.blog-author{display:flex;align-items:center;gap:8px;}
+.blog-av{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.blog-author-name{font-size:12px;font-weight:600;color:var(--t2);}
+.blog-read{font-size:12px;color:var(--a);font-weight:600;}
+
+/* ─── FOOTER ─── */
+#footer{background:var(--bg2);border-top:1px solid var(--br);padding:72px 0 0;}
+.ft-grid{display:grid;grid-template-columns:280px repeat(3,1fr);gap:48px;margin-bottom:56px;}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ft-logo-ico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:17px;}
+.ft-logo-txt{font-family:var(--font-display);font-size:18px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ft-desc{font-size:13px;color:var(--t3);line-height:1.8;margin-bottom:22px;}
+.ft-social{display:flex;gap:8px;}
+.s-btn{width:36px;height:36px;border-radius:9px;background:var(--s3);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:15px;text-decoration:none;color:var(--t2);transition:all .2s;}
+.s-btn:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.08);}
+.ft-col-title{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t2);margin-bottom:18px;}
+.ft-links{display:flex;flex-direction:column;gap:10px;}
+.ft-link{font-size:13px;color:var(--t3);text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.ft-link:hover{color:var(--tx);padding-left:4px;}
+.ft-bottom{border-top:1px solid var(--br);padding:22px 0;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--t3);flex-wrap:wrap;gap:12px;}
+.ft-bottom-links{display:flex;gap:20px;}
+.ft-bottom-links a{color:var(--t3);text-decoration:none;transition:color .2s;}
+.ft-bottom-links a:hover{color:var(--tx);}
+
+/* ─── ANIMATIONS ─── */
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes headerLoad{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
+#lp-header{animation:headerLoad .6s cubic-bezier(.22,1,.36,1) both;}
+.blog-hero-inner{animation:fadeUp .6s .1s both;}
+
+.reveal{opacity:0;transform:translateY(28px) scale(.98);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1);}
+.reveal.visible.d1{transition-delay:.06s}
+.reveal.visible.d2{transition-delay:.13s}
+.reveal.visible.d3{transition-delay:.20s}
+.reveal.visible.d4{transition-delay:.27s}
+.reveal.visible.d5{transition-delay:.34s}
+.reveal.visible.d6{transition-delay:.41s}
+
+/* ─── RESPONSIVE ─── */
+@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.blog-grid{grid-template-columns:1fr;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal{opacity:1;transform:none;}}
+  </style>
+</head>
+<body id="body">
+<div id="scroll-progress"></div>
+
+<!-- ══ HEADER ══ -->
+<header id="lp-header">
+  <div class="container">
+    <div class="header-inner">
+      <a class="lp-logo" href="/">
+        <div class="lp-logo-icon">🛠️</div>
+        <span class="lp-logo-text">ToolsHub Pro</span>
+      </a>
+
+      <nav class="lp-nav">
+        <div class="nav-item"><a class="nav-link" href="/">Home</a></div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Document Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown g2">
+            <div class="dd-hd">📄 PDF</div>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🔗</div><div><div class="dd-n">Merge PDF</div><div class="dd-d">Combine files</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">✂️</div><div><div class="dd-n">Split PDF</div><div class="dd-d">Divide pages</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✏️</div><div><div class="dd-n">Edit PDF</div><div class="dd-d">Edit text</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🗜️</div><div><div class="dd-n">Compress PDF</div><div class="dd-d">Reduce size</div></div></a>
+            <div class="dd-hd">📝 Word / Excel</div>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">📄</div><div><div class="dd-n">Word → PDF</div><div class="dd-d">DOCX to PDF</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📊</div><div><div class="dd-n">Excel → PDF</div><div class="dd-d">XLSX to PDF</div></div></a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Image Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown g2">
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🖼️</div><div><div class="dd-n">Image Converter</div><div class="dd-d">PNG, JPG, WebP…</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🗜️</div><div><div class="dd-n">Compress Image</div><div class="dd-d">Reduce file size</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">✂️</div><div><div class="dd-n">Crop & Resize</div><div class="dd-d">Edit dimensions</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🌈</div><div><div class="dd-n">Remove Background</div><div class="dd-d">Erase BG instantly</div></div></a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">Text & AI <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown">
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔤</div><div><div class="dd-n">Case Converter</div><div class="dd-d">UPPER, lower, Title</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">📊</div><div><div class="dd-n">Word Counter</div><div class="dd-d">Words & characters</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🌍</div><div><div class="dd-n">Translator</div><div class="dd-d">250+ languages</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✨</div><div><div class="dd-n">AI Rewriter</div><div class="dd-d">Rewrite & paraphrase</div></div></a>
+          </div>
+        </div>
+        <div class="nav-item">
+          <a class="nav-link" href="#">More Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown g2">
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔢</div><div><div class="dd-n">Calculator</div><div class="dd-d">Scientific, BMI, Loan</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📏</div><div><div class="dd-n">Unit Converter</div><div class="dd-d">Length, weight, temp</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🎨</div><div><div class="dd-n">Color Tools</div><div class="dd-d">Picker, palette, HEX</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔐</div><div><div class="dd-n">Password Generator</div><div class="dd-d">Strong & secure</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔗</div><div><div class="dd-n">URL Shortener</div><div class="dd-d">Shorten any link</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">💻</div><div><div class="dd-n">Dev Tools</div><div class="dd-d">JSON, Base64, Regex</div></div></a>
+          </div>
+        </div>
+        <div class="nav-item"><a class="nav-link active" href="/blog">Blog</a></div>
+      </nav>
+
+      <div class="header-right">
+        <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+        <a class="h-cta" href="#">All Tools →</a>
+        <button class="mob-btn" onclick="openMob()"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ══ MOBILE NAV ══ -->
+<div class="mob-nav" id="mob-nav" onclick="if(event.target===this)closeMob()">
+  <div class="mob-nav-inner">
+    <div class="mob-head">
+      <a class="lp-logo" href="/"><div class="lp-logo-icon">🛠️</div><span class="lp-logo-text">ToolsHub Pro</span></a>
+      <button class="mob-close" onclick="closeMob()">✕</button>
+    </div>
+    <div class="mob-list">
+      <a class="mob-item" href="/">🏠 Home</a>
+      <div class="mob-sec">Document Tools</div>
+      <a class="mob-item" href="#"><span class="mob-ico">🔗</span>Merge PDF</a>
+      <a class="mob-item" href="#"><span class="mob-ico">✂️</span>Split PDF</a>
+      <a class="mob-item" href="#"><span class="mob-ico">📄</span>Word to PDF</a>
+      <div class="mob-div"></div>
+      <div class="mob-sec">Image Tools</div>
+      <a class="mob-item" href="#"><span class="mob-ico">🖼️</span>Image Converter</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🌈</span>Remove Background</a>
+      <div class="mob-div"></div>
+      <div class="mob-sec">Text & Utilities</div>
+      <a class="mob-item" href="#"><span class="mob-ico">🌍</span>Translator</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🔢</span>Calculator</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🔐</span>Password Generator</a>
+      <div class="mob-div"></div>
+      <a class="mob-item" href="/blog">📰 Blog</a>
+    </div>
+  </div>
+</div>
+
+<!-- ══ BLOG HERO ══ -->
+<section class="blog-hero">
+  <div class="blog-hero-bg"></div>
+  <div class="container">
+    <div class="blog-hero-inner">
+      <div class="blog-breadcrumb">
+        <a href="/">Home</a>
+        <span>›</span>
+        <span>Blog</span>
+      </div>
+      <div class="blog-hero-tag">📰 Latest Articles</div>
+      <h1 class="blog-hero-title">From the Blog</h1>
+      <p class="blog-hero-sub">Tips, tutorials, and guides on tools, productivity, and getting more done online — for free.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══ BLOG POSTS ══ -->
+<section class="blog-main">
+  <div class="container">
+    <div class="blog-grid">
+
+      <a class="blog-card reveal d1" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">📄</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;">PDF Tools</span>
+            <span class="blog-date">April 10, 2026</span>
+          </div>
+          <div class="blog-title">How to Merge Multiple PDFs Into One File in Seconds</div>
+          <div class="blog-desc">Learn the fastest way to combine PDF files without any software — all you need is a browser and our free Merge PDF tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d2" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🖼️</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#fbbf24;">Image Tools</span>
+            <span class="blog-date">April 7, 2026</span>
+          </div>
+          <div class="blog-title">Best Free Ways to Compress Images Without Losing Quality</div>
+          <div class="blog-desc">High-quality images don't have to be large files. Here's how to shrink your images instantly using our free compressor tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d3" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🤖</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a78bfa;">AI Tools</span>
+            <span class="blog-date">April 3, 2026</span>
+          </div>
+          <div class="blog-title">Top 5 AI Writing Tools You Can Use Right Now — For Free</div>
+          <div class="blog-desc">From rewriting paragraphs to translating languages, discover the AI tools that can supercharge your writing productivity today.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d4" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🔐</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;">Security</span>
+            <span class="blog-date">March 28, 2026</span>
+          </div>
+          <div class="blog-title">Why You Need a Strong Password — and How to Generate One</div>
+          <div class="blog-desc">Weak passwords are the #1 cause of account breaches. Here's how to create unbreakable passwords with our free generator tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d5" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🌍</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25);color:#22d3ee;">Text Tools</span>
+            <span class="blog-date">March 22, 2026</span>
+          </div>
+          <div class="blog-title">Translate Any Text Into 250+ Languages Instantly — No App Needed</div>
+          <div class="blog-desc">Our free online translator supports over 250 languages and dialects. No downloads, no signups — just paste and translate.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+      <a class="blog-card reveal d6" href="#">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">📊</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25);color:#60a5fa;">Productivity</span>
+            <span class="blog-date">March 15, 2026</span>
+          </div>
+          <div class="blog-title">Convert Excel to PDF in One Click — No Microsoft Office Required</div>
+          <div class="blog-desc">Sharing spreadsheets shouldn't be complicated. Convert any Excel file to a clean, readable PDF in seconds with our free tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ FOOTER ══ -->
+<footer id="footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-ico">🛠️</div>
+          <span class="ft-logo-txt">ToolsHub Pro</span>
+        </div>
+        <p class="ft-desc">A growing collection of 100+ free online tools for documents, images, text, calculations, conversions, and much more.</p>
+        <div class="ft-social">
+          <a class="s-btn" href="#" title="Facebook">f</a>
+          <a class="s-btn" href="#" title="X">𝕏</a>
+          <a class="s-btn" href="#" title="YouTube">▶</a>
+          <a class="s-btn" href="#" title="Telegram">✈</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Popular Tools</div>
+        <div class="ft-links">
+          <a class="ft-link" href="#">Merge PDF</a>
+          <a class="ft-link" href="#">Image Compressor</a>
+          <a class="ft-link" href="#">Text Translator</a>
+          <a class="ft-link" href="#">Unit Converter</a>
+          <a class="ft-link" href="#">Password Generator</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Categories</div>
+        <div class="ft-links">
+          <a class="ft-link" href="#">Document Tools</a>
+          <a class="ft-link" href="#">Image Tools</a>
+          <a class="ft-link" href="#">Text & Writing</a>
+          <a class="ft-link" href="#">Calculators</a>
+          <a class="ft-link" href="#">AI Tools</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Company</div>
+        <div class="ft-links">
+          <a class="ft-link" href="#">About Us</a>
+          <a class="ft-link" href="/blog">Blog</a>
+          <a class="ft-link" href="#">Privacy Policy</a>
+          <a class="ft-link" href="#">Terms of Service</a>
+          <a class="ft-link" href="#">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© <span id="yr">2026</span> ToolsHub Pro. All rights reserved.</span>
+      <div class="ft-bottom-links">
+        <a href="#">Privacy</a>
+        <a href="#">Terms</a>
+        <a href="#">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var s=localStorage.getItem('th')||'dark';
+  if(s==='light') document.body.classList.add('light-mode');
+  var b=document.getElementById('theme-btn');
+  if(b) b.textContent=s==='light'?'🌙':'☀️';
+})();
+function toggleTheme(){
+  var l=document.body.classList.toggle('light-mode');
+  localStorage.setItem('th',l?'light':'dark');
+  var b=document.getElementById('theme-btn');
+  if(b) b.textContent=l?'🌙':'☀️';
+}
+function openMob(){document.getElementById('mob-nav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mob-nav').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
+window.addEventListener('scroll',function(){
+  document.getElementById('lp-header').classList.toggle('scrolled',window.scrollY>20);
+},{passive:true});
+var yr=document.getElementById('yr');
+if(yr) yr.textContent=new Date().getFullYear();
+(function(){
+  var bar=document.getElementById('scroll-progress');
+  if(!bar)return;
+  function updateBar(){var sc=window.scrollY,tot=document.body.scrollHeight-window.innerHeight;bar.style.width=(tot>0?(sc/tot*100):0)+'%';}
+  window.addEventListener('scroll',updateBar,{passive:true});
+  updateBar();
+})();
+(function(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});
+    return;
+  }
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting) entry.target.classList.add('visible');
+      else entry.target.classList.remove('visible');
+    });
+  },{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){observer.observe(el);});
+})();
+</script>
+</body>
+</html>

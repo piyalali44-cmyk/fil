@@ -17,6 +17,10 @@
   <meta charset='UTF-8'/>
   <meta content='width=device-width, initial-scale=1.0' name='viewport'/>
   <b:include data='blog' name='all-head-content'/>
+  <style>/* Immediately hide Blogger navbar before CSS loads */
+  #navbar-iframe,body>iframe#navbar-iframe{display:none!important;height:0!important;overflow:hidden!important;}
+  body{margin:0!important;padding:0!important;}
+  </style>
   <title>
     <b:if cond='data:view.isHomepage'>
       <data:blog.title/> — Free Online Tools Hub
@@ -421,8 +425,39 @@ body{margin:0!important;padding:0!important}
 .comment-form input[type=text],.comment-form input[type=url]{width:100%;padding:9px 14px;border-radius:10px;border:1px solid var(--br2);background:var(--s3);color:var(--tx);font-size:13px;font-family:var(--f-body);outline:none;margin-bottom:8px}
 .comment-form input[type=submit]{padding:10px 22px;border-radius:50px;background:var(--grad);color:#fff;border:none;font-size:13px;font-weight:700;cursor:pointer;font-family:var(--f-body);transition:opacity .2s}
 .comment-form input[type=submit]:hover{opacity:.88}
-/* Blogger attribution/nav bar */
-#navbar-iframe{display:none!important;height:0!important}
+/* Blogger bars — navbar, attribution, powered-by — completely hidden */
+#navbar-iframe,#navbar,b-navbar,#b-navbar,.b-notification,
+#Attribution1,.widget.Attribution,#google_esf,
+.b-dnd-header,.b-dnd-footer,
+.blogger-attribution,.blogger-navbar-bg,
+div[class*='blogger-nav'],div[id*='navbar']{display:none!important;height:0!important;visibility:hidden!important;overflow:hidden!important;padding:0!important;margin:0!important}
+/* Ad banner sections: zero padding when empty, JS will add has-widgets class */
+.ad-banner{padding:0;text-align:center}
+.ad-banner.has-widgets{padding:12px 0}
+/* ── PAGE-TYPE LAYOUT (uses data:blog.pageType on body) ─────────────────── */
+#content-grid{display:block}
+#global-sb{display:none}
+/* Post view: slight top padding for breadcrumb, then content */
+body.page-item #bl-sec-wrap{padding:14px 0 80px}
+/* Listing view */
+body.page-search #bl-sec-wrap,
+body.page-label #bl-sec-wrap,
+body.page-archive #bl-sec-wrap{padding:0 0 80px}
+/* Post + Listing: grid layout with max-width and sidebar */
+body.page-item #content-grid,
+body.page-search #content-grid,
+body.page-label #content-grid,
+body.page-archive #content-grid{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 292px;gap:36px;align-items:start}
+body.page-item #global-sb,
+body.page-search #global-sb,
+body.page-label #global-sb,
+body.page-archive #global-sb{display:flex;flex-direction:column;gap:18px}
+body.page-item #global-sb{position:sticky;top:calc(var(--nav-h) + 20px)}
+/* Homepage: no padding on wrapper, Blog1 renders bp-sec with its own layout */
+body.page-index #bl-sec-wrap{padding:0}
+body.page-index #global-sb{display:none!important}
+/* Announcement bar — only show when it has actual content */
+.ann-bar-wrap:empty,.ann-bar-wrap>*:empty{display:none!important}
 /* Blogger label/archive widgets alignment fix */
 .label-list,.label-list-link{display:flex;flex-wrap:wrap;gap:6px;list-style:none;padding:0;margin:0}
 .label-list li{display:inline}
@@ -437,7 +472,7 @@ body.loading *{animation-play-state:paused!important}
   ]]></b:skin>
 </head>
 
-<body expr:class='"loading " + data:blog.languageDirection' id='body'>
+<body expr:class='"loading page-" + data:blog.pageType + " " + data:blog.languageDirection' id='body'>
 
 <!-- ════════════════════════════════════════════════════
   LAYOUT SECTION 1 — ANNOUNCEMENT BAR
@@ -681,18 +716,13 @@ body.loading *{animation-play-state:paused!important}
 
 <!-- ════════════════════════════════════════════════════
   LAYOUT SECTION 5 — PRE MAIN (Top Ad / Notice)
-  Blogger Layout → Pre Main Area
   Add AdSense 728x90 leaderboard or custom HTML here
 ════════════════════════════════════════════════════ -->
-<b:section class='ad-banner' id='pre-main' name='📌 Pre-Main (Top Ad Area — paste AdSense 728x90 here)' maxwidgets='2' showaddelement='yes'/>
+<b:section class='ad-banner' id='pre-main' name='📌 Pre-Main Top Ad (728x90)' maxwidgets='2' showaddelement='yes'/>
 
-<!-- ═══════════════════════════ HOMEPAGE VIEW ════════════════════════════ -->
+<!-- ═══════════════════════════ HOMEPAGE ONLY: HERO + FEATURES ════════════════════════════ -->
 <b:if cond='data:view.isHomepage'>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 6 — HERO SECTION (Homepage)
-    Fixed HTML — Edit directly in HTML editor
-  ════════════════════════════════════════════════════ -->
   <section class='hero'>
     <div class='hero-bg'/>
     <div class='hero-dots'/>
@@ -742,42 +772,33 @@ body.loading *{animation-play-state:paused!important}
     </div>
   </section>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 7 — HERO BOTTOM AD / PROMO BANNER
-    Blogger Layout → Hero Bottom Area
-    Great spot for a 728x90 ad or featured category banner
-  ════════════════════════════════════════════════════ -->
-  <b:section class='ad-banner' id='hero-bottom' name='📌 Hero Bottom (Ad / Promo)' maxwidgets='2' showaddelement='yes'/>
+  <b:section class='ad-banner' id='hero-bottom' name='Hero Bottom Ad' maxwidgets='2' showaddelement='yes'/>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 8 — WHY CHOOSE US (Features)
-    Fixed HTML section
-  ════════════════════════════════════════════════════ -->
   <section class='feats'>
     <div class='wrap'>
       <div class='sh rv'>
-        <div class='sh-tag'>⭐ Why ToolsHub Pro</div>
+        <div class='sh-tag'>&#11088; Why ToolsHub Pro</div>
         <h2 class='sh-t'>Built for Everyone. Trusted by Millions.</h2>
         <p class='sh-s'>No fees, no accounts, no limits. Powerful tools that work instantly in your browser on any device.</p>
       </div>
       <div class='feat-g'>
         <div class='feat-card rv d1'>
-          <div class='fi' style='background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border-color:rgba(245,158,11,.25)'>⚡</div>
+          <div class='fi' style='background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border-color:rgba(245,158,11,.25)'>&#9889;</div>
           <div class='ft'>Instant &amp; Lightning Fast</div>
           <div class='fd'>All tools run in your browser. Zero wait, zero loading. Results in milliseconds, every single time.</div>
         </div>
         <div class='feat-card rv d2'>
-          <div class='fi' style='background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border-color:rgba(59,130,246,.25)'>🔒</div>
+          <div class='fi' style='background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border-color:rgba(59,130,246,.25)'>&#128274;</div>
           <div class='ft'>100% Private &amp; Secure</div>
           <div class='fd'>Your files never leave your device. No uploads, no tracking, no accounts. Your privacy is always guaranteed.</div>
         </div>
         <div class='feat-card rv d3'>
-          <div class='fi' style='background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border-color:rgba(16,185,129,.25)'>🌐</div>
+          <div class='fi' style='background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border-color:rgba(16,185,129,.25)'>&#127760;</div>
           <div class='ft'>Works on Any Device</div>
           <div class='fd'>Fully responsive across desktop, tablet, and mobile. Open any tool on any browser — it just works perfectly.</div>
         </div>
         <div class='feat-card rv d4'>
-          <div class='fi' style='background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border-color:rgba(167,139,250,.25)'>✨</div>
+          <div class='fi' style='background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border-color:rgba(167,139,250,.25)'>&#10024;</div>
           <div class='ft'>Always Growing</div>
           <div class='fd'>New tools added every week across every category. Can't find what you need? Request a tool and we'll build it.</div>
         </div>
@@ -785,513 +806,342 @@ body.loading *{animation-play-state:paused!important}
     </div>
   </section>
 
+  <b:section class='ad-banner' id='mid-page' name='Mid Page Ad' maxwidgets='3' showaddelement='yes'/>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 9 — MID-PAGE AD / CUSTOM CONTENT
-    Blogger Layout → Mid Page Area
-    Place a 970x250 billboard ad or a featured tools showcase
-  ════════════════════════════════════════════════════ -->
-  <b:section class='ad-banner' id='mid-page' name='📌 Mid Page (Billboard Ad / Showcase)' maxwidgets='3' showaddelement='yes'/>
+</b:if>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 10 — LATEST BLOG POSTS (Homepage Preview)
-    Blogger Blog Widget — Shows 3 latest posts as cards
-  ════════════════════════════════════════════════════ -->
-  <section class='bp-sec'>
+<!-- ═══ BLOG LISTING ONLY: Hero header (non-homepage, non-post) ═══ -->
+<b:if cond='data:view.isMultipleItems'>
+  <section class='bl-hero'>
+    <div class='bl-hero-bg'/>
     <div class='wrap'>
-      <div class='sh rv'>
-        <div class='sh-tag'>📰 Latest Articles</div>
-        <h2 class='sh-t'>From the Blog</h2>
-        <p class='sh-s'>Tips, tutorials, and guides to help you get the most from our free tools.</p>
-      </div>
-      <b:section class='main' id='main' name='📝 Homepage Blog Posts' maxwidgets='1' showaddelement='no'>
-        <b:widget id='Blog1' locked='false' title='Latest Blog Posts' type='Blog' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-            <b:widget-setting name='showOlderButton'>false</b:widget-setting>
-            <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main' var='top'>
-            <div class='bp-grid'>
-              <b:loop values='data:posts' var='post'>
-                <a class='bp-card rv' expr:href='data:post.url'>
-                  <div class='bp-img'>
-                    <b:if cond='data:post.featuredImage'>
-                      <img alt='' expr:src='data:post.featuredImage'/>
-                    <b:else/>
-                      <span class='bp-fb'>📰</span>
-                    </b:if>
-                  </div>
-                  <div class='bp-body'>
-                    <div class='bp-m'>
-                      <b:loop values='data:post.labels' var='label'>
-                        <span class='bp-cat'><data:label.name/></span>
-                      </b:loop>
-                      <span class='bp-dt'><data:post.date/></span>
-                    </div>
-                    <div class='bp-tit'><data:post.title/></div>
-                    <div class='bp-exc'><data:post.snippet/></div>
-                    <div class='bp-ft'>
-                      <div class='bp-au'>
-                        <div class='bp-av'>✍</div>
-                        <span class='bp-aun'><data:post.author/></span>
-                      </div>
-                      <span class='bp-rd'>Read more →</span>
-                    </div>
-                  </div>
-                </a>
-              </b:loop>
-            </div>
-            <div class='bp-more rv'>
-              <a class='bp-btn' href='/search'>View All Posts 📰</a>
-            </div>
-          </b:includable>
-          <b:includable id='nextprev'/>
-        </b:widget>
-      </b:section>
-    </div>
-  </section>
-
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 11 — BEFORE CTA AD
-    Blogger Layout → Before CTA Area
-  ════════════════════════════════════════════════════ -->
-  <b:section class='ad-banner' id='before-cta' name='📌 Before CTA (Ad Space)' maxwidgets='2' showaddelement='yes'/>
-
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 12 — CTA (Call To Action)
-    Fixed HTML — Edit in HTML editor
-  ════════════════════════════════════════════════════ -->
-  <section class='cta-s'>
-    <div class='wrap'>
-      <div class='cta-c rv'>
-        <div class='cta-in'>
-          <div class='cta-badge'>🚀 Get Started — It's Free</div>
-          <h2 class='cta-t'>Ready to Get Things Done?</h2>
-          <p class='cta-s2'>100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
-          <div class='cta-bs'>
-            <a class='cb1' href='/p/all-tools.html'>🔧 Explore All Tools</a>
-            <a class='cb2' href='/search'>📰 Read the Blog</a>
-          </div>
+      <div class='bl-hero-inn'>
+        <div class='bc'>
+          <a expr:href='data:blog.homepageUrl'>Home</a>
+          <span>&#8250;</span>
+          <b:if cond='data:view.isLabelSearch'>
+            <b:loop values='data:view.labels' var='label'><span><data:label.name/></span></b:loop>
+          <b:else/>
+            <span>Blog</span>
+          </b:if>
         </div>
+        <div class='bl-tag'>&#128240; Latest Articles</div>
+        <h1 class='bl-ht'>
+          <b:if cond='data:view.isLabelSearch'>
+            <b:loop values='data:view.labels' var='label'><data:label.name/></b:loop>
+          <b:else/>
+            From the Blog
+          </b:if>
+        </h1>
+        <p class='bl-hs'>Tips, tutorials, and guides on tools, productivity, and getting more done online — for free.</p>
       </div>
     </div>
   </section>
+  <b:section class='ad-banner' id='listing-top' name='Blog Listing Top Ad' maxwidgets='2' showaddelement='yes'/>
+</b:if>
 
-  <!-- ════════════════════════════════════════════════════
-    LAYOUT SECTION 13 — AFTER CTA / NEWSLETTER
-    Blogger Layout → After CTA Area
-    Great for newsletter signup or partner links
-  ════════════════════════════════════════════════════ -->
-  <b:section class='ad-banner' id='after-cta' name='📌 After CTA (Newsletter / Extra Content)' maxwidgets='2' showaddelement='yes'/>
-
-<b:else/>
-
-  <!-- ═══════════════════════ NON-HOMEPAGE VIEW ════════════════════════ -->
-  <b:if cond='data:view.isPost'>
-
-    <!-- ════ SINGLE POST VIEW ════ -->
-    <div class='wrap' style='padding-top:14px;padding-bottom:80px'>
+<!-- ═══ SINGLE POST ONLY: Breadcrumb strip ═══ -->
+<b:if cond='data:view.isPost'>
+  <div class='bc-strip'>
+    <div class='wrap' style='padding-top:14px;padding-bottom:0'>
       <div class='bc'>
         <a expr:href='data:blog.homepageUrl'>Home</a>
-        <span>›</span>
+        <span>&#8250;</span>
         <span><data:view.title/></span>
       </div>
+    </div>
+  </div>
+  <b:section class='ad-banner' id='inner-top' name='Inner Page Top Ad' maxwidgets='2' showaddelement='yes'/>
+</b:if>
 
-      <!-- ════════════════════════════════════════════════════
-        LAYOUT SECTION 14 — INNER PAGE TOP AD
-        Blogger Layout → Inner Page Top Area
-        Place a 728x90 below breadcrumb (great visibility spot)
-      ════════════════════════════════════════════════════ -->
-      <b:section class='ad-banner' id='inner-top' name='📌 Inner Page Top (728x90 Ad)' maxwidgets='2' showaddelement='yes'/>
+<!-- ════════════════════════════════════════════════════
+  THE SINGLE MAIN SECTION — ONE Blog widget handles ALL views
+  Homepage preview / Single post / Blog listing
+  This is the ONLY section with class=main in the entire theme.
+════════════════════════════════════════════════════ -->
+<div id='bl-sec-wrap'>
+  <div id='content-grid'>
 
-      <div class='bl-lay'>
-        <div>
-          <b:section class='main' id='main2' name='📝 Single Post Content' maxwidgets='1' showaddelement='no'>
-            <b:widget id='Blog2' locked='false' title='Single Post' type='Blog' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main' var='top'>
+    <div class='content-col'>
+      <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+        <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+            <b:widget-setting name='showOlderButton'>true</b:widget-setting>
+            <b:widget-setting name='numItemsToShow'>6</b:widget-setting>
+          </b:widget-settings>
+
+          <b:includable id='main' var='top'>
+
+            <b:if cond='data:view.isHomepage'>
+              <!-- ══ HOMEPAGE: Blog post preview grid ══ -->
+              <section class='bp-sec'>
+                <div class='wrap'>
+                  <div class='sh rv'>
+                    <div class='sh-tag'>&#128240; Latest Articles</div>
+                    <h2 class='sh-t'>From the Blog</h2>
+                    <p class='sh-s'>Tips, tutorials, and guides to help you get the most from our free tools.</p>
+                  </div>
+                  <div class='bp-grid'>
+                    <b:loop values='data:posts' var='post'>
+                      <a class='bp-card rv' expr:href='data:post.url'>
+                        <div class='bp-img'>
+                          <b:if cond='data:post.featuredImage'>
+                            <img alt='' expr:src='data:post.featuredImage'/>
+                          <b:else/>
+                            <div class='bp-fb'>&#128240;</div>
+                          </b:if>
+                        </div>
+                        <div class='bp-body'>
+                          <div class='bp-m'>
+                            <b:loop values='data:post.labels' var='label'>
+                              <span class='bp-cat'><data:label.name/></span>
+                            </b:loop>
+                            <span class='bp-dt'><data:post.date/></span>
+                          </div>
+                          <div class='bp-tit'><data:post.title/></div>
+                          <div class='bp-exc'><data:post.snippet/></div>
+                          <div class='bp-ft'>
+                            <div class='bp-au'>
+                              <div class='bp-av'>&#9999;</div>
+                              <span class='bp-aun'><data:post.author/></span>
+                            </div>
+                            <span class='bp-rd'>Read more &#8594;</span>
+                          </div>
+                        </div>
+                      </a>
+                    </b:loop>
+                  </div>
+                  <div class='bp-more rv'>
+                    <a class='bp-btn' href='/search'>View All Posts &#8594;</a>
+                  </div>
+                </div>
+              </section>
+
+            <b:elseif cond='data:view.isPost'/>
+              <!-- ══ SINGLE POST VIEW ══ -->
+              <b:loop values='data:posts' var='post'>
+                <article class='p-s'>
+                  <div class='ps-hd'>
+                    <div class='pc-tags' style='margin-bottom:11px'>
+                      <b:loop values='data:post.labels' var='label'>
+                        <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
+                      </b:loop>
+                    </div>
+                    <h1 class='ps-t'><data:post.title/></h1>
+                    <div class='ps-m'>
+                      <span>&#128197; <data:post.date/></span>
+                      <span>&#128100; <data:post.author/></span>
+                      <span>&#128336; <data:post.minutesRead/> min read</span>
+                    </div>
+                  </div>
+                  <b:if cond='data:post.featuredImage'>
+                    <div class='ps-fi'><img alt='' expr:src='data:post.featuredImage'/></div>
+                  </b:if>
+                  <div class='p-content'><data:post.body/></div>
+                  <div class='p-tags'>
+                    <span>&#127991; Tags:</span>
+                    <b:loop values='data:post.labels' var='label'>
+                      <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
+                    </b:loop>
+                  </div>
+                  <b:if cond='data:post.allowComments'>
+                    <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
+                  </b:if>
+                </article>
+              </b:loop>
+
+            <b:else/>
+              <!-- ══ BLOG LISTING / SEARCH / LABEL VIEW ══ -->
+              <div class='posts-list'>
                 <b:loop values='data:posts' var='post'>
-                  <article class='p-s'>
-                    <div class='ps-hd'>
-                      <div class='pc-tags' style='margin-bottom:11px'>
+                  <article class='post-card'>
+                    <div class='pc-img'>
+                      <b:if cond='data:post.featuredImage'>
+                        <img alt='' expr:src='data:post.featuredImage'/>
+                      <b:else/>
+                        <span style='font-size:36px'>&#128240;</span>
+                      </b:if>
+                    </div>
+                    <div class='pc-body'>
+                      <div class='pc-tags'>
                         <b:loop values='data:post.labels' var='label'>
                           <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
                         </b:loop>
                       </div>
-                      <h1 class='ps-t'><data:post.title/></h1>
-                      <div class='ps-m'>
-                        <span>📅 <data:post.date/></span>
-                        <span>👤 <data:post.author/></span>
-                        <span>🕐 <data:post.minutesRead/> min read</span>
+                      <div class='pc-tit'><a expr:href='data:post.url'><data:post.title/></a></div>
+                      <div class='pc-exc'><data:post.snippet/></div>
+                      <div class='pc-meta'>
+                        <span class='pmi'>&#128197; <data:post.date/></span>
+                        <span class='pmi'>&#128100; <data:post.author/></span>
+                        <a class='prm' expr:href='data:post.url'>Read more &#8594;</a>
                       </div>
                     </div>
-                    <b:if cond='data:post.featuredImage'>
-                      <div class='ps-fi'><img alt='' expr:src='data:post.featuredImage'/></div>
-                    </b:if>
-                    <div class='p-content'><data:post.body/></div>
-                    <div class='p-tags'>
-                      <span>🏷 Tags:</span>
-                      <b:loop values='data:post.labels' var='label'>
-                        <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
-                      </b:loop>
-                    </div>
-                    <b:if cond='data:post.allowComments'>
-                      <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
-                    </b:if>
                   </article>
                 </b:loop>
-              </b:includable>
-              <b:includable id='nextprev'/>
-              <b:includable id='comments' var='post'>
-                <div id='comments'>
-                  <h3 style='font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--tx);margin-bottom:18px'>💬 Comments</h3>
-                  <b:include data='post' name='comment-form'/>
-                </div>
-              </b:includable>
-              <b:includable id='comment-form' var='post'/>
-            </b:widget>
-          </b:section>
-
-          <!-- ════════════════════════════════════════════════════
-            LAYOUT SECTION 15 — AFTER POST CONTENT AD
-            Blogger Layout → After Content Area
-            Best spot for AdSense in-article or related posts
-          ════════════════════════════════════════════════════ -->
-          <b:section class='ad-banner' id='after-content' name='📌 After Content (In-Article Ad)' maxwidgets='2' showaddelement='yes'/>
-        </div>
-
-        <!-- ════ SIDEBAR (SINGLE POST) ════ -->
-        <aside class='sidebar'>
-
-          <!-- ════════════════════════════════════════════════════
-            LAYOUT SECTION 16 — SIDEBAR (Single Post View)
-            Blogger Layout → Sidebar Widgets
-            Pre-configured: Quick Tools, Search, About, Categories, Archive, Newsletter, Ad
-          ════════════════════════════════════════════════════ -->
-          <div class='sw'>
-            <div class='sw-hd'>⚡ Quick Tools</div>
-            <div class='sw-bd'>
-              <div class='sw-tools'>
-                <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>🔗</div><span class='sw-tnm'>Merge PDF</span></a>
-                <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>✂️</div><span class='sw-tnm'>Split PDF</span></a>
-                <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>🖼️</div><span class='sw-tnm'>Image Converter</span></a>
-                <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>🌐</div><span class='sw-tnm'>Translator</span></a>
-                <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>🔐</div><span class='sw-tnm'>Password Generator</span></a>
-                <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>🔢</div><span class='sw-tnm'>Calculator</span></a>
               </div>
-              <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools →</a>
+              <b:include name='nextprev'/>
+
+            </b:if>
+          </b:includable>
+
+          <b:includable id='nextprev'>
+            <div class='pag'>
+              <b:if cond='data:newerPageUrl'><a class='pag-a' expr:href='data:newerPageUrl'>&#8592; Newer Posts</a></b:if>
+              <b:if cond='data:olderPageUrl'><a class='pag-a' expr:href='data:olderPageUrl'>Older Posts &#8594;</a></b:if>
             </div>
-          </div>
+          </b:includable>
 
-          <b:section class='sidebar' id='sidebar-post' name='📌 Sidebar (Post View)' maxwidgets='12' showaddelement='yes'>
+          <b:includable id='comments' var='post'>
+            <div id='comments'>
+              <h3 style='font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--tx);margin:0 0 18px'>&#128172; Comments</h3>
+              <b:include data='post' name='comment-form'/>
+            </div>
+          </b:includable>
 
-            <b:widget id='BlogSearch1' locked='false' title='Search' type='BlogSearch' version='2'>
-              <b:includable id='main'>
-                <div class='sw'>
-                  <div class='sw-hd'>Search</div>
-                  <div class='sw-bd'>
-                    <div class='sw-search'>
-                      <input class='sw-sinp' id='sw-s1' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s1").value)}'/>
-                      <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s1").value)' style='display:flex;align-items:center;justify-content:center;width:40px'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
-                    </div>
-                  </div>
-                </div>
-              </b:includable>
-            </b:widget>
+          <b:includable id='comment-form' var='post'/>
 
-            <b:widget id='HTML3' locked='false' title='About Us' type='HTML' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;👋 About Us&lt;/div&gt;&lt;div class=&quot;sw-bd&quot;&gt;&lt;div class=&quot;sw-about-img&quot;&gt;🔧&lt;/div&gt;&lt;div class=&quot;sw-about-nm&quot;&gt;ToolsHub Pro&lt;/div&gt;&lt;div class=&quot;sw-about-tx&quot;&gt;Your one-stop destination for 100+ free online tools. Fast, private, no signup required. We add new tools every week!&lt;/div&gt;&lt;div class=&quot;sw-about-soc&quot;&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;f&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;𝕏&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;▶&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;✈&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main'>
-                <data:content/>
-              </b:includable>
-            </b:widget>
+        </b:widget>
+      </b:section>
 
-            <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
-                <b:widget-setting name='showThumbnails'>true</b:widget-setting>
-                <b:widget-setting name='showSnippets'>false</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main'>
-                <b:if cond='data:title != &quot;&quot;'>
-                  <div class='sw popular-posts-widget'>
-                    <div class='sw-hd'>🔥 Popular Posts</div>
-                    <div class='sw-bd'><data:widget.content/></div>
-                  </div>
-                </b:if>
-              </b:includable>
-            </b:widget>
-
-            <b:widget id='Label3' locked='false' title='Categories' type='Label' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
-                <b:widget-setting name='display'>LIST</b:widget-setting>
-                <b:widget-setting name='showType'>ALL</b:widget-setting>
-                <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main' var='top'>
-                <b:if cond='data:title != &quot;&quot;'>
-                  <div class='sw'>
-                    <div class='sw-hd'>📂 <data:title/></div>
-                    <div class='sw-bd'>
-                      <div class='lbl-cloud'>
-                        <b:loop values='data:labels' var='label'>
-                          <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
-                        </b:loop>
-                      </div>
-                    </div>
-                  </div>
-                </b:if>
-              </b:includable>
-            </b:widget>
-
-            <b:widget id='BlogArchive2' locked='false' title='Archive' type='BlogArchive' version='2'>
-              <b:includable id='main' var='top'>
-                <b:if cond='data:title != &quot;&quot;'>
-                  <div class='sw'>
-                    <div class='sw-hd'>🗓 <data:title/></div>
-                    <div class='sw-bd' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
-                  </div>
-                </b:if>
-              </b:includable>
-            </b:widget>
-
-            <b:widget id='HTML4' locked='false' title='Newsletter Signup' type='HTML' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;📧 Newsletter&lt;/div&gt;&lt;div class=&quot;sw-bd sw-nl&quot;&gt;&lt;p&gt;Get notified when new tools and articles are published. No spam, ever.&lt;/p&gt;&lt;div class=&quot;sw-nl-inp&quot;&gt;&lt;input placeholder=&quot;Your email address...&quot; type=&quot;email&quot;/&gt;&lt;button class=&quot;sw-nl-btn&quot;&gt;Subscribe Free 📬&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main'>
-                <data:content/>
-              </b:includable>
-            </b:widget>
-
-            <b:widget id='HTML5' locked='false' title='Sidebar Ad (300x250)' type='HTML' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='content'>&lt;!-- Replace with AdSense 300x250 code --&gt;&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-bd&quot; style=&quot;min-height:250px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.5px&quot;&gt;AD SPACE — 300×250&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-              </b:widget-settings>
-              <b:includable id='main'>
-                <data:content/>
-              </b:includable>
-            </b:widget>
-
-          </b:section>
-        </aside>
-      </div>
+      <b:section class='ad-banner' id='after-content' name='After Post Content Ad' maxwidgets='2' showaddelement='yes'/>
     </div>
 
-  <b:else/>
-
-    <!-- ════ BLOG LISTING / LABEL VIEW ════ -->
-    <section class='bl-hero'>
-      <div class='bl-hero-bg'/>
-      <div class='wrap'>
-        <div class='bl-hero-inn'>
-          <div class='bc'>
-            <a expr:href='data:blog.homepageUrl'>Home</a>
-            <span>›</span>
-            <b:if cond='data:view.isLabelSearch'>
-              <b:loop values='data:view.labels' var='label'><span><data:label.name/></span></b:loop>
-            <b:else/>
-              <span>Blog</span>
-            </b:if>
+    <!-- ════ SIDEBAR — CSS shows it for post/listing, hides on homepage ════ -->
+    <aside id='global-sb'>
+      <div class='sw'>
+        <div class='sw-hd'>&#9889; Quick Tools</div>
+        <div class='sw-bd'>
+          <div class='sw-tools'>
+            <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='sw-tnm'>Merge PDF</span></a>
+            <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>&#9986;&#65039;</div><span class='sw-tnm'>Split PDF</span></a>
+            <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>&#128444;&#65039;</div><span class='sw-tnm'>Image Converter</span></a>
+            <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#127760;</div><span class='sw-tnm'>Translator</span></a>
+            <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>&#128272;</div><span class='sw-tnm'>Password Gen</span></a>
+            <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>&#128290;</div><span class='sw-tnm'>Calculator</span></a>
           </div>
-          <div class='bl-tag'>📰 Latest Articles</div>
-          <h1 class='bl-ht'>
-            <b:if cond='data:view.isLabelSearch'>
-              <b:loop values='data:view.labels' var='label'><data:label.name/></b:loop>
-            <b:else/>
-              From the Blog
-            </b:if>
-          </h1>
-          <p class='bl-hs'>Tips, tutorials, and guides on tools, productivity, and getting more done online — for free.</p>
+          <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools &#8594;</a>
         </div>
       </div>
-    </section>
 
-    <!-- ════════════════════════════════════════════════════
-      LAYOUT SECTION 17 — BLOG LISTING TOP AD
-      Blogger Layout → Blog Listing Top Area
-    ════════════════════════════════════════════════════ -->
-    <b:section class='ad-banner' id='listing-top' name='📌 Blog Listing Top (728x90 Ad)' maxwidgets='2' showaddelement='yes'/>
+      <b:section class='sidebar' id='sidebar-main' name='Sidebar Widgets' maxwidgets='12' showaddelement='yes'>
 
-    <section class='bl-sec'>
-      <div class='wrap'>
-        <div class='bl-lay'>
-          <div>
-            <b:section class='main' id='main3' name='📝 Blog Post Listing' maxwidgets='1' showaddelement='no'>
-              <b:widget id='Blog3' locked='false' title='Blog Posts' type='Blog' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-                  <b:widget-setting name='showOlderButton'>true</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main' var='top'>
-                  <div class='posts-list'>
-                    <b:loop values='data:posts' var='post'>
-                      <article class='post-card'>
-                        <div class='pc-img'>
-                          <b:if cond='data:post.featuredImage'>
-                            <img alt='' expr:src='data:post.featuredImage'/>
-                          <b:else/>
-                            <span style='font-size:36px'>📰</span>
-                          </b:if>
-                        </div>
-                        <div class='pc-body'>
-                          <div class='pc-tags'>
-                            <b:loop values='data:post.labels' var='label'>
-                              <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
-                            </b:loop>
-                          </div>
-                          <div class='pc-tit'><a expr:href='data:post.url'><data:post.title/></a></div>
-                          <div class='pc-exc'><data:post.snippet/></div>
-                          <div class='pc-meta'>
-                            <span class='pmi'>📅 <data:post.date/></span>
-                            <span class='pmi'>👤 <data:post.author/></span>
-                            <a class='prm' expr:href='data:post.url'>Read more →</a>
-                          </div>
-                        </div>
-                      </article>
-                    </b:loop>
-                  </div>
-                  <b:include name='nextprev'/>
-                </b:includable>
-                <b:includable id='nextprev'>
-                  <div class='pag'>
-                    <b:if cond='data:newerPageUrl'><a expr:href='data:newerPageUrl'>← Newer</a></b:if>
-                    <b:if cond='data:olderPageUrl'><a expr:href='data:olderPageUrl'>Older →</a></b:if>
-                  </div>
-                </b:includable>
-              </b:widget>
-            </b:section>
-          </div>
-
-          <!-- ════ SIDEBAR (BLOG LISTING) ════ -->
-          <aside class='sidebar'>
-
-            <!-- ════════════════════════════════════════════════════
-              LAYOUT SECTION 18 — SIDEBAR (Blog Listing View)
-              Blogger Layout → Blog Sidebar Widgets
-              Pre-configured: Quick Tools, Search, About, Popular Posts, Categories, Archive, Newsletter, Ad
-            ════════════════════════════════════════════════════ -->
+        <b:widget id='BlogSearch1' locked='false' title='Search' type='BlogSearch' version='2'>
+          <b:includable id='main'>
             <div class='sw'>
-              <div class='sw-hd'>⚡ Quick Tools</div>
+              <div class='sw-hd'>Search</div>
               <div class='sw-bd'>
-                <div class='sw-tools'>
-                  <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>🔗</div><span class='sw-tnm'>Merge PDF</span></a>
-                  <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>✂️</div><span class='sw-tnm'>Split PDF</span></a>
-                  <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>🖼️</div><span class='sw-tnm'>Image Converter</span></a>
-                  <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>🌐</div><span class='sw-tnm'>Translator</span></a>
-                  <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>🔐</div><span class='sw-tnm'>Password Generator</span></a>
-                  <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>🔢</div><span class='sw-tnm'>Calculator</span></a>
+                <div class='sw-search'>
+                  <input class='sw-sinp' id='sw-sinp' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)}'/>
+                  <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
                 </div>
-                <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools →</a>
               </div>
             </div>
+          </b:includable>
+        </b:widget>
 
-            <b:section class='sidebar' id='sidebar-blog' name='📌 Sidebar (Blog Listing View)' maxwidgets='12' showaddelement='yes'>
+        <b:widget id='HTML3' locked='false' title='About Us' type='HTML' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;&#128075; About Us&lt;/div&gt;&lt;div class=&quot;sw-bd&quot;&gt;&lt;div class=&quot;sw-about-img&quot;&gt;&#128295;&lt;/div&gt;&lt;div class=&quot;sw-about-nm&quot;&gt;ToolsHub Pro&lt;/div&gt;&lt;div class=&quot;sw-about-tx&quot;&gt;Your one-stop for 100+ free online tools. Fast, private, no signup required.&lt;/div&gt;&lt;div class=&quot;sw-about-soc&quot;&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;f&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#120143;&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#9654;&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#9992;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <data:content/>
+          </b:includable>
+        </b:widget>
 
-              <b:widget id='BlogSearch2' locked='false' title='Search' type='BlogSearch' version='2'>
-                <b:includable id='main'>
-                  <div class='sw'>
-                    <div class='sw-hd'>Search</div>
-                    <div class='sw-bd'>
-                      <div class='sw-search'>
-                        <input class='sw-sinp' id='sw-s2' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s2").value)}'/>
-                        <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-s2").value)' style='display:flex;align-items:center;justify-content:center;width:40px'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
-                      </div>
-                    </div>
+        <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
+            <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+            <b:widget-setting name='showSnippets'>false</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <b:if cond='data:title != &quot;&quot;'>
+              <div class='sw popular-posts-widget'>
+                <div class='sw-hd'>&#128293; Popular Posts</div>
+                <div class='sw-bd'><data:widget.content/></div>
+              </div>
+            </b:if>
+          </b:includable>
+        </b:widget>
+
+        <b:widget id='Label3' locked='false' title='Categories' type='Label' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+            <b:widget-setting name='display'>LIST</b:widget-setting>
+            <b:widget-setting name='showType'>ALL</b:widget-setting>
+            <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main' var='top'>
+            <b:if cond='data:title != &quot;&quot;'>
+              <div class='sw'>
+                <div class='sw-hd'>&#128194; <data:title/></div>
+                <div class='sw-bd'>
+                  <div class='lbl-cloud'>
+                    <b:loop values='data:labels' var='label'>
+                      <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
+                    </b:loop>
                   </div>
-                </b:includable>
-              </b:widget>
+                </div>
+              </div>
+            </b:if>
+          </b:includable>
+        </b:widget>
 
-              <b:widget id='HTML6' locked='false' title='About Us' type='HTML' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;👋 About Us&lt;/div&gt;&lt;div class=&quot;sw-bd&quot;&gt;&lt;div class=&quot;sw-about-img&quot;&gt;🔧&lt;/div&gt;&lt;div class=&quot;sw-about-nm&quot;&gt;ToolsHub Pro&lt;/div&gt;&lt;div class=&quot;sw-about-tx&quot;&gt;100+ free online tools for documents, images, text, and more. Fast, private, no signup needed.&lt;/div&gt;&lt;div class=&quot;sw-about-soc&quot;&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;f&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;𝕏&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;▶&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;✈&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main'>
-                  <data:content/>
-                </b:includable>
-              </b:widget>
+        <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2'>
+          <b:includable id='main' var='top'>
+            <b:if cond='data:title != &quot;&quot;'>
+              <div class='sw'>
+                <div class='sw-hd'>&#128197; <data:title/></div>
+                <div class='sw-bd' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
+              </div>
+            </b:if>
+          </b:includable>
+        </b:widget>
 
-              <b:widget id='PopularPosts2' locked='false' title='Popular Posts' type='PopularPosts' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
-                  <b:widget-setting name='showThumbnails'>true</b:widget-setting>
-                  <b:widget-setting name='showSnippets'>false</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main'>
-                  <b:if cond='data:title != &quot;&quot;'>
-                    <div class='sw popular-posts-widget'>
-                      <div class='sw-hd'>🔥 Popular Posts</div>
-                      <div class='sw-bd'><data:widget.content/></div>
-                    </div>
-                  </b:if>
-                </b:includable>
-              </b:widget>
+        <b:widget id='HTML4' locked='false' title='Newsletter' type='HTML' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;&#128231; Newsletter&lt;/div&gt;&lt;div class=&quot;sw-bd sw-nl&quot;&gt;&lt;p&gt;Get notified when new tools and articles are published. No spam, ever.&lt;/p&gt;&lt;div class=&quot;sw-nl-inp&quot;&gt;&lt;input placeholder=&quot;Your email address...&quot; type=&quot;email&quot;/&gt;&lt;button class=&quot;sw-nl-btn&quot;&gt;Subscribe Free&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <data:content/>
+          </b:includable>
+        </b:widget>
 
-              <b:widget id='Label4' locked='false' title='Categories' type='Label' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
-                  <b:widget-setting name='display'>LIST</b:widget-setting>
-                  <b:widget-setting name='showType'>ALL</b:widget-setting>
-                  <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main' var='top'>
-                  <b:if cond='data:title != &quot;&quot;'>
-                    <div class='sw'>
-                      <div class='sw-hd'>📂 <data:title/></div>
-                      <div class='sw-bd'>
-                        <div class='lbl-cloud'>
-                          <b:loop values='data:labels' var='label'>
-                            <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
-                          </b:loop>
-                        </div>
-                      </div>
-                    </div>
-                  </b:if>
-                </b:includable>
-              </b:widget>
+        <b:widget id='HTML5' locked='false' title='Sidebar Ad 300x250' type='HTML' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='content'>&lt;!-- Replace with AdSense 300x250 --&gt;&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-bd&quot; style=&quot;min-height:250px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.5px&quot;&gt;AD SPACE 300&#215;250&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main'>
+            <data:content/>
+          </b:includable>
+        </b:widget>
 
-              <b:widget id='BlogArchive3' locked='false' title='Archive' type='BlogArchive' version='2'>
-                <b:includable id='main' var='top'>
-                  <b:if cond='data:title != &quot;&quot;'>
-                    <div class='sw'>
-                      <div class='sw-hd'>🗓 <data:title/></div>
-                      <div class='sw-bd' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
-                    </div>
-                  </b:if>
-                </b:includable>
-              </b:widget>
+      </b:section>
+    </aside>
 
-              <b:widget id='HTML7' locked='false' title='Newsletter' type='HTML' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;📧 Newsletter&lt;/div&gt;&lt;div class=&quot;sw-bd sw-nl&quot;&gt;&lt;p&gt;New tools and articles delivered to your inbox. No spam, ever.&lt;/p&gt;&lt;div class=&quot;sw-nl-inp&quot;&gt;&lt;input placeholder=&quot;Your email address...&quot; type=&quot;email&quot;/&gt;&lt;button class=&quot;sw-nl-btn&quot;&gt;Subscribe Free 📬&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main'>
-                  <data:content/>
-                </b:includable>
-              </b:widget>
+  </div>
+</div>
 
-              <b:widget id='HTML8' locked='false' title='Sidebar Ad (300x250)' type='HTML' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='content'>&lt;!-- Replace with AdSense 300x250 code --&gt;&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-bd&quot; style=&quot;min-height:250px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.5px&quot;&gt;AD SPACE — 300×250&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-                </b:widget-settings>
-                <b:includable id='main'>
-                  <data:content/>
-                </b:includable>
-              </b:widget>
-
-            </b:section>
-          </aside>
+<!-- ══ HOMEPAGE ONLY: CTA section ══ -->
+<b:if cond='data:view.isHomepage'>
+  <b:section class='ad-banner' id='before-cta' name='Before CTA Ad' maxwidgets='2' showaddelement='yes'/>
+  <section class='cta-s'>
+    <div class='wrap'>
+      <div class='cta-c rv'>
+        <div class='cta-in'>
+          <div class='cta-badge'>&#128640; Get Started &#8212; It's Free</div>
+          <h2 class='cta-t'>Ready to Get Things Done?</h2>
+          <p class='cta-s2'>100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
+          <div class='cta-bs'>
+            <a class='cb1' href='/p/all-tools.html'>&#128295; Explore All Tools</a>
+            <a class='cb2' href='/search'>&#128240; Read the Blog</a>
+          </div>
         </div>
       </div>
-    </section>
-
-  </b:if>
+    </div>
+  </section>
+  <b:section class='ad-banner' id='after-cta' name='After CTA Ad' maxwidgets='2' showaddelement='yes'/>
 </b:if>
 
 <!-- ════════════════════════════════════════════════════
@@ -1479,6 +1329,35 @@ if(yr)yr.textContent=new Date().getFullYear();
 
 /* ── Remove loading class immediately ── */
 document.body.classList.remove('loading');
+
+/* ── Hide empty ad-banner and lp-section-wrap sections (prevents visible lines) ── */
+(function(){
+  function cleanEmpty(){
+    document.querySelectorAll('.ad-banner,.lp-section-wrap').forEach(function(el){
+      var txt=(el.textContent||'').trim();
+      var hasIframe=el.querySelector('iframe');
+      var hasImg=el.querySelector('img');
+      if(!txt&&!hasIframe&&!hasImg){
+        el.style.cssText='display:none!important;padding:0!important;margin:0!important;height:0!important;overflow:hidden!important;min-height:0!important';
+      }
+    });
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',cleanEmpty);}
+  else{cleanEmpty();}
+  setTimeout(cleanEmpty,600);
+  window.addEventListener('load',cleanEmpty);
+})();
+
+/* ── Hide Blogger navbar completely ── */
+(function(){
+  var nb=document.getElementById('navbar-iframe');
+  if(nb){nb.style.display='none';}
+  document.querySelectorAll('iframe').forEach(function(f){
+    if(f.id==='navbar-iframe'||f.src&&f.src.indexOf('blogger.com/navbar')>-1){
+      f.style.cssText='display:none!important;height:0!important;';
+    }
+  });
+})();
 
 /* ── Scroll reveal (IntersectionObserver) ── */
 (function(){

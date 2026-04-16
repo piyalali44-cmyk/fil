@@ -345,18 +345,6 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ─── TOOLS GRID ─── */
-.htu-sec{padding:88px 0;border-top:1px solid var(--br);}
-.htu-g{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;}
-.htu-g::before{content:'';position:absolute;top:48px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);height:1px;background:linear-gradient(90deg,transparent,var(--br2),transparent);pointer-events:none;}
-.htu-c{background:var(--s1);border:1px solid var(--br);border-radius:var(--radius-lg);padding:32px 28px 28px;text-align:center;position:relative;transition:transform .4s var(--ease),box-shadow .4s,border-color .3s;}
-.htu-c:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28);}
-.htu-num{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:var(--font-display);font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 14px;border-radius:0 0 12px 12px;}
-.htu-ico{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:18px auto 16px;transition:transform .3s;}
-.htu-c:hover .htu-ico{transform:scale(1.12);}
-.htu-t{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);letter-spacing:-.2px;margin-bottom:10px;}
-.htu-d{font-size:13.5px;color:var(--t2);line-height:1.75;}
-@media(max-width:768px){.htu-g{grid-template-columns:1fr;}.htu-g::before{display:none;}}
 
 /* ─── BLOG ─── */
 .blog{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
@@ -621,40 +609,6 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
   </div>
 </section>
 
-<!-- ══ TOOLS GRID ══ -->
-<section class="htu-sec">
-  <div class="container">
-    <div class="sec-head reveal">
-      <div class="sec-tag">📖 How It Works</div>
-      <h2 class="sec-title">Start Using Any Tool in 3 Easy Steps</h2>
-      <p class="sec-sub">No account. No software. No cost. Just open a tool and get your work done in seconds.</p>
-    </div>
-    <div class="htu-g">
-
-      <div class="htu-c reveal d1">
-        <div class="htu-num">STEP 01</div>
-        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25)">🔍</div>
-        <div class="htu-t">Choose Your Tool</div>
-        <div class="htu-d">Browse by category from the menu — PDF, Image, Text & AI, and more. Or use the search bar to find any tool instantly.</div>
-      </div>
-
-      <div class="htu-c reveal d2">
-        <div class="htu-num">STEP 02</div>
-        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border:1px solid rgba(245,158,11,.25)">⚡</div>
-        <div class="htu-t">Use It Instantly</div>
-        <div class="htu-d">No sign-up, no installation, no waiting. Every tool opens directly in your browser and is ready to use immediately.</div>
-      </div>
-
-      <div class="htu-c reveal d3">
-        <div class="htu-num">STEP 03</div>
-        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25)">✅</div>
-        <div class="htu-t">Get Your Result</div>
-        <div class="htu-d">Download, copy, or share your result in one click. Your files stay private — nothing is uploaded to any server.</div>
-      </div>
-
-    </div>
-  </div>
-</section>
 
 <!-- ══ CTA ══ -->
 <section class="cta">

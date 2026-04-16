@@ -1,0 +1,1089 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html>
+<html b:css='false' b:defaultwidgetversion='2' b:layoutsVersion='3'
+  b:responsive='true' b:templateUrl='custom' b:version='2'
+  expr:dir='data:blog.languageDirection' xmlns='http://www.w3.org/1999/xhtml'
+  xmlns:b='http://www.google.com/2005/gml/b'
+  xmlns:data='http://www.google.com/2005/gml/data'
+  xmlns:expr='http://www.google.com/2005/gml/expr'>
+
+<head>
+  <meta charset='UTF-8'/>
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0' name='viewport'/>
+  <b:include data='blog' name='all-head-content'/>
+  <title>
+    <b:if cond='data:view.isHomepage'>
+      <data:blog.title/> — Free Online Tools Hub
+    <b:else/>
+      <data:view.title/> — <data:blog.title/>
+    </b:if>
+  </title>
+  <meta expr:content='data:blog.metaDescription' name='description'/>
+  <link href='https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&amp;family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&amp;display=swap' rel='stylesheet'/>
+  <b:skin><![CDATA[
+:root {
+  --bg: #0b0f1a; --bg2: #111827; --s1: #1a2234; --s2: #1e2a3e; --s3: #243147; --s4: #2c3d58;
+  --br: #2e3f5c; --br2: #3a4f6e; --a: #3b82f6; --a2: #6366f1; --a3: #22d3ee;
+  --g: #10b981; --r: #ef4444; --y: #f59e0b;
+  --tx: #e8edf5; --t2: #94a3b8; --t3: #4a6080; --t4: #2d3d55;
+  --grad: linear-gradient(135deg, #3b82f6 0%, #6366f1 50%, #22d3ee 100%);
+  --card-shadow: 0 4px 24px rgba(0,0,0,.4); --nav-h: 64px;
+  --font-display: 'Syne', sans-serif; --font-body: 'DM Sans', sans-serif;
+  --radius: 12px; --radius-lg: 18px; --radius-xl: 24px;
+  --transition: all .2s cubic-bezier(.4,0,.2,1);
+}
+body.light-mode {
+  --bg: #f0f4f8; --bg2: #ffffff; --s1: #ffffff; --s2: #f5f8fc; --s3: #edf2f7; --s4: #e2e8f0;
+  --br: #d1dce9; --br2: #bac8d8; --a: #2563eb; --a2: #4f46e5; --a3: #0891b2;
+  --tx: #0f1f36; --t2: #334e68; --t3: #627d98; --t4: #9fb3c8;
+  --card-shadow: 0 4px 20px rgba(0,0,0,.08);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { font-family: var(--font-body); background: var(--bg); color: var(--tx); font-size: 15px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+a { color: var(--a); text-decoration: none; transition: var(--transition); }
+a:hover { color: var(--a3); }
+img { max-width: 100%; height: auto; }
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg); }
+::-webkit-scrollbar-thumb { background: var(--br2); border-radius: 3px; }
+.container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
+.container-sm { max-width: 860px; margin: 0 auto; padding: 0 20px; }
+.btn { display: inline-flex; align-items: center; gap: 7px; padding: 10px 22px; border-radius: 50px; font-family: var(--font-body); font-size: 14px; font-weight: 600; cursor: pointer; transition: var(--transition); border: none; white-space: nowrap; text-decoration: none; }
+.btn-primary { background: var(--a); color: #fff; box-shadow: 0 4px 16px rgba(59,130,246,.35); }
+.btn-primary:hover { background: var(--a2); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(59,130,246,.45); color: #fff; }
+.btn-outline { background: transparent; color: var(--tx); border: 1.5px solid var(--br2); }
+.btn-outline:hover { border-color: var(--a); color: var(--a); }
+.tag { display: inline-flex; align-items: center; gap: 4px; padding: 3px 11px; border-radius: 50px; font-size: 11px; font-weight: 700; letter-spacing: .4px; }
+#lp-header { position: sticky; top: 0; z-index: 1000; height: var(--nav-h); background: rgba(11,15,26,.92); backdrop-filter: blur(18px) saturate(180%); -webkit-backdrop-filter: blur(18px) saturate(180%); border-bottom: 1px solid rgba(255,255,255,.06); transition: var(--transition); }
+body.light-mode #lp-header { background: rgba(255,255,255,.92); border-bottom-color: rgba(0,0,0,.07); }
+.header-inner { display: flex; align-items: center; height: var(--nav-h); gap: 0; }
+.lp-logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex-shrink: 0; }
+.lp-logo-icon { width: 38px; height: 38px; border-radius: 11px; background: linear-gradient(135deg,#1e40af,#312e81); border: 1px solid rgba(99,102,241,.35); display: flex; align-items: center; justify-content: center; font-size: 18px; box-shadow: 0 2px 12px rgba(59,130,246,.3); }
+.lp-logo-text { font-family: var(--font-display); font-size: 19px; font-weight: 800; letter-spacing: -.5px; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; line-height: 1; }
+.lp-nav { flex: 1; display: flex; align-items: center; justify-content: center; gap: 4px; }
+.nav-item { position: relative; }
+.nav-link { display: flex; align-items: center; gap: 5px; padding: 8px 14px; border-radius: 9px; font-size: 14px; font-weight: 500; color: var(--t2); text-decoration: none; white-space: nowrap; transition: var(--transition); }
+.nav-link svg { transition: transform .2s; width: 12px; height: 12px; fill: none; stroke: currentColor; stroke-width: 2.5; }
+.nav-link:hover { color: var(--tx); background: var(--s3); }
+.nav-item:hover > .nav-link { color: var(--a); }
+.nav-item:hover > .nav-link svg { transform: rotate(180deg); }
+.nav-dropdown { position: absolute; top: calc(100% + 10px); left: 50%; transform: translateX(-50%) translateY(8px); background: var(--s1); border: 1px solid var(--br2); border-radius: var(--radius-lg); padding: 8px; min-width: 220px; max-width: 640px; box-shadow: 0 20px 60px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.2); opacity: 0; visibility: hidden; pointer-events: none; transition: all .22s cubic-bezier(.4,0,.2,1); z-index: 500; }
+.nav-item:hover .nav-dropdown { opacity: 1; visibility: visible; pointer-events: auto; transform: translateX(-50%) translateY(0); }
+.nav-dropdown.wide { min-width: 520px; }
+.nav-dropdown.grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4px; }
+.nav-dropdown.grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 4px; }
+.dd-item { display: flex; align-items: center; gap: 10px; padding: 10px 12px; border-radius: 10px; text-decoration: none; color: var(--t2); transition: var(--transition); cursor: pointer; }
+.dd-item:hover { background: var(--s3); color: var(--tx); }
+.dd-icon { width: 36px; height: 36px; border-radius: 10px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.dd-texts { flex: 1; min-width: 0; }
+.dd-name { font-size: 13px; font-weight: 600; color: var(--tx); line-height: 1.2; }
+.dd-desc { font-size: 11px; color: var(--t3); margin-top: 1px; }
+.dd-sep { grid-column: 1/-1; height: 1px; background: var(--br); margin: 4px 0; }
+.dd-header { grid-column: 1/-1; padding: 6px 12px 4px; font-size: 10px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--t3); display: flex; align-items: center; gap: 6px; }
+.dd-header::after { content: ''; flex: 1; height: 1px; background: var(--br); }
+.header-right { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+.header-search { display: flex; align-items: center; gap: 7px; padding: 7px 14px; border-radius: 50px; background: var(--s3); border: 1px solid var(--br); color: var(--t2); font-size: 13px; cursor: pointer; transition: var(--transition); }
+.header-search:hover { border-color: var(--a); color: var(--a); }
+.theme-btn { width: 36px; height: 36px; border-radius: 10px; background: var(--s3); border: 1px solid var(--br); color: var(--t2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 16px; transition: var(--transition); }
+.theme-btn:hover { border-color: var(--a); color: var(--a); }
+.header-cta { background: linear-gradient(135deg,var(--a),var(--a2)); color: #fff; padding: 8px 18px; border-radius: 50px; font-size: 13px; font-weight: 700; text-decoration: none; box-shadow: 0 4px 14px rgba(59,130,246,.3); transition: var(--transition); }
+.header-cta:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(59,130,246,.45); color: #fff; }
+.mobile-menu-btn { display: none; width: 36px; height: 36px; border-radius: 10px; background: var(--s3); border: 1px solid var(--br); color: var(--t2); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 5px; }
+.mobile-menu-btn span { display: block; width: 18px; height: 2px; background: currentColor; border-radius: 2px; transition: var(--transition); }
+.mobile-nav { display: none; position: fixed; inset: 0; z-index: 1500; background: rgba(0,0,0,.8); backdrop-filter: blur(10px); }
+.mobile-nav.open { display: flex; }
+.mobile-nav-inner { width: min(340px,90vw); height: 100%; background: var(--s1); border-right: 1px solid var(--br2); overflow-y: auto; padding: 0 0 40px; animation: slideInLeft .28s cubic-bezier(.4,0,.2,1); }
+@keyframes slideInLeft { from { transform: translateX(-100%); } to { transform: translateX(0); } }
+.mobile-nav-head { display: flex; align-items: center; justify-content: space-between; padding: 16px 18px; border-bottom: 1px solid var(--br); }
+.mobile-close { width: 32px; height: 32px; border-radius: 50%; background: var(--s3); border: 1px solid var(--br); color: var(--t2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; }
+.mobile-menu-list { padding: 10px 0; }
+.mobile-menu-section { font-size: 9px; font-weight: 800; letter-spacing: 1.6px; text-transform: uppercase; color: var(--t3); padding: 12px 20px 5px; }
+.mobile-menu-item { display: flex; align-items: center; gap: 12px; padding: 11px 20px; font-size: 14px; color: var(--t2); text-decoration: none; transition: background .15s; }
+.mobile-menu-item:hover { background: var(--s3); color: var(--tx); }
+.mobile-menu-icon { width: 34px; height: 34px; border-radius: 9px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 16px; }
+.mobile-menu-divider { height: 1px; background: var(--br); margin: 8px 0; }
+.lp-hero { position: relative; overflow: hidden; padding: 90px 0 80px; background: var(--bg2); }
+.hero-bg { position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse at 20% 30%,rgba(59,130,246,.18) 0,transparent 55%), radial-gradient(ellipse at 80% 70%,rgba(99,102,241,.14) 0,transparent 50%), radial-gradient(ellipse at 60% 10%,rgba(34,211,238,.1) 0,transparent 40%); }
+body.light-mode .hero-bg { background: radial-gradient(ellipse at 20% 30%,rgba(37,99,235,.08) 0,transparent 55%), radial-gradient(ellipse at 80% 70%,rgba(79,70,229,.06) 0,transparent 50%); }
+.hero-grid-dots { position: absolute; inset: 0; pointer-events: none; opacity: .3; background-image: radial-gradient(circle,var(--br) 1px,transparent 1px); background-size: 28px 28px; }
+body.light-mode .hero-grid-dots { opacity: .15; }
+.hero-content { position: relative; z-index: 1; text-align: center; }
+.hero-badge { display: inline-flex; align-items: center; gap: 7px; padding: 6px 16px; border-radius: 50px; background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.25); font-size: 12px; font-weight: 700; color: #60a5fa; letter-spacing: .3px; margin-bottom: 22px; animation: fadeUp .5s .1s both; }
+.hero-title { font-family: var(--font-display); font-size: clamp(34px,6vw,60px); font-weight: 800; letter-spacing: -1.5px; line-height: 1.1; color: var(--tx); margin-bottom: 18px; animation: fadeUp .6s .2s both; }
+.hero-title .gradient-text { background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-sub { font-size: 17px; color: var(--t2); max-width: 560px; margin: 0 auto 36px; line-height: 1.7; animation: fadeUp .6s .3s both; }
+.hero-search { max-width: 560px; margin: 0 auto; position: relative; animation: fadeUp .6s .4s both; }
+.hero-search-box { display: flex; align-items: center; gap: 0; background: var(--s1); border: 1.5px solid var(--br2); border-radius: 50px; padding: 6px 6px 6px 20px; box-shadow: 0 8px 40px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.04); transition: border-color .2s,box-shadow .2s; }
+.hero-search-box:focus-within { border-color: var(--a); box-shadow: 0 8px 40px rgba(0,0,0,.25),0 0 0 4px rgba(59,130,246,.15); }
+.hero-search-icon { font-size: 18px; flex-shrink: 0; }
+.hero-search-input { flex: 1; background: transparent; border: none; outline: none; font-family: var(--font-body); font-size: 15px; color: var(--tx); padding: 8px 14px; }
+.hero-search-input::placeholder { color: var(--t3); }
+.hero-search-btn { padding: 10px 22px; border-radius: 50px; background: var(--a); color: #fff; border: none; font-size: 14px; font-weight: 700; cursor: pointer; transition: var(--transition); flex-shrink: 0; }
+.hero-search-btn:hover { background: var(--a2); transform: scale(1.03); }
+.hero-stats { display: flex; align-items: center; justify-content: center; gap: 32px; margin-top: 40px; animation: fadeUp .6s .5s both; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-val { font-family: var(--font-display); font-size: 24px; font-weight: 800; color: var(--tx); line-height: 1; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.hero-stat-lbl { font-size: 12px; color: var(--t3); margin-top: 3px; }
+.hero-stat-sep { width: 1px; height: 36px; background: var(--br); }
+@keyframes fadeUp { from { opacity: 0; transform: translateY(18px); } to { opacity: 1; transform: translateY(0); } }
+.tools-section { padding: 72px 0 80px; }
+.section-header { text-align: center; margin-bottom: 48px; }
+.section-tag { display: inline-flex; align-items: center; gap: 6px; padding: 5px 14px; border-radius: 50px; background: rgba(34,211,238,.1); border: 1px solid rgba(34,211,238,.25); font-size: 11px; font-weight: 700; color: var(--a3); letter-spacing: .5px; text-transform: uppercase; margin-bottom: 12px; }
+.section-title { font-family: var(--font-display); font-size: clamp(26px,4vw,40px); font-weight: 800; letter-spacing: -1px; color: var(--tx); line-height: 1.15; margin-bottom: 12px; }
+.section-sub { font-size: 16px; color: var(--t2); max-width: 500px; margin: 0 auto; }
+.tools-categories { display: flex; flex-direction: column; gap: 52px; }
+.tool-cat-head { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; padding-bottom: 14px; border-bottom: 1px solid var(--br); }
+.tool-cat-icon { width: 38px; height: 38px; border-radius: 11px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.tool-cat-title { font-family: var(--font-display); font-size: 18px; font-weight: 700; color: var(--tx); letter-spacing: -.3px; }
+.tool-cat-count { margin-left: auto; font-size: 11px; font-weight: 700; padding: 3px 10px; border-radius: 50px; background: var(--s3); color: var(--t3); border: 1px solid var(--br); }
+.tool-cat-see-all { display: flex; align-items: center; gap: 5px; font-size: 13px; font-weight: 600; color: var(--a); text-decoration: none; margin-left: 12px; flex-shrink: 0; transition: var(--transition); }
+.tool-cat-see-all:hover { gap: 8px; }
+.tools-grid { display: grid; grid-template-columns: repeat(auto-fill,minmax(200px,1fr)); gap: 12px; }
+.tool-card { display: flex; flex-direction: column; gap: 8px; padding: 16px 14px; border-radius: var(--radius); background: var(--s1); border: 1px solid var(--br); text-decoration: none; color: var(--t2); transition: all .22s cubic-bezier(.34,1.2,.64,1); cursor: pointer; position: relative; overflow: hidden; }
+.tool-card::before { content: ''; position: absolute; inset: 0; opacity: 0; background: linear-gradient(135deg,rgba(59,130,246,.06),transparent); transition: opacity .2s; }
+.tool-card:hover { border-color: var(--a); background: var(--s2); transform: translateY(-3px); box-shadow: var(--card-shadow); color: var(--tx); }
+.tool-card:hover::before { opacity: 1; }
+.tool-card:active { transform: scale(.97); }
+.tc-icon { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 20px; border: 1px solid; flex-shrink: 0; }
+.tc-name { font-size: 13px; font-weight: 700; color: var(--tx); line-height: 1.25; }
+.tc-desc { font-size: 11px; color: var(--t3); line-height: 1.4; }
+.tc-badge { display: inline-flex; align-items: center; padding: 2px 8px; border-radius: 50px; font-size: 9px; font-weight: 800; letter-spacing: .5px; text-transform: uppercase; }
+.features-section { padding: 80px 0; background: var(--bg2); border-top: 1px solid var(--br); border-bottom: 1px solid var(--br); }
+.features-grid { display: grid; grid-template-columns: repeat(auto-fit,minmax(220px,1fr)); gap: 24px; }
+.feature-card { padding: 24px 20px; border-radius: var(--radius-lg); background: var(--s1); border: 1px solid var(--br); transition: var(--transition); }
+.feature-card:hover { border-color: var(--br2); box-shadow: var(--card-shadow); transform: translateY(-2px); }
+.feature-icon { width: 52px; height: 52px; border-radius: 14px; background: linear-gradient(135deg,rgba(59,130,246,.15),rgba(99,102,241,.1)); border: 1px solid rgba(59,130,246,.2); display: flex; align-items: center; justify-content: center; font-size: 22px; margin-bottom: 16px; }
+.feature-title { font-family: var(--font-display); font-size: 16px; font-weight: 700; color: var(--tx); margin-bottom: 7px; letter-spacing: -.2px; }
+.feature-desc { font-size: 13px; color: var(--t2); line-height: 1.65; }
+.blog-section { padding: 80px 0; }
+.blog-layout { display: grid; grid-template-columns: 1fr 320px; gap: 36px; }
+.posts-list { display: flex; flex-direction: column; gap: 24px; }
+.post-card { background: var(--s1); border: 1px solid var(--br); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+.post-card:hover { border-color: var(--br2); box-shadow: var(--card-shadow); transform: translateY(-2px); }
+.post-card-img { width: 100%; height: 200px; object-fit: cover; background: var(--s3); display: flex; align-items: center; justify-content: center; font-size: 40px; }
+.post-card-img img { width: 100%; height: 200px; object-fit: cover; }
+.post-card-body { padding: 22px 22px 20px; }
+.post-card-tags { display: flex; gap: 7px; margin-bottom: 12px; flex-wrap: wrap; }
+.post-card-tag { padding: 3px 11px; border-radius: 50px; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .5px; background: rgba(59,130,246,.1); border: 1px solid rgba(59,130,246,.2); color: #60a5fa; }
+.post-card-title { font-family: var(--font-display); font-size: 19px; font-weight: 700; color: var(--tx); letter-spacing: -.3px; line-height: 1.3; margin-bottom: 10px; }
+.post-card-title a { color: var(--tx); text-decoration: none; }
+.post-card-title a:hover { color: var(--a); }
+.post-card-excerpt { font-size: 14px; color: var(--t2); line-height: 1.7; margin-bottom: 16px; }
+.post-card-meta { display: flex; align-items: center; gap: 14px; font-size: 12px; color: var(--t3); padding-top: 16px; border-top: 1px solid var(--br); flex-wrap: wrap; }
+.post-meta-item { display: flex; align-items: center; gap: 5px; }
+.post-read-more { margin-left: auto; font-size: 13px; font-weight: 600; color: var(--a); text-decoration: none; display: flex; align-items: center; gap: 4px; transition: gap .15s; }
+.post-read-more:hover { gap: 7px; }
+.post-single { max-width: 760px; }
+.post-single-header { margin-bottom: 32px; }
+.post-single-title { font-family: var(--font-display); font-size: clamp(26px,4vw,40px); font-weight: 800; letter-spacing: -1px; color: var(--tx); line-height: 1.15; margin-bottom: 16px; }
+.post-single-meta { display: flex; align-items: center; gap: 16px; font-size: 13px; color: var(--t3); flex-wrap: wrap; padding-bottom: 20px; border-bottom: 1px solid var(--br); }
+.post-single-img { width: 100%; border-radius: var(--radius-lg); overflow: hidden; margin: 24px 0; border: 1px solid var(--br); }
+.post-single-img img { width: 100%; display: block; }
+.post-content { font-size: 16px; line-height: 1.85; color: var(--t2); }
+.post-content h1,.post-content h2,.post-content h3,.post-content h4,.post-content h5 { font-family: var(--font-display); color: var(--tx); margin: 32px 0 14px; font-weight: 700; letter-spacing: -.3px; line-height: 1.2; }
+.post-content h2 { font-size: 26px; } .post-content h3 { font-size: 21px; }
+.post-content p { margin-bottom: 18px; }
+.post-content a { color: var(--a); border-bottom: 1px solid rgba(59,130,246,.3); }
+.post-content a:hover { border-bottom-color: var(--a); }
+.post-content ul,.post-content ol { margin: 0 0 18px 22px; }
+.post-content li { margin-bottom: 7px; }
+.post-content blockquote { margin: 24px 0; padding: 18px 22px; border-left: 4px solid var(--a); background: rgba(59,130,246,.06); border-radius: 0 var(--radius) var(--radius) 0; font-style: italic; color: var(--t2); }
+.post-content code { background: var(--s3); padding: 2px 7px; border-radius: 5px; font-size: 13px; color: var(--a3); }
+.post-content pre { background: var(--s2); border: 1px solid var(--br); border-radius: var(--radius); padding: 18px; overflow-x: auto; margin: 24px 0; }
+.post-content pre code { background: none; padding: 0; }
+.post-content img { max-width: 100%; border-radius: var(--radius); margin: 18px 0; }
+.post-content table { width: 100%; border-collapse: collapse; margin: 24px 0; font-size: 14px; }
+.post-content th,.post-content td { padding: 12px 16px; border: 1px solid var(--br); text-align: left; }
+.post-content th { background: var(--s3); font-weight: 700; color: var(--tx); }
+.tool-embed-widget { width: 100%; border-radius: var(--radius-lg); border: 2px solid var(--br2); overflow: hidden; background: var(--s1); margin: 32px 0; box-shadow: var(--card-shadow); }
+.tool-embed-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; background: var(--s2); border-bottom: 1px solid var(--br); }
+.tool-embed-icon { width: 38px; height: 38px; border-radius: 10px; background: rgba(59,130,246,.12); border: 1px solid rgba(59,130,246,.25); display: flex; align-items: center; justify-content: center; font-size: 18px; }
+.tool-embed-title { font-size: 14px; font-weight: 700; color: var(--tx); }
+.tool-embed-frame { width: 100%; border: none; min-height: 600px; display: block; }
+.tool-embed-cta { display: flex; align-items: center; justify-content: space-between; padding: 14px 18px; background: rgba(59,130,246,.05); border-top: 1px solid var(--br); font-size: 13px; color: var(--t2); }
+.sidebar { position: sticky; top: calc(var(--nav-h) + 20px); }
+.sidebar-widget { background: var(--s1); border: 1px solid var(--br); border-radius: var(--radius-lg); overflow: hidden; margin-bottom: 20px; }
+.sw-header { padding: 14px 18px; border-bottom: 1px solid var(--br); font-family: var(--font-display); font-size: 14px; font-weight: 700; color: var(--tx); display: flex; align-items: center; gap: 8px; }
+.sw-header::before { content: ''; width: 3px; height: 14px; background: var(--a); border-radius: 2px; }
+.sw-body { padding: 14px 18px; }
+.sidebar-tool-list { display: flex; flex-direction: column; gap: 4px; }
+.sidebar-tool-item { display: flex; align-items: center; gap: 10px; padding: 9px 12px; border-radius: 10px; cursor: pointer; transition: background .15s; text-decoration: none; color: var(--t2); }
+.sidebar-tool-item:hover { background: var(--s3); color: var(--tx); }
+.st-icon { width: 32px; height: 32px; border-radius: 9px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+.st-name { font-size: 13px; font-weight: 600; }
+.cta-section { padding: 80px 0; background: var(--bg2); border-top: 1px solid var(--br); }
+.cta-card { border-radius: var(--radius-xl); background: linear-gradient(135deg,#1e3a8a 0%,#312e81 40%,#1e1b4b 100%); border: 1px solid rgba(255,255,255,.1); padding: 60px 40px; text-align: center; position: relative; overflow: hidden; }
+.cta-card::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse at 30% 50%,rgba(99,102,241,.3),transparent 60%), radial-gradient(ellipse at 70% 50%,rgba(34,211,238,.15),transparent 60%); }
+.cta-card-content { position: relative; z-index: 1; }
+.cta-title { font-family: var(--font-display); font-size: clamp(26px,4vw,40px); font-weight: 800; color: #fff; letter-spacing: -1px; margin-bottom: 14px; }
+.cta-sub { font-size: 16px; color: rgba(255,255,255,.65); max-width: 480px; margin: 0 auto 30px; line-height: 1.6; }
+.cta-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+.cta-btn-primary { padding: 13px 28px; border-radius: 50px; background: linear-gradient(135deg,#60a5fa,#818cf8); color: #fff; font-weight: 700; font-size: 15px; text-decoration: none; box-shadow: 0 6px 24px rgba(96,165,250,.4); transition: var(--transition); display: inline-flex; align-items: center; gap: 7px; }
+.cta-btn-primary:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(96,165,250,.55); color: #fff; }
+.cta-btn-secondary { padding: 13px 24px; border-radius: 50px; background: rgba(255,255,255,.1); border: 1.5px solid rgba(255,255,255,.25); color: rgba(255,255,255,.85); font-weight: 600; font-size: 15px; text-decoration: none; transition: var(--transition); display: inline-flex; align-items: center; gap: 7px; }
+.cta-btn-secondary:hover { background: rgba(255,255,255,.18); color: #fff; }
+.pagination { display: flex; align-items: center; justify-content: center; gap: 6px; padding: 48px 0 0; flex-wrap: wrap; }
+.page-link,.page-current { width: 40px; height: 40px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 600; text-decoration: none; transition: var(--transition); }
+.page-link { background: var(--s1); border: 1px solid var(--br); color: var(--t2); }
+.page-link:hover { border-color: var(--a); color: var(--a); background: var(--s3); }
+.page-current { background: var(--a); color: #fff; border: 1px solid transparent; box-shadow: 0 4px 14px rgba(59,130,246,.35); }
+.page-prev,.page-next { padding: 0 16px; width: auto; gap: 6px; background: var(--s1); border: 1px solid var(--br); color: var(--t2); }
+.page-prev:hover,.page-next:hover { color: var(--a); border-color: var(--a); }
+.lp-breadcrumb { padding: 14px 0; font-size: 13px; color: var(--t3); display: flex; align-items: center; gap: 7px; flex-wrap: wrap; }
+.lp-breadcrumb a { color: var(--t3); text-decoration: none; }
+.lp-breadcrumb a:hover { color: var(--a); }
+.lp-breadcrumb .bc-sep { color: var(--t4); }
+.lp-breadcrumb .bc-current { color: var(--t2); font-weight: 500; }
+.labels-cloud { display: flex; flex-wrap: wrap; gap: 7px; }
+.label-link { display: inline-flex; align-items: center; gap: 5px; padding: 5px 13px; border-radius: 50px; font-size: 12px; font-weight: 600; color: var(--t2); background: var(--s3); border: 1px solid var(--br); text-decoration: none; transition: var(--transition); }
+.label-link:hover { border-color: var(--a); color: var(--a); background: rgba(59,130,246,.08); }
+#lp-footer { background: var(--bg2); border-top: 1px solid var(--br); padding: 64px 0 0; }
+.footer-grid { display: grid; grid-template-columns: 280px repeat(3,1fr); gap: 40px; margin-bottom: 48px; }
+.footer-logo-wrap { display: flex; align-items: center; gap: 10px; margin-bottom: 14px; }
+.footer-logo-icon { width: 36px; height: 36px; border-radius: 10px; background: linear-gradient(135deg,#1e40af,#312e81); border: 1px solid rgba(99,102,241,.35); display: flex; align-items: center; justify-content: center; font-size: 17px; }
+.footer-logo-text { font-family: var(--font-display); font-size: 18px; font-weight: 800; background: var(--grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
+.footer-desc { font-size: 13px; color: var(--t3); line-height: 1.75; margin-bottom: 20px; }
+.footer-social { display: flex; gap: 8px; }
+.social-btn { width: 36px; height: 36px; border-radius: 9px; background: var(--s3); border: 1px solid var(--br); display: flex; align-items: center; justify-content: center; font-size: 15px; text-decoration: none; color: var(--t2); transition: var(--transition); }
+.social-btn:hover { border-color: var(--a); color: var(--a); background: rgba(59,130,246,.08); }
+.footer-col-title { font-size: 12px; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; color: var(--t2); margin-bottom: 16px; }
+.footer-links { display: flex; flex-direction: column; gap: 9px; }
+.footer-link { font-size: 13px; color: var(--t3); text-decoration: none; transition: var(--transition); }
+.footer-link:hover { color: var(--tx); padding-left: 3px; }
+.footer-bottom { border-top: 1px solid var(--br); padding: 20px 0; display: flex; align-items: center; justify-content: space-between; font-size: 12px; color: var(--t3); flex-wrap: wrap; gap: 12px; }
+.footer-bottom-links { display: flex; gap: 20px; }
+.footer-bottom-links a { color: var(--t3); text-decoration: none; }
+.footer-bottom-links a:hover { color: var(--tx); }
+.announcement-bar { background: linear-gradient(135deg,#1d4ed8,#4f46e5); padding: 10px 0; text-align: center; font-size: 13px; color: rgba(255,255,255,.9); font-weight: 500; }
+.announcement-bar a { color: #fff; text-decoration: underline; font-weight: 700; }
+.search-overlay { display: none; position: fixed; inset: 0; z-index: 2000; background: rgba(0,0,0,.8); backdrop-filter: blur(12px); align-items: flex-start; justify-content: center; padding-top: 80px; }
+.search-overlay.open { display: flex; animation: fadeIn .2s ease; }
+.search-box-overlay { width: min(620px,calc(100% - 40px)); background: var(--s1); border: 1px solid var(--br2); border-radius: var(--radius-xl); overflow: hidden; box-shadow: 0 30px 80px rgba(0,0,0,.6); }
+.search-input-row { display: flex; align-items: center; gap: 0; padding: 0 20px; border-bottom: 1px solid var(--br); }
+.search-input-row .si { font-size: 20px; flex-shrink: 0; }
+.search-input-field { flex: 1; padding: 18px 14px; background: transparent; border: none; outline: none; font-size: 17px; color: var(--tx); font-family: var(--font-body); }
+.search-input-field::placeholder { color: var(--t3); }
+.search-close-btn { width: 32px; height: 32px; border-radius: 8px; background: var(--s3); border: 1px solid var(--br); color: var(--t2); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 13px; flex-shrink: 0; }
+.search-hints { padding: 16px 20px; font-size: 12px; color: var(--t3); display: flex; gap: 10px; flex-wrap: wrap; align-items: center; }
+.search-hint-tag { padding: 4px 11px; border-radius: 50px; background: var(--s3); border: 1px solid var(--br); color: var(--t2); cursor: pointer; font-size: 12px; font-weight: 500; transition: var(--transition); }
+.search-hint-tag:hover { border-color: var(--a); color: var(--a); }
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.notice { padding: 14px 18px; border-radius: var(--radius); display: flex; align-items: flex-start; gap: 12px; margin: 20px 0; font-size: 13px; line-height: 1.65; }
+.notice-info { background: rgba(59,130,246,.08); border: 1px solid rgba(59,130,246,.2); color: var(--t2); }
+.notice-success { background: rgba(16,185,129,.08); border: 1px solid rgba(16,185,129,.2); color: var(--t2); }
+.notice-warning { background: rgba(245,158,11,.08); border: 1px solid rgba(245,158,11,.2); color: var(--t2); }
+.notice-icon { font-size: 17px; flex-shrink: 0; margin-top: 1px; }
+
+/* === Professional Motion System === */
+:root{--motion-fast:.22s;--motion-base:.38s;--motion-slow:.65s;--ease-pro:cubic-bezier(.22,1,.36,1);}
+#lp-header,.hero-search-box,.feature-card,.post-card,.cta-card,.sidebar-widget,.search-box-overlay,.header-cta,.theme-btn,.header-search,.social-btn,.footer-link,.label-link,.page-link,.page-prev,.page-next{
+  transition:transform var(--motion-base) var(--ease-pro),box-shadow var(--motion-base) var(--ease-pro),border-color var(--motion-fast) ease,background-color var(--motion-fast) ease,color var(--motion-fast) ease,opacity var(--motion-base) ease;
+}
+#lp-header.is-scrolled{box-shadow:0 10px 30px rgba(0,0,0,.18);}
+body.light-mode #lp-header.is-scrolled{box-shadow:0 10px 30px rgba(15,23,42,.08);}
+.lp-logo-icon,.tool-cat-icon,.feature-icon,.footer-logo-icon{animation:floatSoft 6s ease-in-out infinite;}
+.hero-badge{animation:fadeUp .55s .08s both, glowPulse 3.5s ease-in-out 1.2s infinite;}
+.hero-search-box:hover{transform:translateY(-2px);box-shadow:0 14px 44px rgba(0,0,0,.28),0 0 0 1px rgba(255,255,255,.04);}
+.feature-card:hover,.post-card:hover,.sidebar-widget:hover{transform:translateY(-6px);box-shadow:0 18px 42px rgba(0,0,0,.22);}
+.cta-card:hover{transform:translateY(-4px);box-shadow:0 22px 60px rgba(0,0,0,.24);}
+.footer-link,.label-link,.post-read-more,.tool-cat-see-all{position:relative;}
+.footer-link:after,.post-read-more:after,.tool-cat-see-all:after{
+  content:'';position:absolute;left:0;bottom:-2px;width:0;height:1px;background:currentColor;transition:width var(--motion-base) var(--ease-pro);
+}
+.footer-link:hover:after,.post-read-more:hover:after,.tool-cat-see-all:hover:after{width:100%;}
+.reveal-on-scroll{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s var(--ease-pro),transform .7s var(--ease-pro);}
+.reveal-on-scroll.is-visible{opacity:1;transform:translateY(0) scale(1);}
+.reveal-stagger-1{transition-delay:.06s;}
+.reveal-stagger-2{transition-delay:.12s;}
+.reveal-stagger-3{transition-delay:.18s;}
+.reveal-stagger-4{transition-delay:.24s;}
+@keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,.0)}50%{box-shadow:0 0 0 10px rgba(59,130,246,.08)}}
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important;scroll-behavior:auto !important;}
+  .reveal-on-scroll{opacity:1;transform:none;}
+}
+
+/* ===== LAYOUT SECTION WRAPPERS ===== */
+.lp-section-wrap { width: 100%; }
+.reveal-card{animation:fadeUp .6s both;}
+.feature-card,.post-card,.cta-card{will-change:transform,box-shadow;}
+.feature-card:hover,.post-card:hover,.tool-card:hover{transform:translateY(-4px);}
+@media (max-width: 1024px) { .footer-grid { grid-template-columns: 1fr 1fr; gap: 32px; } .blog-layout { grid-template-columns: 1fr; } .sidebar { position: static; } }
+@media (max-width: 768px) { .lp-nav { display: none; } .mobile-menu-btn { display: flex; } .tools-grid { grid-template-columns: repeat(2,1fr); } .features-grid { grid-template-columns: 1fr 1fr; } .hero-stats { gap: 20px; } .hero-stat-sep { display: none; } .cta-card { padding: 40px 24px; } .footer-grid { grid-template-columns: 1fr 1fr; } .footer-brand { grid-column: 1/-1; } .header-search { display: none; } }
+@media (max-width: 480px) { .tools-grid { grid-template-columns: 1fr 1fr; gap: 8px; } .features-grid { grid-template-columns: 1fr; } .footer-grid { grid-template-columns: 1fr; } .hero-search-box { flex-direction: column; border-radius: 18px; padding: 12px 14px; gap: 8px; } .hero-search-btn { width: 100%; justify-content: center; } .cta-btns { flex-direction: column; align-items: center; } }
+@media print { #lp-header, #lp-footer, .sidebar, .mobile-nav { display: none; } }
+@keyframes ripple { to { transform: scale(2.5); opacity: 0; } }
+  ]]></b:skin>
+</head>
+
+<body expr:class='"loading" + data:blog.languageDirection' id='body'>
+
+<!-- ═══════════════════════════════════════════════
+  SECTION 1: ANNOUNCEMENT BAR
+  Layout এ দেখবেন: "announcement-bar-section"
+  HTML/JavaScript gadget যোগ করে announcement bar কাস্টমাইজ করুন
+═══════════════════════════════════════════════ -->
+<b:section class='announcement-bar-section' id='announcement-bar-section' name='Announcement Bar' maxwidgets='1' showaddelement='yes'/>
+
+<!-- ═══════════════════════════════════════════════
+  SECTION 2: HEADER TOP (নেভিগেশনের উপরে)
+  Layout এ: "header-top-section"
+  নেভিগেশনের আগে যেকোনো কিছু যোগ করুন
+═══════════════════════════════════════════════ -->
+<b:section class='lp-section-wrap' id='header-top-section' name='Header Top Area' maxwidgets='2' showaddelement='yes'/>
+
+<header id='lp-header'>
+  <div class='container'>
+    <div class='header-inner'>
+      <a class='lp-logo' expr:href='data:blog.homepageUrl'>
+        <div class='lp-logo-icon'>&#127760;</div>
+        <span class='lp-logo-text'><data:blog.title/></span>
+      </a>
+      <nav class='lp-nav' id='main-nav'>
+        <div class='nav-item'>
+          <a class='nav-link' expr:href='data:blog.homepageUrl'>Home</a>
+        </div>
+        <div class='nav-item'>
+          <a class='nav-link' href='/p/pdf-tools.html'>
+            PDF Tools
+            <svg viewBox='0 0 24 24'><polyline points='6 9 12 15 18 9'/></svg>
+          </a>
+          <div class='nav-dropdown wide grid-3'>
+            <div class='dd-header'>&#128194; Organize</div>
+            <a class='dd-item' href='/p/merge-pdf.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#128279;</div>
+              <div class='dd-texts'><div class='dd-name'>Merge PDF</div><div class='dd-desc'>Combine multiple PDFs</div></div>
+            </a>
+            <a class='dd-item' href='/p/split-pdf.html'>
+              <div class='dd-icon' style='background:rgba(243,107,107,.12);border:1px solid rgba(243,107,107,.25)'>&#9986;</div>
+              <div class='dd-texts'><div class='dd-name'>Split PDF</div><div class='dd-desc'>6 split modes</div></div>
+            </a>
+            <a class='dd-item' href='/p/rotate-pdf.html'>
+              <div class='dd-icon' style='background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)'>&#128260;</div>
+              <div class='dd-texts'><div class='dd-name'>Rotate Pages</div><div class='dd-desc'>Fix orientation</div></div>
+            </a>
+            <div class='dd-header'>&#9999; Edit</div>
+            <a class='dd-item' href='/p/edit-pdf.html'>
+              <div class='dd-icon' style='background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)'>&#9999;</div>
+              <div class='dd-texts'><div class='dd-name'>Edit PDF</div><div class='dd-desc'>Edit text on pages</div></div>
+            </a>
+            <a class='dd-item' href='/p/sign-pdf.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#9997;</div>
+              <div class='dd-texts'><div class='dd-name'>Sign PDF</div><div class='dd-desc'>Add signature</div></div>
+            </a>
+            <a class='dd-item' href='/p/watermark-pdf.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#128167;</div>
+              <div class='dd-texts'><div class='dd-name'>Watermark</div><div class='dd-desc'>Add watermark</div></div>
+            </a>
+            <div class='dd-header'>&#128274; Security</div>
+            <a class='dd-item' href='/p/protect-pdf.html'>
+              <div class='dd-icon' style='background:rgba(243,107,107,.12);border:1px solid rgba(243,107,107,.25)'>&#128272;</div>
+              <div class='dd-texts'><div class='dd-name'>Protect PDF</div><div class='dd-desc'>Add password</div></div>
+            </a>
+            <a class='dd-item' href='/p/unlock-pdf.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#128275;</div>
+              <div class='dd-texts'><div class='dd-name'>Unlock PDF</div><div class='dd-desc'>Remove password</div></div>
+            </a>
+            <a class='dd-item' href='/p/all-tools.html' style='grid-column:1/-1;justify-content:center;background:rgba(59,130,246,.06);border-radius:10px;color:var(--a);font-weight:600'>
+              View All Easy to Expand &#8594;
+            </a>
+          </div>
+        </div>
+        <div class='nav-item'>
+          <a class='nav-link' href='/p/convert.html'>
+            Convert
+            <svg viewBox='0 0 24 24'><polyline points='6 9 12 15 18 9'/></svg>
+          </a>
+          <div class='nav-dropdown grid-2'>
+            <div class='dd-header'>&#128229; To PDF</div>
+            <a class='dd-item' href='/p/jpg-to-pdf.html'>
+              <div class='dd-icon' style='background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)'>&#128444;</div>
+              <div class='dd-texts'><div class='dd-name'>JPG &#8594; PDF</div><div class='dd-desc'>Images to PDF</div></div>
+            </a>
+            <a class='dd-item' href='/p/word-to-pdf.html'>
+              <div class='dd-icon' style='background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25)'>&#128221;</div>
+              <div class='dd-texts'><div class='dd-name'>Word &#8594; PDF</div><div class='dd-desc'>DOCX to PDF</div></div>
+            </a>
+            <a class='dd-item' href='/p/excel-to-pdf.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#128215;</div>
+              <div class='dd-texts'><div class='dd-name'>Excel &#8594; PDF</div><div class='dd-desc'>CSV / XLSX</div></div>
+            </a>
+            <div class='dd-header'>&#128228; From PDF</div>
+            <a class='dd-item' href='/p/pdf-to-jpg.html'>
+              <div class='dd-icon' style='background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)'>&#128444;</div>
+              <div class='dd-texts'><div class='dd-name'>PDF &#8594; JPG</div><div class='dd-desc'>Pages as images</div></div>
+            </a>
+            <a class='dd-item' href='/p/pdf-to-word.html'>
+              <div class='dd-icon' style='background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25)'>&#128221;</div>
+              <div class='dd-texts'><div class='dd-name'>PDF &#8594; Word</div><div class='dd-desc'>Extract text as RTF</div></div>
+            </a>
+            <a class='dd-item' href='/p/ocr.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#128269;</div>
+              <div class='dd-texts'><div class='dd-name'>PDF OCR</div><div class='dd-desc'>Scanned to text</div></div>
+            </a>
+          </div>
+        </div>
+        <div class='nav-item'>
+          <a class='nav-link' href='/p/translate.html'>
+            Translate
+            <svg viewBox='0 0 24 24'><polyline points='6 9 12 15 18 9'/></svg>
+          </a>
+          <div class='nav-dropdown'>
+            <a class='dd-item' href='/p/translate-pdf.html'>
+              <div class='dd-icon' style='background:rgba(79,142,247,.12);border:1px solid rgba(79,142,247,.25)'>&#127760;</div>
+              <div class='dd-texts'><div class='dd-name'>Translate PDF</div><div class='dd-desc'>PDF &#8594; any language</div></div>
+            </a>
+            <a class='dd-item' href='/p/text-translate.html'>
+              <div class='dd-icon' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>&#9997;</div>
+              <div class='dd-texts'><div class='dd-name'>Text Translate</div><div class='dd-desc'>250+ languages</div></div>
+            </a>
+          </div>
+        </div>
+        <div class='nav-item'>
+          <a class='nav-link' expr:href='data:blog.homepageUrl'>Blog</a>
+        </div>
+      </nav>
+      <div class='header-right'>
+        <button class='header-search' id='search-toggle' onclick='openSearch()'>
+          <span>&#128269;</span>
+        </button>
+        <button class='theme-btn' id='theme-btn' onclick='toggleTheme()' title='Toggle theme'>&#127769;</button>
+        <a class='header-cta' href='/p/all-tools.html'>Try Free &#8594;</a>
+        <button class='mobile-menu-btn' id='mobile-menu-btn' onclick='openMobileNav()'>
+          <span/><span/><span/>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<div class='mobile-nav' id='mobile-nav' onclick='if(event.target===this)closeMobileNav()'>
+  <div class='mobile-nav-inner'>
+    <div class='mobile-nav-head'>
+      <a class='lp-logo' expr:href='data:blog.homepageUrl'>
+        <div class='lp-logo-icon'>&#127760;</div>
+        <span class='lp-logo-text'><data:blog.title/></span>
+      </a>
+      <button class='mobile-close' onclick='closeMobileNav()'>&#10005;</button>
+    </div>
+    <div class='mobile-menu-list'>
+      <a class='mobile-menu-item' expr:href='data:blog.homepageUrl'>&#127968; Home</a>
+      <div class='mobile-menu-section'>PDF Tools</div>
+      <a class='mobile-menu-item' href='/p/merge-pdf.html'><span class='mobile-menu-icon'>&#128279;</span>Merge PDF</a>
+      <a class='mobile-menu-item' href='/p/split-pdf.html'><span class='mobile-menu-icon'>&#9986;</span>Split PDF</a>
+      <a class='mobile-menu-item' href='/p/rotate-pdf.html'><span class='mobile-menu-icon'>&#128260;</span>Rotate PDF</a>
+      <a class='mobile-menu-item' href='/p/edit-pdf.html'><span class='mobile-menu-icon'>&#9999;</span>Edit PDF</a>
+      <a class='mobile-menu-item' href='/p/sign-pdf.html'><span class='mobile-menu-icon'>&#9997;</span>Sign PDF</a>
+      <a class='mobile-menu-item' href='/p/protect-pdf.html'><span class='mobile-menu-icon'>&#128272;</span>Protect PDF</a>
+      <a class='mobile-menu-item' href='/p/all-tools.html' style='color:var(--a);font-weight:600'><span class='mobile-menu-icon'>&#128295;</span>All Easy to Expand</a>
+      <div class='mobile-menu-divider'/>
+      <div class='mobile-menu-section'>Convert</div>
+      <a class='mobile-menu-item' href='/p/jpg-to-pdf.html'><span class='mobile-menu-icon'>&#128444;</span>JPG &#8594; PDF</a>
+      <a class='mobile-menu-item' href='/p/word-to-pdf.html'><span class='mobile-menu-icon'>&#128221;</span>Word &#8594; PDF</a>
+      <a class='mobile-menu-item' href='/p/pdf-to-jpg.html'><span class='mobile-menu-icon'>&#128228;</span>PDF &#8594; JPG</a>
+      <div class='mobile-menu-divider'/>
+      <div class='mobile-menu-section'>Translate</div>
+      <a class='mobile-menu-item' href='/p/translate-pdf.html'><span class='mobile-menu-icon'>&#127760;</span>Translate PDF</a>
+      <a class='mobile-menu-item' href='/p/text-translate.html'><span class='mobile-menu-icon'>&#9997;</span>Text Translate</a>
+      <div class='mobile-menu-divider'/>
+      <div style='padding:14px 20px;display:flex;gap:10px;'>
+        <a class='btn btn-primary' href='/p/all-tools.html' style='flex:1;justify-content:center'>Try Free &#128640;</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class='search-overlay' id='search-overlay' onclick='if(event.target===this)closeSearch()'>
+  <div class='search-box-overlay'>
+    <div class='search-input-row'>
+      <span class='si'>&#128269;</span>
+      <input class='search-input-field' id='search-overlay-input' onkeydown='if(event.key===&quot;Enter&quot;)doSearch()' placeholder='Search tools or articles...' type='text'/>
+      <button class='search-close-btn' onclick='closeSearch()'>&#10005;</button>
+    </div>
+    <div class='search-hints'>
+      <span style='color:var(--t3)'>Quick:</span>
+      <span class='search-hint-tag' onclick='searchFor(&quot;image tools&quot;)'>Image Tools</span>
+      <span class='search-hint-tag' onclick='searchFor(&quot;text tools&quot;)'>Text Tools</span>
+      <span class='search-hint-tag' onclick='searchFor(&quot;translate&quot;)'>Translate</span>
+      <span class='search-hint-tag' onclick='searchFor(&quot;convert&quot;)'>Convert</span>
+    </div>
+  </div>
+</div>
+
+<div id='lp-body'>
+
+  <!-- ═══════════════════════════════════════════════
+    SECTION 3: PRE-MAIN (সব পেইজের উপরে)
+    Layout এ: "pre-main"
+    সকল পেজের কন্টেন্টের আগে gadget যোগ করুন (যেমন: Ad Banner)
+  ═══════════════════════════════════════════════ -->
+  <b:section class='lp-pre-main' id='pre-main' name='Pre Main Area' maxwidgets='3' showaddelement='yes'/>
+
+  <b:if cond='data:view.isHomepage'>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 4: HERO TOP (Hero সেকশনের উপরে)
+      Layout এ: "hero-top-section"
+      Hero এর আগে কিছু দেখাতে চাইলে এখানে gadget যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='hero-top-section' name='Hero Top Area' maxwidgets='2' showaddelement='yes'/>
+
+    <section class='lp-hero'>
+      <div class='hero-bg'/>
+      <div class='hero-grid-dots'/>
+      <div class='container'>
+        <div class='hero-content'>
+          <div class='hero-badge'>&#9889; 100% Free &#183; No Upload &#183; Works Offline</div>
+          <h1 class='hero-title'>
+            Free Online Tools &amp;<br/>
+            <span class='gradient-text'>Utilities Platform</span>
+          </h1>
+          <p class='hero-sub'>A growing collection of online tools for documents, images, text, conversions, productivity, and more &#8212; fast, clean, and easy to use. No signup. No limits.</p>
+          <div class='hero-search'>
+            <div class='hero-search-box'>
+              <span class='hero-search-icon'>&#128269;</span>
+              <input class='hero-search-input' id='hero-search' onkeydown='if(event.key===&quot;Enter&quot;)heroSearch()' placeholder='Search tools &#8212; e.g. &quot;Image Converter&quot;, &quot;Text Tools&quot;, &quot;Translate&quot;...' type='text'/>
+              <button class='hero-search-btn' onclick='heroSearch()'>Find Tool</button>
+            </div>
+          </div>
+          <div class='hero-stats'>
+            <div class='hero-stat'><div class='hero-stat-val'>70+</div><div class='hero-stat-lbl'>Tool Library</div></div>
+            <div class='hero-stat-sep'/>
+            <div class='hero-stat'><div class='hero-stat-val'>Multi</div><div class='hero-stat-lbl'>Categories</div></div>
+            <div class='hero-stat-sep'/>
+            <div class='hero-stat'><div class='hero-stat-val'>100%</div><div class='hero-stat-lbl'>Free &amp; Private</div></div>
+            <div class='hero-stat-sep'/>
+            <div class='hero-stat'><div class='hero-stat-val'>Fast</div><div class='hero-stat-lbl'>Ready to Use</div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 5: HERO BOTTOM (Hero এর পরে)
+      Layout এ: "hero-bottom-section"
+      Hero এর নিচে Banner Ad বা অন্য কিছু যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='hero-bottom-section' name='Hero Bottom Area' maxwidgets='3' showaddelement='yes'/>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 6: HOMEPAGE SHOWCASE AREA
+      Layout এ: "showcase-top-section"
+      Homepage-এ promo, featured categories, banners, announcements, or future animations যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='showcase-top-section' name='Homepage Showcase Area' maxwidgets='3' showaddelement='yes'/>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 10: BETWEEN SHOWCASE AND FEATURES
+      Layout এ: "mid-page-section"
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='mid-page-section' maxwidgets='3' showaddelement='yes'/>
+
+    <section class='features-section reveal-on-scroll'>
+      <div class='container'>
+        <div class='section-header' style='margin-bottom:40px'>
+          <div class='section-tag'>&#11088; Why Choose Us</div>
+          <h2 class='section-title'>Built for Speed, Flexibility &amp; Growth</h2>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════
+          SECTION 11: FEATURES HEADER EXTRA
+          Layout এ: "features-top-section"
+        ═══════════════════════════════════════════════ -->
+        <b:section class='lp-section-wrap' id='features-top-section' name='Features Top Area' maxwidgets='2' showaddelement='yes'/>
+
+        <div class='features-grid'>
+          <div class='feature-card reveal-on-scroll reveal-stagger-1'><div class='feature-icon'>&#128274;</div><div class='feature-title'>Clean Experience</div><div class='feature-desc'>Designed for a fast and focused experience with room to expand into many different categories of tools over time.</div></div>
+          <div class='feature-card reveal-on-scroll reveal-stagger-2'><div class='feature-icon'>&#9889;</div><div class='feature-title'>Flexible Platform</div><div class='feature-desc'>Use the same platform structure for document tools, image utilities, text helpers, converters, calculators, and more.</div></div>
+          <div class='feature-card reveal-on-scroll reveal-stagger-3'><div class='feature-icon'>&#127760;</div><div class='feature-title'>Professional Design</div><div class='feature-desc'>Modern sections, strong spacing, polished cards, and scalable layout areas make the site feel clean and premium.</div></div>
+          <div class='feature-card reveal-on-scroll reveal-stagger-4'><div class='feature-icon'>&#128295;</div><div class='feature-title'>Easy to Expand</div><div class='feature-desc'>Add new pages, new categories, new utilities, and future sections without redesigning the whole homepage.</div></div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════
+          SECTION 12: FEATURES BOTTOM EXTRA
+          Layout এ: "features-bottom-section"
+          Features এর নিচে custom card বা testimonial যোগ করুন
+        ═══════════════════════════════════════════════ -->
+        <b:section class='lp-section-wrap' id='features-bottom-section' name='Features Bottom Area' maxwidgets='3' showaddelement='yes'/>
+
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 13: BEFORE BLOG
+      Layout এ: "before-blog-section"
+      Blog এর আগে Ad বা Promo Banner যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='before-blog-section' name='Before Blog Area' maxwidgets='3' showaddelement='yes'/>
+
+    <section class='blog-section reveal-on-scroll'>
+      <div class='container'>
+        <div class='section-header'>
+          <div class='section-tag'>&#128240; Blog</div>
+          <h2 class='section-title'>Latest Articles &amp; Guides</h2>
+        </div>
+        <b:section class='main' id='main' name='Main Blog Posts' maxwidgets='4' showaddelement='no'>
+          <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+              <b:widget-setting name='showOlderButton'>true</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='top'>
+              <div class='posts-list'>
+                <b:loop values='data:posts' var='post'>
+                  <article class='post-card'>
+                    <b:if cond='data:post.featuredImage'>
+                      <div class='post-card-img'><img alt='' expr:src='data:post.featuredImage'/></div>
+                    </b:if>
+                    <div class='post-card-body'>
+                      <div class='post-card-tags'>
+                        <b:loop values='data:post.labels' var='label'>
+                          <a class='post-card-tag' expr:href='data:label.url'><data:label.name/></a>
+                        </b:loop>
+                      </div>
+                      <h2 class='post-card-title'><a expr:href='data:post.url'><data:post.title/></a></h2>
+                      <div class='post-card-excerpt'><data:post.snippet/></div>
+                      <div class='post-card-meta'>
+                        <span class='post-meta-item'>&#128197; <data:post.date/></span>
+                        <span class='post-meta-item'>&#128100; <data:post.author/></span>
+                        <a class='post-read-more' expr:href='data:post.url'>Read more &#8594;</a>
+                      </div>
+                    </div>
+                  </article>
+                </b:loop>
+              </div>
+              <b:include name='nextprev'/>
+            </b:includable>
+            <b:includable id='nextprev'>
+              <div class='pagination'>
+                <b:if cond='data:newerPageUrl'><a class='page-link page-prev' expr:href='data:newerPageUrl'>&#8592; Newer</a></b:if>
+                <b:if cond='data:olderPageUrl'><a class='page-link page-next' expr:href='data:olderPageUrl'>Older &#8594;</a></b:if>
+              </div>
+            </b:includable>
+          </b:widget>
+        </b:section>
+      </div>
+    </section>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 14: AFTER BLOG
+      Layout এ: "after-blog-section"
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='after-blog-section' name='After Blog Area' maxwidgets='3' showaddelement='yes'/>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 15: CTA TOP
+      Layout এ: "cta-top-section"
+      CTA এর আগে কিছু যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='cta-top-section' name='CTA Top Area' maxwidgets='2' showaddelement='yes'/>
+
+    <section class='cta-section reveal-on-scroll'>
+      <div class='container'>
+        <div class='cta-card'>
+          <div class='cta-card-content'>
+            <h2 class='cta-title'>Explore Powerful Online Tools</h2>
+            <p class='cta-sub'>No account. No uploads. No limits. Works directly in your browser.</p>
+            <div class='cta-btns'>
+              <a class='cta-btn-primary' href='/p/all-tools.html'>&#128640; Open All Tools</a>
+              <a class='cta-btn-secondary' href='/p/all-tools.html'>&#128295; Browse Tools</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- ═══════════════════════════════════════════════
+          SECTION 16: CTA BOTTOM (CTA কার্ডের নিচে)
+          Layout এ: "cta-bottom-section"
+          CTA সেকশনের নিচে newsletter বা extra promo যোগ করুন
+        ═══════════════════════════════════════════════ -->
+        <b:section class='lp-section-wrap' id='cta-bottom-section' name='CTA Bottom Area' maxwidgets='3' showaddelement='yes'/>
+
+      </div>
+    </section>
+
+  <b:else/>
+
+    <div class='container' style='padding-top:16px;padding-bottom:80px'>
+      <div class='lp-breadcrumb'>
+        <a expr:href='data:blog.homepageUrl'>Home</a>
+        <span class='bc-sep'>&#8250;</span>
+        <b:if cond='data:view.isLabelSearch'>
+          <b:loop values='data:view.labels' var='label'>
+            <a expr:href='data:label.url'><data:label.name/></a>
+          </b:loop>
+          <span class='bc-sep'>&#8250;</span>
+          <span class='bc-current'><b:loop values='data:view.labels' var='label'><data:label.name/></b:loop></span>
+        <b:elseif cond='data:view.isPost'/>
+          <span class='bc-current'><data:view.title/></span>
+        <b:else/>
+          <span class='bc-current'><data:view.title/></span>
+        </b:if>
+      </div>
+
+      <!-- ═══════════════════════════════════════════════
+        SECTION 17: INNER PAGE TOP
+        Layout এ: "inner-page-top-section"
+        Post/Category পেজের কন্টেন্টের আগে gadget যোগ করুন
+      ═══════════════════════════════════════════════ -->
+      <b:section class='lp-section-wrap' id='inner-page-top-section' maxwidgets='3' showaddelement='yes'/>
+
+      <div class='blog-layout'>
+        <div class='main-content'>
+          <b:section class='main' id='main2' maxwidgets='4' showaddelement='no'>
+            <b:widget id='Blog2' locked='false' title='Blog Posts' type='Blog' version='2'>
+              <b:widget-settings>
+                <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+                <b:widget-setting name='showOlderButton'>true</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main' var='top'>
+                <b:if cond='data:view.isPost'>
+                  <b:loop values='data:posts' var='post'>
+                    <article class='post-single'>
+                      <div class='post-single-header'>
+                        <div class='post-card-tags' style='margin-bottom:12px'>
+                          <b:loop values='data:post.labels' var='label'>
+                            <a class='post-card-tag' expr:href='data:label.url'><data:label.name/></a>
+                          </b:loop>
+                        </div>
+                        <h1 class='post-single-title'><data:post.title/></h1>
+                        <div class='post-single-meta'>
+                          <span>&#128197; <data:post.date/></span>
+                          <span>&#128100; <data:post.author/></span>
+                          <span>&#128336; <data:post.minutesRead/> min read</span>
+                        </div>
+                      </div>
+                      <b:if cond='data:post.featuredImage'>
+                        <div class='post-single-img'><img alt='' expr:src='data:post.featuredImage'/></div>
+                      </b:if>
+                      <div class='post-content'><data:post.body/></div>
+                      <div style='margin-top:36px;padding-top:20px;border-top:1px solid var(--br)'>
+                        <div style='display:flex;align-items:center;gap:10px;flex-wrap:wrap'>
+                          <span style='font-size:12px;color:var(--t3)'>Tags:</span>
+                          <b:loop values='data:post.labels' var='label'>
+                            <a class='label-link' expr:href='data:label.url'><data:label.name/></a>
+                          </b:loop>
+                        </div>
+                      </div>
+                      <b:if cond='data:post.allowComments'>
+                        <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
+                      </b:if>
+                    </article>
+                  </b:loop>
+                <b:else/>
+                  <div class='posts-list'>
+                    <b:loop values='data:posts' var='post'>
+                      <article class='post-card'>
+                        <b:if cond='data:post.featuredImage'>
+                          <div class='post-card-img'><img alt='' expr:src='data:post.featuredImage'/></div>
+                        </b:if>
+                        <div class='post-card-body'>
+                          <div class='post-card-tags'>
+                            <b:loop values='data:post.labels' var='label'>
+                              <a class='post-card-tag' expr:href='data:label.url'><data:label.name/></a>
+                            </b:loop>
+                          </div>
+                          <h2 class='post-card-title'><a expr:href='data:post.url'><data:post.title/></a></h2>
+                          <div class='post-card-excerpt'><data:post.snippet/></div>
+                          <div class='post-card-meta'>
+                            <span class='post-meta-item'>&#128197; <data:post.date/></span>
+                            <span class='post-meta-item'>&#128100; <data:post.author/></span>
+                            <a class='post-read-more' expr:href='data:post.url'>Read more &#8594;</a>
+                          </div>
+                        </div>
+                      </article>
+                    </b:loop>
+                  </div>
+                </b:if>
+                <b:include name='nextprev'/>
+              </b:includable>
+              <b:includable id='nextprev'>
+                <div class='pagination'>
+                  <b:if cond='data:newerPageUrl'><a class='page-link page-prev' expr:href='data:newerPageUrl'>&#8592; Newer</a></b:if>
+                  <b:if cond='data:olderPageUrl'><a class='page-link page-next' expr:href='data:olderPageUrl'>Older &#8594;</a></b:if>
+                </div>
+              </b:includable>
+              <b:includable id='comments' var='post'>
+                <div id='comments' style='margin-top:32px'>
+                  <h3 style='font-family:var(--font-display);font-size:20px;font-weight:700;color:var(--tx);margin-bottom:20px'>Comments</h3>
+                  <b:include data='post' name='comment-form'/>
+                </div>
+              </b:includable>
+              <b:includable id='comment-form' var='post'>
+              </b:includable>
+            </b:widget>
+          </b:section>
+
+          <!-- ═══════════════════════════════════════════════
+            SECTION 18: AFTER CONTENT (Post এর নিচে)
+            Layout এ: "after-content-section"
+            Post কন্টেন্টের পরে Ad বা Related Links যোগ করুন
+          ═══════════════════════════════════════════════ -->
+          <b:section class='lp-section-wrap' id='after-content-section' name='After Content Area' maxwidgets='3' showaddelement='yes'/>
+
+        </div>
+
+        <aside class='sidebar'>
+          <div class='sidebar-widget reveal-on-scroll reveal-stagger-1'>
+            <div class='sw-header'>&#9889; Quick Tools</div>
+            <div class='sw-body'>
+              <div class='sidebar-tool-list'>
+                <a class='sidebar-tool-item' href='/p/merge-pdf.html'><div class='st-icon' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='st-name'>Merge PDF</span></a>
+                <a class='sidebar-tool-item' href='/p/split-pdf.html'><div class='st-icon' style='background:rgba(243,107,107,.12)'>&#9986;</div><span class='st-name'>Split PDF</span></a>
+                <a class='sidebar-tool-item' href='/p/translate-pdf.html'><div class='st-icon' style='background:rgba(79,142,247,.12)'>&#127760;</div><span class='st-name'>Translate PDF</span></a>
+                <a class='sidebar-tool-item' href='/p/sign-pdf.html'><div class='st-icon' style='background:rgba(34,199,147,.12)'>&#9997;</div><span class='st-name'>Sign PDF</span></a>
+                <a class='sidebar-tool-item' href='/p/protect-pdf.html'><div class='st-icon' style='background:rgba(243,107,107,.12)'>&#128272;</div><span class='st-name'>Protect PDF</span></a>
+                <a class='sidebar-tool-item' href='/p/jpg-to-pdf.html'><div class='st-icon' style='background:rgba(251,191,36,.12)'>&#128444;</div><span class='st-name'>JPG to PDF</span></a>
+              </div>
+              <a class='btn btn-primary' href='/p/all-tools.html' style='width:100%;justify-content:center;margin-top:14px'>All Easy to Expand &#8594;</a>
+            </div>
+          </div>
+
+          <!-- ═══════════════════════════════════════════════
+            SECTION 19: SIDEBAR WIDGETS
+            Layout এ: "sidebar"
+            Sidebar এ Labels, Archive, Ad, Custom HTML যোগ করুন
+          ═══════════════════════════════════════════════ -->
+          <b:section class='sidebar' id='sidebar' name='Sidebar Widgets' maxwidgets='15' showaddelement='yes'>
+            <b:widget id='Label1' locked='false' title='Categories' type='Label' version='2'>
+              <b:widget-settings>
+                <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+                <b:widget-setting name='display'>LIST</b:widget-setting>
+                <b:widget-setting name='showType'>ALL</b:widget-setting>
+                <b:widget-setting name='showFreqNumbers'>false</b:widget-setting>
+              </b:widget-settings>
+              <b:includable id='main' var='top'>
+                <b:if cond='data:title != &quot;&quot;'>
+                  <div class='sidebar-widget reveal-on-scroll reveal-stagger-2'>
+                    <div class='sw-header'><data:title/></div>
+                    <div class='sw-body'>
+                      <div class='labels-cloud'>
+                        <b:loop values='data:labels' var='label'>
+                          <a class='label-link' expr:href='data:label.url'><data:label.name/></a>
+                        </b:loop>
+                      </div>
+                    </div>
+                  </div>
+                </b:if>
+              </b:includable>
+            </b:widget>
+            <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2'>
+              <b:includable id='main' var='top'>
+                <b:if cond='data:title != &quot;&quot;'>
+                  <div class='sidebar-widget reveal-on-scroll reveal-stagger-3'>
+                    <div class='sw-header'><data:title/></div>
+                    <div class='sw-body' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
+                  </div>
+                </b:if>
+              </b:includable>
+            </b:widget>
+          </b:section>
+
+          <!-- ═══════════════════════════════════════════════
+            SECTION 20: SIDEBAR BOTTOM
+            Layout এ: "sidebar-bottom-section"
+            Sidebar এর একদম নিচে Ad বা extra widget যোগ করুন
+          ═══════════════════════════════════════════════ -->
+          <b:section class='lp-section-wrap' id='sidebar-bottom-section' name='Sidebar Bottom Area' maxwidgets='5' showaddelement='yes'/>
+
+        </aside>
+      </div>
+    </div>
+
+  </b:if>
+</div>
+
+<!-- ═══════════════════════════════════════════════
+  SECTION 21: BEFORE FOOTER
+  Layout এ: "before-footer-section"
+  Footer এর আগে Ad বা Newsletter Form যোগ করুন
+═══════════════════════════════════════════════ -->
+<b:section class='lp-section-wrap' id='before-footer-section' name='Before Footer Area' maxwidgets='3' showaddelement='yes'/>
+
+<footer id='lp-footer'>
+  <div class='container'>
+    <div class='footer-grid'>
+      <div class='footer-brand'>
+        <div class='footer-logo-wrap'>
+          <div class='footer-logo-icon'>&#127760;</div>
+          <span class='footer-logo-text'><data:blog.title/></span>
+        </div>
+        <p class='footer-desc'>A modern online tools platform for documents, images, text, conversions, utilities, and more. Fast experience, flexible structure, and room to grow.</p>
+        <div class='footer-social'>
+          <a class='social-btn' href='#' title='Facebook'>f</a>
+          <a class='social-btn' href='#' title='Twitter'>&#120143;</a>
+          <a class='social-btn' href='#' title='YouTube'>&#9654;</a>
+          <a class='social-btn' href='#' title='Telegram'>&#9992;</a>
+        </div>
+      </div>
+      <div>
+        <div class='footer-col-title'>Popular Tools</div>
+        <div class='footer-links'>
+          <a class='footer-link' href='/p/merge-pdf.html'>Merge PDF</a>
+          <a class='footer-link' href='/p/split-pdf.html'>Split PDF</a>
+          <a class='footer-link' href='/p/rotate-pdf.html'>Rotate PDF</a>
+          <a class='footer-link' href='/p/compress-pdf.html'>Compress PDF</a>
+          <a class='footer-link' href='/p/edit-pdf.html'>Edit PDF</a>
+          <a class='footer-link' href='/p/sign-pdf.html'>Sign PDF</a>
+          <a class='footer-link' href='/p/protect-pdf.html'>Protect PDF</a>
+          <a class='footer-link' href='/p/all-tools.html' style='color:var(--a);font-weight:600'>All Tools &#8594;</a>
+        </div>
+      </div>
+      <div>
+        <div class='footer-col-title'>Convert</div>
+        <div class='footer-links'>
+          <a class='footer-link' href='/p/jpg-to-pdf.html'>JPG to PDF</a>
+          <a class='footer-link' href='/p/word-to-pdf.html'>Word to PDF</a>
+          <a class='footer-link' href='/p/excel-to-pdf.html'>Excel to PDF</a>
+          <a class='footer-link' href='/p/pdf-to-jpg.html'>PDF to JPG</a>
+          <a class='footer-link' href='/p/pdf-to-word.html'>PDF to Word</a>
+          <a class='footer-link' href='/p/ocr.html'>PDF OCR</a>
+          <a class='footer-link' href='/p/heic-to-jpg.html'>HEIC to JPG</a>
+        </div>
+      </div>
+      <div>
+        <div class='footer-col-title'>Company</div>
+        <div class='footer-links'>
+          <a class='footer-link' href='/p/about.html'>About Us</a>
+          <a class='footer-link' href='/p/privacy-policy.html'>Privacy Policy</a>
+          <a class='footer-link' href='/p/terms.html'>Terms of Service</a>
+          <a class='footer-link' href='/p/contact.html'>Contact Us</a>
+          <a class='footer-link' expr:href='data:blog.homepageUrl'>Blog</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════════════════════════════════════════
+      SECTION 22: FOOTER EXTRA
+      Layout এ: "footer-extra-section"
+      Footer grid এর নিচে extra links বা widget যোগ করুন
+    ═══════════════════════════════════════════════ -->
+    <b:section class='lp-section-wrap' id='footer-extra-section' name='Footer Extra Area' maxwidgets='4' showaddelement='yes'/>
+
+    <div class='footer-bottom'>
+      <span>&#169; <span id='footer-year'>2025</span> <data:blog.title/>. All rights reserved. | Free Online Tools Hub</span>
+      <div class='footer-bottom-links'>
+        <a href='/p/privacy-policy.html'>Privacy</a>
+        <a href='/p/terms.html'>Terms</a>
+        <a href='/p/contact.html'>Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════════════════════════════════════
+  SECTION 23: AFTER FOOTER
+  Layout এ: "after-footer-section"
+  Footer এর পরে Sticky Ad বা Script যোগ করুন
+═══════════════════════════════════════════════ -->
+<b:section class='lp-section-wrap' id='after-footer-section' name='After Footer Area' maxwidgets='3' showaddelement='yes'/>
+
+<script>
+//<![CDATA[
+(function(){
+  var s=localStorage.getItem('lp_theme')||'dark';
+  if(s==='light')document.body.classList.add('light-mode');
+  var btn=document.getElementById('theme-btn');
+  if(btn)btn.textContent=s==='light'?'\u{1F319}':'\u2600\uFE0F';
+})();
+function toggleTheme(){
+  var isLight=document.body.classList.toggle('light-mode');
+  localStorage.setItem('lp_theme',isLight?'light':'dark');
+  var btn=document.getElementById('theme-btn');
+  if(btn)btn.textContent=isLight?'\u{1F319}':'\u2600\uFE0F';
+}
+function openMobileNav(){document.getElementById('mobile-nav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMobileNav(){document.getElementById('mobile-nav').classList.remove('open');document.body.style.overflow='';}
+function openSearch(){
+  document.getElementById('search-overlay').classList.add('open');
+  setTimeout(function(){var inp=document.getElementById('search-overlay-input');if(inp)inp.focus();},150);
+}
+function closeSearch(){document.getElementById('search-overlay').classList.remove('open');}
+function doSearch(){
+  var v=document.getElementById('search-overlay-input').value.trim();
+  if(v)window.location.href='/search?q='+encodeURIComponent(v);
+}
+function searchFor(term){
+  var inp=document.getElementById('search-overlay-input');
+  if(inp){inp.value=term;window.location.href='/search?q='+encodeURIComponent(term);}
+}
+document.addEventListener('keydown',function(e){
+  if(e.key==='Escape'){closeSearch();closeMobileNav();}
+  if((e.ctrlKey||e.metaKey)&&e.key==='k'){e.preventDefault();openSearch();}
+});
+function heroSearch(){
+  var v=document.getElementById('hero-search').value.trim();
+  if(v)window.location.href='/search?q='+encodeURIComponent(v);
+}
+window.addEventListener('scroll',function(){
+  var h=document.getElementById('lp-header');
+  if(!h)return;
+  h.style.boxShadow=window.scrollY>20?'0 4px 24px rgba(0,0,0,.35)':'none';
+},{passive:true});
+var fy=document.getElementById('footer-year');
+if(fy)fy.textContent=new Date().getFullYear();
+document.querySelectorAll('a[href^="#"]').forEach(function(a){
+  a.addEventListener('click',function(e){
+    var t=document.querySelector(this.getAttribute('href'));
+    if(t){e.preventDefault();t.scrollIntoView({behavior:'smooth',block:'start'});}
+  });
+});
+document.querySelectorAll('.tool-card').forEach(function(card){
+  card.addEventListener('click',function(e){
+    var r=document.createElement('span');
+    var rect=card.getBoundingClientRect();
+    var size=Math.max(rect.width,rect.height);
+    r.style.cssText='position:absolute;width:'+size+'px;height:'+size+'px;border-radius:50%;background:rgba(59,130,246,.15);transform:scale(0);animation:ripple .5s ease;top:'+(e.clientY-rect.top-size/2)+'px;left:'+(e.clientX-rect.left-size/2)+'px;pointer-events:none;z-index:0';
+    card.style.position='relative';card.style.overflow='hidden';
+    card.appendChild(r);
+    setTimeout(function(){r.remove();},500);
+  });
+});
+if('IntersectionObserver' in window){
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(e){
+      if(e.isIntersecting){var img=e.target;if(img.dataset.src){img.src=img.dataset.src;io.unobserve(img);}}
+    });
+  });
+  document.querySelectorAll('img[data-src]').forEach(function(img){io.observe(img);});
+}
+//]]>
+</script>
+
+
+<script>
+//<![CDATA[
+(function(){
+  var d=document, w=window;
+  function onScrollHeader(){
+    var h=d.getElementById('lp-header');
+    if(!h) return;
+    if(w.scrollY > 12){h.classList.add('is-scrolled');}else{h.classList.remove('is-scrolled');}
+  }
+  function revealInit(){
+    if(!('IntersectionObserver' in w)){
+      d.querySelectorAll('.reveal-on-scroll').forEach(function(el){el.classList.add('is-visible');});
+      return;
+    }
+    var io=new IntersectionObserver(function(entries){
+      entries.forEach(function(entry){
+        if(entry.isIntersecting){
+          entry.target.classList.add('is-visible');
+          io.unobserve(entry.target);
+        }
+      });
+    },{threshold:.14,rootMargin:'0px 0px -40px 0px'});
+    d.querySelectorAll('.reveal-on-scroll').forEach(function(el){io.observe(el);});
+  }
+  d.addEventListener('DOMContentLoaded', function(){
+    onScrollHeader();
+    revealInit();
+  });
+  w.addEventListener('scroll', onScrollHeader, {passive:true});
+})();
+//]]>
+</script>
+
+</body>
+</html>

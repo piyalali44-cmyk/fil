@@ -33,40 +33,32 @@ img{max-width:100%;height:auto;}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:3px;}
 .container{max-width:1200px;margin:0 auto;padding:0 20px;}
 
+/* ─── SCROLL PROGRESS ─── */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
+
 /* ─── HEADER ─── */
 #lp-header{
   position:sticky;top:0;z-index:1000;height:var(--nav-h);
   background:rgba(11,15,26,.88);backdrop-filter:blur(20px) saturate(180%);
   border-bottom:1px solid rgba(255,255,255,.06);
   transition:box-shadow .3s,background .3s;
+  animation:headerLoad .6s cubic-bezier(.22,1,.36,1) both;
 }
+@keyframes headerLoad{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
 body.light-mode #lp-header{background:rgba(255,255,255,.9);border-bottom-color:rgba(0,0,0,.07);}
 #lp-header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.28);}
 .header-inner{display:flex;align-items:center;height:var(--nav-h);gap:0;}
 .lp-logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0;}
-.lp-logo-icon{
-  width:38px;height:38px;border-radius:11px;
-  background:linear-gradient(135deg,#1e40af,#312e81);
-  border:1px solid rgba(99,102,241,.35);
-  display:flex;align-items:center;justify-content:center;font-size:18px;
-  box-shadow:0 2px 12px rgba(59,130,246,.3);
-  animation:floatSoft 6s ease-in-out infinite;
-}
+.lp-logo-icon{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:18px;box-shadow:0 2px 12px rgba(59,130,246,.3);animation:floatSoft 6s ease-in-out infinite;}
 .lp-logo-text{font-family:var(--font-display);font-size:19px;font-weight:800;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px;}
 .nav-item{position:relative;}
 .nav-link{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:500;color:var(--t2);text-decoration:none;white-space:nowrap;transition:all .18s;}
 .nav-link svg{transition:transform .2s;width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;}
 .nav-link:hover,.nav-item:hover>.nav-link{color:var(--a);background:var(--s3);}
+.nav-link.active{color:var(--a);background:var(--s3);}
 .nav-item:hover>.nav-link svg{transform:rotate(180deg);}
-.nav-dropdown{
-  position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(8px);
-  background:var(--s1);border:1px solid var(--br2);border-radius:var(--radius-lg);
-  padding:8px;min-width:220px;max-width:680px;
-  box-shadow:0 24px 64px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.2);
-  opacity:0;visibility:hidden;pointer-events:none;
-  transition:all .22s cubic-bezier(.4,0,.2,1);z-index:500;
-}
+.nav-dropdown{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--s1);border:1px solid var(--br2);border-radius:var(--radius-lg);padding:8px;min-width:220px;max-width:680px;box-shadow:0 24px 64px rgba(0,0,0,.5),0 4px 16px rgba(0,0,0,.2);opacity:0;visibility:hidden;pointer-events:none;transition:all .22s cubic-bezier(.4,0,.2,1);z-index:500;}
 .nav-item:hover .nav-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
 .nav-dropdown.g2{display:grid;grid-template-columns:1fr 1fr;gap:4px;min-width:420px;}
 .nav-dropdown.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;min-width:580px;}
@@ -114,89 +106,13 @@ body.light-mode #lp-header{background:rgba(255,255,255,.9);border-bottom-color:r
 .s-tag{padding:4px 11px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;font-size:12px;font-weight:500;transition:all .18s;}
 .s-tag:hover{border-color:var(--a);color:var(--a);}
 
-/* ─── HERO SEARCH ─── */
-.hero-search{max-width:660px;margin:0 auto 52px;animation:fadeUp .7s .4s both;}
-.hs-outer{position:relative;}
-.hs-glow{
-  position:absolute;inset:-2px;border-radius:60px;
-  background:var(--grad);opacity:0;
-  transition:opacity .4s var(--ease);
-  filter:blur(12px);z-index:0;pointer-events:none;
-}
-.hs-outer.focused .hs-glow{opacity:.35;}
-.hs-inner{
-  position:relative;z-index:1;
-  display:flex;align-items:center;gap:0;
-  background:var(--s1);
-  border:1.5px solid var(--br2);
-  border-radius:54px;
-  padding:7px 7px 7px 22px;
-  box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 0 0 rgba(59,130,246,0);
-  transition:border-color .35s,box-shadow .35s;
-}
-.hs-outer.focused .hs-inner{
-  border-color:rgba(99,130,246,.7);
-  box-shadow:0 8px 40px rgba(0,0,0,.25),0 0 0 5px rgba(59,130,246,.12);
-}
-.hs-icon-wrap{
-  display:flex;align-items:center;justify-content:center;
-  color:var(--t3);flex-shrink:0;margin-right:4px;
-  transition:color .3s;
-}
-.hs-outer.focused .hs-icon-wrap{color:var(--a);}
-.hs-input{
-  flex:1;background:transparent;border:none;outline:none;
-  font-family:var(--font-body);font-size:15.5px;color:var(--tx);
-  padding:11px 12px;min-width:0;
-  caret-color:var(--a);
-}
-.hs-input::placeholder{color:var(--t3);}
-/* Typewriter cursor */
-.hs-cursor{
-  display:inline-block;width:2px;height:18px;background:var(--a);
-  margin-left:1px;vertical-align:middle;border-radius:2px;
-  animation:cursorBlink .85s ease-in-out infinite;
-  opacity:0;position:absolute;pointer-events:none;
-}
-.hs-outer.focused .hs-cursor{display:none;}
-@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
-.hs-btn{
-  display:flex;align-items:center;gap:8px;flex-shrink:0;
-  padding:12px 26px;border-radius:50px;
-  background:var(--grad);border:none;color:#fff;
-  font-family:var(--font-body);font-size:14px;font-weight:700;
-  cursor:pointer;
-  box-shadow:0 4px 18px rgba(59,130,246,.38);
-  transition:all .25s var(--ease);
-  position:relative;overflow:hidden;
-}
-.hs-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent);opacity:0;transition:opacity .25s;}
-.hs-btn:hover{transform:scale(1.05);box-shadow:0 8px 28px rgba(59,130,246,.55);}
-.hs-btn:hover::before{opacity:1;}
-.hs-btn:active{transform:scale(.98);}
-.hs-tags{
-  display:flex;align-items:center;gap:8px;margin-top:14px;
-  flex-wrap:wrap;justify-content:center;
-}
-.hs-hint{font-size:12px;color:var(--t3);font-weight:500;}
-.hs-tag{
-  padding:5px 14px;border-radius:50px;
-  background:rgba(255,255,255,.05);border:1px solid var(--br);
-  color:var(--t2);font-size:12px;font-weight:600;font-family:var(--font-body);
-  cursor:pointer;transition:all .2s;
-}
-.hs-tag:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.08);}
-body.light-mode .hs-tag{background:rgba(0,0,0,.04);}
-
 /* ─── HERO ─── */
 .hero{position:relative;overflow:hidden;padding:110px 0 100px;background:var(--bg2);}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 18% 28%,rgba(59,130,246,.18) 0,transparent 55%),radial-gradient(ellipse at 82% 72%,rgba(99,102,241,.15) 0,transparent 50%),radial-gradient(ellipse at 55% 8%,rgba(34,211,238,.1) 0,transparent 42%);}
 body.light-mode .hero-bg{background:radial-gradient(ellipse at 18% 28%,rgba(37,99,235,.07) 0,transparent 55%),radial-gradient(ellipse at 82% 72%,rgba(79,70,229,.05) 0,transparent 50%);}
-/* Animated dot grid */
 .hero-dots{position:absolute;inset:0;pointer-events:none;opacity:.25;background-image:radial-gradient(circle,var(--br2) 1px,transparent 1px);background-size:30px 30px;animation:dotMove 80s linear infinite;}
 @keyframes dotMove{from{background-position:0 0}to{background-position:600px 600px}}
 body.light-mode .hero-dots{opacity:.12;}
-/* Floating glowing orbs */
 .orb{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;}
 .orb1{width:500px;height:500px;background:rgba(59,130,246,.1);top:-150px;left:-120px;animation:orb1 14s ease-in-out infinite;}
 .orb2{width:380px;height:380px;background:rgba(99,102,241,.09);bottom:-100px;right:-80px;animation:orb2 11s ease-in-out infinite;}
@@ -204,48 +120,113 @@ body.light-mode .hero-dots{opacity:.12;}
 @keyframes orb1{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(40px,-50px) scale(1.1)}}
 @keyframes orb2{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-30px,40px) scale(1.08)}}
 @keyframes orb3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(25px,-30px) scale(1.12)}}
-/* Particle canvas bg */
 canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
-
 .hero-inner{position:relative;z-index:2;text-align:center;}
-.hero-badge{
-  display:inline-flex;align-items:center;gap:8px;
-  padding:7px 18px;border-radius:50px;
-  background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);
-  font-size:12px;font-weight:700;color:#60a5fa;letter-spacing:.4px;
-  margin-bottom:30px;
-  animation:fadeUp .5s .1s both, glowPulse 3.5s ease-in-out 1.5s infinite;
-}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;padding:7px 18px;border-radius:50px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.25);font-size:12px;font-weight:700;color:#60a5fa;letter-spacing:.4px;margin-bottom:30px;animation:fadeUp .5s .1s both, glowPulse 3.5s ease-in-out 1.5s infinite;}
 .badge-dot{width:6px;height:6px;border-radius:50%;background:#60a5fa;animation:blink 1.4s ease-in-out infinite;}
 @keyframes blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.2;transform:scale(.7)}}
-.hero-title{
-  font-family:var(--font-display);
-  font-size:clamp(38px,7vw,72px);
-  font-weight:800;letter-spacing:-2.5px;line-height:1.05;
-  color:var(--tx);margin-bottom:24px;
-  animation:fadeUp .7s .2s both;
-}
+.hero-title{font-family:var(--font-display);font-size:clamp(38px,7vw,72px);font-weight:800;letter-spacing:-2.5px;line-height:1.05;color:var(--tx);margin-bottom:24px;animation:fadeUp .7s .2s both;}
 .grad-txt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:17px;color:var(--t2);max-width:600px;margin:0 auto 44px;line-height:1.8;animation:fadeUp .7s .3s both;}
-/* Stats */
+.hero-search{max-width:660px;margin:0 auto 52px;animation:fadeUp .7s .4s both;}
+.hs-outer{position:relative;}
+.hs-glow{position:absolute;inset:-2px;border-radius:60px;background:var(--grad);opacity:0;transition:opacity .4s var(--ease);filter:blur(12px);z-index:0;pointer-events:none;}
+.hs-outer.focused .hs-glow{opacity:.35;}
+.hs-inner{position:relative;z-index:1;display:flex;align-items:center;gap:0;background:var(--s1);border:1.5px solid var(--br2);border-radius:54px;padding:7px 7px 7px 22px;box-shadow:0 8px 40px rgba(0,0,0,.2);transition:border-color .35s,box-shadow .35s;}
+.hs-outer.focused .hs-inner{border-color:rgba(99,130,246,.7);box-shadow:0 8px 40px rgba(0,0,0,.25),0 0 0 5px rgba(59,130,246,.12);}
+.hs-icon-wrap{display:flex;align-items:center;justify-content:center;color:var(--t3);flex-shrink:0;margin-right:4px;transition:color .3s;}
+.hs-outer.focused .hs-icon-wrap{color:var(--a);}
+.hs-input{flex:1;background:transparent;border:none;outline:none;font-family:var(--font-body);font-size:15.5px;color:var(--tx);padding:11px 12px;min-width:0;caret-color:var(--a);}
+.hs-input::placeholder{color:var(--t3);}
+.hs-btn{display:flex;align-items:center;gap:8px;flex-shrink:0;padding:12px 26px;border-radius:50px;background:var(--grad);border:none;color:#fff;font-family:var(--font-body);font-size:14px;font-weight:700;cursor:pointer;box-shadow:0 4px 18px rgba(59,130,246,.38);transition:all .25s var(--ease);position:relative;overflow:hidden;}
+.hs-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent);opacity:0;transition:opacity .25s;}
+.hs-btn:hover{transform:scale(1.05);box-shadow:0 8px 28px rgba(59,130,246,.55);}
+.hs-btn:hover::before{opacity:1;}
+.hs-tags{display:flex;align-items:center;gap:8px;margin-top:14px;flex-wrap:wrap;justify-content:center;}
+.hs-hint{font-size:12px;color:var(--t3);font-weight:500;}
+.hs-tag{padding:5px 14px;border-radius:50px;background:rgba(255,255,255,.05);border:1px solid var(--br);color:var(--t2);font-size:12px;font-weight:600;font-family:var(--font-body);cursor:pointer;transition:all .2s;}
+.hs-tag:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.08);}
+body.light-mode .hs-tag{background:rgba(0,0,0,.04);}
 .hero-stats{display:flex;align-items:center;justify-content:center;gap:40px;animation:fadeUp .7s .5s both;flex-wrap:wrap;}
 .stat{text-align:center;}
 .stat-val{font-family:var(--font-display);font-size:28px;font-weight:800;line-height:1;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .stat-lbl{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.3px;}
 .stat-sep{width:1px;height:40px;background:var(--br);}
 
-/* ─── FEATURES ─── */
-.features{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br);}
+/* ─── SECTION COMMONS ─── */
 .sec-head{text-align:center;margin-bottom:60px;}
 .sec-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 16px;border-radius:50px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);font-size:11px;font-weight:700;color:var(--a3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;}
 .sec-title{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.2px;color:var(--tx);line-height:1.12;margin-bottom:14px;}
 .sec-sub{font-size:16px;color:var(--t2);max-width:520px;margin:0 auto;line-height:1.75;}
-.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
-.feat-card{
-  padding:34px 28px 30px;border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
-  position:relative;overflow:hidden;cursor:default;
+
+/* ─── TOOL CATEGORIES SECTION ─── */
+.tool-cats{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px;}
+.cat-card{
+  border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
+  padding:32px 28px;position:relative;overflow:hidden;cursor:pointer;
   transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
+  text-decoration:none;color:inherit;display:block;
 }
+.cat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);border-radius:0 0 var(--radius-lg) var(--radius-lg);}
+.cat-card:hover{transform:translateY(-10px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);}
+.cat-card:hover::before{transform:scaleX(1);}
+.cat-card.pdf::before{background:linear-gradient(90deg,#ef4444,#f97316);}
+.cat-card.img::before{background:linear-gradient(90deg,#f59e0b,#22d3ee);}
+.cat-card.txt::before{background:linear-gradient(90deg,#6366f1,#a78bfa);}
+.cat-card.calc::before{background:linear-gradient(90deg,#10b981,#22d3ee);}
+.cat-card.conv::before{background:linear-gradient(90deg,#3b82f6,#6366f1);}
+.cat-card.ai::before{background:linear-gradient(90deg,#a78bfa,#ec4899);}
+.cat-card.dev::before{background:linear-gradient(90deg,#22d3ee,#3b82f6);}
+.cat-card.gen::before{background:linear-gradient(90deg,#f59e0b,#ef4444);}
+.cat-hd{display:flex;align-items:center;gap:14px;margin-bottom:20px;}
+.cat-ico{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;flex-shrink:0;}
+.cat-ico.pdf{background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(249,115,22,.08));border:1px solid rgba(239,68,68,.25);}
+.cat-ico.img{background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(34,211,238,.08));border:1px solid rgba(245,158,11,.25);}
+.cat-ico.txt{background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(167,139,250,.08));border:1px solid rgba(99,102,241,.25);}
+.cat-ico.calc{background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25);}
+.cat-ico.conv{background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25);}
+.cat-ico.ai{background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(236,72,153,.08));border:1px solid rgba(167,139,250,.25);}
+.cat-ico.dev{background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(59,130,246,.08));border:1px solid rgba(34,211,238,.25);}
+.cat-ico.gen{background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(239,68,68,.08));border:1px solid rgba(245,158,11,.25);}
+.cat-name{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--tx);letter-spacing:-.3px;}
+.cat-count{font-size:12px;color:var(--t3);margin-top:2px;}
+.cat-tools{display:flex;flex-direction:column;gap:7px;}
+.cat-tool{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--t2);}
+.cat-tool::before{content:'›';color:var(--a);font-weight:700;font-size:14px;}
+.cat-more{margin-top:14px;font-size:12px;color:var(--a);font-weight:600;display:flex;align-items:center;gap:4px;}
+
+/* ─── POPULAR TOOLS ─── */
+.popular{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br);}
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px;}
+.tool-card{
+  border-radius:var(--radius);background:var(--s1);border:1px solid var(--br);
+  padding:22px 20px;display:flex;align-items:center;gap:14px;
+  text-decoration:none;color:inherit;
+  transition:transform .35s var(--ease),box-shadow .35s var(--ease),border-color .25s;
+}
+.tool-card:hover{transform:translateY(-5px);box-shadow:0 16px 40px rgba(0,0,0,.18),0 0 0 1px rgba(59,130,246,.1);border-color:rgba(59,130,246,.25);}
+.tool-ico{width:42px;height:42px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.tool-info-name{font-size:13px;font-weight:700;color:var(--tx);margin-bottom:2px;}
+.tool-info-cat{font-size:11px;color:var(--t3);}
+
+/* ─── HOW IT WORKS ─── */
+.how{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
+.steps-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:32px;position:relative;}
+.steps-grid::before{content:'';position:absolute;top:40px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,var(--br),transparent);pointer-events:none;}
+.step{text-align:center;position:relative;z-index:1;}
+.step-num{width:72px;height:72px;border-radius:50%;background:var(--s1);border:2px solid var(--br2);display:flex;align-items:center;justify-content:center;margin:0 auto 22px;font-family:var(--font-display);font-size:26px;font-weight:800;color:var(--a);transition:all .35s var(--ease);position:relative;}
+.step-num::before{content:'';position:absolute;inset:-6px;border-radius:50%;background:var(--grad);opacity:0;transition:opacity .35s;z-index:-1;}
+.step:hover .step-num{border-color:var(--a);box-shadow:0 0 0 8px rgba(59,130,246,.12);}
+.step:hover .step-num::before{opacity:.15;}
+.step-emoji{font-size:28px;line-height:1;}
+.step-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);margin-bottom:10px;}
+.step-desc{font-size:13px;color:var(--t2);line-height:1.75;}
+
+/* ─── FEATURES ─── */
+.features{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br);}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+.feat-card{padding:34px 28px 30px;border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);position:relative;overflow:hidden;cursor:default;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;}
 .feat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);border-radius:0 0 var(--radius-lg) var(--radius-lg);}
 .feat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 0%,rgba(59,130,246,.06),transparent 60%);opacity:0;transition:opacity .4s;}
 .feat-card:hover{transform:translateY(-10px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);}
@@ -259,19 +240,47 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 .feat-card:nth-child(3) .feat-ico-wrap{background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25);animation:floatSoft 5s ease-in-out -3.4s infinite;}
 .feat-card:nth-child(4) .feat-ico-wrap{background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border:1px solid rgba(167,139,250,.25);animation:floatSoft 5s ease-in-out -.9s infinite;}
 
+/* ─── BLOG PREVIEW ─── */
+.blog-prev{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
+.blog-card{border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);overflow:hidden;display:flex;flex-direction:column;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;text-decoration:none;color:inherit;}
+.blog-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);}
+.blog-thumb{width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--s3),var(--s4));position:relative;overflow:hidden;}
+.blog-thumb-inner{width:100%;height:100%;background:var(--grad);opacity:.12;position:absolute;inset:0;}
+.blog-thumb-emoji{position:relative;z-index:1;font-size:44px;}
+.blog-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column;}
+.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap;}
+.blog-cat{padding:3px 11px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;}
+.blog-date{font-size:12px;color:var(--t3);}
+.blog-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);line-height:1.35;margin-bottom:10px;letter-spacing:-.2px;}
+.blog-desc{font-size:13px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:16px;}
+.blog-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--br);padding-top:14px;margin-top:auto;}
+.blog-author{display:flex;align-items:center;gap:8px;}
+.blog-av{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.blog-author-name{font-size:12px;font-weight:600;color:var(--t2);}
+.blog-read{font-size:12px;color:var(--a);font-weight:600;display:flex;align-items:center;gap:4px;}
+.blog-more{text-align:center;margin-top:44px;}
+.blog-more-btn{display:inline-flex;align-items:center;gap:8px;padding:13px 32px;border-radius:50px;border:1.5px solid var(--br2);background:var(--s1);color:var(--t2);font-size:14px;font-weight:600;text-decoration:none;transition:all .25s;}
+.blog-more-btn:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.06);}
+
+/* ─── NEWSLETTER ─── */
+.newsletter{padding:80px 0;background:var(--bg2);border-top:1px solid var(--br);}
+.nl-card{border-radius:var(--radius-xl);background:linear-gradient(135deg,var(--s2),var(--s3));border:1px solid var(--br2);padding:60px 48px;display:flex;align-items:center;gap:60px;flex-wrap:wrap;}
+.nl-txt{flex:1;min-width:260px;}
+.nl-title{font-family:var(--font-display);font-size:clamp(22px,3vw,32px);font-weight:800;color:var(--tx);letter-spacing:-.8px;margin-bottom:10px;}
+.nl-sub{font-size:14px;color:var(--t2);line-height:1.7;}
+.nl-form{flex:1;min-width:280px;display:flex;gap:10px;flex-wrap:wrap;}
+.nl-inp{flex:1;min-width:200px;padding:14px 18px;border-radius:50px;background:var(--s1);border:1.5px solid var(--br2);color:var(--tx);font-size:14px;font-family:var(--font-body);outline:none;transition:border-color .25s;}
+.nl-inp::placeholder{color:var(--t3);}
+.nl-inp:focus{border-color:var(--a);}
+.nl-btn{padding:14px 28px;border-radius:50px;background:var(--grad);border:none;color:#fff;font-size:14px;font-weight:700;font-family:var(--font-body);cursor:pointer;box-shadow:0 4px 18px rgba(59,130,246,.35);transition:all .25s;white-space:nowrap;}
+.nl-btn:hover{transform:translateY(-2px);box-shadow:0 8px 28px rgba(59,130,246,.5);}
 
 /* ─── CTA ─── */
-.cta{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br);}
-.cta-card{
-  border-radius:var(--radius-xl);
-  background:linear-gradient(135deg,#0f2460 0%,#1e1b6b 45%,#0e1a38 100%);
-  border:1px solid rgba(255,255,255,.08);
-  padding:80px 40px;text-align:center;position:relative;overflow:hidden;
-  transition:transform .45s var(--ease),box-shadow .45s var(--ease);
-}
+.cta{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
+.cta-card{border-radius:var(--radius-xl);background:linear-gradient(135deg,#0f2460 0%,#1e1b6b 45%,#0e1a38 100%);border:1px solid rgba(255,255,255,.08);padding:80px 40px;text-align:center;position:relative;overflow:hidden;transition:transform .45s var(--ease),box-shadow .45s var(--ease);}
 .cta-card:hover{transform:translateY(-5px);box-shadow:0 28px 64px rgba(0,0,0,.35);}
 .cta-card::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 25% 55%,rgba(99,102,241,.28),transparent 58%),radial-gradient(ellipse at 75% 45%,rgba(34,211,238,.14),transparent 58%);}
-/* Animated shimmer line */
 .cta-card::after{content:'';position:absolute;top:0;left:-100%;width:60%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.04),transparent);animation:shimmer 3s ease-in-out 2s infinite;}
 @keyframes shimmer{0%{left:-100%}100%{left:160%}}
 .cta-inner{position:relative;z-index:1;}
@@ -286,7 +295,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 
 /* ─── FOOTER ─── */
 #footer{background:var(--bg2);border-top:1px solid var(--br);padding:72px 0 0;}
-.ft-grid{display:grid;grid-template-columns:280px repeat(3,1fr);gap:48px;margin-bottom:56px;}
+.ft-grid{display:grid;grid-template-columns:300px repeat(4,1fr);gap:40px;margin-bottom:56px;}
 .ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
 .ft-logo-ico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:17px;}
 .ft-logo-txt{font-family:var(--font-display);font-size:18px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
@@ -298,106 +307,44 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 .ft-links{display:flex;flex-direction:column;gap:10px;}
 .ft-link{font-size:13px;color:var(--t3);text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;}
 .ft-link:hover{color:var(--tx);padding-left:4px;}
-.ft-bottom{border-top:1px solid var(--br);padding:22px 0;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--t3);flex-wrap:wrap;gap:12px;}
-.ft-bottom-links{display:flex;gap:20px;}
+.ft-link::before{content:'›';margin-right:0;opacity:0;transition:opacity .2s,margin-right .2s;}
+.ft-link:hover::before{opacity:1;margin-right:4px;}
+.ft-bottom{border-top:1px solid var(--br);padding:24px 0;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--t3);flex-wrap:wrap;gap:12px;}
+.ft-bottom-links{display:flex;gap:20px;flex-wrap:wrap;}
 .ft-bottom-links a{color:var(--t3);text-decoration:none;transition:color .2s;}
 .ft-bottom-links a:hover{color:var(--tx);}
-
+.ft-badge{display:inline-flex;align-items:center;gap:5px;padding:3px 10px;border-radius:50px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);font-size:11px;color:var(--a);font-weight:600;}
 
 /* ─── SCROLL REVEAL ─── */
-/* Base state: hidden, exits instantly (no stagger delay on exit) */
-.reveal{
-  opacity:0;
-  transform:translateY(36px) scale(.975);
-  transition:opacity .72s cubic-bezier(.22,1,.36,1), transform .72s cubic-bezier(.22,1,.36,1);
-  transition-delay:0s;
-}
+.reveal{opacity:0;transform:translateY(36px) scale(.975);transition:opacity .72s cubic-bezier(.22,1,.36,1), transform .72s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
 .reveal.visible{opacity:1;transform:translateY(0) scale(1);}
-/* Stagger delays apply ONLY when entering (class added via JS to .visible) */
 .reveal.visible.d1{transition-delay:.06s}
 .reveal.visible.d2{transition-delay:.13s}
 .reveal.visible.d3{transition-delay:.20s}
 .reveal.visible.d4{transition-delay:.27s}
 .reveal.visible.d5{transition-delay:.34s}
 .reveal.visible.d6{transition-delay:.41s}
-
-/* Reveal variants */
-.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);}
 .reveal-left.visible{opacity:1;transform:translateX(0);}
-.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);}
 .reveal-right.visible{opacity:1;transform:translateX(0);}
-.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
-.reveal-scale.visible{opacity:1;transform:scale(1);}
-
-/* Header load animation */
-#lp-header{animation:headerLoad .6s cubic-bezier(.22,1,.36,1) both;}
-@keyframes headerLoad{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
-
-/* Footer link hover */
-.ft-link{transition:color .2s,padding-left .25s cubic-bezier(.22,1,.36,1);}
-.ft-link::before{content:'›';margin-right:0;opacity:0;transition:opacity .2s,margin-right .2s;}
-.ft-link:hover::before{opacity:1;margin-right:4px;}
 
 /* ─── KEYFRAMES ─── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
-@keyframes spin{to{transform:rotate(360deg)}}
-
-
-/* ─── BLOG ─── */
-.blog{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
-.blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
-.blog-card{
-  border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
-  overflow:hidden;display:flex;flex-direction:column;
-  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
-  text-decoration:none;color:inherit;
-}
-.blog-card:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.15);border-color:rgba(59,130,246,.3);}
-.blog-thumb{
-  width:100%;aspect-ratio:16/9;display:flex;align-items:center;justify-content:center;
-  background:linear-gradient(135deg,var(--s3),var(--s4));
-  position:relative;overflow:hidden;
-}
-.blog-thumb-inner{
-  width:100%;height:100%;display:flex;align-items:center;justify-content:center;
-  font-size:48px;
-  background:var(--grad);opacity:.12;
-  position:absolute;inset:0;
-}
-.blog-thumb-emoji{position:relative;z-index:1;font-size:44px;}
-.blog-body{padding:22px 22px 20px;flex:1;display:flex;flex-direction:column;}
-.blog-meta{display:flex;align-items:center;gap:10px;margin-bottom:11px;flex-wrap:wrap;}
-.blog-cat{
-  padding:3px 11px;border-radius:50px;font-size:10px;font-weight:800;letter-spacing:.8px;text-transform:uppercase;
-}
-.blog-date{font-size:12px;color:var(--t3);}
-.blog-title{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);line-height:1.35;margin-bottom:10px;letter-spacing:-.2px;}
-.blog-desc{font-size:13px;color:var(--t2);line-height:1.75;flex:1;margin-bottom:16px;}
-.blog-foot{display:flex;align-items:center;justify-content:space-between;border-top:1px solid var(--br);padding-top:14px;margin-top:auto;}
-.blog-author{display:flex;align-items:center;gap:8px;}
-.blog-av{width:28px;height:28px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
-.blog-author-name{font-size:12px;font-weight:600;color:var(--t2);}
-.blog-read{font-size:12px;color:var(--a);font-weight:600;display:flex;align-items:center;gap:4px;}
-.blog-more{text-align:center;margin-top:44px;}
-.blog-more-btn{
-  display:inline-flex;align-items:center;gap:8px;padding:13px 32px;
-  border-radius:50px;border:1.5px solid var(--br2);background:var(--s1);
-  color:var(--t2);font-size:14px;font-weight:600;text-decoration:none;
-  transition:all .25s;
-}
-.blog-more-btn:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.06);}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.hs-inner{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.hs-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;}}
+@media(max-width:1100px){.ft-grid{grid-template-columns:1fr 1fr 1fr;}}
+@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}.nl-card{padding:44px 32px;gap:36px;}}
+@media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}.steps-grid::before{display:none;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.hs-inner{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.hs-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}.nl-card{padding:32px 20px;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal,.reveal-left,.reveal-right{opacity:1;transform:none;}}
   </style>
 </head>
 <body id="body">
+<div id="scroll-progress"></div>
 
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
@@ -409,55 +356,71 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       </a>
 
       <nav class="lp-nav">
-        <div class="nav-item"><a class="nav-link" href="#">Home</a></div>
+        <div class="nav-item"><a class="nav-link active" href="#">Home</a></div>
 
         <div class="nav-item">
           <a class="nav-link" href="#">Document Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
           <div class="nav-dropdown g2">
-            <div class="dd-hd">📄 PDF</div>
+            <div class="dd-hd">📄 PDF Tools</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🔗</div><div><div class="dd-n">Merge PDF</div><div class="dd-d">Combine files</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">✂️</div><div><div class="dd-n">Split PDF</div><div class="dd-d">Divide pages</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✏️</div><div><div class="dd-n">Edit PDF</div><div class="dd-d">Edit text</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🗜️</div><div><div class="dd-n">Compress PDF</div><div class="dd-d">Reduce size</div></div></a>
-            <div class="dd-hd">📝 Word / Excel</div>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔒</div><div><div class="dd-n">Protect PDF</div><div class="dd-d">Add password</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">🔄</div><div><div class="dd-n">Rotate PDF</div><div class="dd-d">Fix orientation</div></div></a>
+            <div class="dd-hd">📝 Office Conversions</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">📄</div><div><div class="dd-n">Word → PDF</div><div class="dd-d">DOCX to PDF</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📊</div><div><div class="dd-n">Excel → PDF</div><div class="dd-d">XLSX to PDF</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">📑</div><div><div class="dd-n">PPT → PDF</div><div class="dd-d">Slides to PDF</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔁</div><div><div class="dd-n">PDF → Word</div><div class="dd-d">PDF to DOCX</div></div></a>
           </div>
         </div>
 
         <div class="nav-item">
           <a class="nav-link" href="#">Image Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
           <div class="nav-dropdown g2">
-            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🖼️</div><div><div class="dd-n">Image Converter</div><div class="dd-d">PNG, JPG, WebP…</div></div></a>
+            <div class="dd-hd">🖼️ Edit & Convert</div>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🔄</div><div><div class="dd-n">Image Converter</div><div class="dd-d">PNG, JPG, WebP…</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🗜️</div><div><div class="dd-n">Compress Image</div><div class="dd-d">Reduce file size</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">✂️</div><div><div class="dd-n">Crop & Resize</div><div class="dd-d">Edit dimensions</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🌈</div><div><div class="dd-n">Remove Background</div><div class="dd-d">Erase BG instantly</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">💧</div><div><div class="dd-n">Add Watermark</div><div class="dd-d">Protect images</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">✨</div><div><div class="dd-n">Enhance Image</div><div class="dd-d">Upscale with AI</div></div></a>
           </div>
         </div>
 
         <div class="nav-item">
           <a class="nav-link" href="#">Text & AI <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
-          <div class="nav-dropdown">
+          <div class="nav-dropdown g2">
+            <div class="dd-hd">✍️ Text Utilities</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔤</div><div><div class="dd-n">Case Converter</div><div class="dd-d">UPPER, lower, Title</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">📊</div><div><div class="dd-n">Word Counter</div><div class="dd-d">Words & characters</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🌍</div><div><div class="dd-n">Translator</div><div class="dd-d">250+ languages</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔍</div><div><div class="dd-n">Plagiarism Checker</div><div class="dd-d">Detect duplicates</div></div></a>
+            <div class="dd-hd">🤖 AI Powered</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✨</div><div><div class="dd-n">AI Rewriter</div><div class="dd-d">Rewrite & paraphrase</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">🤖</div><div><div class="dd-n">AI Summarizer</div><div class="dd-d">Summarize any text</div></div></a>
           </div>
         </div>
 
         <div class="nav-item">
           <a class="nav-link" href="#">More Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
-          <div class="nav-dropdown g2">
+          <div class="nav-dropdown g3">
+            <div class="dd-hd">🔢 Calculators</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔢</div><div><div class="dd-n">Calculator</div><div class="dd-d">Scientific, BMI, Loan</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">💰</div><div><div class="dd-n">Loan Calculator</div><div class="dd-d">EMI & interest</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">⚖️</div><div><div class="dd-n">BMI Calculator</div><div class="dd-d">Body mass index</div></div></a>
+            <div class="dd-hd">🔧 Utilities</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📏</div><div><div class="dd-n">Unit Converter</div><div class="dd-d">Length, weight, temp</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🎨</div><div><div class="dd-n">Color Tools</div><div class="dd-d">Picker, palette, HEX</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔐</div><div><div class="dd-n">Password Generator</div><div class="dd-d">Strong & secure</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔗</div><div><div class="dd-n">URL Shortener</div><div class="dd-d">Shorten any link</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">💻</div><div><div class="dd-n">Dev Tools</div><div class="dd-d">JSON, Base64, Regex</div></div></a>
+            <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">📅</div><div><div class="dd-n">Date Calculator</div><div class="dd-d">Age, difference</div></div></a>
           </div>
         </div>
 
-        <div class="nav-item"><a class="nav-link" href="/search">Blog</a></div>
+        <div class="nav-item"><a class="nav-link" href="/blog">Blog</a></div>
       </nav>
 
       <div class="header-right">
@@ -482,18 +445,30 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       <div class="mob-sec">Document Tools</div>
       <a class="mob-item" href="#"><span class="mob-ico">🔗</span>Merge PDF</a>
       <a class="mob-item" href="#"><span class="mob-ico">✂️</span>Split PDF</a>
+      <a class="mob-item" href="#"><span class="mob-ico">✏️</span>Edit PDF</a>
       <a class="mob-item" href="#"><span class="mob-ico">📄</span>Word to PDF</a>
+      <a class="mob-item" href="#"><span class="mob-ico">📊</span>Excel to PDF</a>
       <div class="mob-div"></div>
       <div class="mob-sec">Image Tools</div>
       <a class="mob-item" href="#"><span class="mob-ico">🖼️</span>Image Converter</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🗜️</span>Compress Image</a>
+      <a class="mob-item" href="#"><span class="mob-ico">✂️</span>Crop & Resize</a>
       <a class="mob-item" href="#"><span class="mob-ico">🌈</span>Remove Background</a>
       <div class="mob-div"></div>
-      <div class="mob-sec">Text & Utilities</div>
+      <div class="mob-sec">Text & AI</div>
       <a class="mob-item" href="#"><span class="mob-ico">🌍</span>Translator</a>
-      <a class="mob-item" href="#"><span class="mob-ico">🔢</span>Calculator</a>
-      <a class="mob-item" href="#"><span class="mob-ico">🔐</span>Password Generator</a>
+      <a class="mob-item" href="#"><span class="mob-ico">✨</span>AI Rewriter</a>
+      <a class="mob-item" href="#"><span class="mob-ico">📊</span>Word Counter</a>
       <div class="mob-div"></div>
-      <a class="mob-item" href="/search">📰 Blog</a>
+      <div class="mob-sec">More Tools</div>
+      <a class="mob-item" href="#"><span class="mob-ico">🔢</span>Calculator</a>
+      <a class="mob-item" href="#"><span class="mob-ico">📏</span>Unit Converter</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🔐</span>Password Generator</a>
+      <a class="mob-item" href="#"><span class="mob-ico">🎨</span>Color Tools</a>
+      <div class="mob-div"></div>
+      <a class="mob-item" href="/blog">📰 Blog</a>
+      <a class="mob-item" href="#">ℹ️ About Us</a>
+      <a class="mob-item" href="#">📩 Contact</a>
       <div class="mob-div"></div>
       <div style="padding:14px 20px;">
         <a href="#" style="display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 22px;border-radius:50px;font-size:14px;font-weight:700;text-decoration:none;background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.35);">Explore All Tools 🚀</a>
@@ -507,7 +482,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
   <div class="search-box">
     <div class="s-row">
       <span class="si">🔍</span>
-      <input class="s-inp" id="s-inp" onkeydown="if(event.key==='Enter')doSearch()" placeholder='Search 100+ tools — e.g. "Calculator", "Translator", "Compress Image"...' type="text"/>
+      <input class="s-inp" id="s-inp" onkeydown="if(event.key==='Enter')doSearch()" placeholder='Search 100+ tools — e.g. "Calculator", "Translator", "PDF Merger"...' type="text"/>
       <button class="s-close" onclick="closeSearch()">✕</button>
     </div>
     <div class="s-hints">
@@ -517,6 +492,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       <span class="s-tag" onclick="searchFor('calculator')">Calculator</span>
       <span class="s-tag" onclick="searchFor('translator')">Translator</span>
       <span class="s-tag" onclick="searchFor('pdf')">PDF Tools</span>
+      <span class="s-tag" onclick="searchFor('password')">Password Generator</span>
     </div>
   </div>
 </div>
@@ -549,7 +525,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
             </div>
             <input class="hs-input" id="hero-inp" autocomplete="off" onkeydown="if(event.key==='Enter')heroSearch()" type="text"/>
             <button class="hs-btn" onclick="heroSearch()">
-              <span class="hs-btn-txt">Search</span>
+              <span>Search Tools</span>
               <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             </button>
           </div>
@@ -571,6 +547,193 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <div class="stat"><div class="stat-val">100%</div><div class="stat-lbl">Free & Private</div></div>
         <div class="stat-sep"></div>
         <div class="stat"><div class="stat-val">0 MB</div><div class="stat-lbl">No Install</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOOL CATEGORIES ══ -->
+<section class="tool-cats">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">📂 Browse by Category</div>
+      <h2 class="sec-title">All Tool Categories</h2>
+      <p class="sec-sub">Choose a category and find exactly the tool you need — all free, all instant, no signup required.</p>
+    </div>
+    <div class="cat-grid">
+
+      <a class="cat-card pdf reveal d1" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico pdf">📄</div>
+          <div><div class="cat-name">Document Tools</div><div class="cat-count">12+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Merge PDF</div>
+          <div class="cat-tool">Split PDF</div>
+          <div class="cat-tool">Edit & Compress PDF</div>
+          <div class="cat-tool">Word / Excel → PDF</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card img reveal d2" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico img">🖼️</div>
+          <div><div class="cat-name">Image Tools</div><div class="cat-count">10+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Image Converter</div>
+          <div class="cat-tool">Compress & Resize</div>
+          <div class="cat-tool">Remove Background</div>
+          <div class="cat-tool">Add Watermark</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card txt reveal d3" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico txt">✍️</div>
+          <div><div class="cat-name">Text & Writing</div><div class="cat-count">8+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Case Converter</div>
+          <div class="cat-tool">Word Counter</div>
+          <div class="cat-tool">Translator (250+ languages)</div>
+          <div class="cat-tool">Plagiarism Checker</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card ai reveal d4" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico ai">🤖</div>
+          <div><div class="cat-name">AI Tools</div><div class="cat-count">6+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">AI Rewriter</div>
+          <div class="cat-tool">AI Summarizer</div>
+          <div class="cat-tool">AI Image Enhancer</div>
+          <div class="cat-tool">Grammar Checker</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card calc reveal d5" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico calc">🔢</div>
+          <div><div class="cat-name">Calculators</div><div class="cat-count">10+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Scientific Calculator</div>
+          <div class="cat-tool">BMI Calculator</div>
+          <div class="cat-tool">Loan & EMI Calculator</div>
+          <div class="cat-tool">Age Calculator</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card conv reveal d6" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico conv">📏</div>
+          <div><div class="cat-name">Converters</div><div class="cat-count">8+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Unit Converter</div>
+          <div class="cat-tool">Currency Converter</div>
+          <div class="cat-tool">Temperature Converter</div>
+          <div class="cat-tool">Number Base Converter</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card dev reveal d1" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico dev">💻</div>
+          <div><div class="cat-name">Developer Tools</div><div class="cat-count">12+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">JSON Formatter</div>
+          <div class="cat-tool">Base64 Encoder / Decoder</div>
+          <div class="cat-tool">Regex Tester</div>
+          <div class="cat-tool">Color Code Picker</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+      <a class="cat-card gen reveal d2" href="#">
+        <div class="cat-hd">
+          <div class="cat-ico gen">⚡</div>
+          <div><div class="cat-name">Generators</div><div class="cat-count">7+ tools</div></div>
+        </div>
+        <div class="cat-tools">
+          <div class="cat-tool">Password Generator</div>
+          <div class="cat-tool">QR Code Generator</div>
+          <div class="cat-tool">UUID Generator</div>
+          <div class="cat-tool">URL Shortener</div>
+        </div>
+        <div class="cat-more">Explore all →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══ POPULAR TOOLS ══ -->
+<section class="popular">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">🔥 Most Used</div>
+      <h2 class="sec-title">Popular Tools Right Now</h2>
+      <p class="sec-sub">The tools people use most every day — all completely free, no login needed.</p>
+    </div>
+    <div class="tools-grid">
+      <a class="tool-card reveal d1" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(249,115,22,.08));border:1px solid rgba(239,68,68,.25)">🔗</div><div><div class="tool-info-name">Merge PDF</div><div class="tool-info-cat">Document Tools</div></div></a>
+      <a class="tool-card reveal d2" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border:1px solid rgba(245,158,11,.25)">🖼️</div><div><div class="tool-info-name">Image Converter</div><div class="tool-info-cat">Image Tools</div></div></a>
+      <a class="tool-card reveal d3" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(34,199,147,.18),rgba(34,211,238,.08));border:1px solid rgba(34,199,147,.25)">🌍</div><div><div class="tool-info-name">Translator</div><div class="tool-info-cat">Text & AI</div></div></a>
+      <a class="tool-card reveal d4" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(167,139,250,.08));border:1px solid rgba(99,102,241,.25)">🔐</div><div><div class="tool-info-name">Password Generator</div><div class="tool-info-cat">Generators</div></div></a>
+      <a class="tool-card reveal d5" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25)">⚖️</div><div><div class="tool-info-name">BMI Calculator</div><div class="tool-info-cat">Calculators</div></div></a>
+      <a class="tool-card reveal d6" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25)">🗜️</div><div><div class="tool-info-name">Compress Image</div><div class="tool-info-cat">Image Tools</div></div></a>
+      <a class="tool-card reveal d1" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(236,72,153,.08));border:1px solid rgba(167,139,250,.25)">✨</div><div><div class="tool-info-name">AI Rewriter</div><div class="tool-info-cat">AI Tools</div></div></a>
+      <a class="tool-card reveal d2" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(239,68,68,.08));border:1px solid rgba(245,158,11,.25)">✂️</div><div><div class="tool-info-name">Split PDF</div><div class="tool-info-cat">Document Tools</div></div></a>
+      <a class="tool-card reveal d3" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(34,211,238,.18),rgba(59,130,246,.08));border:1px solid rgba(34,211,238,.25)">💻</div><div><div class="tool-info-name">JSON Formatter</div><div class="tool-info-cat">Developer Tools</div></div></a>
+      <a class="tool-card reveal d4" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,199,147,.08));border:1px solid rgba(16,185,129,.25)">🌈</div><div><div class="tool-info-name">Remove Background</div><div class="tool-info-cat">Image Tools</div></div></a>
+      <a class="tool-card reveal d5" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(59,130,246,.08));border:1px solid rgba(99,102,241,.25)">📄</div><div><div class="tool-info-name">Word to PDF</div><div class="tool-info-cat">Document Tools</div></div></a>
+      <a class="tool-card reveal d6" href="#"><div class="tool-ico" style="background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(167,139,250,.08));border:1px solid rgba(239,68,68,.25)">📏</div><div><div class="tool-info-name">Unit Converter</div><div class="tool-info-cat">Converters</div></div></a>
+    </div>
+    <div style="text-align:center;margin-top:44px;">
+      <a href="#" style="display:inline-flex;align-items:center;gap:8px;padding:13px 36px;border-radius:50px;background:var(--grad);color:#fff;font-weight:700;font-size:14px;box-shadow:0 4px 18px rgba(59,130,246,.35);transition:all .25s;" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 8px 28px rgba(59,130,246,.5)'" onmouseout="this.style.transform='';this.style.boxShadow='0 4px 18px rgba(59,130,246,.35)'">View All 100+ Tools 🚀</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ HOW IT WORKS ══ -->
+<section class="how">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">⚡ Simple & Fast</div>
+      <h2 class="sec-title">How It Works</h2>
+      <p class="sec-sub">Three easy steps — no accounts, no waiting, no hassle.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step reveal d1">
+        <div class="step-num"><span class="step-emoji">🔍</span></div>
+        <div class="step-title">Choose a Tool</div>
+        <div class="step-desc">Browse by category or search from 100+ free tools. Find exactly what you need in seconds.</div>
+      </div>
+      <div class="step reveal d2">
+        <div class="step-num"><span class="step-emoji">📂</span></div>
+        <div class="step-title">Upload or Enter</div>
+        <div class="step-desc">Upload your file or paste your text directly. No registration, no email, no payment needed.</div>
+      </div>
+      <div class="step reveal d3">
+        <div class="step-num"><span class="step-emoji">⚡</span></div>
+        <div class="step-title">Process Instantly</div>
+        <div class="step-desc">Your tool runs entirely in the browser at lightning speed — results appear in seconds.</div>
+      </div>
+      <div class="step reveal d4">
+        <div class="step-num"><span class="step-emoji">⬇️</span></div>
+        <div class="step-title">Download & Done</div>
+        <div class="step-desc">Download your result instantly. Your files are private — never stored on any server.</div>
       </div>
     </div>
   </div>
@@ -609,6 +772,91 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
   </div>
 </section>
 
+<!-- ══ BLOG PREVIEW ══ -->
+<section class="blog-prev">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">📰 From the Blog</div>
+      <h2 class="sec-title">Latest Tips & Tutorials</h2>
+      <p class="sec-sub">Guides, how-tos, and productivity tips to help you get more done online — completely free.</p>
+    </div>
+    <div class="blog-grid">
+      <a class="blog-card reveal d1" href="/blog">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">📄</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;">PDF Tools</span>
+            <span class="blog-date">April 10, 2026</span>
+          </div>
+          <div class="blog-title">How to Merge Multiple PDFs Into One File in Seconds</div>
+          <div class="blog-desc">Learn the fastest way to combine PDF files without any software — all you need is a browser and our free tool.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+      <a class="blog-card reveal d2" href="/blog">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🖼️</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25);color:#fbbf24;">Image Tools</span>
+            <span class="blog-date">April 7, 2026</span>
+          </div>
+          <div class="blog-title">Best Free Ways to Compress Images Without Losing Quality</div>
+          <div class="blog-desc">High-quality images don't have to be large files. Here's how to shrink images instantly using our free compressor.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+      <a class="blog-card reveal d3" href="/blog">
+        <div class="blog-thumb">
+          <div class="blog-thumb-inner"></div>
+          <div class="blog-thumb-emoji">🤖</div>
+        </div>
+        <div class="blog-body">
+          <div class="blog-meta">
+            <span class="blog-cat" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a78bfa;">AI Tools</span>
+            <span class="blog-date">April 3, 2026</span>
+          </div>
+          <div class="blog-title">Top 5 AI Writing Tools You Can Use Right Now — For Free</div>
+          <div class="blog-desc">From rewriting paragraphs to translating languages, discover the AI tools that supercharge your productivity.</div>
+          <div class="blog-foot">
+            <div class="blog-author"><div class="blog-av">✍️</div><span class="blog-author-name">ToolsHub Team</span></div>
+            <span class="blog-read">Read more →</span>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="blog-more">
+      <a class="blog-more-btn reveal" href="/blog">📰 View All Articles →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══ NEWSLETTER ══ -->
+<section class="newsletter">
+  <div class="container">
+    <div class="nl-card reveal">
+      <div class="nl-txt">
+        <div class="nl-title">Stay Updated with New Tools 🔔</div>
+        <div class="nl-sub">Get notified whenever we add new tools, guides, or features. No spam, unsubscribe anytime.</div>
+      </div>
+      <div class="nl-form">
+        <input class="nl-inp" type="email" placeholder="Enter your email address…"/>
+        <button class="nl-btn" onclick="alert('Subscribed! Thank you.')">Subscribe Free →</button>
+      </div>
+    </div>
+  </div>
+</section>
 
 <!-- ══ CTA ══ -->
 <section class="cta">
@@ -617,10 +865,10 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       <div class="cta-inner">
         <div class="cta-badge">🚀 Get Started — It's Free</div>
         <h2 class="cta-title">Ready to Get Things Done?</h2>
-        <p class="cta-sub">100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working.</p>
+        <p class="cta-sub">100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
         <div class="cta-btns">
           <a class="cta-btn1" href="#">🛠️ Explore All Tools</a>
-          <a class="cta-btn2" href="/search">📰 Read the Blog</a>
+          <a class="cta-btn2" href="/blog">📰 Read the Blog</a>
         </div>
       </div>
     </div>
@@ -631,60 +879,91 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 <footer id="footer">
   <div class="container">
     <div class="ft-grid">
+
+      <!-- Brand -->
       <div class="reveal d1">
         <div class="ft-logo">
           <div class="ft-logo-ico">🛠️</div>
           <span class="ft-logo-txt">ToolsHub Pro</span>
         </div>
-        <p class="ft-desc">A growing collection of 100+ free online tools for documents, images, text, calculations, conversions, and much more.</p>
-        <div class="ft-social">
+        <p class="ft-desc">A growing collection of 100+ free online tools for documents, images, text, calculations, conversions, AI, and much more. No signup required.</p>
+        <div class="ft-social" style="margin-bottom:16px;">
           <a class="s-btn" href="#" title="Facebook">f</a>
-          <a class="s-btn" href="#" title="X">𝕏</a>
+          <a class="s-btn" href="#" title="X / Twitter">𝕏</a>
           <a class="s-btn" href="#" title="YouTube">▶</a>
           <a class="s-btn" href="#" title="Telegram">✈</a>
+          <a class="s-btn" href="#" title="Instagram">📷</a>
         </div>
+        <div class="ft-badge">🔒 Privacy First · No Ads · Free Forever</div>
       </div>
+
+      <!-- Tools -->
       <div class="reveal d2">
         <div class="ft-col-title">Popular Tools</div>
         <div class="ft-links">
           <a class="ft-link" href="#">Merge PDF</a>
+          <a class="ft-link" href="#">Split PDF</a>
           <a class="ft-link" href="#">Image Compressor</a>
+          <a class="ft-link" href="#">Remove Background</a>
           <a class="ft-link" href="#">Text Translator</a>
           <a class="ft-link" href="#">Unit Converter</a>
           <a class="ft-link" href="#">BMI Calculator</a>
           <a class="ft-link" href="#">Password Generator</a>
-          <a class="ft-link" href="#" style="color:var(--a);font-weight:600">All Tools →</a>
+          <a class="ft-link" href="#" style="color:var(--a);font-weight:600;margin-top:4px;">View All Tools →</a>
         </div>
       </div>
+
+      <!-- Categories -->
       <div class="reveal d3">
         <div class="ft-col-title">Categories</div>
         <div class="ft-links">
-          <a class="ft-link" href="#">Document Tools</a>
-          <a class="ft-link" href="#">Image Tools</a>
-          <a class="ft-link" href="#">Text & Writing</a>
-          <a class="ft-link" href="#">Calculators</a>
-          <a class="ft-link" href="#">Converters</a>
-          <a class="ft-link" href="#">AI Tools</a>
-          <a class="ft-link" href="#">Developer Tools</a>
+          <a class="ft-link" href="#">📄 Document Tools</a>
+          <a class="ft-link" href="#">🖼️ Image Tools</a>
+          <a class="ft-link" href="#">✍️ Text & Writing</a>
+          <a class="ft-link" href="#">🤖 AI Tools</a>
+          <a class="ft-link" href="#">🔢 Calculators</a>
+          <a class="ft-link" href="#">📏 Converters</a>
+          <a class="ft-link" href="#">💻 Developer Tools</a>
+          <a class="ft-link" href="#">⚡ Generators</a>
         </div>
       </div>
+
+      <!-- Pages -->
       <div class="reveal d4">
-        <div class="ft-col-title">Company</div>
+        <div class="ft-col-title">Pages</div>
         <div class="ft-links">
-          <a class="ft-link" href="#">About Us</a>
-          <a class="ft-link" href="/search">Blog</a>
-          <a class="ft-link" href="#">Privacy Policy</a>
-          <a class="ft-link" href="#">Terms of Service</a>
-          <a class="ft-link" href="#">Contact Us</a>
-          <a class="ft-link" href="#">Request a Tool</a>
+          <a class="ft-link" href="#">🏠 Home</a>
+          <a class="ft-link" href="/blog">📰 Blog</a>
+          <a class="ft-link" href="#">ℹ️ About Us</a>
+          <a class="ft-link" href="#">📩 Contact Us</a>
+          <a class="ft-link" href="#">🙋 Request a Tool</a>
+          <a class="ft-link" href="#">🗺️ Sitemap</a>
         </div>
       </div>
+
+      <!-- Legal -->
+      <div class="reveal d5">
+        <div class="ft-col-title">Legal & Help</div>
+        <div class="ft-links">
+          <a class="ft-link" href="#">🔒 Privacy Policy</a>
+          <a class="ft-link" href="#">📋 Terms of Service</a>
+          <a class="ft-link" href="#">🍪 Cookie Policy</a>
+          <a class="ft-link" href="#">♿ Accessibility</a>
+          <a class="ft-link" href="#">❓ FAQ</a>
+          <a class="ft-link" href="#">🐛 Report a Bug</a>
+        </div>
+      </div>
+
     </div>
+
     <div class="ft-bottom reveal">
-      <span>© <span id="yr">2026</span> ToolsHub Pro. All rights reserved.</span>
+      <span>© <span id="yr">2026</span> ToolsHub Pro. All rights reserved. Made with ❤️ for everyone.</span>
       <div class="ft-bottom-links">
         <a href="#">Privacy</a>
         <a href="#">Terms</a>
+        <a href="#">Cookies</a>
+        <a href="#">Sitemap</a>
+        <a href="/blog">Blog</a>
         <a href="#">Contact</a>
       </div>
     </div>
@@ -715,21 +994,20 @@ function closeMob(){document.getElementById('mob-nav').classList.remove('open');
   var el=document.getElementById('hero-inp');
   var outer=document.getElementById('hs-outer');
   if(!el)return;
-  var phrases=['Search from 100+ free tools...','Try "PDF Merger"...','Try "Image Converter"...','Try "Password Generator"...','Try "Translator"...','Try "Scientific Calculator"...','Try "Remove Background"...'];
-  var pi=0,ci=0,deleting=false,paused=false;
+  var phrases=['Search from 100+ free tools...','Try "PDF Merger"...','Try "Image Converter"...','Try "Password Generator"...','Try "Translator"...','Try "Scientific Calculator"...','Try "Remove Background"...','Try "JSON Formatter"...'];
+  var pi=0,ci=0,deleting=false;
   function type(){
     if(document.activeElement===el)return;
     var phrase=phrases[pi];
     if(!deleting){
       if(ci<=phrase.length){el.placeholder=phrase.slice(0,ci);ci++;setTimeout(type,55);}
-      else{paused=true;setTimeout(function(){paused=false;deleting=true;type();},2000);}
+      else{setTimeout(function(){deleting=true;type();},2000);}
     } else {
       if(ci>0){el.placeholder=phrase.slice(0,ci);ci--;setTimeout(type,30);}
       else{deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,400);}
     }
   }
   type();
-  /* Focus glow */
   el.addEventListener('focus',function(){if(outer)outer.classList.add('focused');});
   el.addEventListener('blur',function(){if(outer)outer.classList.remove('focused');setTimeout(type,600);});
 })();
@@ -757,98 +1035,72 @@ document.addEventListener('keydown',function(e){
 /* ── Header scroll ── */
 window.addEventListener('scroll',function(){
   document.getElementById('lp-header').classList.toggle('scrolled',window.scrollY>20);
+  var prog=document.getElementById('scroll-progress');
+  if(prog){
+    var h=document.documentElement;
+    var pct=window.scrollY/(h.scrollHeight-h.clientHeight)*100;
+    prog.style.width=Math.min(pct,100)+'%';
+  }
 },{passive:true});
 
 /* ── Footer year ── */
 var yr=document.getElementById('yr');
 if(yr) yr.textContent=new Date().getFullYear();
 
-
-/* ── Bidirectional scroll reveal ── */
+/* ── Scroll reveal ── */
 (function(){
   if(!('IntersectionObserver' in window)){
-    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){el.classList.add('visible');});
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){el.classList.add('visible');});
     return;
   }
   var observer=new IntersectionObserver(function(entries){
     entries.forEach(function(entry){
-      if(entry.isIntersecting){
-        entry.target.classList.add('visible');
-      } else {
-        /* Only remove 'visible' when exiting — CSS sets delay:0s on exit so it's smooth */
-        entry.target.classList.remove('visible');
-      }
+      if(entry.isIntersecting){entry.target.classList.add('visible');}
+      else{entry.target.classList.remove('visible');}
     });
   },{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){
-    observer.observe(el);
-  });
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right').forEach(function(el){observer.observe(el);});
 })();
 
-/* ── Hero counter animation (eased) ── */
+/* ── Hero counter animation ── */
 function easeOut(t){return 1-Math.pow(1-t,3);}
 function animCount(el,target,suffix,dur){
   if(!el)return;
   var start=performance.now();
   function frame(now){
     var p=Math.min((now-start)/dur,1);
-    var v=Math.round(easeOut(p)*target);
-    el.textContent=v+suffix;
+    el.textContent=Math.round(easeOut(p)*target)+(p<1?'':suffix);
     if(p<1)requestAnimationFrame(frame);
-    else el.textContent=target+suffix;
   }
   requestAnimationFrame(frame);
 }
 window.addEventListener('load',function(){
   setTimeout(function(){
     animCount(document.getElementById('cnt1'),100,'+',1800);
-    animCount(document.getElementById('cnt2'),12,'',1000);
+    animCount(document.getElementById('cnt2'),8,'',1400);
   },600);
 });
 
 /* ── Particle canvas ── */
 (function(){
-  var c=document.getElementById('particles');
-  if(!c)return;
-  var ctx=c.getContext('2d');
-  var W,H,pts=[];
-  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
-  resize();
-  window.addEventListener('resize',resize);
+  var canvas=document.getElementById('particles');
+  if(!canvas)return;
+  var ctx=canvas.getContext('2d');
+  var w,h,pts=[];
+  function resize(){w=canvas.width=canvas.offsetWidth;h=canvas.height=canvas.offsetHeight;}
+  window.addEventListener('resize',resize);resize();
   for(var i=0;i<55;i++){
-    pts.push({
-      x:Math.random()*W, y:Math.random()*H,
-      vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35,
-      r:Math.random()*1.8+.6,
-      a:Math.random()*.6+.15
-    });
+    pts.push({x:Math.random()*1400,y:Math.random()*700,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*2+.8,a:Math.random()*.5+.1});
   }
   function draw(){
-    ctx.clearRect(0,0,W,H);
+    ctx.clearRect(0,0,w,h);
     pts.forEach(function(p){
-      p.x+=p.vx; p.y+=p.vy;
-      if(p.x<0||p.x>W) p.vx*=-1;
-      if(p.y<0||p.y>H) p.vy*=-1;
-      ctx.beginPath();
-      ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-      ctx.fillStyle='rgba(99,130,246,'+p.a+')';
-      ctx.fill();
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0)p.x=w;if(p.x>w)p.x=0;
+      if(p.y<0)p.y=h;if(p.y>h)p.y=0;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(99,130,246,'+p.a+')';ctx.fill();
     });
-    /* Draw lines between close particles */
-    for(var i=0;i<pts.length;i++){
-      for(var j=i+1;j<pts.length;j++){
-        var dx=pts[i].x-pts[j].x, dy=pts[i].y-pts[j].y;
-        var d=Math.sqrt(dx*dx+dy*dy);
-        if(d<120){
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x,pts[i].y);
-          ctx.lineTo(pts[j].x,pts[j].y);
-          ctx.strokeStyle='rgba(99,130,246,'+((.12*(1-d/120)))+')';
-          ctx.lineWidth=.8;
-          ctx.stroke();
-        }
-      }
-    }
     requestAnimationFrame(draw);
   }
   draw();

@@ -347,6 +347,25 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 @keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ─── TOOLS GRID ─── */
+.tools-sec{padding:88px 0;border-top:1px solid var(--br);}
+.tools-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:22px;}
+.tcat{background:var(--s1);border:1px solid var(--br);border-radius:var(--radius-lg);overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;display:flex;flex-direction:column;}
+.tcat:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28);}
+.tcat-hd{padding:20px 22px 16px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:13px;}
+.tcat-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
+.tcat-nm{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--tx);letter-spacing:-.2px;}
+.tcat-ds{font-size:11.5px;color:var(--t3);margin-top:2px;}
+.tcat-bd{padding:10px 14px 6px;display:flex;flex-direction:column;gap:1px;flex:1;}
+.ttool{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;text-decoration:none;color:var(--t2);transition:all .15s;font-size:13px;font-weight:500;}
+.ttool:hover{background:var(--s3);color:var(--tx);}
+.ttool-ico{font-size:15px;flex-shrink:0;width:22px;text-align:center;}
+.tcat-ft{padding:12px 14px 16px;}
+.tcat-all{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 18px;border-radius:50px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);color:var(--a);font-size:12.5px;font-weight:700;text-decoration:none;transition:all .2s;}
+.tcat-all:hover{background:rgba(59,130,246,.15);border-color:var(--a);}
+@media(max-width:768px){.tools-cats{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.tools-cats{grid-template-columns:1fr;}}
+
 /* ─── BLOG ─── */
 .blog{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
 .blog-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:24px;}
@@ -607,6 +626,84 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         <div class="feat-title">Always Growing</div>
         <div class="feat-desc">New tools are added every week across every category. Can't find what you need? Request a tool and we'll build it for you.</div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══ TOOLS GRID ══ -->
+<section class="tools-sec">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">🔧 Popular Tools</div>
+      <h2 class="sec-title">All Tools, One Click Away</h2>
+      <p class="sec-sub">Click any tool below to get started instantly — no signup, no download, runs entirely in your browser.</p>
+    </div>
+    <div class="tools-cats">
+
+      <div class="tcat reveal d1">
+        <div class="tcat-hd">
+          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.06));border:1px solid rgba(239,68,68,.25)">📄</div>
+          <div><div class="tcat-nm">PDF Tools</div><div class="tcat-ds">Edit, merge, split & convert PDFs</div></div>
+        </div>
+        <div class="tcat-bd">
+          <a class="ttool" href="/p/merge-pdf.html"><span class="ttool-ico">🔗</span>Merge PDF</a>
+          <a class="ttool" href="/p/split-pdf.html"><span class="ttool-ico">✂️</span>Split PDF</a>
+          <a class="ttool" href="/p/compress-pdf.html"><span class="ttool-ico">🗜️</span>Compress PDF</a>
+          <a class="ttool" href="/p/edit-pdf.html"><span class="ttool-ico">✏️</span>Edit PDF</a>
+          <a class="ttool" href="/p/word-to-pdf.html"><span class="ttool-ico">📝</span>Word → PDF</a>
+          <a class="ttool" href="/p/jpg-to-pdf.html"><span class="ttool-ico">🖼️</span>JPG → PDF</a>
+        </div>
+        <div class="tcat-ft"><a class="tcat-all" href="/p/document-tools.html">All PDF Tools →</a></div>
+      </div>
+
+      <div class="tcat reveal d2">
+        <div class="tcat-hd">
+          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.25)">🖼️</div>
+          <div><div class="tcat-nm">Image Tools</div><div class="tcat-ds">Compress, convert & edit images</div></div>
+        </div>
+        <div class="tcat-bd">
+          <a class="ttool" href="/p/image-converter.html"><span class="ttool-ico">🔄</span>Image Converter</a>
+          <a class="ttool" href="/p/compress-image.html"><span class="ttool-ico">🗜️</span>Compress Image</a>
+          <a class="ttool" href="/p/crop-resize.html"><span class="ttool-ico">✂️</span>Crop & Resize</a>
+          <a class="ttool" href="/p/remove-background.html"><span class="ttool-ico">🌈</span>Remove Background</a>
+          <a class="ttool" href="/p/watermark.html"><span class="ttool-ico">🔏</span>Add Watermark</a>
+          <a class="ttool" href="/p/flip-rotate.html"><span class="ttool-ico">↩️</span>Flip & Rotate</a>
+        </div>
+        <div class="tcat-ft"><a class="tcat-all" href="/p/image-tools.html">All Image Tools →</a></div>
+      </div>
+
+      <div class="tcat reveal d3">
+        <div class="tcat-hd">
+          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(99,102,241,.06));border:1px solid rgba(99,102,241,.25)">✨</div>
+          <div><div class="tcat-nm">Text & AI</div><div class="tcat-ds">Write, translate & analyse text</div></div>
+        </div>
+        <div class="tcat-bd">
+          <a class="ttool" href="/p/translator.html"><span class="ttool-ico">🌐</span>Translator</a>
+          <a class="ttool" href="/p/ai-rewriter.html"><span class="ttool-ico">🤖</span>AI Rewriter</a>
+          <a class="ttool" href="/p/word-counter.html"><span class="ttool-ico">📊</span>Word Counter</a>
+          <a class="ttool" href="/p/case-converter.html"><span class="ttool-ico">🔡</span>Case Converter</a>
+          <a class="ttool" href="/p/lorem-ipsum.html"><span class="ttool-ico">📄</span>Lorem Ipsum</a>
+          <a class="ttool" href="/p/text-to-speech.html"><span class="ttool-ico">🔊</span>Text to Speech</a>
+        </div>
+        <div class="tcat-ft"><a class="tcat-all" href="/p/text-ai-tools.html">All Text & AI Tools →</a></div>
+      </div>
+
+      <div class="tcat reveal d4">
+        <div class="tcat-hd">
+          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));border:1px solid rgba(16,185,129,.25)">🛠️</div>
+          <div><div class="tcat-nm">More Tools</div><div class="tcat-ds">Calculators, generators & dev tools</div></div>
+        </div>
+        <div class="tcat-bd">
+          <a class="ttool" href="/p/calculator.html"><span class="ttool-ico">🔢</span>Calculator</a>
+          <a class="ttool" href="/p/unit-converter.html"><span class="ttool-ico">📏</span>Unit Converter</a>
+          <a class="ttool" href="/p/password-generator.html"><span class="ttool-ico">🔐</span>Password Generator</a>
+          <a class="ttool" href="/p/color-tools.html"><span class="ttool-ico">🎨</span>Color Tools</a>
+          <a class="ttool" href="/p/qr-code.html"><span class="ttool-ico">📱</span>QR Code Generator</a>
+          <a class="ttool" href="/p/dev-tools.html"><span class="ttool-ico">💻</span>Dev Tools</a>
+        </div>
+        <div class="tcat-ft"><a class="tcat-all" href="/p/all-tools.html">Browse All 100+ Tools →</a></div>
+      </div>
+
     </div>
   </div>
 </section>

@@ -380,10 +380,30 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 .rv.on{opacity:1;transform:translateY(0) scale(1)}
 .rv.on.d1{transition-delay:.07s}.rv.on.d2{transition-delay:.14s}.rv.on.d3{transition-delay:.21s}.rv.on.d4{transition-delay:.28s}
 
+/* ━━ TOOLS GRID ━━ */
+.tools-sec{padding:88px 0;border-top:1px solid var(--br)}
+.tools-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:22px}
+.tcat{background:var(--s1);border:1px solid var(--br);border-radius:var(--r2);overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;display:flex;flex-direction:column}
+.tcat:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28)}
+.tcat-hd{padding:20px 22px 16px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:13px}
+.tcat-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0}
+.tcat-nm{font-family:var(--f-display);font-size:15px;font-weight:700;color:var(--tx);letter-spacing:-.2px}
+.tcat-ds{font-size:11.5px;color:var(--t3);margin-top:2px}
+.tcat-bd{padding:10px 14px 6px;display:flex;flex-direction:column;gap:1px;flex:1}
+.ttool{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;text-decoration:none;color:var(--t2);transition:all .15s;font-size:13px;font-weight:500}
+.ttool:hover{background:var(--s3);color:var(--tx)}
+.ttool-ico{font-size:15px;flex-shrink:0;width:22px;text-align:center}
+.tcat-ft{padding:12px 14px 16px}
+.tcat-all{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 18px;border-radius:50px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);color:var(--a);font-size:12.5px;font-weight:700;text-decoration:none;transition:all .2s}
+.tcat-all:hover{background:rgba(59,130,246,.15);border-color:var(--a)}
+
+/* ━━ PARTICLES CANVAS ━━ */
+canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
+
 /* ━━ RESPONSIVE ━━ */
 @media(max-width:1024px){.foot-g{grid-template-columns:1fr 1fr}.bl-lay{grid-template-columns:1fr}.sidebar{position:static}}
-@media(max-width:768px){.lp-nav{display:none}.mob-btn{display:flex}.h-srch{display:none}.h-stats{gap:20px}.hs-sep{display:none}.cta-c{padding:56px 22px}.foot-g{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr}}
-@media(max-width:480px){.foot-g{grid-template-columns:1fr}.hs-i{flex-direction:column;border-radius:20px;padding:14px;gap:10px}.hs-btn{width:100%;justify-content:center}.cta-bs{flex-direction:column;align-items:center}}
+@media(max-width:768px){.lp-nav{display:none}.mob-btn{display:flex}.h-srch{display:none}.h-stats{gap:20px}.hs-sep{display:none}.cta-c{padding:56px 22px}.foot-g{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr}.tools-cats{grid-template-columns:1fr 1fr}}
+@media(max-width:480px){.foot-g{grid-template-columns:1fr}.hs-i{flex-direction:column;border-radius:20px;padding:14px;gap:10px}.hs-btn{width:100%;justify-content:center}.cta-bs{flex-direction:column;align-items:center}.tools-cats{grid-template-columns:1fr}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}.rv{opacity:1;transform:none}}
   ]]></b:skin>
 </head>
@@ -644,6 +664,7 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
   <section class='hero'>
     <div class='hero-bg'/>
     <div class='hero-dots'/>
+    <canvas id='hp-canvas'/>
     <div class='o1 orb'/><div class='o2 orb'/><div class='o3 orb'/>
     <div class='wrap'>
       <div class='hero-cnt'>
@@ -677,9 +698,9 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
           </div>
         </div>
         <div class='h-stats'>
-          <div class='hs'><div class='hs-v'>100+</div><div class='hs-l'>Free Tools</div></div>
+          <div class='hs'><div class='hs-v' id='hv1'>100+</div><div class='hs-l'>Free Tools</div></div>
           <div class='hs-sep'/>
-          <div class='hs'><div class='hs-v'>12</div><div class='hs-l'>Categories</div></div>
+          <div class='hs'><div class='hs-v' id='hv2'>12</div><div class='hs-l'>Categories</div></div>
           <div class='hs-sep'/>
           <div class='hs'><div class='hs-v'>100%</div><div class='hs-l'>Free &amp; Private</div></div>
           <div class='hs-sep'/>
@@ -728,6 +749,104 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
           <div class='ft'>Always Growing</div>
           <div class='fd'>New tools added every week across every category. Can't find what you need? Request a tool and we'll build it.</div>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ════════════════════════════════════════════════════
+    LAYOUT SECTION 8B — HOMEPAGE TOOLS GRID
+    Clickable tool cards organised by category
+    Edit href values below to point to your tool pages
+  ════════════════════════════════════════════════════ -->
+  <section class='tools-sec'>
+    <div class='wrap'>
+      <div class='sh rv'>
+        <div class='sh-tag'>🔧 Popular Tools</div>
+        <h2 class='sh-t'>All Tools, One Click Away</h2>
+        <p class='sh-s'>Click any tool below to get started instantly — no signup, no download, runs entirely in your browser.</p>
+      </div>
+      <div class='tools-cats'>
+
+        <!-- ── PDF Tools ── Edit hrefs to your actual page URLs ── -->
+        <div class='tcat rv d1'>
+          <div class='tcat-hd'>
+            <div class='tcat-ico' style='background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.06));border:1px solid rgba(239,68,68,.25)'>📄</div>
+            <div>
+              <div class='tcat-nm'>PDF Tools</div>
+              <div class='tcat-ds'>Edit, merge, split &amp; convert PDFs</div>
+            </div>
+          </div>
+          <div class='tcat-bd'>
+            <a class='ttool' href='/p/merge-pdf.html'><span class='ttool-ico'>🔗</span>Merge PDF</a>
+            <a class='ttool' href='/p/split-pdf.html'><span class='ttool-ico'>✂️</span>Split PDF</a>
+            <a class='ttool' href='/p/compress-pdf.html'><span class='ttool-ico'>🗜️</span>Compress PDF</a>
+            <a class='ttool' href='/p/edit-pdf.html'><span class='ttool-ico'>✏️</span>Edit PDF</a>
+            <a class='ttool' href='/p/word-to-pdf.html'><span class='ttool-ico'>📝</span>Word → PDF</a>
+            <a class='ttool' href='/p/jpg-to-pdf.html'><span class='ttool-ico'>🖼️</span>JPG → PDF</a>
+          </div>
+          <div class='tcat-ft'><a class='tcat-all' href='/p/document-tools.html'>All PDF Tools →</a></div>
+        </div>
+
+        <!-- ── Image Tools ── -->
+        <div class='tcat rv d2'>
+          <div class='tcat-hd'>
+            <div class='tcat-ico' style='background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.25)'>🖼️</div>
+            <div>
+              <div class='tcat-nm'>Image Tools</div>
+              <div class='tcat-ds'>Compress, convert &amp; edit images</div>
+            </div>
+          </div>
+          <div class='tcat-bd'>
+            <a class='ttool' href='/p/image-converter.html'><span class='ttool-ico'>🔄</span>Image Converter</a>
+            <a class='ttool' href='/p/compress-image.html'><span class='ttool-ico'>🗜️</span>Compress Image</a>
+            <a class='ttool' href='/p/crop-resize.html'><span class='ttool-ico'>✂️</span>Crop &amp; Resize</a>
+            <a class='ttool' href='/p/remove-background.html'><span class='ttool-ico'>🌈</span>Remove Background</a>
+            <a class='ttool' href='/p/watermark.html'><span class='ttool-ico'>🔏</span>Add Watermark</a>
+            <a class='ttool' href='/p/flip-rotate.html'><span class='ttool-ico'>↩️</span>Flip &amp; Rotate</a>
+          </div>
+          <div class='tcat-ft'><a class='tcat-all' href='/p/image-tools.html'>All Image Tools →</a></div>
+        </div>
+
+        <!-- ── Text & AI ── -->
+        <div class='tcat rv d3'>
+          <div class='tcat-hd'>
+            <div class='tcat-ico' style='background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(99,102,241,.06));border:1px solid rgba(99,102,241,.25)'>✨</div>
+            <div>
+              <div class='tcat-nm'>Text &amp; AI</div>
+              <div class='tcat-ds'>Write, translate &amp; analyse text</div>
+            </div>
+          </div>
+          <div class='tcat-bd'>
+            <a class='ttool' href='/p/translator.html'><span class='ttool-ico'>🌐</span>Translator</a>
+            <a class='ttool' href='/p/ai-rewriter.html'><span class='ttool-ico'>🤖</span>AI Rewriter</a>
+            <a class='ttool' href='/p/word-counter.html'><span class='ttool-ico'>📊</span>Word Counter</a>
+            <a class='ttool' href='/p/case-converter.html'><span class='ttool-ico'>🔡</span>Case Converter</a>
+            <a class='ttool' href='/p/lorem-ipsum.html'><span class='ttool-ico'>📄</span>Lorem Ipsum</a>
+            <a class='ttool' href='/p/text-to-speech.html'><span class='ttool-ico'>🔊</span>Text to Speech</a>
+          </div>
+          <div class='tcat-ft'><a class='tcat-all' href='/p/text-ai-tools.html'>All Text &amp; AI Tools →</a></div>
+        </div>
+
+        <!-- ── More Tools ── -->
+        <div class='tcat rv d4'>
+          <div class='tcat-hd'>
+            <div class='tcat-ico' style='background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));border:1px solid rgba(16,185,129,.25)'>🛠️</div>
+            <div>
+              <div class='tcat-nm'>More Tools</div>
+              <div class='tcat-ds'>Calculators, generators &amp; dev tools</div>
+            </div>
+          </div>
+          <div class='tcat-bd'>
+            <a class='ttool' href='/p/calculator.html'><span class='ttool-ico'>🔢</span>Calculator</a>
+            <a class='ttool' href='/p/unit-converter.html'><span class='ttool-ico'>📏</span>Unit Converter</a>
+            <a class='ttool' href='/p/password-generator.html'><span class='ttool-ico'>🔐</span>Password Generator</a>
+            <a class='ttool' href='/p/color-tools.html'><span class='ttool-ico'>🎨</span>Color Tools</a>
+            <a class='ttool' href='/p/qr-code.html'><span class='ttool-ico'>📱</span>QR Code Generator</a>
+            <a class='ttool' href='/p/dev-tools.html'><span class='ttool-ico'>💻</span>Dev Tools</a>
+          </div>
+          <div class='tcat-ft'><a class='tcat-all' href='/p/all-tools.html'>Browse All 100+ Tools →</a></div>
+        </div>
+
       </div>
     </div>
   </section>
@@ -1428,6 +1547,9 @@ if(yr)yr.textContent=new Date().getFullYear();
   u();
 })();
 
+/* ── Remove loading class immediately ── */
+document.body.classList.remove('loading');
+
 /* ── Scroll reveal (IntersectionObserver) ── */
 (function(){
   if(!('IntersectionObserver' in window)){
@@ -1438,8 +1560,56 @@ if(yr)yr.textContent=new Date().getFullYear();
     entries.forEach(function(en){
       if(en.isIntersecting)en.target.classList.add('on');
     });
-  },{threshold:0.07,rootMargin:'0px 0px -24px 0px'});
+  },{threshold:0.06,rootMargin:'0px 0px -20px 0px'});
   document.querySelectorAll('.rv').forEach(function(el){obs.observe(el);});
+})();
+
+/* ── Hero counter animation ── */
+function easeOut(t){return 1-Math.pow(1-t,3);}
+function animCnt(el,target,sfx,dur){
+  if(!el)return;
+  var start=performance.now();
+  (function frame(now){
+    var p=Math.min((now-start)/dur,1);
+    el.textContent=Math.round(easeOut(p)*target)+sfx;
+    if(p<1)requestAnimationFrame(frame);
+  })(start);
+}
+window.addEventListener('load',function(){
+  setTimeout(function(){
+    animCnt(document.getElementById('hv1'),100,'+',1800);
+    animCnt(document.getElementById('hv2'),12,'',1100);
+  },500);
+});
+
+/* ── Particle canvas ── */
+(function(){
+  var c=document.getElementById('hp-canvas');
+  if(!c)return;
+  var ctx=c.getContext('2d');
+  var W,H,pts=[];
+  function resize(){W=c.width=c.offsetWidth;H=c.height=c.offsetHeight;}
+  window.addEventListener('resize',resize);
+  resize();
+  for(var i=0;i<50;i++){
+    pts.push({x:Math.random()*W,y:Math.random()*H,vx:(Math.random()-.5)*.32,vy:(Math.random()-.5)*.32,r:Math.random()*1.7+.5,a:Math.random()*.55+.12});
+  }
+  (function draw(){
+    ctx.clearRect(0,0,W,H);
+    for(var i=0;i<pts.length;i++){
+      var p=pts[i];
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<0||p.x>W)p.vx*=-1;
+      if(p.y<0||p.y>H)p.vy*=-1;
+      ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+      ctx.fillStyle='rgba(99,130,246,'+p.a+')';ctx.fill();
+      for(var j=i+1;j<pts.length;j++){
+        var q=pts[j],dx=p.x-q.x,dy=p.y-q.y,d=Math.sqrt(dx*dx+dy*dy);
+        if(d<115){ctx.beginPath();ctx.moveTo(p.x,p.y);ctx.lineTo(q.x,q.y);ctx.strokeStyle='rgba(99,130,246,'+(.11*(1-d/115))+')';ctx.lineWidth=.75;ctx.stroke();}
+      }
+    }
+    requestAnimationFrame(draw);
+  })();
 })();
 //]]>
 </script>

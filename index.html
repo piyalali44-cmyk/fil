@@ -34,9 +34,6 @@ img{max-width:100%;height:auto;}
 ::-webkit-scrollbar-thumb{background:var(--br2);border-radius:3px;}
 .container{max-width:1200px;margin:0 auto;padding:0 20px;}
 
-/* ─── SCROLL PROGRESS ─── */
-#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
-
 /* ─── HEADER ─── */
 #lp-header{
   position:fixed !important;top:0 !important;left:0;right:0;width:100%;z-index:3000 !important;height:var(--nav-h);
@@ -426,8 +423,6 @@ body.light-mode .orb{opacity:.58;}
   <div class="ambient-orb orb-b"></div>
   <div class="ambient-orb orb-c"></div>
 </div>
-<div id="scroll-progress"></div>
-
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
   <div class="container">
@@ -980,11 +975,6 @@ document.addEventListener('keydown',function(e){
 window.addEventListener('scroll',function(){
   var y=window.scrollY;
   document.getElementById('lp-header').classList.toggle('scrolled',y>20);
-  var prog=document.getElementById('scroll-progress');
-  if(prog){
-    var h=document.documentElement;
-    prog.style.width=Math.min(y/(h.scrollHeight-h.clientHeight)*100,100)+'%';
-  }
 },{passive:true});
 
 /* ── Footer year ── */

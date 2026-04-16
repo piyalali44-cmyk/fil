@@ -87,8 +87,6 @@ body.light-mode #lp-header.scrolled{box-shadow:0 8px 32px rgba(15,23,42,.1);}
 .mob-ico{width:34px;height:34px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px;}
 .mob-div{height:1px;background:var(--br);margin:8px 0;}
 
-/* ─── SCROLL PROGRESS BAR ─── */
-#scroll-progress{position:fixed;top:var(--nav-h);left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
 
 
 .ambient-bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(circle at 18% 20%,rgba(59,130,246,.12),transparent 32%),radial-gradient(circle at 82% 12%,rgba(34,211,238,.10),transparent 30%),radial-gradient(circle at 55% 88%,rgba(99,102,241,.12),transparent 36%);}
@@ -253,8 +251,6 @@ body.light-mode .orb{opacity:.58;}
   <div class="ambient-orb orb-b"></div>
   <div class="ambient-orb orb-c"></div>
 </div>
-<div id="scroll-progress"></div>
-
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
   <div class="container">
@@ -572,13 +568,6 @@ window.addEventListener('scroll',function(){
 },{passive:true});
 var yr=document.getElementById('yr');
 if(yr) yr.textContent=new Date().getFullYear();
-(function(){
-  var bar=document.getElementById('scroll-progress');
-  if(!bar)return;
-  function updateBar(){var sc=window.scrollY,tot=document.body.scrollHeight-window.innerHeight;bar.style.width=(tot>0?(sc/tot*100):0)+'%';}
-  window.addEventListener('scroll',updateBar,{passive:true});
-  updateBar();
-})();
 (function(){
   if(!('IntersectionObserver' in window)){
     document.querySelectorAll('.reveal').forEach(function(el){el.classList.add('visible');});

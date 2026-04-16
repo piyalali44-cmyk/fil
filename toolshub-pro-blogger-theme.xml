@@ -77,7 +77,7 @@ body.light-mode #lp-header.scr{box-shadow:0 8px 32px rgba(15,23,42,.1)}
 .hdr{display:flex;align-items:center;height:var(--nav-h);gap:0}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
 .logo-ico{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 2px 12px rgba(59,130,246,.3)}
-.logo-txt{font-family:var(--f-display);font-size:19px;font-weight:800;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.logo-txt{font-family:var(--f-display);font-size:19px;font-weight:800;letter-spacing:-.5px;color:#93c5fd;white-space:nowrap;-webkit-text-fill-color:#93c5fd}
 /* NAV */
 .lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px}
 .ni{position:relative}
@@ -434,28 +434,9 @@ div[class*='blogger-nav'],div[id*='navbar']{display:none!important;height:0!impo
 /* Ad banner sections: zero padding when empty, JS will add has-widgets class */
 .ad-banner{padding:0;text-align:center}
 .ad-banner.has-widgets{padding:12px 0}
-/* ── PAGE-TYPE LAYOUT (uses data:blog.pageType on body) ─────────────────── */
-#content-grid{display:block}
-#global-sb{display:none}
-/* Post view: slight top padding for breadcrumb, then content */
-body.page-item #bl-sec-wrap{padding:14px 0 80px}
-/* Listing view */
-body.page-search #bl-sec-wrap,
-body.page-label #bl-sec-wrap,
-body.page-archive #bl-sec-wrap{padding:0 0 80px}
-/* Post + Listing: grid layout with max-width and sidebar */
-body.page-item #content-grid,
-body.page-search #content-grid,
-body.page-label #content-grid,
-body.page-archive #content-grid{max-width:1200px;margin:0 auto;padding:0 24px;display:grid;grid-template-columns:1fr 292px;gap:36px;align-items:start}
-body.page-item #global-sb,
-body.page-search #global-sb,
-body.page-label #global-sb,
-body.page-archive #global-sb{display:flex;flex-direction:column;gap:18px}
-body.page-item #global-sb{position:sticky;top:calc(var(--nav-h) + 20px)}
-/* Homepage: no padding on wrapper, Blog1 renders bp-sec with its own layout */
-body.page-index #bl-sec-wrap{padding:0}
-body.page-index #global-sb{display:none!important}
+/* ── POST + LISTING LAYOUT ─────────────────── */
+/* Single post: sticky sidebar */
+body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
 /* Announcement bar — only show when it has actual content */
 .ann-bar-wrap:empty,.ann-bar-wrap>*:empty{display:none!important}
 /* Blogger label/archive widgets alignment fix */
@@ -732,7 +713,7 @@ body.loading *{animation-play-state:paused!important}
       <div class='hero-cnt'>
         <div class='h-badge'>
           <span class='bdot'/>
-          100% Free &#160;·&#160; No Signup &#160;·&#160; Works in Browser
+          100% Free &#160;&#183;&#160; No Signup &#160;&#183;&#160; Works in Browser
         </div>
         <h1 class='h-title'>One Platform.<br/><span class='gt'>Unlimited Tools.</span></h1>
         <p class='h-sub'>Documents, images, text, AI tools, calculators, converters &amp; more. All free, all fast, all private.</p>
@@ -744,10 +725,7 @@ body.loading *{animation-play-state:paused!important}
                 <svg width='19' height='19' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
               </div>
               <input class='hs-inp' id='hero-inp' autocomplete='off' onkeydown='if(event.key==="Enter")hS()' placeholder='Search from 100+ free tools...' type='text'/>
-              <button class='hs-btn' onclick='hS()'>
-                Search
-                <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M12 5l7 7-7 7'/></svg>
-              </button>
+              <button class='hs-btn' onclick='hS()'>Search <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M12 5l7 7-7 7'/></svg></button>
             </div>
             <div class='hs-tags'>
               <span class='hs-hint'>Popular:</span>
@@ -795,12 +773,12 @@ body.loading *{animation-play-state:paused!important}
         <div class='feat-card rv d3'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border-color:rgba(16,185,129,.25)'>&#127760;</div>
           <div class='ft'>Works on Any Device</div>
-          <div class='fd'>Fully responsive across desktop, tablet, and mobile. Open any tool on any browser — it just works perfectly.</div>
+          <div class='fd'>Fully responsive across desktop, tablet, and mobile. Open any tool on any browser it just works perfectly.</div>
         </div>
         <div class='feat-card rv d4'>
           <div class='fi' style='background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border-color:rgba(167,139,250,.25)'>&#10024;</div>
           <div class='ft'>Always Growing</div>
-          <div class='fd'>New tools added every week across every category. Can't find what you need? Request a tool and we'll build it.</div>
+          <div class='fd'>New tools added every week across every category. Request a tool and we will build it.</div>
         </div>
       </div>
     </div>
@@ -808,341 +786,298 @@ body.loading *{animation-play-state:paused!important}
 
   <b:section class='ad-banner' id='mid-page' name='Mid Page Ad' maxwidgets='3' showaddelement='yes'/>
 
-</b:if>
-
-<!-- ═══ BLOG LISTING ONLY: Hero header (non-homepage, non-post) ═══ -->
-<b:if cond='data:view.isMultipleItems'>
-  <section class='bl-hero'>
-    <div class='bl-hero-bg'/>
-    <div class='wrap'>
-      <div class='bl-hero-inn'>
-        <div class='bc'>
-          <a expr:href='data:blog.homepageUrl'>Home</a>
-          <span>&#8250;</span>
-          <b:if cond='data:view.isLabelSearch'>
-            <b:loop values='data:view.labels' var='label'><span><data:label.name/></span></b:loop>
-          <b:else/>
-            <span>Blog</span>
-          </b:if>
-        </div>
-        <div class='bl-tag'>&#128240; Latest Articles</div>
-        <h1 class='bl-ht'>
-          <b:if cond='data:view.isLabelSearch'>
-            <b:loop values='data:view.labels' var='label'><data:label.name/></b:loop>
-          <b:else/>
-            From the Blog
-          </b:if>
-        </h1>
-        <p class='bl-hs'>Tips, tutorials, and guides on tools, productivity, and getting more done online — for free.</p>
-      </div>
-    </div>
-  </section>
-  <b:section class='ad-banner' id='listing-top' name='Blog Listing Top Ad' maxwidgets='2' showaddelement='yes'/>
-</b:if>
-
-<!-- ═══ SINGLE POST ONLY: Breadcrumb strip ═══ -->
-<b:if cond='data:view.isPost'>
-  <div class='bc-strip'>
-    <div class='wrap' style='padding-top:14px;padding-bottom:0'>
-      <div class='bc'>
-        <a expr:href='data:blog.homepageUrl'>Home</a>
-        <span>&#8250;</span>
-        <span><data:view.title/></span>
-      </div>
-    </div>
-  </div>
-  <b:section class='ad-banner' id='inner-top' name='Inner Page Top Ad' maxwidgets='2' showaddelement='yes'/>
-</b:if>
-
-<!-- ════════════════════════════════════════════════════
-  THE SINGLE MAIN SECTION — ONE Blog widget handles ALL views
-  Homepage preview / Single post / Blog listing
-  This is the ONLY section with class=main in the entire theme.
-════════════════════════════════════════════════════ -->
-<div id='bl-sec-wrap'>
-  <div id='content-grid'>
-
-    <div class='content-col'>
-      <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
-        <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-            <b:widget-setting name='showOlderButton'>true</b:widget-setting>
-            <b:widget-setting name='numItemsToShow'>6</b:widget-setting>
-          </b:widget-settings>
-
-          <b:includable id='main' var='top'>
-
-            <b:if cond='data:view.isHomepage'>
-              <!-- ══ HOMEPAGE: Blog post preview grid ══ -->
-              <section class='bp-sec'>
-                <div class='wrap'>
-                  <div class='sh rv'>
-                    <div class='sh-tag'>&#128240; Latest Articles</div>
-                    <h2 class='sh-t'>From the Blog</h2>
-                    <p class='sh-s'>Tips, tutorials, and guides to help you get the most from our free tools.</p>
-                  </div>
-                  <div class='bp-grid'>
-                    <b:loop values='data:posts' var='post'>
-                      <a class='bp-card rv' expr:href='data:post.url'>
-                        <div class='bp-img'>
-                          <b:if cond='data:post.featuredImage'>
-                            <img alt='' expr:src='data:post.featuredImage'/>
-                          <b:else/>
-                            <div class='bp-fb'>&#128240;</div>
-                          </b:if>
-                        </div>
-                        <div class='bp-body'>
-                          <div class='bp-m'>
-                            <b:loop values='data:post.labels' var='label'>
-                              <span class='bp-cat'><data:label.name/></span>
-                            </b:loop>
-                            <span class='bp-dt'><data:post.date/></span>
-                          </div>
-                          <div class='bp-tit'><data:post.title/></div>
-                          <div class='bp-exc'><data:post.snippet/></div>
-                          <div class='bp-ft'>
-                            <div class='bp-au'>
-                              <div class='bp-av'>&#9999;</div>
-                              <span class='bp-aun'><data:post.author/></span>
-                            </div>
-                            <span class='bp-rd'>Read more &#8594;</span>
-                          </div>
-                        </div>
-                      </a>
-                    </b:loop>
-                  </div>
-                  <div class='bp-more rv'>
-                    <a class='bp-btn' href='/search'>View All Posts &#8594;</a>
-                  </div>
-                </div>
-              </section>
-
-            <b:elseif cond='data:view.isPost'/>
-              <!-- ══ SINGLE POST VIEW ══ -->
-              <b:loop values='data:posts' var='post'>
-                <article class='p-s'>
-                  <div class='ps-hd'>
-                    <div class='pc-tags' style='margin-bottom:11px'>
-                      <b:loop values='data:post.labels' var='label'>
-                        <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
-                      </b:loop>
-                    </div>
-                    <h1 class='ps-t'><data:post.title/></h1>
-                    <div class='ps-m'>
-                      <span>&#128197; <data:post.date/></span>
-                      <span>&#128100; <data:post.author/></span>
-                      <span>&#128336; <data:post.minutesRead/> min read</span>
-                    </div>
-                  </div>
-                  <b:if cond='data:post.featuredImage'>
-                    <div class='ps-fi'><img alt='' expr:src='data:post.featuredImage'/></div>
-                  </b:if>
-                  <div class='p-content'><data:post.body/></div>
-                  <div class='p-tags'>
-                    <span>&#127991; Tags:</span>
-                    <b:loop values='data:post.labels' var='label'>
-                      <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
-                    </b:loop>
-                  </div>
-                  <b:if cond='data:post.allowComments'>
-                    <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
-                  </b:if>
-                </article>
-              </b:loop>
-
-            <b:else/>
-              <!-- ══ BLOG LISTING / SEARCH / LABEL VIEW ══ -->
-              <div class='posts-list'>
-                <b:loop values='data:posts' var='post'>
-                  <article class='post-card'>
-                    <div class='pc-img'>
-                      <b:if cond='data:post.featuredImage'>
-                        <img alt='' expr:src='data:post.featuredImage'/>
-                      <b:else/>
-                        <span style='font-size:36px'>&#128240;</span>
-                      </b:if>
-                    </div>
-                    <div class='pc-body'>
-                      <div class='pc-tags'>
-                        <b:loop values='data:post.labels' var='label'>
-                          <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
-                        </b:loop>
-                      </div>
-                      <div class='pc-tit'><a expr:href='data:post.url'><data:post.title/></a></div>
-                      <div class='pc-exc'><data:post.snippet/></div>
-                      <div class='pc-meta'>
-                        <span class='pmi'>&#128197; <data:post.date/></span>
-                        <span class='pmi'>&#128100; <data:post.author/></span>
-                        <a class='prm' expr:href='data:post.url'>Read more &#8594;</a>
-                      </div>
-                    </div>
-                  </article>
-                </b:loop>
-              </div>
-              <b:include name='nextprev'/>
-
-            </b:if>
-          </b:includable>
-
-          <b:includable id='nextprev'>
-            <div class='pag'>
-              <b:if cond='data:newerPageUrl'><a class='pag-a' expr:href='data:newerPageUrl'>&#8592; Newer Posts</a></b:if>
-              <b:if cond='data:olderPageUrl'><a class='pag-a' expr:href='data:olderPageUrl'>Older Posts &#8594;</a></b:if>
-            </div>
-          </b:includable>
-
-          <b:includable id='comments' var='post'>
-            <div id='comments'>
-              <h3 style='font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--tx);margin:0 0 18px'>&#128172; Comments</h3>
-              <b:include data='post' name='comment-form'/>
-            </div>
-          </b:includable>
-
-          <b:includable id='comment-form' var='post'/>
-
-        </b:widget>
-      </b:section>
-
-      <b:section class='ad-banner' id='after-content' name='After Post Content Ad' maxwidgets='2' showaddelement='yes'/>
-    </div>
-
-    <!-- ════ SIDEBAR — CSS shows it for post/listing, hides on homepage ════ -->
-    <aside id='global-sb'>
-      <div class='sw'>
-        <div class='sw-hd'>&#9889; Quick Tools</div>
-        <div class='sw-bd'>
-          <div class='sw-tools'>
-            <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='sw-tnm'>Merge PDF</span></a>
-            <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>&#9986;&#65039;</div><span class='sw-tnm'>Split PDF</span></a>
-            <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>&#128444;&#65039;</div><span class='sw-tnm'>Image Converter</span></a>
-            <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#127760;</div><span class='sw-tnm'>Translator</span></a>
-            <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>&#128272;</div><span class='sw-tnm'>Password Gen</span></a>
-            <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>&#128290;</div><span class='sw-tnm'>Calculator</span></a>
-          </div>
-          <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools &#8594;</a>
-        </div>
-      </div>
-
-      <b:section class='sidebar' id='sidebar-main' name='Sidebar Widgets' maxwidgets='12' showaddelement='yes'>
-
-        <b:widget id='BlogSearch1' locked='false' title='Search' type='BlogSearch' version='2'>
-          <b:includable id='main'>
-            <div class='sw'>
-              <div class='sw-hd'>Search</div>
-              <div class='sw-bd'>
-                <div class='sw-search'>
-                  <input class='sw-sinp' id='sw-sinp' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)}'/>
-                  <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
-                </div>
-              </div>
-            </div>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='HTML3' locked='false' title='About Us' type='HTML' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;&#128075; About Us&lt;/div&gt;&lt;div class=&quot;sw-bd&quot;&gt;&lt;div class=&quot;sw-about-img&quot;&gt;&#128295;&lt;/div&gt;&lt;div class=&quot;sw-about-nm&quot;&gt;ToolsHub Pro&lt;/div&gt;&lt;div class=&quot;sw-about-tx&quot;&gt;Your one-stop for 100+ free online tools. Fast, private, no signup required.&lt;/div&gt;&lt;div class=&quot;sw-about-soc&quot;&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;f&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#120143;&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#9654;&lt;/a&gt;&lt;a class=&quot;sw-sb&quot; href=&quot;#&quot;&gt;&#9992;&lt;/a&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <data:content/>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
-            <b:widget-setting name='showThumbnails'>true</b:widget-setting>
-            <b:widget-setting name='showSnippets'>false</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <b:if cond='data:title != &quot;&quot;'>
-              <div class='sw popular-posts-widget'>
-                <div class='sw-hd'>&#128293; Popular Posts</div>
-                <div class='sw-bd'><data:widget.content/></div>
-              </div>
-            </b:if>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='Label3' locked='false' title='Categories' type='Label' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
-            <b:widget-setting name='display'>LIST</b:widget-setting>
-            <b:widget-setting name='showType'>ALL</b:widget-setting>
-            <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main' var='top'>
-            <b:if cond='data:title != &quot;&quot;'>
-              <div class='sw'>
-                <div class='sw-hd'>&#128194; <data:title/></div>
-                <div class='sw-bd'>
-                  <div class='lbl-cloud'>
-                    <b:loop values='data:labels' var='label'>
-                      <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
-                    </b:loop>
-                  </div>
-                </div>
-              </div>
-            </b:if>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2'>
-          <b:includable id='main' var='top'>
-            <b:if cond='data:title != &quot;&quot;'>
-              <div class='sw'>
-                <div class='sw-hd'>&#128197; <data:title/></div>
-                <div class='sw-bd' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
-              </div>
-            </b:if>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='HTML4' locked='false' title='Newsletter' type='HTML' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;&#128231; Newsletter&lt;/div&gt;&lt;div class=&quot;sw-bd sw-nl&quot;&gt;&lt;p&gt;Get notified when new tools and articles are published. No spam, ever.&lt;/p&gt;&lt;div class=&quot;sw-nl-inp&quot;&gt;&lt;input placeholder=&quot;Your email address...&quot; type=&quot;email&quot;/&gt;&lt;button class=&quot;sw-nl-btn&quot;&gt;Subscribe Free&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <data:content/>
-          </b:includable>
-        </b:widget>
-
-        <b:widget id='HTML5' locked='false' title='Sidebar Ad 300x250' type='HTML' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='content'>&lt;!-- Replace with AdSense 300x250 --&gt;&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-bd&quot; style=&quot;min-height:250px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.5px&quot;&gt;AD SPACE 300&#215;250&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main'>
-            <data:content/>
-          </b:includable>
-        </b:widget>
-
-      </b:section>
-    </aside>
-
-  </div>
-</div>
-
-<!-- ══ HOMEPAGE ONLY: CTA section ══ -->
-<b:if cond='data:view.isHomepage'>
-  <b:section class='ad-banner' id='before-cta' name='Before CTA Ad' maxwidgets='2' showaddelement='yes'/>
   <section class='cta-s'>
     <div class='wrap'>
       <div class='cta-c rv'>
         <div class='cta-in'>
-          <div class='cta-badge'>&#128640; Get Started &#8212; It's Free</div>
+          <div class='cta-badge'>&#128640; Get Started, It is Free</div>
           <h2 class='cta-t'>Ready to Get Things Done?</h2>
           <p class='cta-s2'>100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
           <div class='cta-bs'>
             <a class='cb1' href='/p/all-tools.html'>&#128295; Explore All Tools</a>
-            <a class='cb2' href='/search'>&#128240; Read the Blog</a>
+            <a class='cb2' expr:href='data:blog.homepageUrl + "search"'>&#128240; Read the Blog</a>
           </div>
         </div>
       </div>
     </div>
   </section>
+
   <b:section class='ad-banner' id='after-cta' name='After CTA Ad' maxwidgets='2' showaddelement='yes'/>
+
 </b:if>
+
+<!-- ═══════════════ POST AND BLOG LISTING VIEWS (not homepage) ═══════════════ -->
+<b:if cond='not data:view.isHomepage'>
+
+  <!-- Single post: breadcrumb + inner top ad -->
+  <b:if cond='data:view.isPost'>
+    <div class='bc-strip'>
+      <div class='wrap' style='padding-top:16px;padding-bottom:0'>
+        <div class='bc'>
+          <a expr:href='data:blog.homepageUrl'>Home</a>
+          <span>&#8250;</span>
+          <span><data:view.title/></span>
+        </div>
+      </div>
+    </div>
+    <b:section class='ad-banner' id='inner-top' name='Inner Page Top Ad' maxwidgets='2' showaddelement='yes'/>
+  </b:if>
+
+  <!-- Blog listing / search: hero header + top ad -->
+  <b:if cond='not data:view.isPost'>
+    <section class='bl-hero'>
+      <div class='bl-hero-bg'/>
+      <div class='wrap'>
+        <div class='bl-hero-inn'>
+          <div class='bc'>
+            <a expr:href='data:blog.homepageUrl'>Home</a>
+            <span>&#8250;</span>
+            <b:if cond='data:view.isLabelSearch'>
+              <b:loop values='data:view.labels' var='label'><span><data:label.name/></span></b:loop>
+            <b:else/>
+              <span>Blog</span>
+            </b:if>
+          </div>
+          <div class='bl-tag'>&#128240; Latest Articles</div>
+          <h1 class='bl-ht'>
+            <b:if cond='data:view.isLabelSearch'>
+              <b:loop values='data:view.labels' var='label'><data:label.name/></b:loop>
+            <b:else/>
+              From the Blog
+            </b:if>
+          </h1>
+          <p class='bl-hs'>Tips, tutorials, and guides on tools, productivity, and getting more done online.</p>
+        </div>
+      </div>
+    </section>
+    <b:section class='ad-banner' id='listing-top' name='Blog Listing Top Ad' maxwidgets='2' showaddelement='yes'/>
+  </b:if>
+
+  <!-- ════════════════════════════════════════════════════
+    THE ONE MAIN SECTION — Blog1 handles all non-homepage views
+    Single post and blog listing both use this same section.
+    data:posts is always populated by Blogger in this section.
+  ════════════════════════════════════════════════════ -->
+  <div class='wrap' style='padding-top:36px;padding-bottom:80px'>
+    <div class='bl-lay'>
+
+      <div class='content-col'>
+        <b:section class='main' id='main' maxwidgets='1' showaddelement='no'>
+          <b:widget id='Blog1' locked='false' title='Blog Posts' type='Blog' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+              <b:widget-setting name='showOlderButton'>true</b:widget-setting>
+              <b:widget-setting name='numItemsToShow'>6</b:widget-setting>
+            </b:widget-settings>
+
+            <b:includable id='main' var='top'>
+              <b:if cond='data:view.isPost'>
+                <!-- ══ SINGLE POST ══ -->
+                <b:loop values='data:posts' var='post'>
+                  <article class='p-s'>
+                    <div class='ps-hd'>
+                      <div class='pc-tags' style='margin-bottom:11px'>
+                        <b:loop values='data:post.labels' var='label'>
+                          <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
+                        </b:loop>
+                      </div>
+                      <h1 class='ps-t'><data:post.title/></h1>
+                      <div class='ps-m'>
+                        <span>&#128197; <data:post.date/></span>
+                        <span>&#128100; <data:post.author/></span>
+                        <span>&#128336; <data:post.minutesRead/> min read</span>
+                      </div>
+                    </div>
+                    <b:if cond='data:post.featuredImage'>
+                      <div class='ps-fi'><img alt='' expr:src='data:post.featuredImage'/></div>
+                    </b:if>
+                    <div class='p-content post-body'><data:post.body/></div>
+                    <div class='p-tags'>
+                      <span>&#127991; Tags:</span>
+                      <b:loop values='data:post.labels' var='label'>
+                        <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
+                      </b:loop>
+                    </div>
+                    <b:if cond='data:post.allowComments'>
+                      <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
+                    </b:if>
+                  </article>
+                </b:loop>
+
+              <b:else/>
+                <!-- ══ BLOG LISTING / SEARCH / LABEL VIEW ══ -->
+                <div class='posts-list'>
+                  <b:loop values='data:posts' var='post'>
+                    <article class='post-card'>
+                      <div class='pc-img'>
+                        <b:if cond='data:post.featuredImage'>
+                          <img alt='' expr:src='data:post.featuredImage'/>
+                        <b:else/>
+                          <div style='display:flex;align-items:center;justify-content:center;height:100%;font-size:36px'>&#128240;</div>
+                        </b:if>
+                      </div>
+                      <div class='pc-body'>
+                        <div class='pc-tags'>
+                          <b:loop values='data:post.labels' var='label'>
+                            <a class='pc-tag' expr:href='data:label.url'><data:label.name/></a>
+                          </b:loop>
+                        </div>
+                        <div class='pc-tit'><a expr:href='data:post.url'><data:post.title/></a></div>
+                        <div class='pc-exc'><data:post.snippet/></div>
+                        <div class='pc-meta'>
+                          <span class='pmi'>&#128197; <data:post.date/></span>
+                          <span class='pmi'>&#128100; <data:post.author/></span>
+                          <a class='prm' expr:href='data:post.url'>Read more &#8594;</a>
+                        </div>
+                      </div>
+                    </article>
+                  </b:loop>
+                </div>
+                <b:include name='nextprev'/>
+
+              </b:if>
+            </b:includable>
+
+            <b:includable id='nextprev'>
+              <div class='pag'>
+                <b:if cond='data:newerPageUrl'><a class='pag-a' expr:href='data:newerPageUrl'>&#8592; Newer Posts</a></b:if>
+                <b:if cond='data:olderPageUrl'><a class='pag-a' expr:href='data:olderPageUrl'>Older Posts &#8594;</a></b:if>
+              </div>
+            </b:includable>
+
+            <b:includable id='comments' var='post'>
+              <div id='comments'>
+                <h3 style='font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--tx);margin:0 0 18px'>&#128172; Comments</h3>
+                <b:include data='post' name='comment-form'/>
+              </div>
+            </b:includable>
+
+            <b:includable id='comment-form' var='post'/>
+
+          </b:widget>
+        </b:section>
+
+        <b:section class='ad-banner' id='after-content' name='After Post Content Ad' maxwidgets='2' showaddelement='yes'/>
+      </div>
+
+      <!-- SIDEBAR — always shown for post and listing views -->
+      <aside class='sidebar' id='global-sb'>
+        <div class='sw'>
+          <div class='sw-hd'>&#9889; Quick Tools</div>
+          <div class='sw-bd'>
+            <div class='sw-tools'>
+              <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='sw-tnm'>Merge PDF</span></a>
+              <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>&#9986;</div><span class='sw-tnm'>Split PDF</span></a>
+              <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>&#128444;</div><span class='sw-tnm'>Image Converter</span></a>
+              <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#127760;</div><span class='sw-tnm'>Translator</span></a>
+              <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>&#128272;</div><span class='sw-tnm'>Password Gen</span></a>
+              <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>&#128290;</div><span class='sw-tnm'>Calculator</span></a>
+            </div>
+            <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools &#8594;</a>
+          </div>
+        </div>
+
+        <b:section class='sidebar' id='sidebar-main' name='Sidebar Widgets' maxwidgets='12' showaddelement='yes'>
+
+          <b:widget id='BlogSearch1' locked='false' title='Search' type='BlogSearch' version='2'>
+            <b:includable id='main'>
+              <div class='sw'>
+                <div class='sw-hd'>Search</div>
+                <div class='sw-bd'>
+                  <div class='sw-search'>
+                    <input class='sw-sinp' id='sw-sinp' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)}'/>
+                    <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
+                  </div>
+                </div>
+              </div>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='HTML3' locked='false' title='About Us' type='HTML' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;About Us&lt;/div&gt;&lt;div class=&quot;sw-bd&quot;&gt;&lt;div class=&quot;sw-about-img&quot;&gt;&#128295;&lt;/div&gt;&lt;div class=&quot;sw-about-nm&quot;&gt;ToolsHub Pro&lt;/div&gt;&lt;div class=&quot;sw-about-tx&quot;&gt;Your one-stop for 100+ free online tools. Fast, private, no signup required.&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='PopularPosts1' locked='false' title='Popular Posts' type='PopularPosts' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='numItemsToShow'>5</b:widget-setting>
+              <b:widget-setting name='showThumbnails'>true</b:widget-setting>
+              <b:widget-setting name='showSnippets'>false</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <div class='sw popular-posts-widget'>
+                  <div class='sw-hd'>&#128293; Popular Posts</div>
+                  <div class='sw-bd'><data:widget.content/></div>
+                </div>
+              </b:if>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='Label3' locked='false' title='Categories' type='Label' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='sorting'>ALPHA</b:widget-setting>
+              <b:widget-setting name='display'>LIST</b:widget-setting>
+              <b:widget-setting name='showType'>ALL</b:widget-setting>
+              <b:widget-setting name='showFreqNumbers'>true</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main' var='top'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <div class='sw'>
+                  <div class='sw-hd'>&#128194; <data:title/></div>
+                  <div class='sw-bd'>
+                    <div class='lbl-cloud'>
+                      <b:loop values='data:labels' var='label'>
+                        <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
+                      </b:loop>
+                    </div>
+                  </div>
+                </div>
+              </b:if>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='BlogArchive1' locked='false' title='Archive' type='BlogArchive' version='2'>
+            <b:includable id='main' var='top'>
+              <b:if cond='data:title != &quot;&quot;'>
+                <div class='sw'>
+                  <div class='sw-hd'>&#128197; <data:title/></div>
+                  <div class='sw-bd' style='font-size:13px;color:var(--t2)'><data:widget.content/></div>
+                </div>
+              </b:if>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='HTML4' locked='false' title='Newsletter' type='HTML' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-hd&quot;&gt;&#128231; Newsletter&lt;/div&gt;&lt;div class=&quot;sw-bd sw-nl&quot;&gt;&lt;p&gt;Get notified when new tools and articles are published. No spam.&lt;/p&gt;&lt;div class=&quot;sw-nl-inp&quot;&gt;&lt;input placeholder=&quot;Your email address...&quot; type=&quot;email&quot;/&gt;&lt;button class=&quot;sw-nl-btn&quot;&gt;Subscribe Free&lt;/button&gt;&lt;/div&gt;&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+          </b:widget>
+
+          <b:widget id='HTML5' locked='false' title='Sidebar Ad 300x250' type='HTML' version='2'>
+            <b:widget-settings>
+              <b:widget-setting name='content'>&lt;!-- Replace with AdSense 300x250 --&gt;&lt;div class=&quot;sw&quot;&gt;&lt;div class=&quot;sw-bd&quot; style=&quot;min-height:250px;display:flex;align-items:center;justify-content:center;font-size:12px;color:var(--t3);font-weight:600;letter-spacing:.5px&quot;&gt;AD SPACE 300x250&lt;/div&gt;&lt;/div&gt;</b:widget-setting>
+            </b:widget-settings>
+            <b:includable id='main'>
+              <data:content/>
+            </b:includable>
+          </b:widget>
+
+        </b:section>
+      </aside>
+
+    </div>
+  </div>
+
+</b:if>
+
 
 <!-- ════════════════════════════════════════════════════
   LAYOUT SECTION 19 — BEFORE FOOTER AD

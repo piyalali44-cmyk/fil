@@ -114,6 +114,80 @@ body.light-mode #lp-header{background:rgba(255,255,255,.9);border-bottom-color:r
 .s-tag{padding:4px 11px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;font-size:12px;font-weight:500;transition:all .18s;}
 .s-tag:hover{border-color:var(--a);color:var(--a);}
 
+/* ─── HERO SEARCH ─── */
+.hero-search{max-width:660px;margin:0 auto 52px;animation:fadeUp .7s .4s both;}
+.hs-outer{position:relative;}
+.hs-glow{
+  position:absolute;inset:-2px;border-radius:60px;
+  background:var(--grad);opacity:0;
+  transition:opacity .4s var(--ease);
+  filter:blur(12px);z-index:0;pointer-events:none;
+}
+.hs-outer.focused .hs-glow{opacity:.35;}
+.hs-inner{
+  position:relative;z-index:1;
+  display:flex;align-items:center;gap:0;
+  background:var(--s1);
+  border:1.5px solid var(--br2);
+  border-radius:54px;
+  padding:7px 7px 7px 22px;
+  box-shadow:0 8px 40px rgba(0,0,0,.2),0 0 0 0 rgba(59,130,246,0);
+  transition:border-color .35s,box-shadow .35s;
+}
+.hs-outer.focused .hs-inner{
+  border-color:rgba(99,130,246,.7);
+  box-shadow:0 8px 40px rgba(0,0,0,.25),0 0 0 5px rgba(59,130,246,.12);
+}
+.hs-icon-wrap{
+  display:flex;align-items:center;justify-content:center;
+  color:var(--t3);flex-shrink:0;margin-right:4px;
+  transition:color .3s;
+}
+.hs-outer.focused .hs-icon-wrap{color:var(--a);}
+.hs-input{
+  flex:1;background:transparent;border:none;outline:none;
+  font-family:var(--font-body);font-size:15.5px;color:var(--tx);
+  padding:11px 12px;min-width:0;
+  caret-color:var(--a);
+}
+.hs-input::placeholder{color:var(--t3);}
+/* Typewriter cursor */
+.hs-cursor{
+  display:inline-block;width:2px;height:18px;background:var(--a);
+  margin-left:1px;vertical-align:middle;border-radius:2px;
+  animation:cursorBlink .85s ease-in-out infinite;
+  opacity:0;position:absolute;pointer-events:none;
+}
+.hs-outer.focused .hs-cursor{display:none;}
+@keyframes cursorBlink{0%,100%{opacity:1}50%{opacity:0}}
+.hs-btn{
+  display:flex;align-items:center;gap:8px;flex-shrink:0;
+  padding:12px 26px;border-radius:50px;
+  background:var(--grad);border:none;color:#fff;
+  font-family:var(--font-body);font-size:14px;font-weight:700;
+  cursor:pointer;
+  box-shadow:0 4px 18px rgba(59,130,246,.38);
+  transition:all .25s var(--ease);
+  position:relative;overflow:hidden;
+}
+.hs-btn::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(255,255,255,.18),transparent);opacity:0;transition:opacity .25s;}
+.hs-btn:hover{transform:scale(1.05);box-shadow:0 8px 28px rgba(59,130,246,.55);}
+.hs-btn:hover::before{opacity:1;}
+.hs-btn:active{transform:scale(.98);}
+.hs-tags{
+  display:flex;align-items:center;gap:8px;margin-top:14px;
+  flex-wrap:wrap;justify-content:center;
+}
+.hs-hint{font-size:12px;color:var(--t3);font-weight:500;}
+.hs-tag{
+  padding:5px 14px;border-radius:50px;
+  background:rgba(255,255,255,.05);border:1px solid var(--br);
+  color:var(--t2);font-size:12px;font-weight:600;font-family:var(--font-body);
+  cursor:pointer;transition:all .2s;
+}
+.hs-tag:hover{border-color:var(--a);color:var(--a);background:rgba(59,130,246,.08);}
+body.light-mode .hs-tag{background:rgba(0,0,0,.04);}
+
 /* ─── HERO ─── */
 .hero{position:relative;overflow:hidden;padding:110px 0 100px;background:var(--bg2);}
 .hero-bg{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 18% 28%,rgba(59,130,246,.18) 0,transparent 55%),radial-gradient(ellipse at 82% 72%,rgba(99,102,241,.15) 0,transparent 50%),radial-gradient(ellipse at 55% 8%,rgba(34,211,238,.1) 0,transparent 42%);}
@@ -153,15 +227,6 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 }
 .grad-txt{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
 .hero-sub{font-size:17px;color:var(--t2);max-width:600px;margin:0 auto 44px;line-height:1.8;animation:fadeUp .7s .3s both;}
-/* Search */
-.hero-search{max-width:600px;margin:0 auto 52px;animation:fadeUp .7s .4s both;}
-.s-wrap{display:flex;align-items:center;background:var(--s1);border:1.5px solid var(--br2);border-radius:50px;padding:7px 7px 7px 24px;box-shadow:0 10px 50px rgba(0,0,0,.25),0 0 0 1px rgba(255,255,255,.04);transition:border-color .25s,box-shadow .25s;}
-.s-wrap:focus-within{border-color:var(--a);box-shadow:0 10px 50px rgba(0,0,0,.25),0 0 0 5px rgba(59,130,246,.14);}
-.s-icon{font-size:18px;flex-shrink:0;}
-.s-input{flex:1;background:transparent;border:none;outline:none;font-family:var(--font-body);font-size:15px;color:var(--tx);padding:10px 14px;}
-.s-input::placeholder{color:var(--t3);}
-.s-btn{padding:12px 26px;border-radius:50px;background:var(--grad);color:#fff;border:none;font-size:14px;font-weight:700;cursor:pointer;transition:all .2s;flex-shrink:0;box-shadow:0 4px 16px rgba(59,130,246,.35);}
-.s-btn:hover{transform:scale(1.05);box-shadow:0 8px 28px rgba(59,130,246,.5);}
 /* Stats */
 .hero-stats{display:flex;align-items:center;justify-content:center;gap:40px;animation:fadeUp .7s .5s both;flex-wrap:wrap;}
 .stat{text-align:center;}
@@ -169,17 +234,30 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 .stat-lbl{font-size:12px;color:var(--t3);margin-top:4px;letter-spacing:.3px;}
 .stat-sep{width:1px;height:40px;background:var(--br);}
 
-/* ─── MARQUEE TOOL TICKER ─── */
-.ticker-wrap{padding:22px 0;background:var(--bg);border-top:1px solid var(--br);border-bottom:1px solid var(--br);overflow:hidden;position:relative;}
-.ticker-wrap::before,.ticker-wrap::after{content:'';position:absolute;top:0;bottom:0;width:120px;z-index:2;pointer-events:none;}
-.ticker-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent);}
-.ticker-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent);}
-.ticker-track{display:flex;gap:0;width:max-content;animation:tickerRun 38s linear infinite;}
-.ticker-track:hover{animation-play-state:paused;}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;padding:0 28px;font-size:13px;font-weight:600;color:var(--t2);white-space:nowrap;border-right:1px solid var(--br);}
-.ticker-item span{font-size:16px;}
-.ticker-item:hover{color:var(--a);}
-@keyframes tickerRun{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+/* ─── FEATURES ─── */
+.features{padding:96px 0;background:var(--bg2);border-top:1px solid var(--br);}
+.sec-head{text-align:center;margin-bottom:60px;}
+.sec-tag{display:inline-flex;align-items:center;gap:6px;padding:5px 16px;border-radius:50px;background:rgba(34,211,238,.1);border:1px solid rgba(34,211,238,.25);font-size:11px;font-weight:700;color:var(--a3);letter-spacing:.5px;text-transform:uppercase;margin-bottom:14px;}
+.sec-title{font-family:var(--font-display);font-size:clamp(28px,4vw,44px);font-weight:800;letter-spacing:-1.2px;color:var(--tx);line-height:1.12;margin-bottom:14px;}
+.sec-sub{font-size:16px;color:var(--t2);max-width:520px;margin:0 auto;line-height:1.75;}
+.feat-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px;}
+.feat-card{
+  padding:34px 28px 30px;border-radius:var(--radius-lg);background:var(--s1);border:1px solid var(--br);
+  position:relative;overflow:hidden;cursor:default;
+  transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;
+}
+.feat-card::before{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--grad);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease);border-radius:0 0 var(--radius-lg) var(--radius-lg);}
+.feat-card::after{content:'';position:absolute;inset:0;background:radial-gradient(circle at 30% 0%,rgba(59,130,246,.06),transparent 60%);opacity:0;transition:opacity .4s;}
+.feat-card:hover{transform:translateY(-10px);box-shadow:0 24px 56px rgba(0,0,0,.22),0 0 0 1px rgba(59,130,246,.12);border-color:rgba(59,130,246,.3);}
+.feat-card:hover::before{transform:scaleX(1);}
+.feat-card:hover::after{opacity:1;}
+.feat-ico-wrap{width:60px;height:60px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:26px;margin-bottom:22px;position:relative;z-index:1;}
+.feat-title{font-family:var(--font-display);font-size:18px;font-weight:700;color:var(--tx);margin-bottom:10px;letter-spacing:-.3px;position:relative;z-index:1;}
+.feat-desc{font-size:14px;color:var(--t2);line-height:1.78;position:relative;z-index:1;}
+.feat-card:nth-child(1) .feat-ico-wrap{background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border:1px solid rgba(245,158,11,.25);animation:floatSoft 5s ease-in-out infinite;}
+.feat-card:nth-child(2) .feat-ico-wrap{background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25);animation:floatSoft 5s ease-in-out -1.8s infinite;}
+.feat-card:nth-child(3) .feat-ico-wrap{background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25);animation:floatSoft 5s ease-in-out -3.4s infinite;}
+.feat-card:nth-child(4) .feat-ico-wrap{background:linear-gradient(135deg,rgba(167,139,250,.18),rgba(139,92,246,.08));border:1px solid rgba(167,139,250,.25);animation:floatSoft 5s ease-in-out -.9s infinite;}
 
 
 /* ─── CTA ─── */
@@ -240,7 +318,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 /* ─── RESPONSIVE ─── */
 @media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}.trust-grid{grid-template-columns:repeat(2,1fr);}}
 @media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.s-wrap{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.s-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}.trust-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.hs-inner{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.hs-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal{opacity:1;transform:none;}}
   </style>
 </head>
@@ -388,10 +466,26 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
       </h1>
       <p class="hero-sub">Everything you need in one place — documents, images, text, calculators, converters, AI tools, and much more. Fast, private, free.</p>
       <div class="hero-search">
-        <div class="s-wrap">
-          <span class="s-icon">🔍</span>
-          <input class="s-input" id="hero-inp" onkeydown="if(event.key==='Enter')heroSearch()" placeholder="Search from 100+ free tools..." type="text"/>
-          <button class="s-btn" onclick="heroSearch()">Find Tool</button>
+        <div class="hs-outer" id="hs-outer">
+          <div class="hs-glow"></div>
+          <div class="hs-inner">
+            <div class="hs-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+            </div>
+            <input class="hs-input" id="hero-inp" autocomplete="off" onkeydown="if(event.key==='Enter')heroSearch()" type="text"/>
+            <button class="hs-btn" onclick="heroSearch()">
+              <span class="hs-btn-txt">Search</span>
+              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+          <div class="hs-tags">
+            <span class="hs-hint">Try:</span>
+            <button class="hs-tag" onclick="setSearch('PDF Merger')">PDF Merger</button>
+            <button class="hs-tag" onclick="setSearch('Image Converter')">Image Converter</button>
+            <button class="hs-tag" onclick="setSearch('Translator')">Translator</button>
+            <button class="hs-tag" onclick="setSearch('Password Generator')">Password Generator</button>
+            <button class="hs-tag" onclick="setSearch('Calculator')">Calculator</button>
+          </div>
         </div>
       </div>
       <div class="hero-stats">
@@ -407,47 +501,38 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
   </div>
 </section>
 
-<!-- ══ TOOL TICKER ══ -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker">
-    <span class="ticker-item"><span>📄</span> Merge PDF</span>
-    <span class="ticker-item"><span>✂️</span> Split PDF</span>
-    <span class="ticker-item"><span>🖼️</span> Image Converter</span>
-    <span class="ticker-item"><span>🗜️</span> Compress Image</span>
-    <span class="ticker-item"><span>🌈</span> Remove Background</span>
-    <span class="ticker-item"><span>🔤</span> Case Converter</span>
-    <span class="ticker-item"><span>📊</span> Word Counter</span>
-    <span class="ticker-item"><span>🌍</span> Translator</span>
-    <span class="ticker-item"><span>✨</span> AI Rewriter</span>
-    <span class="ticker-item"><span>🔢</span> Scientific Calculator</span>
-    <span class="ticker-item"><span>📏</span> Unit Converter</span>
-    <span class="ticker-item"><span>🎨</span> Color Picker</span>
-    <span class="ticker-item"><span>🔐</span> Password Generator</span>
-    <span class="ticker-item"><span>🔗</span> URL Shortener</span>
-    <span class="ticker-item"><span>💻</span> JSON Formatter</span>
-    <span class="ticker-item"><span>📅</span> Date Calculator</span>
-    <span class="ticker-item"><span>📹</span> Video Converter</span>
-    <span class="ticker-item"><span>🔍</span> Find & Replace</span>
-    <span class="ticker-item"><span>📄</span> Merge PDF</span>
-    <span class="ticker-item"><span>✂️</span> Split PDF</span>
-    <span class="ticker-item"><span>🖼️</span> Image Converter</span>
-    <span class="ticker-item"><span>🗜️</span> Compress Image</span>
-    <span class="ticker-item"><span>🌈</span> Remove Background</span>
-    <span class="ticker-item"><span>🔤</span> Case Converter</span>
-    <span class="ticker-item"><span>📊</span> Word Counter</span>
-    <span class="ticker-item"><span>🌍</span> Translator</span>
-    <span class="ticker-item"><span>✨</span> AI Rewriter</span>
-    <span class="ticker-item"><span>🔢</span> Scientific Calculator</span>
-    <span class="ticker-item"><span>📏</span> Unit Converter</span>
-    <span class="ticker-item"><span>🎨</span> Color Picker</span>
-    <span class="ticker-item"><span>🔐</span> Password Generator</span>
-    <span class="ticker-item"><span>🔗</span> URL Shortener</span>
-    <span class="ticker-item"><span>💻</span> JSON Formatter</span>
-    <span class="ticker-item"><span>📅</span> Date Calculator</span>
-    <span class="ticker-item"><span>📹</span> Video Converter</span>
-    <span class="ticker-item"><span>🔍</span> Find & Replace</span>
+<!-- ══ FEATURES ══ -->
+<section class="features">
+  <div class="container">
+    <div class="sec-head reveal">
+      <div class="sec-tag">⭐ Why ToolsHub Pro</div>
+      <h2 class="sec-title">Built for Everyone. Trusted by Millions.</h2>
+      <p class="sec-sub">No hidden fees, no accounts, no limits — just powerful tools that work instantly in your browser, on any device.</p>
+    </div>
+    <div class="feat-grid">
+      <div class="feat-card reveal d1">
+        <div class="feat-ico-wrap">⚡</div>
+        <div class="feat-title">Instant & Lightning Fast</div>
+        <div class="feat-desc">All tools run directly in your browser with zero server wait. Get results in milliseconds — no loading, no delays, ever.</div>
+      </div>
+      <div class="feat-card reveal d2">
+        <div class="feat-ico-wrap">🔒</div>
+        <div class="feat-title">100% Private & Secure</div>
+        <div class="feat-desc">Your files and data never leave your device. No uploads to servers, no tracking, no accounts required — your privacy is guaranteed.</div>
+      </div>
+      <div class="feat-card reveal d3">
+        <div class="feat-ico-wrap">🌐</div>
+        <div class="feat-title">Works on Any Device</div>
+        <div class="feat-desc">Fully optimized for desktop, tablet, and mobile. Open a tool on any browser, on any device — it just works perfectly every time.</div>
+      </div>
+      <div class="feat-card reveal d4">
+        <div class="feat-ico-wrap">✨</div>
+        <div class="feat-title">Always Growing</div>
+        <div class="feat-desc">New tools are added every week across every category. Can't find what you need? Request a tool and we'll build it for you.</div>
+      </div>
+    </div>
   </div>
-</div>
+</section>
 
 <!-- ══ CTA ══ -->
 <section class="cta">
@@ -549,7 +634,36 @@ function toggleTheme(){
 function openMob(){document.getElementById('mob-nav').classList.add('open');document.body.style.overflow='hidden';}
 function closeMob(){document.getElementById('mob-nav').classList.remove('open');document.body.style.overflow='';}
 
-/* ── Search ── */
+/* ── Typewriter placeholder ── */
+(function(){
+  var el=document.getElementById('hero-inp');
+  var outer=document.getElementById('hs-outer');
+  if(!el)return;
+  var phrases=['Search from 100+ free tools...','Try "PDF Merger"...','Try "Image Converter"...','Try "Password Generator"...','Try "Translator"...','Try "Scientific Calculator"...','Try "Remove Background"...'];
+  var pi=0,ci=0,deleting=false,paused=false;
+  function type(){
+    if(document.activeElement===el)return;
+    var phrase=phrases[pi];
+    if(!deleting){
+      if(ci<=phrase.length){el.placeholder=phrase.slice(0,ci);ci++;setTimeout(type,55);}
+      else{paused=true;setTimeout(function(){paused=false;deleting=true;type();},2000);}
+    } else {
+      if(ci>0){el.placeholder=phrase.slice(0,ci);ci--;setTimeout(type,30);}
+      else{deleting=false;pi=(pi+1)%phrases.length;setTimeout(type,400);}
+    }
+  }
+  type();
+  /* Focus glow */
+  el.addEventListener('focus',function(){if(outer)outer.classList.add('focused');});
+  el.addEventListener('blur',function(){if(outer)outer.classList.remove('focused');setTimeout(type,600);});
+})();
+function setSearch(q){
+  var el=document.getElementById('hero-inp');
+  if(el){el.value=q;el.focus();}
+}
+function heroSearch(){var v=(document.getElementById('hero-inp')||{}).value||'';if(v.trim())alert('Searching for: '+v.trim());}
+
+/* ── Search overlay ── */
 function openSearch(){
   document.getElementById('search-ov').classList.add('open');
   setTimeout(function(){var i=document.getElementById('s-inp');if(i)i.focus();},150);

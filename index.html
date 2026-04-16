@@ -346,23 +346,17 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 @keyframes spin{to{transform:rotate(360deg)}}
 
 /* ─── TOOLS GRID ─── */
-.tools-sec{padding:88px 0;border-top:1px solid var(--br);}
-.tools-cats{display:grid;grid-template-columns:repeat(auto-fit,minmax(256px,1fr));gap:22px;}
-.tcat{background:var(--s1);border:1px solid var(--br);border-radius:var(--radius-lg);overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s var(--ease),border-color .3s;display:flex;flex-direction:column;}
-.tcat:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28);}
-.tcat-hd{padding:20px 22px 16px;border-bottom:1px solid var(--br);display:flex;align-items:center;gap:13px;}
-.tcat-ico{width:46px;height:46px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:21px;flex-shrink:0;}
-.tcat-nm{font-family:var(--font-display);font-size:15px;font-weight:700;color:var(--tx);letter-spacing:-.2px;}
-.tcat-ds{font-size:11.5px;color:var(--t3);margin-top:2px;}
-.tcat-bd{padding:10px 14px 6px;display:flex;flex-direction:column;gap:1px;flex:1;}
-.ttool{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;text-decoration:none;color:var(--t2);transition:all .15s;font-size:13px;font-weight:500;}
-.ttool:hover{background:var(--s3);color:var(--tx);}
-.ttool-ico{font-size:15px;flex-shrink:0;width:22px;text-align:center;}
-.tcat-ft{padding:12px 14px 16px;}
-.tcat-all{display:flex;align-items:center;justify-content:center;gap:5px;padding:9px 18px;border-radius:50px;background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.18);color:var(--a);font-size:12.5px;font-weight:700;text-decoration:none;transition:all .2s;}
-.tcat-all:hover{background:rgba(59,130,246,.15);border-color:var(--a);}
-@media(max-width:768px){.tools-cats{grid-template-columns:1fr 1fr;}}
-@media(max-width:480px){.tools-cats{grid-template-columns:1fr;}}
+.htu-sec{padding:88px 0;border-top:1px solid var(--br);}
+.htu-g{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;position:relative;}
+.htu-g::before{content:'';position:absolute;top:48px;left:calc(16.66% + 14px);right:calc(16.66% + 14px);height:1px;background:linear-gradient(90deg,transparent,var(--br2),transparent);pointer-events:none;}
+.htu-c{background:var(--s1);border:1px solid var(--br);border-radius:var(--radius-lg);padding:32px 28px 28px;text-align:center;position:relative;transition:transform .4s var(--ease),box-shadow .4s,border-color .3s;}
+.htu-c:hover{transform:translateY(-8px);box-shadow:0 24px 56px rgba(0,0,0,.22);border-color:rgba(59,130,246,.28);}
+.htu-num{position:absolute;top:-1px;left:50%;transform:translateX(-50%);background:var(--grad);color:#fff;font-family:var(--font-display);font-size:11px;font-weight:800;letter-spacing:1px;padding:4px 14px;border-radius:0 0 12px 12px;}
+.htu-ico{width:64px;height:64px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:28px;margin:18px auto 16px;transition:transform .3s;}
+.htu-c:hover .htu-ico{transform:scale(1.12);}
+.htu-t{font-family:var(--font-display);font-size:17px;font-weight:700;color:var(--tx);letter-spacing:-.2px;margin-bottom:10px;}
+.htu-d{font-size:13.5px;color:var(--t2);line-height:1.75;}
+@media(max-width:768px){.htu-g{grid-template-columns:1fr;}.htu-g::before{display:none;}}
 
 /* ─── BLOG ─── */
 .blog{padding:96px 0;background:var(--bg);border-top:1px solid var(--br);}
@@ -628,77 +622,34 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 </section>
 
 <!-- ══ TOOLS GRID ══ -->
-<section class="tools-sec">
+<section class="htu-sec">
   <div class="container">
     <div class="sec-head reveal">
-      <div class="sec-tag">🔧 Popular Tools</div>
-      <h2 class="sec-title">All Tools, One Click Away</h2>
-      <p class="sec-sub">Click any tool below to get started instantly — no signup, no download, runs entirely in your browser.</p>
+      <div class="sec-tag">📖 How It Works</div>
+      <h2 class="sec-title">Start Using Any Tool in 3 Easy Steps</h2>
+      <p class="sec-sub">No account. No software. No cost. Just open a tool and get your work done in seconds.</p>
     </div>
-    <div class="tools-cats">
+    <div class="htu-g">
 
-      <div class="tcat reveal d1">
-        <div class="tcat-hd">
-          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(239,68,68,.18),rgba(239,68,68,.06));border:1px solid rgba(239,68,68,.25)">📄</div>
-          <div><div class="tcat-nm">PDF Tools</div><div class="tcat-ds">Edit, merge, split & convert PDFs</div></div>
-        </div>
-        <div class="tcat-bd">
-          <a class="ttool" href="/p/merge-pdf.html"><span class="ttool-ico">🔗</span>Merge PDF</a>
-          <a class="ttool" href="/p/split-pdf.html"><span class="ttool-ico">✂️</span>Split PDF</a>
-          <a class="ttool" href="/p/compress-pdf.html"><span class="ttool-ico">🗜️</span>Compress PDF</a>
-          <a class="ttool" href="/p/edit-pdf.html"><span class="ttool-ico">✏️</span>Edit PDF</a>
-          <a class="ttool" href="/p/word-to-pdf.html"><span class="ttool-ico">📝</span>Word → PDF</a>
-          <a class="ttool" href="/p/jpg-to-pdf.html"><span class="ttool-ico">🖼️</span>JPG → PDF</a>
-        </div>
-        <div class="tcat-ft"><a class="tcat-all" href="/p/document-tools.html">All PDF Tools →</a></div>
+      <div class="htu-c reveal d1">
+        <div class="htu-num">STEP 01</div>
+        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25)">🔍</div>
+        <div class="htu-t">Choose Your Tool</div>
+        <div class="htu-d">Browse by category from the menu — PDF, Image, Text & AI, and more. Or use the search bar to find any tool instantly.</div>
       </div>
 
-      <div class="tcat reveal d2">
-        <div class="tcat-hd">
-          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(245,158,11,.06));border:1px solid rgba(245,158,11,.25)">🖼️</div>
-          <div><div class="tcat-nm">Image Tools</div><div class="tcat-ds">Compress, convert & edit images</div></div>
-        </div>
-        <div class="tcat-bd">
-          <a class="ttool" href="/p/image-converter.html"><span class="ttool-ico">🔄</span>Image Converter</a>
-          <a class="ttool" href="/p/compress-image.html"><span class="ttool-ico">🗜️</span>Compress Image</a>
-          <a class="ttool" href="/p/crop-resize.html"><span class="ttool-ico">✂️</span>Crop & Resize</a>
-          <a class="ttool" href="/p/remove-background.html"><span class="ttool-ico">🌈</span>Remove Background</a>
-          <a class="ttool" href="/p/watermark.html"><span class="ttool-ico">🔏</span>Add Watermark</a>
-          <a class="ttool" href="/p/flip-rotate.html"><span class="ttool-ico">↩️</span>Flip & Rotate</a>
-        </div>
-        <div class="tcat-ft"><a class="tcat-all" href="/p/image-tools.html">All Image Tools →</a></div>
+      <div class="htu-c reveal d2">
+        <div class="htu-num">STEP 02</div>
+        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(245,158,11,.18),rgba(251,191,36,.08));border:1px solid rgba(245,158,11,.25)">⚡</div>
+        <div class="htu-t">Use It Instantly</div>
+        <div class="htu-d">No sign-up, no installation, no waiting. Every tool opens directly in your browser and is ready to use immediately.</div>
       </div>
 
-      <div class="tcat reveal d3">
-        <div class="tcat-hd">
-          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(99,102,241,.18),rgba(99,102,241,.06));border:1px solid rgba(99,102,241,.25)">✨</div>
-          <div><div class="tcat-nm">Text & AI</div><div class="tcat-ds">Write, translate & analyse text</div></div>
-        </div>
-        <div class="tcat-bd">
-          <a class="ttool" href="/p/translator.html"><span class="ttool-ico">🌐</span>Translator</a>
-          <a class="ttool" href="/p/ai-rewriter.html"><span class="ttool-ico">🤖</span>AI Rewriter</a>
-          <a class="ttool" href="/p/word-counter.html"><span class="ttool-ico">📊</span>Word Counter</a>
-          <a class="ttool" href="/p/case-converter.html"><span class="ttool-ico">🔡</span>Case Converter</a>
-          <a class="ttool" href="/p/lorem-ipsum.html"><span class="ttool-ico">📄</span>Lorem Ipsum</a>
-          <a class="ttool" href="/p/text-to-speech.html"><span class="ttool-ico">🔊</span>Text to Speech</a>
-        </div>
-        <div class="tcat-ft"><a class="tcat-all" href="/p/text-ai-tools.html">All Text & AI Tools →</a></div>
-      </div>
-
-      <div class="tcat reveal d4">
-        <div class="tcat-hd">
-          <div class="tcat-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(16,185,129,.06));border:1px solid rgba(16,185,129,.25)">🛠️</div>
-          <div><div class="tcat-nm">More Tools</div><div class="tcat-ds">Calculators, generators & dev tools</div></div>
-        </div>
-        <div class="tcat-bd">
-          <a class="ttool" href="/p/calculator.html"><span class="ttool-ico">🔢</span>Calculator</a>
-          <a class="ttool" href="/p/unit-converter.html"><span class="ttool-ico">📏</span>Unit Converter</a>
-          <a class="ttool" href="/p/password-generator.html"><span class="ttool-ico">🔐</span>Password Generator</a>
-          <a class="ttool" href="/p/color-tools.html"><span class="ttool-ico">🎨</span>Color Tools</a>
-          <a class="ttool" href="/p/qr-code.html"><span class="ttool-ico">📱</span>QR Code Generator</a>
-          <a class="ttool" href="/p/dev-tools.html"><span class="ttool-ico">💻</span>Dev Tools</a>
-        </div>
-        <div class="tcat-ft"><a class="tcat-all" href="/p/all-tools.html">Browse All 100+ Tools →</a></div>
+      <div class="htu-c reveal d3">
+        <div class="htu-num">STEP 03</div>
+        <div class="htu-ico" style="background:linear-gradient(135deg,rgba(16,185,129,.18),rgba(34,211,238,.08));border:1px solid rgba(16,185,129,.25)">✅</div>
+        <div class="htu-t">Get Your Result</div>
+        <div class="htu-d">Download, copy, or share your result in one click. Your files stay private — nothing is uploaded to any server.</div>
       </div>
 
     </div>

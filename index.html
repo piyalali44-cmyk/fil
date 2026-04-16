@@ -303,26 +303,59 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 .ft-bottom-links a{color:var(--t3);text-decoration:none;transition:color .2s;}
 .ft-bottom-links a:hover{color:var(--tx);}
 
+/* ─── SCROLL PROGRESS BAR ─── */
+#scroll-progress{position:fixed;top:0;left:0;height:3px;width:0%;z-index:9999;background:var(--grad);border-radius:0 3px 3px 0;box-shadow:0 0 10px rgba(99,130,246,.6);transition:width .1s linear;pointer-events:none;}
+
 /* ─── SCROLL REVEAL ─── */
-.reveal{opacity:0;transform:translateY(32px) scale(.97);transition:opacity .75s var(--ease),transform .75s var(--ease);}
-.reveal.visible{opacity:1;transform:none;}
-.d1{transition-delay:.07s}.d2{transition-delay:.14s}.d3{transition-delay:.21s}.d4{transition-delay:.28s}.d5{transition-delay:.35s}.d6{transition-delay:.42s}
+/* Base state: hidden, exits instantly (no stagger delay on exit) */
+.reveal{
+  opacity:0;
+  transform:translateY(36px) scale(.975);
+  transition:opacity .72s cubic-bezier(.22,1,.36,1), transform .72s cubic-bezier(.22,1,.36,1);
+  transition-delay:0s;
+}
+.reveal.visible{opacity:1;transform:translateY(0) scale(1);}
+/* Stagger delays apply ONLY when entering (class added via JS to .visible) */
+.reveal.visible.d1{transition-delay:.06s}
+.reveal.visible.d2{transition-delay:.13s}
+.reveal.visible.d3{transition-delay:.20s}
+.reveal.visible.d4{transition-delay:.27s}
+.reveal.visible.d5{transition-delay:.34s}
+.reveal.visible.d6{transition-delay:.41s}
+
+/* Reveal variants */
+.reveal-left{opacity:0;transform:translateX(-32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal-left.visible{opacity:1;transform:translateX(0);}
+.reveal-right{opacity:0;transform:translateX(32px);transition:opacity .72s cubic-bezier(.22,1,.36,1),transform .72s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal-right.visible{opacity:1;transform:translateX(0);}
+.reveal-scale{opacity:0;transform:scale(.92);transition:opacity .65s cubic-bezier(.22,1,.36,1),transform .65s cubic-bezier(.22,1,.36,1);transition-delay:0s;}
+.reveal-scale.visible{opacity:1;transform:scale(1);}
+
+/* Header load animation */
+#lp-header{animation:headerLoad .6s cubic-bezier(.22,1,.36,1) both;}
+@keyframes headerLoad{from{opacity:0;transform:translateY(-100%)}to{opacity:1;transform:translateY(0)}}
+
+/* Footer link hover */
+.ft-link{transition:color .2s,padding-left .25s cubic-bezier(.22,1,.36,1);}
+.ft-link::before{content:'›';margin-right:0;opacity:0;transition:opacity .2s,margin-right .2s;}
+.ft-link:hover::before{opacity:1;margin-right:4px;}
 
 /* ─── KEYFRAMES ─── */
-@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 12px rgba(59,130,246,.07)}}
-@keyframes ripple{to{transform:scale(2.8);opacity:0}}
+@keyframes floatSoft{0%,100%{transform:translateY(0)}50%{transform:translateY(-7px)}}
+@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
+@keyframes spin{to{transform:rotate(360deg)}}
 
 /* ─── RESPONSIVE ─── */
-@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}.trust-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.h-search{display:none;}.hero-stats{gap:22px;}.stat-sep{display:none;}.cta-card{padding:56px 24px;}.ft-grid{grid-template-columns:1fr 1fr;}}
 @media(max-width:480px){.ft-grid{grid-template-columns:1fr;}.hs-inner{flex-direction:column;border-radius:20px;padding:14px;gap:10px;}.hs-btn{width:100%;justify-content:center;}.cta-btns{flex-direction:column;align-items:center;}}
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal{opacity:1;transform:none;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important;}.reveal,.reveal-left,.reveal-right,.reveal-scale{opacity:1;transform:none;}#scroll-progress{display:none;}}
   </style>
 </head>
 <body id="body">
+<div id="scroll-progress"></div>
 
 <!-- ══ HEADER ══ -->
 <header id="lp-header">
@@ -555,7 +588,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
 <footer id="footer">
   <div class="container">
     <div class="ft-grid">
-      <div>
+      <div class="reveal d1">
         <div class="ft-logo">
           <div class="ft-logo-ico">🛠️</div>
           <span class="ft-logo-txt">ToolsHub Pro</span>
@@ -568,7 +601,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
           <a class="s-btn" href="#" title="Telegram">✈</a>
         </div>
       </div>
-      <div>
+      <div class="reveal d2">
         <div class="ft-col-title">Popular Tools</div>
         <div class="ft-links">
           <a class="ft-link" href="#">Merge PDF</a>
@@ -580,7 +613,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
           <a class="ft-link" href="#" style="color:var(--a);font-weight:600">All Tools →</a>
         </div>
       </div>
-      <div>
+      <div class="reveal d3">
         <div class="ft-col-title">Categories</div>
         <div class="ft-links">
           <a class="ft-link" href="#">Document Tools</a>
@@ -592,7 +625,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
           <a class="ft-link" href="#">Developer Tools</a>
         </div>
       </div>
-      <div>
+      <div class="reveal d4">
         <div class="ft-col-title">Company</div>
         <div class="ft-links">
           <a class="ft-link" href="#">About Us</a>
@@ -604,7 +637,7 @@ canvas#particles{position:absolute;inset:0;pointer-events:none;opacity:.5;}
         </div>
       </div>
     </div>
-    <div class="ft-bottom">
+    <div class="ft-bottom reveal">
       <span>© <span id="yr">2026</span> ToolsHub Pro. All rights reserved.</span>
       <div class="ft-bottom-links">
         <a href="#">Privacy</a>
@@ -661,7 +694,7 @@ function setSearch(q){
   var el=document.getElementById('hero-inp');
   if(el){el.value=q;el.focus();}
 }
-function heroSearch(){var v=(document.getElementById('hero-inp')||{}).value||'';if(v.trim())alert('Searching for: '+v.trim());}
+function heroSearch(){var el=document.getElementById('hero-inp');var v=el?el.value.trim():'';if(v)alert('Searching: '+v);}
 
 /* ── Search overlay ── */
 function openSearch(){
@@ -671,7 +704,6 @@ function openSearch(){
 function closeSearch(){document.getElementById('search-ov').classList.remove('open');}
 function doSearch(){var v=document.getElementById('s-inp').value.trim();if(v)alert('Searching: '+v);}
 function searchFor(t){var i=document.getElementById('s-inp');if(i){i.value=t;openSearch();}}
-function heroSearch(){var v=document.getElementById('hero-inp').value.trim();if(v)alert('Searching: '+v);}
 
 /* ── Keyboard ── */
 document.addEventListener('keydown',function(e){
@@ -688,34 +720,58 @@ window.addEventListener('scroll',function(){
 var yr=document.getElementById('yr');
 if(yr) yr.textContent=new Date().getFullYear();
 
-/* ── Scroll reveal (bidirectional) ── */
-if('IntersectionObserver' in window){
-  var ro=new IntersectionObserver(function(en){
-    en.forEach(function(e){
-      if(e.isIntersecting){
-        e.target.classList.add('visible');
+/* ── Scroll progress bar ── */
+(function(){
+  var bar=document.getElementById('scroll-progress');
+  if(!bar)return;
+  function updateBar(){
+    var sc=window.scrollY, tot=document.body.scrollHeight-window.innerHeight;
+    bar.style.width=(tot>0?(sc/tot*100):0)+'%';
+  }
+  window.addEventListener('scroll',updateBar,{passive:true});
+  updateBar();
+})();
+
+/* ── Bidirectional scroll reveal ── */
+(function(){
+  if(!('IntersectionObserver' in window)){
+    document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){el.classList.add('visible');});
+    return;
+  }
+  var observer=new IntersectionObserver(function(entries){
+    entries.forEach(function(entry){
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
       } else {
-        e.target.classList.remove('visible');
+        /* Only remove 'visible' when exiting — CSS sets delay:0s on exit so it's smooth */
+        entry.target.classList.remove('visible');
       }
     });
-  },{threshold:0.08,rootMargin:'0px 0px -40px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){ro.observe(el);});
-}
+  },{threshold:0.07,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal,.reveal-left,.reveal-right,.reveal-scale').forEach(function(el){
+    observer.observe(el);
+  });
+})();
 
-/* ── Hero counter animation ── */
-function countUp(el, target, suffix, dur){
-  var start=0, step=dur/target;
-  var t=setInterval(function(){
-    start++;
-    el.textContent=start+suffix;
-    if(start>=target){el.textContent=target+suffix;clearInterval(t);}
-  },step);
+/* ── Hero counter animation (eased) ── */
+function easeOut(t){return 1-Math.pow(1-t,3);}
+function animCount(el,target,suffix,dur){
+  if(!el)return;
+  var start=performance.now();
+  function frame(now){
+    var p=Math.min((now-start)/dur,1);
+    var v=Math.round(easeOut(p)*target);
+    el.textContent=v+suffix;
+    if(p<1)requestAnimationFrame(frame);
+    else el.textContent=target+suffix;
+  }
+  requestAnimationFrame(frame);
 }
 window.addEventListener('load',function(){
   setTimeout(function(){
-    countUp(document.getElementById('cnt1'),100,'+',1600);
-    countUp(document.getElementById('cnt2'),12,'',800);
-  },700);
+    animCount(document.getElementById('cnt1'),100,'+',1800);
+    animCount(document.getElementById('cnt2'),12,'',1000);
+  },600);
 });
 
 /* ── Particle canvas ── */

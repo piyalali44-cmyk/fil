@@ -28,6 +28,11 @@ class Handler(http.server.BaseHTTPRequestHandler):
 
     def _serve_request(self, send_body):
         parsed_path = unquote(urlparse(self.path).path)
+
+        if parsed_path == "/favicon.ico":
+            self._send_text(204, "", send_body)
+            return
+
         relative_path = PUBLIC_FILES.get(parsed_path)
 
         if relative_path is None:

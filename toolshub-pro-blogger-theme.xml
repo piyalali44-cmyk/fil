@@ -997,9 +997,6 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
             </b:widget>
 
             <b:widget id='BlogArchive2' locked='false' title='Archive' type='BlogArchive' version='2'>
-              <b:widget-settings>
-                <b:widget-setting name='showPostCount'>true</b:widget-setting>
-              </b:widget-settings>
               <b:includable id='main' var='top'>
                 <b:if cond='data:title != &quot;&quot;'>
                   <div class='sw'>
@@ -1206,9 +1203,6 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
               </b:widget>
 
               <b:widget id='BlogArchive3' locked='false' title='Archive' type='BlogArchive' version='2'>
-                <b:widget-settings>
-                  <b:widget-setting name='showPostCount'>true</b:widget-setting>
-                </b:widget-settings>
                 <b:includable id='main' var='top'>
                   <b:if cond='data:title != &quot;&quot;'>
                     <div class='sw'>

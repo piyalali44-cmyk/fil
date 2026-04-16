@@ -649,7 +649,7 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
       <div class='hero-cnt'>
         <div class='h-badge'>
           <span class='bdot'/>
-          100% Free &nbsp;·&nbsp; No Signup &nbsp;·&nbsp; Works in Browser
+          100% Free &#160;·&#160; No Signup &#160;·&#160; Works in Browser
         </div>
         <h1 class='h-title'>One Platform.<br/><span class='gt'>Unlimited Tools.</span></h1>
         <p class='h-sub'>Documents, images, text, AI tools, calculators, converters &amp; more. All free, all fast, all private.</p>

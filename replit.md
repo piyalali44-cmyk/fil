@@ -50,12 +50,18 @@ Server runs on port 5000 (or `$PORT`). Only serves preview pages, XML files, and
 5. **Latest Articles hidden on homepage** — `<section class='bp-sec'>` block fully removed
 6. **Blogger posts auto-populate** — Blog1 widget handles post listing; Blog2 (sidebar) shows recent posts
 7. **Clear comments in XML** — Each section has Bengali + English instructions for adding new tools/categories
+8. **Blogger upload compatibility fixes** — tool/page links now use `data:blog.homepageUrl`, search redirects are homepage-safe, search overlay and hero search animations were strengthened, mobile search is visible, and a built-in tool library section was added so key categories remain visible after Blogger upload without external files.
 
 ## How to Add a New Tool (XML)
 
 Inside the nav dropdown (`<div class='dd-mega'>`), find the relevant `.dd-col` category block and add:
 ```html
 <a class='dd-tool' href='/p/your-tool-page-slug.html'>Tool Name</a>
+```
+
+For best Blogger compatibility, use homepage-relative expressions like:
+```html
+<a class='dd-tool' expr:href='data:blog.homepageUrl + "p/your-tool-page-slug.html"'>Tool Name</a>
 ```
 
 ## How to Add a New Category (XML)

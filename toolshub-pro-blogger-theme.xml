@@ -107,8 +107,10 @@ body.light-mode #lp-header.scr{box-shadow:0 8px 32px rgba(15,23,42,.1)}
 .dh{padding:5px 12px 3px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3)}
 /* HEADER RIGHT */
 .hdr-r{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
-.h-srch{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);font-size:13px;cursor:pointer;transition:all .2s;font-family:var(--f-body)}
-.h-srch:hover{border-color:var(--a);color:var(--a)}
+.h-srch{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);font-size:13px;cursor:pointer;transition:all .2s;font-family:var(--f-body);position:relative;overflow:hidden}
+.h-srch::after{content:'';position:absolute;inset:-2px;background:linear-gradient(120deg,transparent 0 35%,rgba(96,165,250,.22),transparent 65%);transform:translateX(-140%);animation:srchSweep 4.5s ease-in-out infinite;pointer-events:none}
+.h-srch:hover,.h-srch:focus{border-color:var(--a);color:var(--a);box-shadow:0 0 0 4px rgba(59,130,246,.1);outline:none}
+@keyframes srchSweep{0%,55%{transform:translateX(-140%)}78%,100%{transform:translateX(140%)}}
 .th-btn{width:36px;height:36px;border-radius:10px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:all .2s}
 .th-btn:hover{border-color:var(--a);color:var(--a)}
 .h-cta{background:var(--grad);color:#fff;padding:9px 20px;border-radius:50px;font-size:13px;font-weight:700;text-decoration:none;box-shadow:0 4px 14px rgba(59,130,246,.35);transition:all .2s}
@@ -137,7 +139,9 @@ body.light-mode #lp-header.scr{box-shadow:0 8px 32px rgba(15,23,42,.1)}
 /* ━━ SEARCH OVERLAY ━━ */
 .s-ov{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.85);backdrop-filter:blur(16px);align-items:flex-start;justify-content:center;padding-top:80px}
 .s-ov.open{display:flex;animation:fadeIn .2s}
-.s-box{width:min(640px,calc(100% - 40px));background:var(--s1);border:1px solid var(--br2);border-radius:var(--r3);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6)}
+.s-box{width:min(640px,calc(100% - 40px));background:var(--s1);border:1px solid var(--br2);border-radius:var(--r3);overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.6);transform:translateY(18px) scale(.96);opacity:0}
+.s-ov.open .s-box{animation:searchPop .32s var(--ease) forwards}
+@keyframes searchPop{to{transform:translateY(0) scale(1);opacity:1}}
 .s-row{display:flex;align-items:center;padding:0 20px;border-bottom:1px solid var(--br)}
 .s-row span{font-size:19px;flex-shrink:0}
 .s-inp{flex:1;padding:17px 12px;background:transparent;border:none;outline:none;font-size:17px;color:var(--tx);font-family:var(--f-body)}
@@ -173,7 +177,8 @@ body.light-mode .hero-bg{background:radial-gradient(ellipse at 15% 25%,rgba(37,9
 .h-sub{font-size:17px;color:var(--t2);max-width:580px;margin:0 auto 44px;line-height:1.8;animation:fuP .7s .3s both}
 .hs-wrap{max-width:660px;margin:0 auto 52px;animation:fuP .7s .4s both}
 .hs-o{position:relative}
-.hs-glow{position:absolute;inset:-2px;border-radius:60px;background:var(--grad);opacity:0;filter:blur(14px);z-index:0;pointer-events:none;transition:opacity .4s var(--ease)}
+.hs-glow{position:absolute;inset:-2px;border-radius:60px;background:var(--grad);opacity:.16;filter:blur(14px);z-index:0;pointer-events:none;transition:opacity .4s var(--ease);animation:heroSearchGlow 3.8s ease-in-out infinite}
+@keyframes heroSearchGlow{0%,100%{opacity:.12;transform:scale(.985)}50%{opacity:.28;transform:scale(1.01)}}
 .hs-o.fc .hs-glow{opacity:.32}
 .hs-i{position:relative;z-index:1;display:flex;align-items:center;background:var(--s1);border:1.5px solid var(--br2);border-radius:54px;padding:7px 7px 7px 22px;box-shadow:0 8px 40px rgba(0,0,0,.2);transition:border-color .35s}
 .hs-o.fc .hs-i{border-color:rgba(99,130,246,.7);box-shadow:0 8px 40px rgba(0,0,0,.22),0 0 0 5px rgba(59,130,246,.12)}
@@ -210,6 +215,21 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 .fi{width:58px;height:58px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:24px;margin-bottom:20px;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.25)}
 .ft{font-family:var(--f-display);font-size:17px;font-weight:700;color:var(--tx);margin-bottom:9px;letter-spacing:-.2px}
 .fd{font-size:13.5px;color:var(--t2);line-height:1.78}
+
+
+/* ━━ TOOL LIBRARY SHOWCASE ━━ */
+.tool-lib{padding:96px 0;background:linear-gradient(180deg,var(--bg2),var(--bg));border-top:1px solid var(--br);position:relative;overflow:hidden}
+.tool-lib::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 15% 15%,rgba(59,130,246,.08),transparent 30%),radial-gradient(circle at 85% 75%,rgba(34,211,238,.06),transparent 32%);pointer-events:none}
+.tl-grid{position:relative;z-index:1;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:18px}
+.tl-card{display:flex;gap:14px;padding:22px;border-radius:var(--r2);background:var(--s1);border:1px solid var(--br);text-decoration:none;color:var(--tx);position:relative;overflow:hidden;transition:transform .25s var(--ease),border-color .25s,box-shadow .25s}
+.tl-card::after{content:'';position:absolute;inset:0;background:linear-gradient(120deg,transparent 0 42%,rgba(255,255,255,.08),transparent 58%);transform:translateX(-120%);transition:transform .6s var(--ease)}
+.tl-card:hover{transform:translateY(-6px);border-color:rgba(59,130,246,.38);box-shadow:0 18px 44px rgba(0,0,0,.18);color:var(--tx)}
+.tl-card:hover::after{transform:translateX(120%)}
+.tl-ico{width:48px;height:48px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;background:linear-gradient(135deg,rgba(59,130,246,.18),rgba(99,102,241,.08));border:1px solid rgba(59,130,246,.22)}
+.tl-name{font-family:var(--f-display);font-size:16px;font-weight:800;color:var(--tx);margin-bottom:6px}
+.tl-desc{font-size:13px;color:var(--t2);line-height:1.65;margin-bottom:10px}
+.tl-mini{display:flex;flex-wrap:wrap;gap:6px}
+.tl-mini span{font-size:11px;color:var(--t3);background:var(--s3);border:1px solid var(--br);border-radius:999px;padding:3px 8px}
 
 /* ━━ AD AREAS (professional ad slots) ━━ */
 .ad-banner{padding:12px 0;text-align:center}
@@ -429,7 +449,7 @@ canvas#hp-canvas{position:absolute;inset:0;pointer-events:none;opacity:.45}
 
 /* ━━ RESPONSIVE ━━ */
 @media(max-width:1024px){.foot-g{grid-template-columns:1fr 1fr}.bl-lay{grid-template-columns:1fr}.sidebar{position:static}}
-@media(max-width:768px){.lp-nav{display:none}.mob-btn{display:flex}.h-srch{display:none}.h-stats{gap:20px}.hs-sep{display:none}.cta-c{padding:56px 22px}.foot-g{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr}}
+@media(max-width:768px){.lp-nav{display:none}.mob-btn{display:flex}.h-srch{display:flex;width:36px;height:36px;padding:0;justify-content:center;border-radius:10px}.h-srch .srch-txt{display:none}.h-stats{gap:20px}.hs-sep{display:none}.cta-c{padding:56px 22px}.foot-g{grid-template-columns:1fr 1fr}.bp-grid{grid-template-columns:1fr}}
 @media(max-width:480px){.foot-g{grid-template-columns:1fr}.hs-i{flex-direction:column;border-radius:20px;padding:14px;gap:10px}.hs-btn{width:100%;justify-content:center}.cta-bs{flex-direction:column;align-items:center}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}.rv{opacity:1;transform:none}}
 
@@ -539,7 +559,7 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
           <!-- ══════════════════════════════════════════════════
             ALL TOOLS MEGA DROPDOWN
             নতুন টুল যোগ করতে: নিচের যেকোনো .dd-col এর মধ্যে
-            <a class='dd-tool' href='/p/your-tool-page.html'>🔧 Your Tool Name</a>
+            <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/your-tool-page.html"'>🔧 Your Tool Name</a>
             যোগ করুন। নতুন category যোগ করতে নতুন .dd-col div তৈরি করুন।
           ══════════════════════════════════════════════════ -->
           <div class='dd dd-mega'>
@@ -552,11 +572,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Document Tools</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/merge-pdf.html'>Merge PDF</a>
-                <a class='dd-tool' href='/p/split-pdf.html'>Split PDF</a>
-                <a class='dd-tool' href='/p/compress-pdf.html'>Compress PDF</a>
-                <a class='dd-tool' href='/p/pdf-to-word.html'>PDF to Word</a>
-                <a class='dd-tool' href='/p/word-to-pdf.html'>Word to PDF</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/merge-pdf.html"'>Merge PDF</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/split-pdf.html"'>Split PDF</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/compress-pdf.html"'>Compress PDF</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/pdf-to-word.html"'>PDF to Word</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/word-to-pdf.html"'>Word to PDF</a>
               </div>
 
               <!-- ── CATEGORY 2: IMAGE TOOLS ────────────────────────── -->
@@ -566,11 +586,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Image Tools</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/image-converter.html'>Image Converter</a>
-                <a class='dd-tool' href='/p/compress-image.html'>Compress Image</a>
-                <a class='dd-tool' href='/p/resize-image.html'>Resize Image</a>
-                <a class='dd-tool' href='/p/remove-background.html'>Remove Background</a>
-                <a class='dd-tool' href='/p/add-watermark.html'>Add Watermark</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/image-converter.html"'>Image Converter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/compress-image.html"'>Compress Image</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/resize-image.html"'>Resize Image</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/remove-background.html"'>Remove Background</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/add-watermark.html"'>Add Watermark</a>
               </div>
 
               <!-- ── CATEGORY 3: TEXT & AI TOOLS ───────────────────── -->
@@ -580,11 +600,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Text &amp; AI Tools</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/translator.html'>Text Translator</a>
-                <a class='dd-tool' href='/p/word-counter.html'>Word Counter</a>
-                <a class='dd-tool' href='/p/case-converter.html'>Case Converter</a>
-                <a class='dd-tool' href='/p/ai-rewriter.html'>AI Rewriter</a>
-                <a class='dd-tool' href='/p/grammar-checker.html'>Grammar Checker</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/translator.html"'>Text Translator</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/word-counter.html"'>Word Counter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/case-converter.html"'>Case Converter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/ai-rewriter.html"'>AI Rewriter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/grammar-checker.html"'>Grammar Checker</a>
               </div>
 
               <!-- ── CATEGORY 4: CALCULATORS ────────────────────────── -->
@@ -594,11 +614,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Calculators</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/scientific-calculator.html'>Scientific Calc</a>
-                <a class='dd-tool' href='/p/bmi-calculator.html'>BMI Calculator</a>
-                <a class='dd-tool' href='/p/loan-calculator.html'>Loan Calculator</a>
-                <a class='dd-tool' href='/p/age-calculator.html'>Age Calculator</a>
-                <a class='dd-tool' href='/p/percentage-calculator.html'>Percentage Calc</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/scientific-calculator.html"'>Scientific Calc</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/bmi-calculator.html"'>BMI Calculator</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/loan-calculator.html"'>Loan Calculator</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/age-calculator.html"'>Age Calculator</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/percentage-calculator.html"'>Percentage Calc</a>
               </div>
 
               <!-- ── CATEGORY 5: CONVERTERS ─────────────────────────── -->
@@ -608,11 +628,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Converters</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/unit-converter.html'>Unit Converter</a>
-                <a class='dd-tool' href='/p/currency-converter.html'>Currency Converter</a>
-                <a class='dd-tool' href='/p/temperature-converter.html'>Temperature Conv.</a>
-                <a class='dd-tool' href='/p/number-converter.html'>Number Base Conv.</a>
-                <a class='dd-tool' href='/p/color-converter.html'>Color Converter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/unit-converter.html"'>Unit Converter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/currency-converter.html"'>Currency Converter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/temperature-converter.html"'>Temperature Conv.</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/number-converter.html"'>Number Base Conv.</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/color-converter.html"'>Color Converter</a>
               </div>
 
               <!-- ── CATEGORY 6: DEVELOPER TOOLS ───────────────────── -->
@@ -622,11 +642,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                   <span class='dd-cat-nm'>Developer Tools</span>
                 </div>
                 <!-- ══ নিচে আপনার টুলের নাম ও লিঙ্ক দিন ══ -->
-                <a class='dd-tool' href='/p/json-formatter.html'>JSON Formatter</a>
-                <a class='dd-tool' href='/p/base64.html'>Base64 Encoder</a>
-                <a class='dd-tool' href='/p/regex-tester.html'>Regex Tester</a>
-                <a class='dd-tool' href='/p/color-picker.html'>Color Picker</a>
-                <a class='dd-tool' href='/p/password-generator.html'>Password Gen</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/json-formatter.html"'>JSON Formatter</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/base64.html"'>Base64 Encoder</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/regex-tester.html"'>Regex Tester</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/color-picker.html"'>Color Picker</a>
+                <a class='dd-tool' expr:href='data:blog.homepageUrl + "p/password-generator.html"'>Password Gen</a>
               </div>
 
             </div>
@@ -638,15 +658,15 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
       </nav>
 
       <div class='hdr-r'>
-        <button class='h-srch' onclick='openS()'>
+        <button class='h-srch' type='button' onclick='openS()'>
           <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
-          Search
+          <span class='srch-txt'>Search</span>
         </button>
-        <button class='th-btn' id='th-btn' onclick='togTh()' title='Toggle theme'>
+        <button class='th-btn' type='button' id='th-btn' onclick='togTh()' title='Toggle theme'>
           <svg id='ico-moon' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'><path d='M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z'/></svg>
           <svg id='ico-sun' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round' style='display:none'><circle cx='12' cy='12' r='5'/><line x1='12' y1='1' x2='12' y2='3'/><line x1='12' y1='21' x2='12' y2='23'/><line x1='4.22' y1='4.22' x2='5.64' y2='5.64'/><line x1='18.36' y1='18.36' x2='19.78' y2='19.78'/><line x1='1' y1='12' x2='3' y2='12'/><line x1='21' y1='12' x2='23' y2='12'/><line x1='4.22' y1='19.78' x2='5.64' y2='18.36'/><line x1='18.36' y1='5.64' x2='19.78' y2='4.22'/></svg>
         </button>
-        <button class='mob-btn' onclick='openM()'><span/><span/><span/></button>
+        <button class='mob-btn' type='button' onclick='openM()'><span/><span/><span/></button>
       </div>
     </div>
   </div>
@@ -658,7 +678,7 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
 <div class='mob-nav' id='mob-nav' onclick='if(event.target===this)closeM()'>
   <div class='mob-inner'>
     <div class='mob-hd'>
-      <button class='mob-cl' onclick='closeM()'>
+      <button class='mob-cl' type='button' onclick='closeM()'>
         <svg width='13' height='13' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>
       </button>
     </div>
@@ -666,17 +686,17 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
       <a class='mob-lnk' expr:href='data:blog.homepageUrl'>🏠 Home</a>
       <div class='mob-div'/>
       <div class='mob-sec'>All Tools</div>
-      <a class='mob-lnk' href='/p/document-tools.html'><span class='mob-ico'>📄</span>Document Tools</a>
-      <a class='mob-lnk' href='/p/image-tools.html'><span class='mob-ico'>🖼️</span>Image Tools</a>
-      <a class='mob-lnk' href='/p/text-ai-tools.html'><span class='mob-ico'>✍️</span>Text &amp; AI Tools</a>
-      <a class='mob-lnk' href='/p/calculator.html'><span class='mob-ico'>🔢</span>Calculators</a>
-      <a class='mob-lnk' href='/p/unit-converter.html'><span class='mob-ico'>📏</span>Converters</a>
-      <a class='mob-lnk' href='/p/dev-tools.html'><span class='mob-ico'>💻</span>Developer Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/document-tools.html"'><span class='mob-ico'>📄</span>Document Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/image-tools.html"'><span class='mob-ico'>🖼️</span>Image Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/text-ai-tools.html"'><span class='mob-ico'>✍️</span>Text &amp; AI Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/calculator.html"'><span class='mob-ico'>🔢</span>Calculators</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/unit-converter.html"'><span class='mob-ico'>📏</span>Converters</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/dev-tools.html"'><span class='mob-ico'>💻</span>Developer Tools</a>
       <div class='mob-div'/>
       <a class='mob-lnk' expr:href='data:blog.homepageUrl + &quot;search&quot;'><span class='mob-ico'>📰</span>Blog</a>
     </div>
     <div class='mob-foot'>
-      <a class='mob-cta' href='/p/all-tools.html'>🛠️ All Tools</a>
+      <a class='mob-cta' expr:href='data:blog.homepageUrl + "p/all-tools.html"'>🛠️ All Tools</a>
     </div>
   </div>
 </div>
@@ -691,7 +711,7 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
         <svg width='18' height='18' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
       </span>
       <input class='s-inp' id='s-inp' onkeydown='if(event.key==="Enter")doS()' placeholder='Search tools or articles...' type='text'/>
-      <button class='s-cls' onclick='closeS()'>
+      <button class='s-cls' type='button' onclick='closeS()'>
         <svg width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><line x1='18' y1='6' x2='6' y2='18'/><line x1='6' y1='6' x2='18' y2='18'/></svg>
       </button>
     </div>
@@ -735,15 +755,15 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                 <svg width='19' height='19' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg>
               </div>
               <input class='hs-inp' id='hero-inp' autocomplete='off' onkeydown='if(event.key==="Enter")hS()' placeholder='Search from 100+ free tools...' type='text'/>
-              <button class='hs-btn' onclick='hS()'>Search <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M12 5l7 7-7 7'/></svg></button>
+              <button class='hs-btn' type='button' onclick='hS()'>Search <svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'><path d='M5 12h14M12 5l7 7-7 7'/></svg></button>
             </div>
             <div class='hs-tags'>
               <span class='hs-hint'>Popular:</span>
-              <button class='hs-stag' onclick='setH("PDF Merger")'>PDF Merger</button>
-              <button class='hs-stag' onclick='setH("Image Converter")'>Image Converter</button>
-              <button class='hs-stag' onclick='setH("Translator")'>Translator</button>
-              <button class='hs-stag' onclick='setH("Calculator")'>Calculator</button>
-              <button class='hs-stag' onclick='setH("Password Generator")'>Password Gen</button>
+              <button class='hs-stag' type='button' onclick='setH("PDF Merger")'>PDF Merger</button>
+              <button class='hs-stag' type='button' onclick='setH("Image Converter")'>Image Converter</button>
+              <button class='hs-stag' type='button' onclick='setH("Translator")'>Translator</button>
+              <button class='hs-stag' type='button' onclick='setH("Calculator")'>Calculator</button>
+              <button class='hs-stag' type='button' onclick='setH("Password Generator")'>Password Gen</button>
             </div>
           </div>
         </div>
@@ -794,6 +814,25 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
     </div>
   </section>
 
+
+  <section class='tool-lib'>
+    <div class='wrap'>
+      <div class='sh rv'>
+        <div class='sh-tag'>&#128295; Complete Tool Library</div>
+        <h2 class='sh-t'>Everything Visible After Blogger Upload</h2>
+        <p class='sh-s'>Core categories and important tool links are built directly inside the theme, so visitors see a complete professional tools hub without needing extra imported files.</p>
+      </div>
+      <div class='tl-grid'>
+        <a class='tl-card rv d1' expr:href='data:blog.homepageUrl + &quot;p/document-tools.html&quot;'><div class='tl-ico'>&#128196;</div><div><div class='tl-name'>Document Tools</div><div class='tl-desc'>Merge, split, compress, convert and manage PDF or office documents.</div><div class='tl-mini'><span>PDF</span><span>Word</span><span>Compress</span></div></div></a>
+        <a class='tl-card rv d2' expr:href='data:blog.homepageUrl + &quot;p/image-tools.html&quot;'><div class='tl-ico'>&#128444;</div><div><div class='tl-name'>Image Tools</div><div class='tl-desc'>Convert, resize, compress, watermark and improve images online.</div><div class='tl-mini'><span>JPG</span><span>PNG</span><span>Resize</span></div></div></a>
+        <a class='tl-card rv d3' expr:href='data:blog.homepageUrl + &quot;p/text-ai-tools.html&quot;'><div class='tl-ico'>&#9997;</div><div><div class='tl-name'>Text &amp; AI Tools</div><div class='tl-desc'>Rewrite, translate, count words, check grammar and format text faster.</div><div class='tl-mini'><span>AI</span><span>Text</span><span>Translate</span></div></div></a>
+        <a class='tl-card rv d4' expr:href='data:blog.homepageUrl + &quot;p/calculator.html&quot;'><div class='tl-ico'>&#128290;</div><div><div class='tl-name'>Calculators</div><div class='tl-desc'>BMI, age, loan, percentage and daily-use calculators in one place.</div><div class='tl-mini'><span>BMI</span><span>Loan</span><span>Age</span></div></div></a>
+        <a class='tl-card rv d1' expr:href='data:blog.homepageUrl + &quot;p/unit-converter.html&quot;'><div class='tl-ico'>&#128207;</div><div><div class='tl-name'>Converters</div><div class='tl-desc'>Unit, currency, temperature, number base and color conversion tools.</div><div class='tl-mini'><span>Unit</span><span>Currency</span><span>Color</span></div></div></a>
+        <a class='tl-card rv d2' expr:href='data:blog.homepageUrl + &quot;p/dev-tools.html&quot;'><div class='tl-ico'>&#128187;</div><div><div class='tl-name'>Developer Tools</div><div class='tl-desc'>JSON formatter, Base64, regex tester, color picker and generators.</div><div class='tl-mini'><span>JSON</span><span>Base64</span><span>Regex</span></div></div></a>
+      </div>
+    </div>
+  </section>
+
   <b:section class='ad-banner' id='mid-page' name='Mid Page Ad' maxwidgets='3' showaddelement='yes'/>
 
   <b:section class='ad-banner' id='after-blog-preview' name='After Blog Preview Ad' maxwidgets='2' showaddelement='yes'/>
@@ -806,7 +845,7 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
           <h2 class='cta-t'>Ready to Get Things Done?</h2>
           <p class='cta-s2'>100+ tools at your fingertips, zero cost, zero signup. Just open a tool and start working right now.</p>
           <div class='cta-bs'>
-            <a class='cb1' href='/p/all-tools.html'>&#128295; Explore All Tools</a>
+            <a class='cb1' expr:href='data:blog.homepageUrl + "p/all-tools.html"'>&#128295; Explore All Tools</a>
             <a class='cb2' expr:href='data:blog.homepageUrl + "search"'>&#128240; Read the Blog</a>
           </div>
         </div>
@@ -897,7 +936,7 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                       <div class='ps-m'>
                         <span>&#128197; <data:post.date/></span>
                         <span>&#128100; <data:post.author/></span>
-                        <span>&#128336; <data:post.minutesRead/> min read</span>
+                        <span>&#128336; Quick read</span>
                       </div>
                     </div>
                     <b:if cond='data:post.featuredImage'>
@@ -1038,14 +1077,14 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
           <div class='sw-hd'>&#9889; Quick Tools</div>
           <div class='sw-bd'>
             <div class='sw-tools'>
-              <a class='sw-ti' href='/p/merge-pdf.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='sw-tnm'>Merge PDF</span></a>
-              <a class='sw-ti' href='/p/split-pdf.html'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>&#9986;</div><span class='sw-tnm'>Split PDF</span></a>
-              <a class='sw-ti' href='/p/image-converter.html'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>&#128444;</div><span class='sw-tnm'>Image Converter</span></a>
-              <a class='sw-ti' href='/p/translator.html'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#127760;</div><span class='sw-tnm'>Translator</span></a>
-              <a class='sw-ti' href='/p/password-generator.html'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>&#128272;</div><span class='sw-tnm'>Password Gen</span></a>
-              <a class='sw-ti' href='/p/calculator.html'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>&#128290;</div><span class='sw-tnm'>Calculator</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/merge-pdf.html"'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#128279;</div><span class='sw-tnm'>Merge PDF</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/split-pdf.html"'><div class='sw-tico' style='background:rgba(239,68,68,.12)'>&#9986;</div><span class='sw-tnm'>Split PDF</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/image-converter.html"'><div class='sw-tico' style='background:rgba(245,158,11,.12)'>&#128444;</div><span class='sw-tnm'>Image Converter</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/translator.html"'><div class='sw-tico' style='background:rgba(34,199,147,.12)'>&#127760;</div><span class='sw-tnm'>Translator</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/password-generator.html"'><div class='sw-tico' style='background:rgba(99,102,241,.12)'>&#128272;</div><span class='sw-tnm'>Password Gen</span></a>
+              <a class='sw-ti' expr:href='data:blog.homepageUrl + "p/calculator.html"'><div class='sw-tico' style='background:rgba(16,185,129,.12)'>&#128290;</div><span class='sw-tnm'>Calculator</span></a>
             </div>
-            <a class='sw-cta' href='/p/all-tools.html'>Browse All Tools &#8594;</a>
+            <a class='sw-cta' expr:href='data:blog.homepageUrl + "p/all-tools.html"'>Browse All Tools &#8594;</a>
           </div>
         </div>
 
@@ -1057,8 +1096,8 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                 <div class='sw-hd'>Search</div>
                 <div class='sw-bd'>
                   <div class='sw-search'>
-                    <input class='sw-sinp' id='sw-sinp' placeholder='Search articles...' type='text' onkeydown='if(event.key==="Enter"){window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)}'/>
-                    <button class='sw-sbtn' onclick='window.location="/search?q="+encodeURIComponent(document.getElementById("sw-sinp").value)'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
+                    <input class='sw-sinp' id='sw-sinp' placeholder='Search articles...' type='text' onkeydown='if(event.key===&quot;Enter&quot;)themeSearchFrom(&quot;sw-sinp&quot;)'/>
+                    <button class='sw-sbtn' type='button' onclick='themeSearchFrom(&quot;sw-sinp&quot;)'><svg width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2.2' stroke-linecap='round' stroke-linejoin='round'><circle cx='11' cy='11' r='8'/><path d='m21 21-4.35-4.35'/></svg></button>
                   </div>
                 </div>
               </div>
@@ -1201,38 +1240,38 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
           <div class='ft-col'>
             <div class='fc-tit'>Popular Tools</div>
             <div class='f-links'>
-              <a class='f-lnk' href='/p/merge-pdf.html'>Merge PDF</a>
-              <a class='f-lnk' href='/p/split-pdf.html'>Split PDF</a>
-              <a class='f-lnk' href='/p/compress-pdf.html'>Compress PDF</a>
-              <a class='f-lnk' href='/p/image-converter.html'>Image Converter</a>
-              <a class='f-lnk' href='/p/compress-image.html'>Compress Image</a>
-              <a class='f-lnk' href='/p/translator.html'>Text Translator</a>
-              <a class='f-lnk' href='/p/password-generator.html'>Password Generator</a>
-              <a class='f-lnk' href='/p/bmi-calculator.html'>BMI Calculator</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/merge-pdf.html"'>Merge PDF</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/split-pdf.html"'>Split PDF</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/compress-pdf.html"'>Compress PDF</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/image-converter.html"'>Image Converter</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/compress-image.html"'>Compress Image</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/translator.html"'>Text Translator</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/password-generator.html"'>Password Generator</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/bmi-calculator.html"'>BMI Calculator</a>
             </div>
           </div>
           <div class='ft-col'>
             <div class='fc-tit'>Categories</div>
             <div class='f-links'>
-              <a class='f-lnk' href='/p/document-tools.html'>Document Tools</a>
-              <a class='f-lnk' href='/p/image-tools.html'>Image Tools</a>
-              <a class='f-lnk' href='/p/text-ai-tools.html'>Text &amp; AI Tools</a>
-              <a class='f-lnk' href='/p/calculator.html'>Calculators</a>
-              <a class='f-lnk' href='/p/unit-converter.html'>Unit Converters</a>
-              <a class='f-lnk' href='/p/dev-tools.html'>Developer Tools</a>
-              <a class='f-lnk' href='/p/all-tools.html'>All Tools</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/document-tools.html"'>Document Tools</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/image-tools.html"'>Image Tools</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/text-ai-tools.html"'>Text &amp; AI Tools</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/calculator.html"'>Calculators</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/unit-converter.html"'>Unit Converters</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/dev-tools.html"'>Developer Tools</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/all-tools.html"'>All Tools</a>
             </div>
           </div>
           <div class='ft-col'>
             <div class='fc-tit'>Company</div>
             <div class='f-links'>
-              <a class='f-lnk' href='/p/about.html'>About Us</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/about.html"'>About Us</a>
               <a class='f-lnk' expr:href='data:blog.homepageUrl + "search"'>Blog</a>
-              <a class='f-lnk' href='/p/contact.html'>Contact Us</a>
-              <a class='f-lnk' href='/p/request-tool.html'>Request a Tool</a>
-              <a class='f-lnk' href='/p/privacy-policy.html'>Privacy Policy</a>
-              <a class='f-lnk' href='/p/terms.html'>Terms of Service</a>
-              <a class='f-lnk' href='/p/sitemap.html'>Sitemap</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/contact.html"'>Contact Us</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/request-tool.html"'>Request a Tool</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/privacy-policy.html"'>Privacy Policy</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/terms.html"'>Terms of Service</a>
+              <a class='f-lnk' expr:href='data:blog.homepageUrl + "p/sitemap.html"'>Sitemap</a>
             </div>
           </div>
         </div>
@@ -1249,10 +1288,10 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
     <div class='ft-bot'>
       <span class='ft-copy'>&#169; <span id='yr'>2026</span> <data:blog.title/>. All rights reserved.</span>
       <div class='ft-bot-links'>
-        <a href='/p/privacy-policy.html'>Privacy</a>
-        <a href='/p/terms.html'>Terms</a>
-        <a href='/p/sitemap.html'>Sitemap</a>
-        <a href='/p/contact.html'>Contact</a>
+        <a expr:href='data:blog.homepageUrl + "p/privacy-policy.html"'>Privacy</a>
+        <a expr:href='data:blog.homepageUrl + "p/terms.html"'>Terms</a>
+        <a expr:href='data:blog.homepageUrl + "p/sitemap.html"'>Sitemap</a>
+        <a expr:href='data:blog.homepageUrl + "p/contact.html"'>Contact</a>
       </div>
     </div>
   </div>
@@ -1268,6 +1307,11 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
 <!-- ═══════════════════════════ SCRIPTS ═══════════════════════════ -->
 <script>
 //<![CDATA[
+var THP_HOME='<data:blog.homepageUrl/>';
+function thpUrl(path){return THP_HOME.replace(/\/?$/,'/')+String(path||'').replace(/^\//,'');}
+function thpGoSearch(q){q=(q||'').trim();if(q){window.location.href=thpUrl('search?q='+encodeURIComponent(q));}}
+function themeSearchFrom(id){var el=document.getElementById(id);thpGoSearch(el?el.value:'');}
+
 /* ── Theme Switcher ── */
 function _syncThIco(isLight){
   var moon=document.getElementById('ico-moon');
@@ -1298,7 +1342,7 @@ function openS(){
 function closeS(){document.getElementById('s-ov').classList.remove('open');}
 function doS(){
   var v=(document.getElementById('s-inp')||{}).value||'';
-  if(v.trim())window.location='/search?q='+encodeURIComponent(v.trim());
+  thpGoSearch(v);
 }
 function setS(q){
   var i=document.getElementById('s-inp');
@@ -1311,7 +1355,7 @@ function setH(q){var el=document.getElementById('hero-inp');if(el){el.value=q;el
 function hS(){
   var el=document.getElementById('hero-inp');
   var v=el?el.value.trim():'';
-  if(v)window.location='/search?q='+encodeURIComponent(v);
+  thpGoSearch(v);
 }
 (function(){
   var el=document.getElementById('hero-inp');
@@ -1335,6 +1379,12 @@ function hS(){
   }
   ty();
   el.addEventListener('blur',function(){setTimeout(ty,700);});
+})();
+
+/* ── Blogger upload fallback: keep brand text visible even if blog title is empty ── */
+(function(){
+  var names=document.querySelectorAll('.logo-txt,.ft-logo-txt');
+  names.forEach(function(n){if(!(n.textContent||'').trim())n.textContent='ToolsHub Pro';});
 })();
 
 /* ── Keyboard shortcuts ── */

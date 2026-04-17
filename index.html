@@ -48,10 +48,10 @@ body.light-mode #lp-header.scrolled{box-shadow:0 8px 32px rgba(15,23,42,.1);}
 .lp-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
 .lp-logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#2563eb 0%,#4f46e5 100%);border:1px solid rgba(99,102,241,.45);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 4px 16px rgba(59,130,246,.45),inset 0 1px 0 rgba(255,255,255,.18);animation:floatSoft 6s ease-in-out infinite;transition:box-shadow .3s;}
 .lp-logo:hover .lp-logo-icon{box-shadow:0 6px 24px rgba(59,130,246,.6),inset 0 1px 0 rgba(255,255,255,.18);}
-.lp-logo-wordmark{display:flex;flex-direction:column;gap:1px;line-height:1;}
-.logo-name{font-family:var(--font-display);font-size:18px;font-weight:800;letter-spacing:-.4px;color:var(--tx);line-height:1.1;}
-.logo-name .logo-hub{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;font-weight:900;}
-.logo-pro-badge{font-size:9.5px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t3);line-height:1;padding-left:1px;}
+.lp-logo-text{display:flex;align-items:baseline;gap:0;font-family:var(--font-display);letter-spacing:-.5px;}
+.logo-t{font-size:18px;font-weight:600;color:var(--tx);}
+.logo-h{font-size:19px;font-weight:900;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.logo-p{font-size:10px;font-weight:800;letter-spacing:.6px;padding:2px 6px 2px 5px;margin-left:5px;border-radius:5px;background:rgba(59,130,246,.1);border:1px solid rgba(99,102,241,.25);color:var(--a);align-self:center;text-transform:uppercase;}
 .lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px;}
 .nav-item{position:relative;}
 .nav-link{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:500;color:var(--t2);text-decoration:none;white-space:nowrap;transition:all .18s;}
@@ -74,11 +74,12 @@ body.light-mode #lp-header.scrolled{box-shadow:0 8px 32px rgba(15,23,42,.1);}
 .dd-ico{width:38px;height:38px;border-radius:10px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:17px;transition:all .2s;}
 .dd-n{font-size:13px;font-weight:600;color:var(--tx);line-height:1.2;}
 .dd-d{font-size:11px;color:var(--t3);margin-top:2px;line-height:1.3;}
-.dd-footer{grid-column:1/-1;border-top:1px solid var(--br);margin-top:6px;padding-top:8px;display:flex;align-items:center;justify-content:space-between;}
-.dd-all{display:inline-flex;align-items:center;gap:5px;padding:6px 12px;font-size:12px;font-weight:700;color:var(--a);border-radius:8px;transition:all .18s;text-decoration:none;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.18);}
-.dd-all:hover{background:rgba(59,130,246,.14);gap:7px;}
-.dd-all svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5;transition:transform .2s;}
-.dd-all:hover svg{transform:translateX(3px);}
+.dd-sep{grid-column:1/-1;height:1px;background:var(--br);margin:4px 0 2px;}
+.dd-view-all{grid-column:1/-1;}
+.dd-view-all .dd-n{color:var(--a);}
+.dd-view-all .dd-d{color:var(--a);opacity:.7;}
+.dd-view-all .dd-ico{background:rgba(99,102,241,.1)!important;border-color:rgba(99,102,241,.22)!important;}
+.dd-view-all:hover .dd-ico{box-shadow:0 4px 12px rgba(99,102,241,.25)!important;}
 .header-right{display:flex;align-items:center;gap:8px;flex-shrink:0;margin-left:auto;}
 .h-search{display:flex;align-items:center;gap:7px;padding:7px 14px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);font-size:13px;cursor:pointer;transition:all .2s;font-family:var(--font-body);}
 .h-search:hover{border-color:var(--a);color:var(--a);}
@@ -447,10 +448,7 @@ body.light-mode .orb{opacity:.58;}
     <div class="header-inner">
       <a class="lp-logo" href="#">
         <div class="lp-logo-icon">🛠️</div>
-        <div class="lp-logo-wordmark">
-          <span class="logo-name">Tools<span class="logo-hub">Hub</span></span>
-          <span class="logo-pro-badge">Pro · Free Tools</span>
-        </div>
+        <span class="lp-logo-text"><span class="logo-t">Tools</span><span class="logo-h">Hub</span><span class="logo-p">Pro</span></span>
       </a>
 
       <nav class="lp-nav">
@@ -471,9 +469,11 @@ body.light-mode .orb{opacity:.58;}
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📊</div><div><div class="dd-n">Excel → PDF</div><div class="dd-d">XLSX to PDF</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">📑</div><div><div class="dd-n">PPT → PDF</div><div class="dd-d">Slides to PDF</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔁</div><div><div class="dd-n">PDF → Word</div><div class="dd-d">PDF to DOCX</div></div></a>
-            <div class="dd-footer">
-              <a class="dd-all" href="#">All Document Tools <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-            </div>
+            <div class="dd-sep"></div>
+            <a class="dd-item dd-view-all" href="#">
+              <div class="dd-ico" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22)">🗂️</div>
+              <div><div class="dd-n">All Document Tools</div><div class="dd-d">Browse full collection →</div></div>
+            </a>
           </div>
         </div>
 
@@ -487,9 +487,11 @@ body.light-mode .orb{opacity:.58;}
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🌈</div><div><div class="dd-n">Remove Background</div><div class="dd-d">Erase BG instantly</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">💧</div><div><div class="dd-n">Add Watermark</div><div class="dd-d">Protect images</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">✨</div><div><div class="dd-n">Enhance Image</div><div class="dd-d">Upscale with AI</div></div></a>
-            <div class="dd-footer">
-              <a class="dd-all" href="#">All Image Tools <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-            </div>
+            <div class="dd-sep"></div>
+            <a class="dd-item dd-view-all" href="#">
+              <div class="dd-ico" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22)">🗂️</div>
+              <div><div class="dd-n">All Image Tools</div><div class="dd-d">Browse full collection →</div></div>
+            </a>
           </div>
         </div>
 
@@ -504,9 +506,11 @@ body.light-mode .orb{opacity:.58;}
             <div class="dd-hd">🤖 AI Powered</div>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✨</div><div><div class="dd-n">AI Rewriter</div><div class="dd-d">Rewrite & paraphrase</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">🤖</div><div><div class="dd-n">AI Summarizer</div><div class="dd-d">Summarize any text</div></div></a>
-            <div class="dd-footer">
-              <a class="dd-all" href="#">All Text & AI Tools <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-            </div>
+            <div class="dd-sep"></div>
+            <a class="dd-item dd-view-all" href="#">
+              <div class="dd-ico" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22)">🗂️</div>
+              <div><div class="dd-n">All Text & AI Tools</div><div class="dd-d">Browse full collection →</div></div>
+            </a>
           </div>
         </div>
 
@@ -524,9 +528,11 @@ body.light-mode .orb{opacity:.58;}
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔗</div><div><div class="dd-n">URL Shortener</div><div class="dd-d">Shorten any link</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">💻</div><div><div class="dd-n">Dev Tools</div><div class="dd-d">JSON, Base64, Regex</div></div></a>
             <a class="dd-item" href="#"><div class="dd-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">📅</div><div><div class="dd-n">Date Calculator</div><div class="dd-d">Age, difference</div></div></a>
-            <div class="dd-footer">
-              <a class="dd-all" href="#">All Tools Collection <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg></a>
-            </div>
+            <div class="dd-sep"></div>
+            <a class="dd-item dd-view-all" href="#">
+              <div class="dd-ico" style="background:rgba(99,102,241,.1);border:1px solid rgba(99,102,241,.22)">🗂️</div>
+              <div><div class="dd-n">All Tools Collection</div><div class="dd-d">Browse full collection →</div></div>
+            </a>
           </div>
         </div>
 

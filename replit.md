@@ -52,6 +52,7 @@ Server runs on port 5000 (or `$PORT`). Only serves preview pages, XML files, and
 7. **Clear comments in XML** — Each section has Bengali + English instructions for adding new tools/categories
 8. **Blogger upload compatibility fixes** — tool/page links now use `data:blog.homepageUrl`, search redirects are homepage-safe, search overlay and hero search animations were strengthened, mobile search is visible, and a built-in tool library section was added so key categories remain visible after Blogger upload without external files.
 9. **Blogger blank-section fix** — reveal animation is now fail-safe: all `.rv` text/cards are visible by default, so Blogger JavaScript or scroll observer issues cannot hide homepage sections and create large blank areas.
+10. **Blog post listing fallback** — if Blogger's Blog1 widget returns no visible posts on `/search` or label pages, the theme now loads real public posts from the Blogger JSON feed and renders them as professional post cards.
 
 ## How to Add a New Tool (XML)
 
@@ -75,5 +76,5 @@ Copy an existing `<div class='dd-col'>` block, change the icon/color/name, and a
 2. Select all existing code and delete it
 3. Paste the full contents of `toolshub-pro-blogger-theme.xml`
 4. Click **Save theme**
-5. Your blog posts will automatically appear via the Blog1/Blog2 widgets
+5. Your blog posts will automatically appear via the Blog1/Blog2 widgets or the JSON feed fallback
 6. Create Pages (`/p/tool-name.html`) for each tool page

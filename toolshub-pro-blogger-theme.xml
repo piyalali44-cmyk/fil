@@ -287,6 +287,9 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 .bl-sec{padding:68px 0 96px}
 .bl-lay{display:grid;grid-template-columns:1fr 292px;gap:36px;align-items:start}
 .posts-list{display:flex;flex-direction:column;gap:22px}
+#thp-feed-fallback{display:none}
+.thp-feed-loading,.thp-feed-empty{padding:28px;border-radius:var(--r2);background:var(--s1);border:1px solid var(--br);color:var(--t2);text-align:center;font-size:14px}
+.thp-feed-empty strong{display:block;color:var(--tx);font-family:var(--f-display);font-size:18px;margin-bottom:8px}
 
 /* ━━ POST CARD ━━ */
 .post-card{background:var(--s1);border:1px solid var(--br);border-radius:var(--r2);overflow:hidden;transition:transform .4s var(--ease),box-shadow .4s,border-color .3s}
@@ -1044,6 +1047,9 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
                     </article>
                   </b:loop>
                 </div>
+                <div id='thp-feed-fallback'>
+                  <div class='thp-feed-loading'>Loading latest posts...</div>
+                </div>
                 <b:include name='nextprev'/>
 
               </b:if>
@@ -1311,6 +1317,8 @@ var THP_HOME='<data:blog.homepageUrl/>';
 function thpUrl(path){return THP_HOME.replace(/\/?$/,'/')+String(path||'').replace(/^\//,'');}
 function thpGoSearch(q){q=(q||'').trim();if(q){window.location.href=thpUrl('search?q='+encodeURIComponent(q));}}
 function themeSearchFrom(id){var el=document.getElementById(id);thpGoSearch(el?el.value:'');}
+function thpEsc(s){return String(s||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+function thpStrip(s){var d=document.createElement('div');d.innerHTML=s||'';return (d.textContent||d.innerText||'').replace(/\s+/g,' ').trim();}
 
 /* ── Theme Switcher ── */
 function _syncThIco(isLight){
@@ -1385,6 +1393,70 @@ function hS(){
 (function(){
   var names=document.querySelectorAll('.logo-txt,.ft-logo-txt');
   names.forEach(function(n){if(!(n.textContent||'').trim())n.textContent='ToolsHub Pro';});
+})();
+
+function thpFeedUrl(){
+  var path=decodeURIComponent(location.pathname||'');
+  var label='';
+  var marker='/search/label/';
+  if(path.indexOf(marker)>-1){label=path.split(marker)[1].split('/')[0];}
+  var q='';
+  try{q=new URLSearchParams(location.search).get('q')||'';}catch(e){}
+  var base=label?thpUrl('feeds/posts/summary/-/'+encodeURIComponent(label)):thpUrl('feeds/posts/summary');
+  var url=base+'?alt=json-in-script&max-results=9&callback=thpRenderFeedPosts';
+  if(q){url+='&q='+encodeURIComponent(q);}
+  return url;
+}
+window.thpRenderFeedPosts=function(d){
+  var box=document.getElementById('thp-feed-fallback');
+  if(!box)return;
+  var entries=(d&&d.feed&&d.feed.entry)?d.feed.entry:[];
+  if(!entries.length){
+    box.innerHTML='<div class="thp-feed-empty"><strong>No posts found</strong><span>Publish posts in Blogger and keep the blog feed public to show them here.</span></div>';
+    return;
+  }
+  var html='<div class="posts-list">';
+  for(var i=0;i<entries.length;i++){
+    var e=entries[i],link='',cat='';
+    if(e.link){for(var j=0;j<e.link.length;j++){if(e.link[j].rel==='alternate'){link=e.link[j].href;break;}}}
+    if(e.category&&e.category.length){cat=e.category[0].term||'';}
+    var title=thpEsc(e.title&&e.title.$t?e.title.$t:'Untitled Post');
+    var raw=e.summary&&e.summary.$t?e.summary.$t:(e.content&&e.content.$t?e.content.$t:'');
+    var text=thpEsc(thpStrip(raw).slice(0,170));
+    var date=e.published&&e.published.$t?new Date(e.published.$t).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'}):'';
+    var author=e.author&&e.author[0]&&e.author[0].name?e.author[0].name.$t:'Admin';
+    var thumb=e['media$thumbnail']&&e['media$thumbnail'].url?e['media$thumbnail'].url.replace(/\/s\d+(-c)?\//,'/s640/'):'';
+    html+='<article class="post-card">';
+    html+='<div class="pc-img">'+(thumb?'<img src="'+thpEsc(thumb)+'" alt="'+title+'"/>':'<div style="display:flex;align-items:center;justify-content:center;height:100%;font-size:36px">📰</div>')+'</div>';
+    html+='<div class="pc-body">';
+    html+='<div class="pc-tags">'+(cat?'<span class="pc-tag">'+thpEsc(cat)+'</span>':'<span class="pc-tag">Blog</span>')+'</div>';
+    html+='<div class="pc-tit"><a href="'+thpEsc(link)+'">'+title+'</a></div>';
+    html+='<div class="pc-exc">'+text+(text.length>=170?'...':'')+'</div>';
+    html+='<div class="pc-meta"><span class="pmi">📅 '+thpEsc(date)+'</span><span class="pmi">👤 '+thpEsc(author)+'</span><a class="prm" href="'+thpEsc(link)+'">Read more →</a></div>';
+    html+='</div></article>';
+  }
+  html+='</div>';
+  box.innerHTML=html;
+};
+(function(){
+  function loadBlogFallback(){
+    var box=document.getElementById('thp-feed-fallback');
+    if(!box)return;
+    var list=document.querySelector('.posts-list');
+    var first=list?list.querySelector('.post-card .pc-tit a'):null;
+    if(first&&(first.textContent||'').trim()){box.style.display='none';return;}
+    box.style.display='block';
+    box.innerHTML='<div class="thp-feed-loading">Loading latest posts...</div>';
+    var old=document.getElementById('thp-feed-script');
+    if(old&&old.parentNode){old.parentNode.removeChild(old);}
+    var s=document.createElement('script');
+    s.id='thp-feed-script';
+    s.src=thpFeedUrl();
+    s.onerror=function(){box.innerHTML='<div class="thp-feed-empty"><strong>Posts could not load</strong><span>Make sure Blogger Settings → Site feed is enabled and posts are public.</span></div>';};
+    document.body.appendChild(s);
+  }
+  if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',function(){setTimeout(loadBlogFallback,500);});}
+  else{setTimeout(loadBlogFallback,500);}
 })();
 
 /* ── Keyboard shortcuts ── */

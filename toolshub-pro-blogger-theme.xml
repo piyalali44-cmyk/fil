@@ -439,9 +439,9 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 @keyframes fuP{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes glow{0%,100%{box-shadow:0 0 0 0 rgba(59,130,246,0)}50%{box-shadow:0 0 0 14px rgba(59,130,246,.06)}}
-.rv{opacity:0;transform:translateY(26px) scale(.985);transition:opacity .7s cubic-bezier(.22,1,.36,1),transform .7s cubic-bezier(.22,1,.36,1)}
+.rv{opacity:1;transform:translateY(0) scale(1);animation:fuP .7s cubic-bezier(.22,1,.36,1) both}
+.rv.d1{animation-delay:.07s}.rv.d2{animation-delay:.14s}.rv.d3{animation-delay:.21s}.rv.d4{animation-delay:.28s}
 .rv.on{opacity:1;transform:translateY(0) scale(1)}
-.rv.on.d1{transition-delay:.07s}.rv.on.d2{transition-delay:.14s}.rv.on.d3{transition-delay:.21s}.rv.on.d4{transition-delay:.28s}
 
 
 /* ━━ PARTICLES CANVAS ━━ */

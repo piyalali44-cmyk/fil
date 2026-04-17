@@ -51,6 +51,7 @@ Server runs on port 5000 (or `$PORT`). Only serves preview pages, XML files, and
 6. **Blogger posts auto-populate** — Blog1 widget handles post listing; Blog2 (sidebar) shows recent posts
 7. **Clear comments in XML** — Each section has Bengali + English instructions for adding new tools/categories
 8. **Blogger upload compatibility fixes** — tool/page links now use `data:blog.homepageUrl`, search redirects are homepage-safe, search overlay and hero search animations were strengthened, mobile search is visible, and a built-in tool library section was added so key categories remain visible after Blogger upload without external files.
+9. **Blogger blank-section fix** — reveal animation is now fail-safe: all `.rv` text/cards are visible by default, so Blogger JavaScript or scroll observer issues cannot hide homepage sections and create large blank areas.
 
 ## How to Add a New Tool (XML)
 

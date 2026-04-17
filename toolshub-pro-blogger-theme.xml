@@ -687,19 +687,8 @@ body.page-item .sidebar{position:sticky;top:calc(var(--nav-h) + 20px)}
     </div>
     <div class='mob-list'>
       <a class='mob-lnk' expr:href='data:blog.homepageUrl'>🏠 Home</a>
-      <div class='mob-div'/>
-      <div class='mob-sec'>All Tools</div>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/document-tools.html"'><span class='mob-ico'>📄</span>Document Tools</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/image-tools.html"'><span class='mob-ico'>🖼️</span>Image Tools</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/text-ai-tools.html"'><span class='mob-ico'>✍️</span>Text &amp; AI Tools</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/calculator.html"'><span class='mob-ico'>🔢</span>Calculators</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/unit-converter.html"'><span class='mob-ico'>📏</span>Converters</a>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "p/dev-tools.html"'><span class='mob-ico'>💻</span>Developer Tools</a>
-      <div class='mob-div'/>
-      <a class='mob-lnk' expr:href='data:blog.homepageUrl + &quot;search&quot;'><span class='mob-ico'>📰</span>Blog</a>
-    </div>
-    <div class='mob-foot'>
-      <a class='mob-cta' expr:href='data:blog.homepageUrl + "p/all-tools.html"'>🛠️ All Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + &quot;p/all-tools.html&quot;'>🛠️ All Tools</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + &quot;search&quot;'>📰 Blog</a>
     </div>
   </div>
 </div>

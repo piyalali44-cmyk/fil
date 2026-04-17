@@ -53,6 +53,7 @@ Server runs on port 5000 (or `$PORT`). Only serves preview pages, XML files, and
 8. **Blogger upload compatibility fixes** — tool/page links now use `data:blog.homepageUrl`, search redirects are homepage-safe, search overlay and hero search animations were strengthened, mobile search is visible, and a built-in tool library section was added so key categories remain visible after Blogger upload without external files.
 9. **Blogger blank-section fix** — reveal animation is now fail-safe: all `.rv` text/cards are visible by default, so Blogger JavaScript or scroll observer issues cannot hide homepage sections and create large blank areas.
 10. **Blog post listing fallback** — if Blogger's Blog1 widget returns no visible posts on `/search` or label pages, the theme now loads real public posts from the Blogger JSON feed and renders them as professional post cards.
+11. **Simplified mobile menu** — the mobile three-dot menu now shows only Home, All Tools, and Blog, matching the desktop header navigation and removing extra category/tool links from the mobile drawer.
 
 ## How to Add a New Tool (XML)
 

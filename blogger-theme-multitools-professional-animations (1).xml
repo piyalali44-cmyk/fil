@@ -470,27 +470,8 @@ body.light-mode #lp-header.is-scrolled{box-shadow:0 10px 30px rgba(15,23,42,.08)
     </div>
     <div class='mobile-menu-list'>
       <a class='mobile-menu-item' expr:href='data:blog.homepageUrl'>&#127968; Home</a>
-      <div class='mobile-menu-section'>PDF Tools</div>
-      <a class='mobile-menu-item' href='/p/merge-pdf.html'><span class='mobile-menu-icon'>&#128279;</span>Merge PDF</a>
-      <a class='mobile-menu-item' href='/p/split-pdf.html'><span class='mobile-menu-icon'>&#9986;</span>Split PDF</a>
-      <a class='mobile-menu-item' href='/p/rotate-pdf.html'><span class='mobile-menu-icon'>&#128260;</span>Rotate PDF</a>
-      <a class='mobile-menu-item' href='/p/edit-pdf.html'><span class='mobile-menu-icon'>&#9999;</span>Edit PDF</a>
-      <a class='mobile-menu-item' href='/p/sign-pdf.html'><span class='mobile-menu-icon'>&#9997;</span>Sign PDF</a>
-      <a class='mobile-menu-item' href='/p/protect-pdf.html'><span class='mobile-menu-icon'>&#128272;</span>Protect PDF</a>
-      <a class='mobile-menu-item' href='/p/all-tools.html' style='color:var(--a);font-weight:600'><span class='mobile-menu-icon'>&#128295;</span>All Easy to Expand</a>
-      <div class='mobile-menu-divider'/>
-      <div class='mobile-menu-section'>Convert</div>
-      <a class='mobile-menu-item' href='/p/jpg-to-pdf.html'><span class='mobile-menu-icon'>&#128444;</span>JPG &#8594; PDF</a>
-      <a class='mobile-menu-item' href='/p/word-to-pdf.html'><span class='mobile-menu-icon'>&#128221;</span>Word &#8594; PDF</a>
-      <a class='mobile-menu-item' href='/p/pdf-to-jpg.html'><span class='mobile-menu-icon'>&#128228;</span>PDF &#8594; JPG</a>
-      <div class='mobile-menu-divider'/>
-      <div class='mobile-menu-section'>Translate</div>
-      <a class='mobile-menu-item' href='/p/translate-pdf.html'><span class='mobile-menu-icon'>&#127760;</span>Translate PDF</a>
-      <a class='mobile-menu-item' href='/p/text-translate.html'><span class='mobile-menu-icon'>&#9997;</span>Text Translate</a>
-      <div class='mobile-menu-divider'/>
-      <div style='padding:14px 20px;display:flex;gap:10px;'>
-        <a class='btn btn-primary' href='/p/all-tools.html' style='flex:1;justify-content:center'>Try Free &#128640;</a>
-      </div>
+      <a class='mobile-menu-item' expr:href='data:blog.homepageUrl + &quot;p/all-tools.html&quot;'>&#128295; All Tools</a>
+      <a class='mobile-menu-item' expr:href='data:blog.homepageUrl + &quot;search&quot;'>&#128240; Blog</a>
     </div>
   </div>
 </div>

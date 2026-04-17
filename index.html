@@ -542,22 +542,9 @@ body.light-mode .orb{opacity:.58;}
     </div>
     <div class="mob-list">
       <a class="mob-item" href="/">🏠 Home</a>
-      <div class="mob-div"></div>
-      <div class="mob-sec">All Tools</div>
-      <a class="mob-item" href="/p/document-tools.html"><span class="mob-ico">📄</span>Document Tools</a>
-      <a class="mob-item" href="/p/image-tools.html"><span class="mob-ico">🖼️</span>Image Tools</a>
-      <a class="mob-item" href="/p/text-ai-tools.html"><span class="mob-ico">✍️</span>Text & AI Tools</a>
-      <a class="mob-item" href="/p/calculator.html"><span class="mob-ico">🔢</span>Calculators</a>
-      <a class="mob-item" href="/p/unit-converter.html"><span class="mob-ico">📏</span>Converters</a>
-      <a class="mob-item" href="/p/dev-tools.html"><span class="mob-ico">💻</span>Developer Tools</a>
-      <div class="mob-div"></div>
-      <a class="mob-item" href="/p/all-tools.html" style="color:#60a5fa;font-weight:700">🔍 Browse All 100+ Tools</a>
-      <div class="mob-div"></div>
+      <a class="mob-item" href="/p/all-tools.html">🛠️ All Tools</a>
       <a class="mob-item" href="/blog">📰 Blog</a>
-      <a class="mob-item" href="/p/about.html">ℹ️ About Us</a>
-      <a class="mob-item" href="/p/contact.html">📩 Contact</a>
     </div>
-    <div class="mob-footer"></div>
   </div>
 </div>
 
@@ -955,8 +942,8 @@ function toggleTheme(){
 }
 
 /* ── Mobile nav ── */
-function openMob(){document.getElementById('mob-nav').classList.add('open');document.body.style.overflow='hidden';}
-function closeMob(){document.getElementById('mob-nav').classList.remove('open');document.body.style.overflow='';}
+window.openMob=function(){var m=document.getElementById('mob-nav');if(m)m.classList.add('open');document.body.style.overflow='hidden';};
+window.closeMob=function(){var m=document.getElementById('mob-nav');if(m)m.classList.remove('open');document.body.style.overflow='';};
 
 /* ── Typewriter placeholder ── */
 (function(){

@@ -297,6 +297,17 @@ body.light-mode .hs-stag{background:rgba(0,0,0,.03)}
 .p-tags{margin-top:34px;padding-top:18px;border-top:1px solid var(--br);display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 .p-tags span{font-size:12px;color:var(--t3)}
 
+/* ━━ AUTHOR BOX ━━ */
+.auth-box{display:flex;align-items:center;gap:18px;margin-top:38px;padding:22px 24px;border-radius:var(--r2);background:var(--s2);border:1px solid var(--br)}
+.auth-av{width:60px;height:60px;border-radius:50%;background:var(--grad);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;border:3px solid var(--br2)}
+.auth-name{font-family:var(--f-display);font-size:15px;font-weight:700;color:var(--tx);margin-bottom:5px}
+.auth-bio{font-size:13px;color:var(--t2);line-height:1.65}
+
+/* ━━ RELATED POSTS ━━ */
+.rel-posts{margin-top:52px;padding-top:36px;border-top:1px solid var(--br)}
+.rel-hd{font-family:var(--f-display);font-size:20px;font-weight:700;color:var(--tx);margin-bottom:22px;display:flex;align-items:center;gap:8px}
+.rel-hd::before{content:'';width:4px;height:20px;background:var(--grad);border-radius:2px;flex-shrink:0;display:inline-block}
+
 /* ━━ SIDEBAR ━━ */
 .sidebar{position:sticky;top:calc(var(--nav-h) + 20px);display:flex;flex-direction:column;gap:18px}
 .sw{background:var(--s1);border:1px solid var(--br);border-radius:var(--r2);overflow:hidden}
@@ -608,7 +619,7 @@ body.loading *{animation-play-state:paused!important}
           </div>
         </div>
         <div class='ni'>
-          <a class='nl' href='/search'>Blog</a>
+          <a class='nl' expr:href='data:blog.homepageUrl + "search"'>Blog</a>
         </div>
       </nav>
 
@@ -659,7 +670,7 @@ body.loading *{animation-play-state:paused!important}
       <div class='mob-sec'>More</div>
       <a class='mob-lnk' href='/p/calculator.html'><span class='mob-ico'>🔢</span>Calculator</a>
       <a class='mob-lnk' href='/p/password-generator.html'><span class='mob-ico'>🔐</span>Password Generator</a>
-      <a class='mob-lnk' href='/search'><span class='mob-ico'>📰</span>Blog</a>
+      <a class='mob-lnk' expr:href='data:blog.homepageUrl + "search"'><span class='mob-ico'>📰</span>Blog</a>
     </div>
     <div class='mob-foot'>
       <a class='mob-cta' href='/p/all-tools.html'>🚀 Explore All Tools</a>
@@ -782,6 +793,63 @@ body.loading *{animation-play-state:paused!important}
 
   <b:section class='ad-banner' id='mid-page' name='Mid Page Ad' maxwidgets='3' showaddelement='yes'/>
 
+  <!-- ════ HOMEPAGE LATEST BLOG POSTS (Dynamic — shows real posts) ════ -->
+  <section class='bp-sec'>
+    <div class='wrap'>
+      <div class='sh rv'>
+        <div class='sh-tag'>📝 From the Blog</div>
+        <h2 class='sh-t'>Latest Articles &amp; Guides</h2>
+        <p class='sh-s'>Tips, tutorials and productivity guides to help you get more done online.</p>
+      </div>
+      <b:section id='home-blog-preview' name='Homepage Blog Preview' maxwidgets='1' showaddelement='no'>
+        <b:widget id='Blog2' locked='false' title='Recent Posts' type='Blog' version='2'>
+          <b:widget-settings>
+            <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
+            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
+            <b:widget-setting name='showOlderButton'>false</b:widget-setting>
+          </b:widget-settings>
+          <b:includable id='main' var='top'>
+            <div class='bp-grid'>
+              <b:loop values='data:posts' var='post'>
+                <a class='bp-card rv' expr:href='data:post.url'>
+                  <div class='bp-img'>
+                    <b:if cond='data:post.featuredImage'>
+                      <img alt='' expr:src='data:post.featuredImage'/>
+                    <b:else/>
+                      <div class='bp-fb'>📰</div>
+                    </b:if>
+                  </div>
+                  <div class='bp-body'>
+                    <div class='bp-m'>
+                      <b:loop values='data:post.labels' var='label'>
+                        <span class='bp-cat'><data:label.name/></span>
+                      </b:loop>
+                      <span class='bp-dt'><data:post.date/></span>
+                    </div>
+                    <div class='bp-tit'><data:post.title/></div>
+                    <div class='bp-exc'><data:post.snippet/></div>
+                    <div class='bp-ft'>
+                      <div class='bp-au'>
+                        <div class='bp-av'>✍</div>
+                        <span class='bp-aun'><data:post.author/></span>
+                      </div>
+                      <span class='bp-rd'>Read more →</span>
+                    </div>
+                  </div>
+                </a>
+              </b:loop>
+            </div>
+            <div class='bp-more'>
+              <a class='bp-btn' expr:href='data:blog.homepageUrl + "search"'>View All Articles →</a>
+            </div>
+          </b:includable>
+        </b:widget>
+      </b:section>
+    </div>
+  </section>
+
+  <b:section class='ad-banner' id='after-blog-preview' name='After Blog Preview Ad' maxwidgets='2' showaddelement='yes'/>
+
   <section class='cta-s'>
     <div class='wrap'>
       <div class='cta-c rv'>
@@ -894,6 +962,66 @@ body.loading *{animation-play-state:paused!important}
                         <a class='lbl-lnk' expr:href='data:label.url'><data:label.name/></a>
                       </b:loop>
                     </div>
+
+                    <!-- ══ AUTHOR BOX ══ -->
+                    <div class='auth-box'>
+                      <div class='auth-av'>✍</div>
+                      <div class='auth-info'>
+                        <div class='auth-name'><data:post.author/></div>
+                        <div class='auth-bio'>Writer at <data:blog.title/>. Passionate about tools, tech and productivity.</div>
+                      </div>
+                    </div>
+
+                    <!-- ══ RELATED POSTS (JS-powered, uses Blogger JSON Feed API) ══ -->
+                    <b:if cond='data:post.labels'>
+                      <div class='rel-posts' id='rel-posts'>
+                        <div class='rel-hd'>📖 Related Articles</div>
+                        <div class='bp-grid' id='rel-grid'></div>
+                      </div>
+                      <script>
+                      //<![CDATA[
+                      (function(){
+                        var blogUrl = '<data:blog.homepageUrl/>';
+                        var currentUrl = '<data:post.url/>';
+                        var firstLabel = '<data:post.labels[0].name/>';
+                        if(!firstLabel){ document.getElementById('rel-posts').style.display='none'; return; }
+                        var feed = blogUrl + 'feeds/posts/summary/-/' + encodeURIComponent(firstLabel) + '?alt=json&max-results=5&callback=_loadRel';
+                        window._loadRel = function(d){
+                          var entries = (d.feed && d.feed.entry) ? d.feed.entry : [];
+                          var grid = document.getElementById('rel-grid');
+                          if(!grid) return;
+                          var html = '';
+                          var count = 0;
+                          for(var i=0;i<entries.length;i++){
+                            if(count>=3) break;
+                            var e = entries[i];
+                            var link = '';
+                            for(var j=0;j<e.link.length;j++){if(e.link[j].rel==='alternate'){link=e.link[j].href;break;}}
+                            if(link===currentUrl) continue;
+                            var title = e.title.$t;
+                            var thumb = (e['media$thumbnail']&&e['media$thumbnail'].url) ? e['media$thumbnail'].url.replace(/\/s\d+-c\//,'/s400-c/') : '';
+                            var date = new Date(e.published.$t).toLocaleDateString('en-US',{year:'numeric',month:'short',day:'numeric'});
+                            var cat = (e.category&&e.category[0]) ? e.category[0].term : firstLabel;
+                            html += '<a class="bp-card" href="'+link+'">';
+                            html += '<div class="bp-img">'+(thumb?'<img src="'+thumb+'" alt="'+title+'">':'<div class="bp-fb">📰</div>')+'</div>';
+                            html += '<div class="bp-body">';
+                            html += '<div class="bp-m"><span class="bp-cat">'+cat+'</span><span class="bp-dt">'+date+'</span></div>';
+                            html += '<div class="bp-tit">'+title+'</div>';
+                            html += '<div class="bp-ft"><span class="bp-rd">Read more →</span></div>';
+                            html += '</div></a>';
+                            count++;
+                          }
+                          if(count>0){ grid.innerHTML=html; }
+                          else{ document.getElementById('rel-posts').style.display='none'; }
+                        };
+                        var s=document.createElement('script');
+                        s.src=feed;
+                        document.body.appendChild(s);
+                      })();
+                      //]]>
+                      </script>
+                    </b:if>
+
                     <b:if cond='data:post.allowComments'>
                       <div style='margin-top:40px'><b:include data='post' name='comments'/></div>
                     </b:if>

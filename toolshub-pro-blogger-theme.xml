@@ -56,7 +56,7 @@ body.light-mode{
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{font-family:var(--f-body);background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+body{font-family:var(--f-body);background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;transition:background-color .3s ease,color .3s ease}
 a{color:var(--a);text-decoration:none;transition:color .2s}
 img{max-width:100%;height:auto;display:block}
 ::-webkit-scrollbar{width:5px}::-webkit-scrollbar-track{background:var(--bg)}::-webkit-scrollbar-thumb{background:var(--br2);border-radius:3px}
@@ -72,7 +72,7 @@ body.light-mode #lp-header.scr{box-shadow:0 8px 32px rgba(15,23,42,.1)}
 .hdr{display:flex;align-items:center;height:var(--nav-h);gap:0}
 .logo{display:flex;align-items:center;gap:10px;text-decoration:none;flex-shrink:0}
 .logo-ico{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 2px 12px rgba(59,130,246,.3)}
-.logo-txt{font-family:var(--f-display);font-size:19px;font-weight:800;letter-spacing:-.5px;color:#93c5fd;white-space:nowrap;-webkit-text-fill-color:#93c5fd}
+.logo-txt{font-family:var(--f-display);font-size:19px;font-weight:800;letter-spacing:-.5px;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;white-space:nowrap}
 /* NAV */
 .lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px}
 .ni{position:relative}
@@ -80,17 +80,31 @@ body.light-mode #lp-header.scr{box-shadow:0 8px 32px rgba(15,23,42,.1)}
 .nl svg{width:11px;height:11px;fill:none;stroke:currentColor;stroke-width:2.5;transition:transform .2s}
 .nl:hover,.ni:hover>.nl{color:var(--a);background:var(--s3)}
 .ni:hover>.nl svg{transform:rotate(180deg)}
-.dd{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--s1);border:1px solid var(--br2);border-radius:var(--r2);padding:8px;min-width:210px;box-shadow:0 24px 64px rgba(0,0,0,.5);opacity:0;visibility:hidden;pointer-events:none;transition:all .22s cubic-bezier(.4,0,.2,1);z-index:500}
+.dd{position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%) translateY(8px);background:var(--s1);border:1px solid rgba(99,102,241,.2);border-radius:18px;padding:0;box-shadow:0 32px 80px rgba(0,0,0,.55),0 8px 24px rgba(0,0,0,.25),inset 0 1px 0 rgba(255,255,255,.06);opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);z-index:500}
+.dd::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:11px;height:11px;background:var(--s1);border-left:1px solid rgba(99,102,241,.2);border-top:1px solid rgba(99,102,241,.2)}
 .ni:hover .dd{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0)}
-.dd.g2{display:grid;grid-template-columns:1fr 1fr;gap:4px;min-width:400px}
-.dd.g3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px;min-width:560px}
-.dh{grid-column:1/-1;padding:5px 12px 3px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:6px}
-.dh::after{content:'';flex:1;height:1px;background:var(--br)}
+/* Mega dropdown layout */
+.dd-mega{width:min(880px,calc(100vw - 48px));left:50%}
+.dd-mega-inner{display:grid;grid-template-columns:repeat(6,1fr);gap:0;padding:18px 14px 14px}
+.dd-col{padding:6px 8px;border-right:1px solid var(--br)}
+.dd-col:last-child{border-right:none}
+.dd-cat-hd{display:flex;align-items:center;gap:7px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--br)}
+.dd-cat-ico{width:26px;height:26px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;border:1px solid transparent}
+.dd-cat-nm{font-size:11.5px;font-weight:800;color:var(--tx);letter-spacing:-.1px;line-height:1.2}
+.dd-tool{display:block;padding:5px 6px;border-radius:7px;font-size:12px;color:var(--t2);text-decoration:none;transition:all .15s;white-space:nowrap}
+.dd-tool:hover{background:rgba(59,130,246,.08);color:var(--tx);padding-left:10px}
+.dd-mega-ft{border-top:1px solid var(--br);padding:10px 14px}
+.dd-mega-all{display:flex;align-items:center;justify-content:center;padding:10px 20px;border-radius:10px;background:rgba(59,130,246,.07);border:1px solid rgba(59,130,246,.18);color:#60a5fa;font-size:13px;font-weight:700;text-decoration:none;transition:all .2s}
+.dd-mega-all:hover{background:rgba(59,130,246,.14);border-color:rgba(59,130,246,.35);color:#93c5fd}
+/* Responsive: hide mega on small screens, keep items accessible via mobile nav */
+@media(max-width:1100px){.dd-mega{min-width:680px}.dd-mega-inner{grid-template-columns:repeat(3,1fr)}.dd-col{border-right:none;border-bottom:1px solid var(--br)}.dd-col:last-child{border-bottom:none}}
+/* legacy di/d-ico/d-n classes kept for compatibility */
 .di{display:flex;align-items:center;gap:10px;padding:9px 11px;border-radius:10px;text-decoration:none;color:var(--t2);transition:all .15s}
 .di:hover{background:var(--s3);color:var(--tx)}
 .d-ico{width:34px;height:34px;border-radius:9px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:16px}
 .d-n{font-size:12.5px;font-weight:600;color:var(--tx);line-height:1.2}
 .d-d{font-size:10.5px;color:var(--t3);margin-top:1px}
+.dh{padding:5px 12px 3px;font-size:10px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:var(--t3)}
 /* HEADER RIGHT */
 .hdr-r{display:flex;align-items:center;gap:8px;margin-left:auto;flex-shrink:0}
 .h-srch{display:flex;align-items:center;gap:6px;padding:7px 14px;border-radius:50px;background:var(--s3);border:1px solid var(--br);color:var(--t2);font-size:13px;cursor:pointer;transition:all .2s;font-family:var(--f-body)}
@@ -506,39 +520,114 @@ body.loading *{animation-play-state:paused!important}
           <a class='nl' expr:href='data:blog.homepageUrl'>Home</a>
         </div>
         <div class='ni'>
-          <a class='nl' href='/p/all-tools.html'>
+          <a class='nl' href='javascript:void(0)'>
             All Tools
             <svg viewBox='0 0 24 24'><polyline points='6 9 12 15 18 9'/></svg>
           </a>
-          <div class='dd g2'>
-            <div class='dh'>🗂️ Browse by Category</div>
-            <a class='di' href='/p/document-tools.html'>
-              <div class='d-ico' style='background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)'>📄</div>
-              <div><div class='d-n'>Document Tools</div><div class='d-d'>PDF, Word, Excel</div></div>
-            </a>
-            <a class='di' href='/p/image-tools.html'>
-              <div class='d-ico' style='background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)'>🖼️</div>
-              <div><div class='d-n'>Image Tools</div><div class='d-d'>Convert, compress, edit</div></div>
-            </a>
-            <a class='di' href='/p/text-ai-tools.html'>
-              <div class='d-ico' style='background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)'>✍️</div>
-              <div><div class='d-n'>Text &amp; AI Tools</div><div class='d-d'>Write, rewrite, translate</div></div>
-            </a>
-            <a class='di' href='/p/calculator.html'>
-              <div class='d-ico' style='background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)'>🔢</div>
-              <div><div class='d-n'>Calculators</div><div class='d-d'>BMI, loan, scientific</div></div>
-            </a>
-            <a class='di' href='/p/unit-converter.html'>
-              <div class='d-ico' style='background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)'>📏</div>
-              <div><div class='d-n'>Converters</div><div class='d-d'>Length, weight, currency</div></div>
-            </a>
-            <a class='di' href='/p/dev-tools.html'>
-              <div class='d-ico' style='background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)'>💻</div>
-              <div><div class='d-n'>Developer Tools</div><div class='d-d'>JSON, Base64, Regex</div></div>
-            </a>
-            <a class='di' href='/p/all-tools.html' style='grid-column:1/-1;justify-content:center;background:rgba(59,130,246,.07);border-radius:10px;color:#60a5fa;font-weight:700;border:1px solid rgba(59,130,246,.18)'>
-              🔍 Browse All 100+ Free Tools →
-            </a>
+          <!-- ══════════════════════════════════════════════════
+            ALL TOOLS MEGA DROPDOWN
+            নতুন টুল যোগ করতে: নিচের যেকোনো .dd-col এর মধ্যে
+            <a class='dd-tool' href='/p/your-tool-page.html'>🔧 Your Tool Name</a>
+            যোগ করুন। নতুন category যোগ করতে নতুন .dd-col div তৈরি করুন।
+          ══════════════════════════════════════════════════ -->
+          <div class='dd dd-mega'>
+            <div class='dd-mega-inner'>
+
+              <!-- ── CATEGORY 1: DOCUMENT TOOLS ─────────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(239,68,68,.12);border-color:rgba(239,68,68,.25)'>📄</span>
+                  <span class='dd-cat-nm'>Document Tools</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন: href="/p/tool-name.html" -->
+                <a class='dd-tool' href='/p/merge-pdf.html'>Merge PDF</a>
+                <a class='dd-tool' href='/p/split-pdf.html'>Split PDF</a>
+                <a class='dd-tool' href='/p/compress-pdf.html'>Compress PDF</a>
+                <a class='dd-tool' href='/p/pdf-to-word.html'>PDF to Word</a>
+                <a class='dd-tool' href='/p/word-to-pdf.html'>Word to PDF</a>
+                <a class='dd-tool' href='/p/document-tools.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Document Tools →</a>
+              </div>
+
+              <!-- ── CATEGORY 2: IMAGE TOOLS ────────────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(245,158,11,.12);border-color:rgba(245,158,11,.25)'>🖼️</span>
+                  <span class='dd-cat-nm'>Image Tools</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন -->
+                <a class='dd-tool' href='/p/image-converter.html'>Image Converter</a>
+                <a class='dd-tool' href='/p/compress-image.html'>Compress Image</a>
+                <a class='dd-tool' href='/p/resize-image.html'>Resize Image</a>
+                <a class='dd-tool' href='/p/remove-background.html'>Remove Background</a>
+                <a class='dd-tool' href='/p/add-watermark.html'>Add Watermark</a>
+                <a class='dd-tool' href='/p/image-tools.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Image Tools →</a>
+              </div>
+
+              <!-- ── CATEGORY 3: TEXT & AI TOOLS ───────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(99,102,241,.12);border-color:rgba(99,102,241,.25)'>✍️</span>
+                  <span class='dd-cat-nm'>Text &amp; AI Tools</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন -->
+                <a class='dd-tool' href='/p/translator.html'>Text Translator</a>
+                <a class='dd-tool' href='/p/word-counter.html'>Word Counter</a>
+                <a class='dd-tool' href='/p/case-converter.html'>Case Converter</a>
+                <a class='dd-tool' href='/p/ai-rewriter.html'>AI Rewriter</a>
+                <a class='dd-tool' href='/p/grammar-checker.html'>Grammar Checker</a>
+                <a class='dd-tool' href='/p/text-ai-tools.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Text Tools →</a>
+              </div>
+
+              <!-- ── CATEGORY 4: CALCULATORS ────────────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(59,130,246,.12);border-color:rgba(59,130,246,.25)'>🔢</span>
+                  <span class='dd-cat-nm'>Calculators</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন -->
+                <a class='dd-tool' href='/p/scientific-calculator.html'>Scientific Calc</a>
+                <a class='dd-tool' href='/p/bmi-calculator.html'>BMI Calculator</a>
+                <a class='dd-tool' href='/p/loan-calculator.html'>Loan Calculator</a>
+                <a class='dd-tool' href='/p/age-calculator.html'>Age Calculator</a>
+                <a class='dd-tool' href='/p/percentage-calculator.html'>Percentage Calc</a>
+                <a class='dd-tool' href='/p/calculator.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Calculators →</a>
+              </div>
+
+              <!-- ── CATEGORY 5: CONVERTERS ─────────────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(16,185,129,.12);border-color:rgba(16,185,129,.25)'>📏</span>
+                  <span class='dd-cat-nm'>Converters</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন -->
+                <a class='dd-tool' href='/p/unit-converter.html'>Unit Converter</a>
+                <a class='dd-tool' href='/p/currency-converter.html'>Currency Converter</a>
+                <a class='dd-tool' href='/p/temperature-converter.html'>Temperature Conv.</a>
+                <a class='dd-tool' href='/p/number-converter.html'>Number Base Conv.</a>
+                <a class='dd-tool' href='/p/color-converter.html'>Color Converter</a>
+                <a class='dd-tool' href='/p/unit-converter.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Converters →</a>
+              </div>
+
+              <!-- ── CATEGORY 6: DEVELOPER TOOLS ───────────────────── -->
+              <div class='dd-col'>
+                <div class='dd-cat-hd'>
+                  <span class='dd-cat-ico' style='background:rgba(34,211,238,.12);border-color:rgba(34,211,238,.25)'>💻</span>
+                  <span class='dd-cat-nm'>Developer Tools</span>
+                </div>
+                <!-- টুলের লিঙ্ক এখানে যোগ করুন -->
+                <a class='dd-tool' href='/p/json-formatter.html'>JSON Formatter</a>
+                <a class='dd-tool' href='/p/base64.html'>Base64 Encoder</a>
+                <a class='dd-tool' href='/p/regex-tester.html'>Regex Tester</a>
+                <a class='dd-tool' href='/p/color-picker.html'>Color Picker</a>
+                <a class='dd-tool' href='/p/password-generator.html'>Password Gen</a>
+                <a class='dd-tool' href='/p/dev-tools.html' style='color:var(--a);font-weight:600;margin-top:4px'>All Dev Tools →</a>
+              </div>
+
+            </div>
+            <!-- Browse all footer -->
+            <div class='dd-mega-ft'>
+              <a class='dd-mega-all' href='/p/all-tools.html'>🔍 Browse All 100+ Free Tools →</a>
+            </div>
           </div>
         </div>
         <div class='ni'>
@@ -704,61 +793,6 @@ body.loading *{animation-play-state:paused!important}
   </section>
 
   <b:section class='ad-banner' id='mid-page' name='Mid Page Ad' maxwidgets='3' showaddelement='yes'/>
-
-  <!-- ════ HOMEPAGE LATEST BLOG POSTS (Dynamic — shows real posts) ════ -->
-  <section class='bp-sec'>
-    <div class='wrap'>
-      <div class='sh rv'>
-        <div class='sh-tag'>📝 From the Blog</div>
-        <h2 class='sh-t'>Latest Articles &amp; Guides</h2>
-        <p class='sh-s'>Tips, tutorials and productivity guides to help you get more done online.</p>
-      </div>
-      <b:section id='home-blog-preview' name='Homepage Blog Preview' maxwidgets='1' showaddelement='no'>
-        <b:widget id='Blog2' locked='false' title='Recent Posts' type='Blog' version='2'>
-          <b:widget-settings>
-            <b:widget-setting name='numItemsToShow'>3</b:widget-setting>
-            <b:widget-setting name='showDateHeader'>false</b:widget-setting>
-            <b:widget-setting name='showOlderButton'>false</b:widget-setting>
-          </b:widget-settings>
-          <b:includable id='main' var='top'>
-            <div class='bp-grid'>
-              <b:loop values='data:posts' var='post'>
-                <a class='bp-card rv' expr:href='data:post.url'>
-                  <div class='bp-img'>
-                    <b:if cond='data:post.featuredImage'>
-                      <img alt='' expr:src='data:post.featuredImage'/>
-                    <b:else/>
-                      <div class='bp-fb'>📰</div>
-                    </b:if>
-                  </div>
-                  <div class='bp-body'>
-                    <div class='bp-m'>
-                      <b:loop values='data:post.labels' var='label'>
-                        <span class='bp-cat'><data:label.name/></span>
-                      </b:loop>
-                      <span class='bp-dt'><data:post.date/></span>
-                    </div>
-                    <div class='bp-tit'><data:post.title/></div>
-                    <div class='bp-exc'><data:post.snippet/></div>
-                    <div class='bp-ft'>
-                      <div class='bp-au'>
-                        <div class='bp-av'>✍</div>
-                        <span class='bp-aun'><data:post.author/></span>
-                      </div>
-                      <span class='bp-rd'>Read more →</span>
-                    </div>
-                  </div>
-                </a>
-              </b:loop>
-            </div>
-            <div class='bp-more'>
-              <a class='bp-btn' expr:href='data:blog.homepageUrl + "search"'>View All Articles →</a>
-            </div>
-          </b:includable>
-        </b:widget>
-      </b:section>
-    </div>
-  </section>
 
   <b:section class='ad-banner' id='after-blog-preview' name='After Blog Preview Ad' maxwidgets='2' showaddelement='yes'/>
 

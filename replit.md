@@ -1,49 +1,72 @@
-# MultiTools Pro — Blogger Theme Preview
+# ToolsHub Pro — Blogger XML Theme Preview
 
 ## Project Overview
 
-This project is a **Blogger XML theme** for a multi-tools online platform (PDF tools, image tools, text utilities, converters, etc.). The original theme file is:
+This project is a **Blogger XML theme** for a multi-tools online platform (PDF tools, image tools, text utilities, converters, calculators, AI tools, etc.).
 
-- `blogger-theme-multitools-professional-animations (1).xml` — Full Blogger template to upload to the Blogger dashboard.
+**Main deliverable**: `toolshub-pro-blogger-theme.xml` — upload this to Blogger Dashboard → Theme → Edit HTML.
 
 Since Blogger themes cannot run standalone, this Replit serves a **static HTML preview** of the theme's design and UI.
 
 ## Project Structure
 
 ```
-├── blogger-theme-multitools-professional-animations (1).xml  # Original Blogger XML theme
-├── index.html      # Static HTML preview of the theme
-├── blog.html       # Static blog listing preview page
-├── attached_assets/ # Public image assets used by the preview
-├── server.py       # Python HTTP server (serves approved public files on port 5000)
+├── toolshub-pro-blogger-theme.xml   # MAIN Blogger XML theme (use this)
+├── blogger-theme-multitools-professional-animations (1).xml  # Old version
+├── index.html      # Static preview — homepage
+├── blog.html       # Static preview — blog listing page
+├── all-tools.html  # Static preview — all tools page
+├── attached_assets/ # Public image assets
+├── server.py       # Python HTTP server (port 5000)
 └── replit.md       # This file
 ```
 
 ## Running the App
 
-The app runs via a Python HTTP server on port 5000 by default and respects Replit's `PORT` environment variable:
-
 ```bash
 python server.py
 ```
 
-The server intentionally restricts requests to the preview pages, theme XML files, and `attached_assets/` so internal project files are not exposed through the web preview.
+Server runs on port 5000 (or `$PORT`). Only serves preview pages, XML files, and `attached_assets/`.
 
 ## Tech Stack
 
-- **Theme**: Blogger XML template with CSS3, HTML5, JavaScript
+- **Theme**: Blogger XML template (CSS3, HTML5, Vanilla JS)
 - **Preview Server**: Python built-in HTTP server
 - **Fonts**: Google Fonts (Syne, DM Sans)
-- **Design**: Dark/light mode, CSS variables, responsive layout, professional animated backgrounds, animated line/particle effects
+- **Design**: Dark/light mode with smooth transitions, CSS variables, responsive layout, particle canvas, scroll reveal animations
 
 ## Deployment
 
 - **Target**: Autoscale
 - **Run Command**: `python server.py`
 
+## Completed Features (toolshub-pro-blogger-theme.xml)
+
+1. **Logo gradient** — ToolsHub Pro shows as blue-purple gradient (CSS var(--grad) with background-clip:text)
+2. **Smooth dark/light transitions** — body has `transition: background-color .3s ease, color .3s ease`
+3. **All Tools nav — no navigate** — href changed to `javascript:void(0)` so clicking won't navigate away
+4. **Mega dropdown** — 6-column professional dropdown with category headers + individual tool links per category
+5. **Latest Articles hidden on homepage** — `<section class='bp-sec'>` block fully removed
+6. **Blogger posts auto-populate** — Blog1 widget handles post listing; Blog2 (sidebar) shows recent posts
+7. **Clear comments in XML** — Each section has Bengali + English instructions for adding new tools/categories
+
+## How to Add a New Tool (XML)
+
+Inside the nav dropdown (`<div class='dd-mega'>`), find the relevant `.dd-col` category block and add:
+```html
+<a class='dd-tool' href='/p/your-tool-page-slug.html'>Tool Name</a>
+```
+
+## How to Add a New Category (XML)
+
+Copy an existing `<div class='dd-col'>` block, change the icon/color/name, and add your tool links inside.
+
 ## How to Use the Blogger Theme
 
-1. Go to your Blogger dashboard
-2. Navigate to **Theme > Customize > Edit HTML**
-3. Replace the existing theme XML with the content from `blogger-theme-multitools-professional-animations (1).xml`
-4. Save and apply
+1. Go to Blogger Dashboard → **Theme → Edit HTML**
+2. Select all existing code and delete it
+3. Paste the full contents of `toolshub-pro-blogger-theme.xml`
+4. Click **Save theme**
+5. Your blog posts will automatically appear via the Blog1/Blog2 widgets
+6. Create Pages (`/p/tool-name.html`) for each tool page

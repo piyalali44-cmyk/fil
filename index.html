@@ -91,9 +91,9 @@ body.light-mode #lp-header.scrolled{box-shadow:0 8px 32px rgba(15,23,42,.1);}
 .mob-btn span{display:block;width:18px;height:2px;background:currentColor;border-radius:2px;}
 
 /* ─── MOBILE NAV ─── */
-.mob-nav{display:none;position:fixed;inset:0;z-index:1500;background:rgba(0,0,0,.76);backdrop-filter:blur(14px);}
+.mob-nav{display:none;position:fixed;inset:0;z-index:1500;background:linear-gradient(90deg,rgba(0,0,0,.65) 0%,rgba(11,15,26,.82) 60%,rgba(11,15,26,.72) 100%);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);}
 .mob-nav.open{display:flex;animation:fadeIn .2s ease;}
-.mob-nav-inner{width:min(320px,88vw);height:100vh;background:var(--s1);border-right:1px solid var(--br2);display:flex;flex-direction:column;animation:slideLeft .3s var(--ease);box-shadow:24px 0 60px rgba(0,0,0,.4);}
+.mob-nav-inner{width:min(320px,88vw);height:100vh;background:var(--s1);border-right:1px solid rgba(99,102,241,.15);display:flex;flex-direction:column;animation:slideLeft .3s var(--ease);box-shadow:32px 0 80px rgba(0,0,0,.5);}
 @keyframes slideLeft{from{transform:translateX(-100%)}to{transform:translateX(0)}}
 .mob-head{display:flex;align-items:center;justify-content:flex-end;padding:14px 16px;border-bottom:1px solid var(--br);flex-shrink:0;}
 .mob-close{width:30px;height:30px;border-radius:8px;background:var(--s3);border:1px solid var(--br);color:var(--t2);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:14px;transition:all .15s;}
@@ -104,9 +104,10 @@ body.light-mode #lp-header.scrolled{box-shadow:0 8px 32px rgba(15,23,42,.1);}
 .mob-item:hover{background:var(--s2);color:var(--tx);border-left-color:var(--a);padding-left:20px;}
 .mob-ico{width:30px;height:30px;border-radius:8px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:14px;background:var(--s3);border:1px solid var(--br);}
 .mob-div{height:1px;background:var(--br);margin:6px 14px;}
-.mob-footer{flex-shrink:0;padding:14px 18px 28px;border-top:1px solid var(--br);}
-.mob-cta{display:flex;align-items:center;justify-content:center;gap:8px;padding:11px 22px;border-radius:50px;font-size:13.5px;font-weight:700;text-decoration:none;background:var(--grad);color:#fff;box-shadow:0 4px 16px rgba(59,130,246,.3);transition:all .2s;}
-.mob-cta:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.45);color:#fff;}
+.mob-footer{display:none;}
+.mob-all-item{color:var(--a)!important;font-weight:700;}
+.mob-all-item .mob-ico{background:rgba(59,130,246,.1)!important;border-color:rgba(99,102,241,.3)!important;}
+.mob-all-item:hover{border-left-color:var(--a)!important;}
 
 /* ─── SEARCH OVERLAY ─── */
 .search-ov{display:none;position:fixed;inset:0;z-index:2000;background:rgba(0,0,0,.82);backdrop-filter:blur(14px);align-items:flex-start;justify-content:center;padding-top:80px;}
@@ -584,10 +585,10 @@ body.light-mode .orb{opacity:.58;}
       <a class="mob-item" href="/blog">📰 Blog</a>
       <a class="mob-item" href="#">ℹ️ About Us</a>
       <a class="mob-item" href="#">📩 Contact</a>
+      <div class="mob-div"></div>
+      <a class="mob-item mob-all-item" href="#"><span class="mob-ico">🗂️</span>All Tools</a>
     </div>
-    <div class="mob-footer">
-      <a href="#" class="mob-cta">🚀 Explore All Tools</a>
-    </div>
+    <div class="mob-footer"></div>
   </div>
 </div>
 

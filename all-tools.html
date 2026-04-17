@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>All Tools — ToolsHub Pro | 100+ Free Online Tools</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700&display=swap" rel="stylesheet"/>
+  <style>
+:root{
+  --bg:#0b0f1a;--bg2:#111827;--s1:#1a2234;--s2:#1e2a3e;--s3:#243147;--s4:#2c3d58;
+  --br:#2e3f5c;--br2:#3a4f6e;--a:#3b82f6;--a2:#6366f1;--a3:#22d3ee;
+  --g:#10b981;--r:#ef4444;--y:#f59e0b;
+  --tx:#e8edf5;--t2:#94a3b8;--t3:#4a6080;
+  --grad:linear-gradient(135deg,#3b82f6 0%,#6366f1 50%,#22d3ee 100%);
+  --nav-h:64px;--radius:12px;--radius-lg:18px;
+  --font-display:'Syne',sans-serif;--font-body:'DM Sans',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+body.light-mode{
+  --bg:#f0f4f8;--bg2:#ffffff;--s1:#ffffff;--s2:#f5f8fc;--s3:#edf2f7;--s4:#e2e8f0;
+  --br:#d1dce9;--br2:#bac8d8;--a:#2563eb;--a2:#4f46e5;--a3:#0891b2;
+  --tx:#0f1f36;--t2:#334e68;--t3:#627d98;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;scroll-padding-top:calc(var(--nav-h)+12px);}
+body{font-family:var(--font-body);background:var(--bg);color:var(--tx);font-size:15px;line-height:1.65;-webkit-font-smoothing:antialiased;overflow-x:hidden;padding-top:var(--nav-h);}
+a{color:var(--a);text-decoration:none;transition:color .2s;}
+::-webkit-scrollbar{width:5px;}
+::-webkit-scrollbar-track{background:var(--bg);}
+::-webkit-scrollbar-thumb{background:var(--br2);border-radius:3px;}
+.container{max-width:1200px;margin:0 auto;padding:0 20px;}
+
+/* HEADER */
+#lp-header{position:fixed;top:0;left:0;right:0;width:100%;z-index:3000;height:var(--nav-h);background:rgba(11,15,26,.93);backdrop-filter:blur(20px) saturate(180%);border-bottom:1px solid rgba(255,255,255,.06);transition:box-shadow .3s,background .3s;}
+body.light-mode #lp-header{background:rgba(255,255,255,.94);border-bottom-color:rgba(0,0,0,.07);}
+#lp-header.scrolled{box-shadow:0 8px 40px rgba(0,0,0,.28);}
+.header-inner{display:flex;align-items:center;height:var(--nav-h);gap:0;}
+.lp-logo{display:flex;align-items:center;gap:11px;text-decoration:none;flex-shrink:0;}
+.lp-logo-icon{width:40px;height:40px;border-radius:12px;background:linear-gradient(145deg,#2563eb,#4f46e5);border:1px solid rgba(99,102,241,.45);display:flex;align-items:center;justify-content:center;font-size:19px;box-shadow:0 4px 16px rgba(59,130,246,.45);}
+.lp-logo-text{font-family:var(--font-display);font-size:18px;font-weight:700;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;letter-spacing:-.3px;}
+.lp-nav{flex:1;display:flex;align-items:center;justify-content:center;gap:2px;}
+.nav-item{position:relative;}
+.nav-link{display:flex;align-items:center;gap:5px;padding:8px 14px;border-radius:9px;font-size:14px;font-weight:500;color:var(--t2);text-decoration:none;white-space:nowrap;transition:all .18s;}
+.nav-link svg{width:12px;height:12px;fill:none;stroke:currentColor;stroke-width:2.5;transition:transform .2s;}
+.nav-link:hover,.nav-item:hover>.nav-link{color:var(--a);background:var(--s3);}
+.nav-link.active{color:var(--a);background:var(--s3);}
+.nav-dropdown{position:absolute;top:calc(100% + 12px);left:50%;transform:translateX(-50%) translateY(10px);background:var(--s1);border:1px solid rgba(99,102,241,.2);border-radius:16px;padding:10px;min-width:220px;box-shadow:0 32px 80px rgba(0,0,0,.55);opacity:0;visibility:hidden;pointer-events:none;transition:all .25s cubic-bezier(.4,0,.2,1);z-index:500;}
+.nav-dropdown::before{content:'';position:absolute;top:-6px;left:50%;transform:translateX(-50%) rotate(45deg);width:11px;height:11px;background:var(--s1);border-left:1px solid rgba(99,102,241,.2);border-top:1px solid rgba(99,102,241,.2);}
+.nav-item:hover .nav-dropdown{opacity:1;visibility:visible;pointer-events:auto;transform:translateX(-50%) translateY(0);}
+.nav-dropdown.g2{display:grid;grid-template-columns:1fr 1fr;gap:3px;min-width:440px;}
+.dd-hd{font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);padding:8px 10px 4px;grid-column:1/-1;}
+.dd-item{display:flex;align-items:center;gap:10px;padding:9px 10px;border-radius:10px;text-decoration:none;color:var(--tx);transition:all .15s;}
+.dd-item:hover{background:var(--s3);}
+.dd-ico{width:32px;height:32px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0;}
+.dd-n{font-size:13px;font-weight:600;color:var(--tx);}
+.dd-d{font-size:11px;color:var(--t3);}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+.theme-btn{width:36px;height:36px;border-radius:9px;background:var(--s3);border:1px solid var(--br);cursor:pointer;font-size:16px;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.theme-btn:hover{border-color:var(--a);background:var(--s2);}
+.mob-btn{display:none;flex-direction:column;gap:5px;width:36px;height:36px;background:var(--s3);border:1px solid var(--br);border-radius:9px;align-items:center;justify-content:center;cursor:pointer;}
+.mob-btn span{width:16px;height:2px;background:var(--t2);border-radius:2px;transition:all .3s;}
+
+/* MOBILE NAV */
+.mob-nav{position:fixed;inset:0;z-index:4000;background:rgba(0,0,0,.6);opacity:0;pointer-events:none;transition:opacity .3s;}
+.mob-nav.open{opacity:1;pointer-events:auto;}
+.mob-nav-inner{position:absolute;right:0;top:0;bottom:0;width:min(340px,90vw);background:var(--bg2);border-left:1px solid var(--br);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .35s var(--ease);}
+.mob-nav.open .mob-nav-inner{transform:translateX(0);}
+.mob-head{display:flex;align-items:center;justify-content:flex-end;padding:14px 16px;border-bottom:1px solid var(--br);}
+.mob-close{width:32px;height:32px;border-radius:8px;background:var(--s3);border:1px solid var(--br);cursor:pointer;font-size:14px;color:var(--t2);display:flex;align-items:center;justify-content:center;}
+.mob-list{flex:1;overflow-y:auto;padding:8px 0;}
+.mob-item{display:flex;align-items:center;gap:10px;padding:11px 20px;font-size:14px;font-weight:500;color:var(--t2);text-decoration:none;transition:all .15s;}
+.mob-item:hover,.mob-item.active{color:var(--tx);background:var(--s3);}
+.mob-ico{width:24px;height:24px;border-radius:6px;background:var(--s3);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0;}
+.mob-sec{font-size:10px;font-weight:800;letter-spacing:1.4px;text-transform:uppercase;color:var(--t3);padding:12px 20px 4px;}
+.mob-div{height:1px;background:var(--br);margin:8px 16px;}
+
+/* HERO / SEARCH */
+.at-hero{padding:52px 0 40px;text-align:center;position:relative;}
+.at-hero-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 14px;border-radius:50px;background:rgba(59,130,246,.1);border:1px solid rgba(59,130,246,.2);font-size:12px;font-weight:700;color:var(--a);letter-spacing:.4px;margin-bottom:18px;}
+.at-hero-title{font-family:var(--font-display);font-size:clamp(28px,4.5vw,52px);font-weight:800;letter-spacing:-.8px;line-height:1.1;margin-bottom:14px;}
+.at-hero-title span{background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.at-hero-sub{font-size:16px;color:var(--t2);margin-bottom:32px;max-width:560px;margin-left:auto;margin-right:auto;}
+.at-search{max-width:580px;margin:0 auto 18px;position:relative;}
+.at-search input{width:100%;padding:14px 20px 14px 50px;background:var(--s1);border:1px solid var(--br);border-radius:50px;font-size:15px;color:var(--tx);font-family:var(--font-body);outline:none;transition:border-color .2s,box-shadow .2s;}
+.at-search input:focus{border-color:var(--a);box-shadow:0 0 0 3px rgba(59,130,246,.12);}
+.at-search input::placeholder{color:var(--t3);}
+.at-search .s-ico{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:var(--t3);pointer-events:none;}
+.at-stats{display:flex;align-items:center;justify-content:center;gap:24px;font-size:12px;color:var(--t3);flex-wrap:wrap;}
+.at-stat strong{color:var(--a);font-weight:700;}
+
+/* CATEGORY FILTERS */
+.cat-filters{padding:0 0 32px;}
+.cat-filter-list{display:flex;gap:8px;overflow-x:auto;padding-bottom:4px;scrollbar-width:none;}
+.cat-filter-list::-webkit-scrollbar{display:none;}
+.cat-filter{padding:7px 16px;border-radius:50px;font-size:13px;font-weight:600;background:var(--s2);border:1px solid var(--br);color:var(--t2);cursor:pointer;white-space:nowrap;transition:all .18s;user-select:none;}
+.cat-filter:hover{border-color:var(--a);color:var(--a);}
+.cat-filter.active{background:var(--a);border-color:var(--a);color:#fff;}
+
+/* CATEGORY SECTIONS */
+.cat-section{margin-bottom:56px;}
+.cat-sec-head{display:flex;align-items:center;gap:14px;margin-bottom:22px;padding-bottom:14px;border-bottom:1px solid var(--br);}
+.cat-sec-ico{width:40px;height:40px;border-radius:11px;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;}
+.cat-sec-info{flex:1;}
+.cat-sec-name{font-family:var(--font-display);font-size:20px;font-weight:800;letter-spacing:-.3px;}
+.cat-sec-count{font-size:12px;color:var(--t3);margin-top:1px;}
+.cat-sec-link{font-size:13px;font-weight:600;color:var(--a);display:flex;align-items:center;gap:4px;white-space:nowrap;transition:gap .2s;}
+.cat-sec-link:hover{gap:8px;}
+
+/* TOOL CARDS GRID */
+.tools-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:14px;}
+.tool-card{background:var(--s1);border:1px solid var(--br);border-radius:var(--radius-lg);padding:20px 18px 18px;display:flex;flex-direction:column;gap:12px;text-decoration:none;color:var(--tx);transition:all .22s;position:relative;overflow:hidden;}
+.tool-card:hover{transform:translateY(-4px);box-shadow:0 16px 40px rgba(0,0,0,.2),0 0 0 1px rgba(59,130,246,.12);border-color:rgba(59,130,246,.25);}
+.tool-card::before{content:'';position:absolute;inset:-55%;background:linear-gradient(120deg,transparent 42%,rgba(255,255,255,.10) 50%,transparent 58%);opacity:0;transform:translateX(-40%) rotate(8deg);transition:opacity .5s;}
+.tool-card:hover::before{opacity:1;animation:shineMove .75s ease both;}
+@keyframes shineMove{to{transform:translateX(40%) rotate(8deg);}}
+.tc-ico{width:46px;height:46px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;}
+.tc-info{}
+.tc-name{font-size:14px;font-weight:700;letter-spacing:-.2px;margin-bottom:4px;line-height:1.3;}
+.tc-desc{font-size:12px;color:var(--t3);line-height:1.5;}
+.tc-badge{position:absolute;top:10px;right:10px;padding:2px 8px;border-radius:50px;font-size:9px;font-weight:800;letter-spacing:.5px;text-transform:uppercase;}
+.badge-new{background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25);color:#34d399;}
+.badge-hot{background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25);color:#f87171;}
+.badge-ai{background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25);color:#a78bfa;}
+
+/* FOOTER */
+#footer{background:rgba(11,15,26,.88);border-top:1px solid rgba(255,255,255,.04);padding:64px 0 0;margin-top:32px;}
+body.light-mode #footer{background:rgba(255,255,255,.88);}
+.ft-grid{display:grid;grid-template-columns:260px repeat(3,1fr);gap:44px;margin-bottom:52px;}
+.ft-logo{display:flex;align-items:center;gap:10px;margin-bottom:14px;}
+.ft-logo-ico{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#1e40af,#312e81);border:1px solid rgba(99,102,241,.35);display:flex;align-items:center;justify-content:center;font-size:17px;}
+.ft-logo-txt{font-family:var(--font-display);font-size:18px;font-weight:800;background:var(--grad);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;}
+.ft-desc{font-size:13px;color:var(--t3);line-height:1.8;margin-bottom:22px;}
+.ft-social{display:flex;gap:8px;}
+.s-btn{width:36px;height:36px;border-radius:9px;background:var(--s3);border:1px solid var(--br);display:flex;align-items:center;justify-content:center;font-size:15px;text-decoration:none;color:var(--t2);transition:all .2s;}
+.s-btn:hover{border-color:var(--a);color:var(--a);}
+.ft-col-title{font-size:11px;font-weight:800;letter-spacing:1.6px;text-transform:uppercase;color:var(--t2);margin-bottom:18px;}
+.ft-links{display:flex;flex-direction:column;gap:10px;}
+.ft-link{font-size:13px;color:var(--t3);text-decoration:none;transition:all .2s;display:flex;align-items:center;gap:6px;}
+.ft-link:hover{color:var(--tx);padding-left:4px;}
+.ft-link::before{content:'›';opacity:0;transition:opacity .2s,margin-right .2s;margin-right:0;}
+.ft-link:hover::before{opacity:1;margin-right:4px;}
+.ft-bottom{border-top:1px solid var(--br);padding:24px 0;display:flex;align-items:center;justify-content:space-between;font-size:12px;color:var(--t3);flex-wrap:wrap;gap:12px;}
+.ft-bottom-links{display:flex;gap:20px;}
+.ft-bottom-links a{color:var(--t3);text-decoration:none;transition:color .2s;}
+.ft-bottom-links a:hover{color:var(--tx);}
+
+/* NO RESULTS */
+.no-results{text-align:center;padding:60px 20px;color:var(--t3);}
+.no-results .nr-ico{font-size:48px;margin-bottom:16px;}
+.no-results p{font-size:15px;}
+
+/* RESPONSIVE */
+@media(max-width:1024px){.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:768px){.lp-nav{display:none;}.mob-btn{display:flex;}.tools-grid{grid-template-columns:repeat(auto-fill,minmax(160px,1fr));}.ft-grid{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.tools-grid{grid-template-columns:1fr 1fr;}.ft-grid{grid-template-columns:1fr;}.at-stats{gap:14px;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;}}
+  </style>
+</head>
+<body id="body">
+
+<!-- HEADER -->
+<header id="lp-header">
+  <div class="container">
+    <div class="header-inner">
+      <a class="lp-logo" href="/">
+        <div class="lp-logo-icon">🛠️</div>
+        <span class="lp-logo-text">ToolsHub Pro</span>
+      </a>
+      <nav class="lp-nav">
+        <div class="nav-item"><a class="nav-link" href="/">Home</a></div>
+        <div class="nav-item">
+          <a class="nav-link active" href="/all-tools.html">All Tools <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></a>
+          <div class="nav-dropdown g2">
+            <div class="dd-hd">🗂️ Browse by Category</div>
+            <a class="dd-item" href="#pdf-tools"><div class="dd-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">📄</div><div><div class="dd-n">Document Tools</div><div class="dd-d">PDF, Word, Excel</div></div></a>
+            <a class="dd-item" href="#image-tools"><div class="dd-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🖼️</div><div><div class="dd-n">Image Tools</div><div class="dd-d">Convert, compress, edit</div></div></a>
+            <a class="dd-item" href="#text-ai"><div class="dd-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">✍️</div><div><div class="dd-n">Text & AI Tools</div><div class="dd-d">Write, rewrite, translate</div></div></a>
+            <a class="dd-item" href="#calculators"><div class="dd-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔢</div><div><div class="dd-n">Calculators</div><div class="dd-d">BMI, loan, scientific</div></div></a>
+            <a class="dd-item" href="#converters"><div class="dd-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📏</div><div><div class="dd-n">Converters</div><div class="dd-d">Length, weight, currency</div></div></a>
+            <a class="dd-item" href="#dev-tools"><div class="dd-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">💻</div><div><div class="dd-n">Developer Tools</div><div class="dd-d">JSON, Base64, Regex</div></div></a>
+          </div>
+        </div>
+        <div class="nav-item"><a class="nav-link" href="/blog">Blog</a></div>
+      </nav>
+      <div class="header-right">
+        <button class="theme-btn" id="theme-btn" onclick="toggleTheme()" title="Toggle theme">🌙</button>
+        <button class="mob-btn" onclick="openMob()"><span></span><span></span><span></span></button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- MOBILE NAV -->
+<div class="mob-nav" id="mob-nav" onclick="if(event.target===this)closeMob()">
+  <div class="mob-nav-inner">
+    <div class="mob-head">
+      <button class="mob-close" onclick="closeMob()">✕</button>
+    </div>
+    <div class="mob-list">
+      <a class="mob-item" href="/">🏠 Home</a>
+      <div class="mob-div"></div>
+      <div class="mob-sec">All Tools</div>
+      <a class="mob-item" href="#pdf-tools"><span class="mob-ico">📄</span>Document Tools</a>
+      <a class="mob-item" href="#image-tools"><span class="mob-ico">🖼️</span>Image Tools</a>
+      <a class="mob-item" href="#text-ai"><span class="mob-ico">✍️</span>Text & AI Tools</a>
+      <a class="mob-item" href="#calculators"><span class="mob-ico">🔢</span>Calculators</a>
+      <a class="mob-item" href="#converters"><span class="mob-ico">📏</span>Converters</a>
+      <a class="mob-item" href="#dev-tools"><span class="mob-ico">💻</span>Developer Tools</a>
+      <div class="mob-div"></div>
+      <a class="mob-item" href="/blog">📰 Blog</a>
+    </div>
+  </div>
+</div>
+
+<!-- HERO -->
+<section class="at-hero">
+  <div class="container">
+    <div class="at-hero-tag">🛠️ All Free Tools</div>
+    <h1 class="at-hero-title">100+ <span>Free Online Tools</span><br/>All in One Place</h1>
+    <p class="at-hero-sub">No signup. No installation. No payment. Just pick a tool and get things done instantly in your browser.</p>
+    <div class="at-search">
+      <span class="s-ico">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      </span>
+      <input id="tool-search" type="text" placeholder="Search tools — e.g. Merge PDF, Translator, BMI Calculator..." oninput="filterTools(this.value)" autocomplete="off"/>
+    </div>
+    <div class="at-stats">
+      <span><strong>8+</strong> Categories</span>
+      <span>·</span>
+      <span><strong>100+</strong> Free Tools</span>
+      <span>·</span>
+      <span><strong>0</strong> Signup Required</span>
+      <span>·</span>
+      <span><strong>100%</strong> Browser-Based</span>
+    </div>
+  </div>
+</section>
+
+<!-- CATEGORY FILTERS -->
+<div class="cat-filters" style="position:sticky;top:var(--nav-h);z-index:100;background:var(--bg);border-bottom:1px solid var(--br);padding:12px 0;">
+  <div class="container">
+    <div class="cat-filter-list">
+      <button class="cat-filter active" onclick="filterCat('all',this)">All Tools</button>
+      <button class="cat-filter" onclick="filterCat('pdf',this)">📄 PDF & Document</button>
+      <button class="cat-filter" onclick="filterCat('image',this)">🖼️ Image</button>
+      <button class="cat-filter" onclick="filterCat('text',this)">✍️ Text & Writing</button>
+      <button class="cat-filter" onclick="filterCat('ai',this)">🤖 AI Tools</button>
+      <button class="cat-filter" onclick="filterCat('calc',this)">🔢 Calculators</button>
+      <button class="cat-filter" onclick="filterCat('convert',this)">📏 Converters</button>
+      <button class="cat-filter" onclick="filterCat('dev',this)">💻 Developer</button>
+      <button class="cat-filter" onclick="filterCat('gen',this)">⚡ Generators</button>
+    </div>
+  </div>
+</div>
+
+<!-- ALL TOOLS SECTIONS -->
+<main style="padding:40px 0 20px;">
+  <div class="container" id="tools-container">
+
+    <!-- ── PDF & DOCUMENT TOOLS ── -->
+    <div class="cat-section" id="pdf-tools" data-cat="pdf">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">📄</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">PDF & Document Tools</div>
+          <div class="cat-sec-count">12 tools · Edit, convert, compress, and manage PDF files</div>
+        </div>
+        <a class="cat-sec-link" href="/p/document-tools.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/merge-pdf.html" data-name="Merge PDF">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🔗</div>
+          <div class="tc-info"><div class="tc-name">Merge PDF</div><div class="tc-desc">Combine multiple PDF files into one document instantly.</div></div>
+        </a>
+        <a class="tool-card" href="/p/split-pdf.html" data-name="Split PDF">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">✂️</div>
+          <div class="tc-info"><div class="tc-name">Split PDF</div><div class="tc-desc">Divide a PDF into multiple separate files by page.</div></div>
+          <span class="tc-badge badge-hot">HOT</span>
+        </a>
+        <a class="tool-card" href="/p/compress-pdf.html" data-name="Compress PDF">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🗜️</div>
+          <div class="tc-info"><div class="tc-name">Compress PDF</div><div class="tc-desc">Reduce PDF file size without losing quality.</div></div>
+        </a>
+        <a class="tool-card" href="/p/edit-pdf.html" data-name="Edit PDF">
+          <div class="tc-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✏️</div>
+          <div class="tc-info"><div class="tc-name">Edit PDF</div><div class="tc-desc">Add text, images, and annotations to any PDF.</div></div>
+        </a>
+        <a class="tool-card" href="/p/rotate-pdf.html" data-name="Rotate PDF">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">🔄</div>
+          <div class="tc-info"><div class="tc-name">Rotate PDF</div><div class="tc-desc">Fix page orientation — rotate pages individually or all.</div></div>
+        </a>
+        <a class="tool-card" href="/p/protect-pdf.html" data-name="Protect PDF">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔒</div>
+          <div class="tc-info"><div class="tc-name">Protect PDF</div><div class="tc-desc">Add a password to your PDF to restrict access.</div></div>
+        </a>
+        <a class="tool-card" href="/p/word-to-pdf.html" data-name="Word to PDF">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">📝</div>
+          <div class="tc-info"><div class="tc-name">Word → PDF</div><div class="tc-desc">Convert DOCX files to PDF format in one click.</div></div>
+        </a>
+        <a class="tool-card" href="/p/excel-to-pdf.html" data-name="Excel to PDF">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📊</div>
+          <div class="tc-info"><div class="tc-name">Excel → PDF</div><div class="tc-desc">Convert Excel spreadsheets to clean PDF documents.</div></div>
+        </a>
+        <a class="tool-card" href="/p/ppt-to-pdf.html" data-name="PPT to PDF">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">📑</div>
+          <div class="tc-info"><div class="tc-name">PPT → PDF</div><div class="tc-desc">Convert PowerPoint presentations to PDF format.</div></div>
+        </a>
+        <a class="tool-card" href="/p/pdf-to-word.html" data-name="PDF to Word">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔁</div>
+          <div class="tc-info"><div class="tc-name">PDF → Word</div><div class="tc-desc">Convert PDF back to editable DOCX format.</div></div>
+        </a>
+        <a class="tool-card" href="/p/jpg-to-pdf.html" data-name="JPG to PDF">
+          <div class="tc-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">🖼️</div>
+          <div class="tc-info"><div class="tc-name">JPG → PDF</div><div class="tc-desc">Turn images into a PDF file quickly.</div></div>
+        </a>
+        <a class="tool-card" href="/p/pdf-to-jpg.html" data-name="PDF to JPG">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">📸</div>
+          <div class="tc-info"><div class="tc-name">PDF → JPG</div><div class="tc-desc">Extract pages from PDF as image files.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── IMAGE TOOLS ── -->
+    <div class="cat-section" id="image-tools" data-cat="image">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🖼️</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Image Tools</div>
+          <div class="cat-sec-count">8 tools · Convert, compress, resize, and enhance images</div>
+        </div>
+        <a class="cat-sec-link" href="/p/image-tools.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/image-converter.html" data-name="Image Converter">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🔄</div>
+          <div class="tc-info"><div class="tc-name">Image Converter</div><div class="tc-desc">Convert between PNG, JPG, WebP, GIF, SVG and more.</div></div>
+          <span class="tc-badge badge-hot">HOT</span>
+        </a>
+        <a class="tool-card" href="/p/compress-image.html" data-name="Compress Image">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🗜️</div>
+          <div class="tc-info"><div class="tc-name">Compress Image</div><div class="tc-desc">Reduce image file size without losing visible quality.</div></div>
+        </a>
+        <a class="tool-card" href="/p/crop-resize.html" data-name="Crop & Resize Image">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">✂️</div>
+          <div class="tc-info"><div class="tc-name">Crop & Resize</div><div class="tc-desc">Trim, resize, and adjust image dimensions online.</div></div>
+        </a>
+        <a class="tool-card" href="/p/remove-background.html" data-name="Remove Background">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🌈</div>
+          <div class="tc-info"><div class="tc-name">Remove Background</div><div class="tc-desc">Erase image background instantly with AI precision.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/watermark.html" data-name="Add Watermark">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">💧</div>
+          <div class="tc-info"><div class="tc-name">Add Watermark</div><div class="tc-desc">Protect images with custom text or logo watermarks.</div></div>
+        </a>
+        <a class="tool-card" href="/p/enhance-image.html" data-name="Enhance Image">
+          <div class="tc-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">✨</div>
+          <div class="tc-info"><div class="tc-name">Enhance Image</div><div class="tc-desc">Upscale and sharpen images using AI technology.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/flip-rotate-image.html" data-name="Flip & Rotate Image">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔃</div>
+          <div class="tc-info"><div class="tc-name">Flip & Rotate</div><div class="tc-desc">Flip horizontally/vertically or rotate by any angle.</div></div>
+        </a>
+        <a class="tool-card" href="/p/image-to-text.html" data-name="Image to Text OCR">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">📖</div>
+          <div class="tc-info"><div class="tc-name">Image to Text (OCR)</div><div class="tc-desc">Extract text from images with optical character recognition.</div></div>
+          <span class="tc-badge badge-new">NEW</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── TEXT TOOLS ── -->
+    <div class="cat-section" id="text-ai" data-cat="text">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">✍️</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Text & Writing Tools</div>
+          <div class="cat-sec-count">7 tools · Write, format, count, and check your text</div>
+        </div>
+        <a class="cat-sec-link" href="/p/text-ai-tools.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/translator.html" data-name="Translator">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🌍</div>
+          <div class="tc-info"><div class="tc-name">Translator</div><div class="tc-desc">Translate text into 250+ languages instantly.</div></div>
+          <span class="tc-badge badge-hot">HOT</span>
+        </a>
+        <a class="tool-card" href="/p/word-counter.html" data-name="Word Counter">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">📊</div>
+          <div class="tc-info"><div class="tc-name">Word Counter</div><div class="tc-desc">Count words, characters, sentences, and paragraphs.</div></div>
+        </a>
+        <a class="tool-card" href="/p/case-converter.html" data-name="Case Converter">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔡</div>
+          <div class="tc-info"><div class="tc-name">Case Converter</div><div class="tc-desc">Convert text to UPPER, lower, Title, or Sentence case.</div></div>
+        </a>
+        <a class="tool-card" href="/p/plagiarism-checker.html" data-name="Plagiarism Checker">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔍</div>
+          <div class="tc-info"><div class="tc-name">Plagiarism Checker</div><div class="tc-desc">Detect duplicate content across the web.</div></div>
+        </a>
+        <a class="tool-card" href="/p/text-to-speech.html" data-name="Text to Speech">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🔊</div>
+          <div class="tc-info"><div class="tc-name">Text to Speech</div><div class="tc-desc">Convert any text to natural-sounding audio.</div></div>
+          <span class="tc-badge badge-new">NEW</span>
+        </a>
+        <a class="tool-card" href="/p/lorem-ipsum.html" data-name="Lorem Ipsum Generator">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📋</div>
+          <div class="tc-info"><div class="tc-name">Lorem Ipsum</div><div class="tc-desc">Generate placeholder dummy text for designs.</div></div>
+        </a>
+        <a class="tool-card" href="/p/find-replace.html" data-name="Find and Replace">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">🔎</div>
+          <div class="tc-info"><div class="tc-name">Find & Replace</div><div class="tc-desc">Bulk find and replace text across large content.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── AI TOOLS ── -->
+    <div class="cat-section" id="ai-tools" data-cat="ai">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">🤖</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">AI Tools</div>
+          <div class="cat-sec-count">5 tools · AI-powered writing, rewriting, and content tools</div>
+        </div>
+        <a class="cat-sec-link" href="/p/ai-tools.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/ai-rewriter.html" data-name="AI Rewriter">
+          <div class="tc-ico" style="background:rgba(251,191,36,.12);border:1px solid rgba(251,191,36,.25)">✨</div>
+          <div class="tc-info"><div class="tc-name">AI Rewriter</div><div class="tc-desc">Rewrite and paraphrase any text using AI.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/ai-summarizer.html" data-name="AI Summarizer">
+          <div class="tc-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">📋</div>
+          <div class="tc-info"><div class="tc-name">AI Summarizer</div><div class="tc-desc">Summarize long articles and documents instantly.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/ai-title-generator.html" data-name="AI Title Generator">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">📰</div>
+          <div class="tc-info"><div class="tc-name">AI Title Generator</div><div class="tc-desc">Generate catchy blog post and article titles.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/grammar-checker.html" data-name="Grammar Checker">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">✅</div>
+          <div class="tc-info"><div class="tc-name">Grammar Checker</div><div class="tc-desc">Fix grammar, spelling, and punctuation errors with AI.</div></div>
+          <span class="tc-badge badge-ai">AI</span>
+        </a>
+        <a class="tool-card" href="/p/hashtag-generator.html" data-name="Hashtag Generator">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">#️⃣</div>
+          <div class="tc-info"><div class="tc-name">Hashtag Generator</div><div class="tc-desc">Generate trending hashtags for social media posts.</div></div>
+          <span class="tc-badge badge-new">NEW</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── CALCULATORS ── -->
+    <div class="cat-section" id="calculators" data-cat="calc">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔢</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Calculators</div>
+          <div class="cat-sec-count">7 tools · Smart calculators for daily needs</div>
+        </div>
+        <a class="cat-sec-link" href="/p/calculator.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/scientific-calculator.html" data-name="Scientific Calculator">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">🔢</div>
+          <div class="tc-info"><div class="tc-name">Scientific Calculator</div><div class="tc-desc">Advanced math operations, trigonometry, and more.</div></div>
+        </a>
+        <a class="tool-card" href="/p/bmi-calculator.html" data-name="BMI Calculator">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">⚖️</div>
+          <div class="tc-info"><div class="tc-name">BMI Calculator</div><div class="tc-desc">Calculate your Body Mass Index instantly.</div></div>
+        </a>
+        <a class="tool-card" href="/p/loan-calculator.html" data-name="Loan Calculator">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">💰</div>
+          <div class="tc-info"><div class="tc-name">Loan Calculator</div><div class="tc-desc">Calculate EMI, interest rate, and loan repayments.</div></div>
+        </a>
+        <a class="tool-card" href="/p/age-calculator.html" data-name="Age Calculator">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">🎂</div>
+          <div class="tc-info"><div class="tc-name">Age Calculator</div><div class="tc-desc">Find your exact age in years, months, and days.</div></div>
+        </a>
+        <a class="tool-card" href="/p/date-calculator.html" data-name="Date Calculator">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">📅</div>
+          <div class="tc-info"><div class="tc-name">Date Calculator</div><div class="tc-desc">Find the difference between two dates in days/weeks.</div></div>
+        </a>
+        <a class="tool-card" href="/p/percentage-calculator.html" data-name="Percentage Calculator">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">%</div>
+          <div class="tc-info"><div class="tc-name">Percentage Calculator</div><div class="tc-desc">Calculate percentage, increase, decrease, and ratios.</div></div>
+        </a>
+        <a class="tool-card" href="/p/tip-calculator.html" data-name="Tip Calculator">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">🍽️</div>
+          <div class="tc-info"><div class="tc-name">Tip Calculator</div><div class="tc-desc">Split bill and calculate tip amount easily.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── CONVERTERS ── -->
+    <div class="cat-section" id="converters" data-cat="convert">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📏</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Unit Converters</div>
+          <div class="cat-sec-count">6 tools · Convert between all units quickly</div>
+        </div>
+        <a class="cat-sec-link" href="/p/unit-converter.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/unit-converter.html" data-name="Unit Converter">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">📏</div>
+          <div class="tc-info"><div class="tc-name">Unit Converter</div><div class="tc-desc">Convert length, weight, volume, and temperature units.</div></div>
+        </a>
+        <a class="tool-card" href="/p/currency-converter.html" data-name="Currency Converter">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">💱</div>
+          <div class="tc-info"><div class="tc-name">Currency Converter</div><div class="tc-desc">Convert between 150+ world currencies live.</div></div>
+          <span class="tc-badge badge-new">NEW</span>
+        </a>
+        <a class="tool-card" href="/p/temperature-converter.html" data-name="Temperature Converter">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🌡️</div>
+          <div class="tc-info"><div class="tc-name">Temperature Converter</div><div class="tc-desc">Convert Celsius, Fahrenheit, and Kelvin.</div></div>
+        </a>
+        <a class="tool-card" href="/p/speed-converter.html" data-name="Speed Converter">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">💨</div>
+          <div class="tc-info"><div class="tc-name">Speed Converter</div><div class="tc-desc">Convert km/h, mph, m/s and more speed units.</div></div>
+        </a>
+        <a class="tool-card" href="/p/data-converter.html" data-name="Data Size Converter">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">💾</div>
+          <div class="tc-info"><div class="tc-name">Data Size Converter</div><div class="tc-desc">Convert KB, MB, GB, TB, and Bytes.</div></div>
+        </a>
+        <a class="tool-card" href="/p/time-converter.html" data-name="Time Zone Converter">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">🕐</div>
+          <div class="tc-info"><div class="tc-name">Time Zone Converter</div><div class="tc-desc">Convert time between any two world time zones.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── DEVELOPER TOOLS ── -->
+    <div class="cat-section" id="dev-tools" data-cat="dev">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">💻</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Developer Tools</div>
+          <div class="cat-sec-count">7 tools · Essential utilities for developers</div>
+        </div>
+        <a class="cat-sec-link" href="/p/dev-tools.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/json-formatter.html" data-name="JSON Formatter">
+          <div class="tc-ico" style="background:rgba(34,211,238,.12);border:1px solid rgba(34,211,238,.25)">{}</div>
+          <div class="tc-info"><div class="tc-name">JSON Formatter</div><div class="tc-desc">Beautify, validate, and minify JSON data.</div></div>
+        </a>
+        <a class="tool-card" href="/p/base64.html" data-name="Base64 Encoder Decoder">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🔐</div>
+          <div class="tc-info"><div class="tc-name">Base64 Encoder</div><div class="tc-desc">Encode and decode Base64 strings quickly.</div></div>
+        </a>
+        <a class="tool-card" href="/p/regex-tester.html" data-name="Regex Tester">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">.*</div>
+          <div class="tc-info"><div class="tc-name">Regex Tester</div><div class="tc-desc">Test and debug regular expressions in real time.</div></div>
+        </a>
+        <a class="tool-card" href="/p/color-picker.html" data-name="Color Picker">
+          <div class="tc-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">🎨</div>
+          <div class="tc-info"><div class="tc-name">Color Picker</div><div class="tc-desc">Pick colors and get HEX, RGB, HSL values.</div></div>
+        </a>
+        <a class="tool-card" href="/p/url-encoder.html" data-name="URL Encoder Decoder">
+          <div class="tc-ico" style="background:rgba(16,185,129,.12);border:1px solid rgba(16,185,129,.25)">🔗</div>
+          <div class="tc-info"><div class="tc-name">URL Encoder</div><div class="tc-desc">Encode and decode URLs for safe transmission.</div></div>
+        </a>
+        <a class="tool-card" href="/p/html-to-text.html" data-name="HTML to Text">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">&lt;/&gt;</div>
+          <div class="tc-info"><div class="tc-name">HTML to Text</div><div class="tc-desc">Strip HTML tags and extract clean plain text.</div></div>
+        </a>
+        <a class="tool-card" href="/p/markdown-to-html.html" data-name="Markdown to HTML">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">Md</div>
+          <div class="tc-info"><div class="tc-name">Markdown to HTML</div><div class="tc-desc">Convert Markdown syntax to HTML code.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- ── GENERATORS ── -->
+    <div class="cat-section" id="generators" data-cat="gen">
+      <div class="cat-sec-head">
+        <div class="cat-sec-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">⚡</div>
+        <div class="cat-sec-info">
+          <div class="cat-sec-name">Generators</div>
+          <div class="cat-sec-count">6 tools · Generate passwords, QR codes, and more</div>
+        </div>
+        <a class="cat-sec-link" href="/p/generators.html">View all <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg></a>
+      </div>
+      <div class="tools-grid">
+        <a class="tool-card" href="/p/password-generator.html" data-name="Password Generator">
+          <div class="tc-ico" style="background:rgba(239,68,68,.12);border:1px solid rgba(239,68,68,.25)">🔐</div>
+          <div class="tc-info"><div class="tc-name">Password Generator</div><div class="tc-desc">Generate strong, secure passwords instantly.</div></div>
+          <span class="tc-badge badge-hot">HOT</span>
+        </a>
+        <a class="tool-card" href="/p/qr-generator.html" data-name="QR Code Generator">
+          <div class="tc-ico" style="background:rgba(59,130,246,.12);border:1px solid rgba(59,130,246,.25)">📱</div>
+          <div class="tc-info"><div class="tc-name">QR Code Generator</div><div class="tc-desc">Create QR codes for URLs, text, and contact info.</div></div>
+        </a>
+        <a class="tool-card" href="/p/url-shortener.html" data-name="URL Shortener">
+          <div class="tc-ico" style="background:rgba(34,199,147,.12);border:1px solid rgba(34,199,147,.25)">✂️</div>
+          <div class="tc-info"><div class="tc-name">URL Shortener</div><div class="tc-desc">Shorten any long URL to a compact shareable link.</div></div>
+        </a>
+        <a class="tool-card" href="/p/uuid-generator.html" data-name="UUID Generator">
+          <div class="tc-ico" style="background:rgba(99,102,241,.12);border:1px solid rgba(99,102,241,.25)">🆔</div>
+          <div class="tc-info"><div class="tc-name">UUID Generator</div><div class="tc-desc">Generate random universally unique identifiers.</div></div>
+        </a>
+        <a class="tool-card" href="/p/username-generator.html" data-name="Username Generator">
+          <div class="tc-ico" style="background:rgba(167,139,250,.12);border:1px solid rgba(167,139,250,.25)">👤</div>
+          <div class="tc-info"><div class="tc-name">Username Generator</div><div class="tc-desc">Generate creative unique usernames for any platform.</div></div>
+        </a>
+        <a class="tool-card" href="/p/color-palette.html" data-name="Color Palette Generator">
+          <div class="tc-ico" style="background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.25)">🎨</div>
+          <div class="tc-info"><div class="tc-name">Color Palette Generator</div><div class="tc-desc">Generate beautiful, harmonious color palettes.</div></div>
+        </a>
+      </div>
+    </div>
+
+    <!-- NO RESULTS -->
+    <div class="no-results" id="no-results" style="display:none;">
+      <div class="nr-ico">🔍</div>
+      <p>No tools found for "<span id="search-term"></span>".<br/>Try a different keyword.</p>
+    </div>
+
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer id="footer">
+  <div class="container">
+    <div class="ft-grid">
+      <div>
+        <div class="ft-logo">
+          <div class="ft-logo-ico">🛠️</div>
+          <span class="ft-logo-txt">ToolsHub Pro</span>
+        </div>
+        <p class="ft-desc">100+ free online tools for documents, images, text, calculators, conversions, and AI. No signup. No downloads. Ever.</p>
+        <div class="ft-social">
+          <a class="s-btn" href="#" title="Facebook">f</a>
+          <a class="s-btn" href="#" title="X / Twitter">𝕏</a>
+          <a class="s-btn" href="#" title="YouTube">▶</a>
+          <a class="s-btn" href="#" title="Telegram">✈</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Popular Tools</div>
+        <div class="ft-links">
+          <a class="ft-link" href="/p/merge-pdf.html">Merge PDF</a>
+          <a class="ft-link" href="/p/image-converter.html">Image Converter</a>
+          <a class="ft-link" href="/p/translator.html">Translator</a>
+          <a class="ft-link" href="/p/password-generator.html">Password Generator</a>
+          <a class="ft-link" href="/p/bmi-calculator.html">BMI Calculator</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Categories</div>
+        <div class="ft-links">
+          <a class="ft-link" href="#pdf-tools">Document Tools</a>
+          <a class="ft-link" href="#image-tools">Image Tools</a>
+          <a class="ft-link" href="#text-ai">Text & Writing</a>
+          <a class="ft-link" href="#calculators">Calculators</a>
+          <a class="ft-link" href="#dev-tools">Developer Tools</a>
+        </div>
+      </div>
+      <div>
+        <div class="ft-col-title">Company</div>
+        <div class="ft-links">
+          <a class="ft-link" href="/p/about.html">About Us</a>
+          <a class="ft-link" href="/blog">Blog</a>
+          <a class="ft-link" href="/p/privacy.html">Privacy Policy</a>
+          <a class="ft-link" href="/p/terms.html">Terms of Service</a>
+          <a class="ft-link" href="/p/contact.html">Contact Us</a>
+        </div>
+      </div>
+    </div>
+    <div class="ft-bottom">
+      <span>© <span id="yr">2026</span> ToolsHub Pro. All rights reserved.</span>
+      <div class="ft-bottom-links">
+        <a href="/p/privacy.html">Privacy</a>
+        <a href="/p/terms.html">Terms</a>
+        <a href="/p/contact.html">Contact</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  var s=localStorage.getItem('th')||'dark';
+  if(s==='light') document.body.classList.add('light-mode');
+  var b=document.getElementById('theme-btn');
+  if(b) b.textContent=s==='light'?'🌙':'☀️';
+})();
+function toggleTheme(){
+  var l=document.body.classList.toggle('light-mode');
+  localStorage.setItem('th',l?'light':'dark');
+  var b=document.getElementById('theme-btn');
+  if(b) b.textContent=l?'🌙':'☀️';
+}
+function openMob(){document.getElementById('mob-nav').classList.add('open');document.body.style.overflow='hidden';}
+function closeMob(){document.getElementById('mob-nav').classList.remove('open');document.body.style.overflow='';}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeMob();});
+window.addEventListener('scroll',function(){
+  document.getElementById('lp-header').classList.toggle('scrolled',window.scrollY>20);
+},{passive:true});
+document.getElementById('yr').textContent=new Date().getFullYear();
+
+/* ── Category Filter ── */
+function filterCat(cat,btn){
+  document.querySelectorAll('.cat-filter').forEach(function(b){b.classList.remove('active');});
+  btn.classList.add('active');
+  document.getElementById('tool-search').value='';
+  document.getElementById('no-results').style.display='none';
+  var sections=document.querySelectorAll('.cat-section');
+  sections.forEach(function(sec){
+    sec.style.display=(cat==='all'||sec.getAttribute('data-cat')===cat)?'':'none';
+  });
+}
+
+/* ── Tool Search ── */
+function filterTools(query){
+  var q=query.trim().toLowerCase();
+  document.querySelectorAll('.cat-filter').forEach(function(b){b.classList.remove('active');});
+  document.querySelector('.cat-filter').classList.add('active');
+  if(!q){
+    document.querySelectorAll('.cat-section').forEach(function(s){s.style.display='';});
+    document.querySelectorAll('.tool-card').forEach(function(c){c.style.display='';});
+    document.getElementById('no-results').style.display='none';
+    return;
+  }
+  var found=0;
+  document.querySelectorAll('.cat-section').forEach(function(sec){
+    var secVisible=false;
+    sec.querySelectorAll('.tool-card').forEach(function(card){
+      var name=(card.getAttribute('data-name')||'').toLowerCase();
+      var desc=(card.querySelector('.tc-desc')||{}).textContent||'';
+      var match=name.includes(q)||desc.toLowerCase().includes(q);
+      card.style.display=match?'':'none';
+      if(match) secVisible=true, found++;
+    });
+    sec.style.display=secVisible?'':'none';
+  });
+  var nr=document.getElementById('no-results');
+  if(found===0){
+    nr.style.display='block';
+    document.getElementById('search-term').textContent=query;
+  } else {
+    nr.style.display='none';
+  }
+}
+</script>
+</body>
+</html>

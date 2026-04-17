@@ -13,6 +13,9 @@ PUBLIC_FILES = {
     "/blog": "blog.html",
     "/blog/": "blog.html",
     "/blog.html": "blog.html",
+    "/all-tools": "all-tools.html",
+    "/all-tools/": "all-tools.html",
+    "/all-tools.html": "all-tools.html",
     "/blogger-theme-multitools-professional-animations (1).xml": "blogger-theme-multitools-professional-animations (1).xml",
     "/toolshub-pro-blogger-theme.xml": "toolshub-pro-blogger-theme.xml",
 }
